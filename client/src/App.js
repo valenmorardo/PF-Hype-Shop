@@ -1,10 +1,16 @@
-import './App.css';
+import "./App.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Home from "./Components/Home/Home";
 
 function App() {
   return (
-    <div className="App">
-      <h1>NFT MARKET PLACE</h1>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Switch>
+          <Route path="home" component={Home}/>
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
