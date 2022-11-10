@@ -14,27 +14,21 @@ const Home = () => {
     dispatch(getSneakers());
   }, [dispatch]);
 
-  {
-
-        sneakers.length === 0? (
+  return (
+    <div>
+      <h5>HypeSHOP</h5>
+      {
+        sneakers.map((e) => {
           <div>
-            <h1>cargando...</h1>
-          </div>
-          ) 
-        :
-          (
-            sneakers.map((e) => {
-              return (
-                <div>
-                  <h5>Hype Shop</h5>
-                  <div key={e.id}>
-                    <Card id={e.id} name={e.name} img={e.img} price={e.price}/>
-                  </div>
-                </div>
-              );
-            })
-          );
+            <div>
+              <Cards />
+            </div>
+          </div>;
+        })
 
-  }
+      }
+    
+    </div>
+  );
 };
 export default Home;
