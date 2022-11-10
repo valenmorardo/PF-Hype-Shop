@@ -7,6 +7,7 @@ import style from "./CreateProduct.module.css"
 
 function CreateProduct() {
 
+    const history = useHistory()
     const dispatch = useDispatch()
     // para validaciones:
     const [error, setError] = useState({})
