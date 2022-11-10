@@ -1,5 +1,3 @@
-// const SneaksAPI = require('sneaks-api');
-// const sneaks = new SneaksAPI();
 const { Router } = require('express');
 const getSneakers = require ("./components/getSneakers")
 const getDbSneakers = require("./components/getDbSneaker")
