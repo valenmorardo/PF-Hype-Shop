@@ -3,27 +3,10 @@ const { Product } = require("../../db.js");
 const axios = require("axios");
 
 const router = Router();
+const { objectFormatter } = require("../../utils/objectFormatter");
 
 router.get("/", async (req, res) => {
   try {
-    const detailss = (details) => {
-      const { title, price, condition, thumbnail, pictures, attributes } =
-        details;
-      const objForm = {
-        title,
-        price,
-        condition,
-        thumbnail,
-        pictures: pictures.map((p) => p.url),
-        attributes: attributes.map((a) => ({
-          name: a.name,
-          value: a.value_name,
-        })),
-      };
-
-      return objForm;
-    };
-
     const getProducts = async () => {
       const fetch = await axios.get(
         "https://api.mercadolibre.com/sites/MLA/search?category=MLA109027"
@@ -41,7 +24,7 @@ router.get("/", async (req, res) => {
       dataFromString1.data
         .map((prod) => prod.body)
         .map((detalles) => {
-          const details = detailss(detalles);
+          const details = objectFormatter(detalles);
           allData.push(details);
         });
       const dataFromString2 = await axios.get(
@@ -50,7 +33,7 @@ router.get("/", async (req, res) => {
       dataFromString2.data
         .map((prod) => prod.body)
         .map((detalles) => {
-          const details = detailss(detalles);
+          const details = objectFormatter(detalles);
           allData.push(details);
         });
       const dataFromString3 = await axios.get(
@@ -59,7 +42,7 @@ router.get("/", async (req, res) => {
       dataFromString3.data
         .map((prod) => prod.body)
         .map((detalles) => {
-          const details = detailss(detalles);
+          const details = objectFormatter(detalles);
           allData.push(details);
         });
 
@@ -68,18 +51,13 @@ router.get("/", async (req, res) => {
       return allData;
     };
     const solucion = await getProducts();
-    solucion.forEach(el =>{
-        const{ title, price, condition, thumbnail, pictures, attributes} = el
-        Product.findOrCreate({  
-            where: {title},
-            defaults:{title,
-            price,
-            condition,
-            thumbnail,
-            pictures,
-            attributes}})
-    })
-
+    solucion.forEach((el) => {
+      const { title, price, condition, thumbnail, pictures, attributes } = el;
+      Product.findOrCreate({
+        where: { title },
+        defaults: { title, price, condition, thumbnail, pictures, attributes },
+      });
+    });
 
     res.send(solucion);
   } catch (error) {
@@ -88,3 +66,4 @@ router.get("/", async (req, res) => {
 });
 
 module.exports = router;
+

@@ -4,33 +4,26 @@ const axios = require("axios");
 
 const router = Router();
 router.get("/", async (req, res) => {
-  try{
+  try {
+    const dataDB = await Product.findAll();
 
-    const dataDB =  await Product.findAll()
+    let response = await dataDB?.map((product) => {
+      console.log(product);
+      return {
+        title: product.title,
+        price: product.price,
+        condition: product.condition,
+        thumbnail: product.thumbnail,
+        pictures: product.pictures,
+        attributes: product.attributes,
+      };
+    });
 
-
-
-  let response = await dataDB?.map(product => 
-    {
-    console.log(product)
-           return {
-            title: product.title,
-            price: product.price,
-            condition: product.condition,
-            thumbnail: product.thumbnail,
-            pictures: product.pictures,
-            attributes: product.attributes
-           }
-       });
-
-       res.send(response);
-
-
-  } catch(err){
-    console.error(err)
+    res.send(response);
+  } catch (err) {
+    console.error(err);
   }
-})
-
+});
 
 module.exports = router;
 
