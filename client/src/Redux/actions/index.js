@@ -1,9 +1,6 @@
 import axios from "axios";
 
-
-import {
-  GET_SNEAKERS,
-} from "./actionTypes"
+import { GET_SNEAKERS } from "./actionTypes";
 
 export const getSneakers = () => {
   return async (dispatch) => {
@@ -12,10 +9,10 @@ export const getSneakers = () => {
       //console.log(response)
       dispatch({
         type: GET_SNEAKERS,
-        payload: response,//data
+        payload: response, //data
       });
     } catch (error) {
-      console.log("error trying to GET_SNEAKERS",error);
+      console.log("error trying to GET_SNEAKERS", error);
     }
   };
 };
