@@ -11,30 +11,30 @@ module.exports = (sequelize) => {
             unique: true,
             allowNull: false,
           },
-        brand: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },//marca
         thumbnail: {
             type: DataTypes.STRING,
             allowNull: false,
-        },//imagen
-        description: {
+        },
+        title: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        shoeName: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },//modelo
-        retailPrice: {
+        price: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        colorway: {
+        condition:{
             type: DataTypes.STRING,
             allowNull: false,
         },
+        pictures:{
+            type: DataTypes.JSON,
+            allowNull: false,
+        },
+        attributes:{
+            type: DataTypes.JSON,
+            allowNull: false,
+        }
 
 
     });

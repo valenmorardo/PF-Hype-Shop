@@ -68,6 +68,19 @@ router.get("/", async (req, res) => {
       return allData;
     };
     const solucion = await getProducts();
+    solucion.forEach(el =>{
+        const{ title, price, condition, thumbnail, pictures, attributes} = el
+        Product.findOrCreate({  
+            where: {title},
+            defaults:{title,
+            price,
+            condition,
+            thumbnail,
+            pictures,
+            attributes}})
+    })
+
+
     res.send(solucion);
   } catch (error) {
     console.log(error);
