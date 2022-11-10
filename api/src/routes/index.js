@@ -2,11 +2,13 @@
 // const sneaks = new SneaksAPI();
 const { Router } = require('express');
 const getSneakers = require ("./components/getSneakers")
+const getDbSneakers = require("./components/getDbSneaker")
 
 const router = Router();
 
 
 router.use("/sneakers", getSneakers)
+router.use("/dbSneakers", getDbSneakers)
 
 
 module.exports = router;
