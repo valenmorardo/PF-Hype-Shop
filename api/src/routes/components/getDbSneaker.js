@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
 
   let response = await dataDB?.map(product => 
     {
-    console.log(product)
+    // console.log(product)
            return {
             id:product.id,
             title: product.title,
