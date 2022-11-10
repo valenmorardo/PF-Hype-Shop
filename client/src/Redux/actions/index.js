@@ -30,3 +30,12 @@ export const getSearchSneaker = (sneaker) => {
       }
    };
 };
+
+/* CREAR PRODUCTO */
+
+export function CreateNewProduct(payload) {
+   return async function () {
+      const response = await axios.post("RutaBack", payload);
+      return response;
+   };
+}

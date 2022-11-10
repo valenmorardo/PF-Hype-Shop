@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import swal from "sweetalert";
 import { useDispatch } from 'react-redux'
+import { CreateNewProduct } from '../../Redux/actions';
 import style from "./CreateProduct.module.css"
 
 function CreateProduct() {
@@ -113,43 +114,43 @@ function CreateProduct() {
     }
 
     //  FUNCION PARA CREAR PRODUCTO
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     if (
-    //         input.name &&
-    //         input.price &&
-    //         input.image &&
-    //         input.brand &&
-    //         input.gender &&
-    //         input.stock &&
-    //         input.size &&
-    //         input.description
-    //     ) {
-    //         dispatch(CreateNewProduct({
-    //             name: input.name,
-    //             price: input.price,
-    //             image: input.image,
-    //             brand: input.brand,
-    //             gender: input.gender,
-    //             stock: input.stock,
-    //             size: input.size,
-    //             description: input.description,
-    //         }));
-    //         swal({
-    //             title: "Product created successfully!",
-    //             icon: "success",
-    //             button: "Ok",
-    //         });
-    //         setInput(initialState);
-    //         history.push("/");
-    //     } else alert(" missing data for the creation of a new product");
-    // }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (
+            input.name &&
+            input.price &&
+            input.image &&
+            input.brand &&
+            input.gender &&
+            input.stock &&
+            input.size &&
+            input.description
+        ) {
+            dispatch(CreateNewProduct({
+                name: input.name,
+                price: input.price,
+                image: input.image,
+                brand: input.brand,
+                gender: input.gender,
+                stock: input.stock,
+                size: input.size,
+                description: input.description,
+            }));
+            swal({
+                title: "Product created successfully!",
+                icon: "success",
+                button: "Ok",
+            });
+            setInput(initialState);
+            history.push("/");
+        } else alert(" missing data for the creation of a new product");
+    }
 
     return (
         < div className={style.containerMain} >
             {/* {console.log(error)} */}
             <form className={style.form}
-            // onSubmit={(e) => handleSubmit(e)}
+                onSubmit={(e) => handleSubmit(e)}
             >
                 <h2 className={style.titulo}>Product creation</h2>
                 {console.log(input)}
@@ -280,7 +281,7 @@ function CreateProduct() {
                     <button
                         className={style.submit}
                         type="submit"
-                    // onClick={(e) => handleSubmit(e)}
+                        onClick={(e) => handleSubmit(e)}
                     >
                         Create New Product
                     </button>
