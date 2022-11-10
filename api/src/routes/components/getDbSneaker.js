@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Product, Users } = require("../../db.js");
+const { Product } = require("../../db.js");
 const axios = require("axios");
 
 const router = Router();
@@ -14,6 +14,7 @@ router.get("/", async (req, res) => {
     {
     console.log(product)
            return {
+            id:product.id,
             title: product.title,
             price: product.price,
             condition: product.condition,
