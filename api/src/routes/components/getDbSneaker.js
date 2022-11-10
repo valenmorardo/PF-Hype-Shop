@@ -14,6 +14,7 @@ router.get("/", async (req, res) => {
     {
     console.log(product)
            return {
+            id:product.id,
             title: product.title,
             price: product.price,
             condition: product.condition,
@@ -26,7 +27,7 @@ router.get("/", async (req, res) => {
        res.send(response);
 
 
-  } catch(err){
+  } catch(err){ 
     console.error(err)
   }
 })
