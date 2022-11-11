@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSneakers } from "../../Redux/actions/index";
 
-import Card from "../Card/Card/Card";
+import Cards from "../Cards/Cards";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -14,27 +14,21 @@ const Home = () => {
     dispatch(getSneakers());
   }, [dispatch]);
 
-  {
-
-        sneakers.length === 0? (
+  return (
+    <div>
+      <h5>HypeSHOP</h5>
+      {
+        sneakers.map((e) => {
           <div>
-            <h1>cargando...</h1>
-          </div>
-          ) 
-        :
-          (
-            sneakers.map((e) => {
-              return (
-                <div>
-                  <h5>Hype Shop</h5>
-                  <div key={e.id}>
-                    <Card id={e.id} name={e.name} img={e.img} price={e.price}/>
-                  </div>
-                </div>
-              );
-            })
-          );
+            <div>
+              <Cards />
+            </div>
+          </div>;
+        })
 
-  }
+      }
+    
+    </div>
+  );
 };
 export default Home;
