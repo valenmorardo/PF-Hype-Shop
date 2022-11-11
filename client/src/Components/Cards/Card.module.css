@@ -1,0 +1,10 @@
+.container{
+    background-color: rgba(0, 0, 0, 0.287);
+    height: auto;
+    width: 80%;
+    border:solid 10px;
+    border-radius: 30px;
+    border-style:groove;
+    border-color: rgba(0, 0, 0, 0.456);
+    text-align: center;
+}
