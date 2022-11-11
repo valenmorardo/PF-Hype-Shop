@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_SNEAKERS, SEARCH_SNEAKER } from "./actionTypes";
+import { GET_SNEAKERS, SEARCH_SNEAKER , GET_DETAIL} from "./actionTypes";
 
 export const getSneakers = () => {
   return async (dispatch) => {
@@ -39,4 +39,18 @@ export function CreateNewProduct(payload) {
     const response = await axios.post("RutaBack", payload);
     return response;
   };
+}
+
+export function getDetail(id){
+   return async function(dispatch){
+       try {
+           let json = await axios.get(`http://localhost:3001/detail/${id}`)
+           return dispatch({
+               type: GET_DETAIL,
+               payload: json.data
+           })
+       } catch (error) {
+       return alert("Detail not found")
+       }
+   }
 }
