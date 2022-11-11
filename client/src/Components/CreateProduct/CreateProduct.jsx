@@ -20,25 +20,25 @@ const validate = (input) => {
     //         priceValidate = false
     //     }
     // }
-    /*      NAME      */
+    /*      title      */
 
-    if (!input.name) {
-        errores.name = "Name Product is required";
+    if (!input.title) {
+        errores.title = "title Product is required";
     }
-    else if (input.name.length < 3) {
-        errores.name = "The name must contain at least 3 letters";
+    else if (input.title.length < 3) {
+        errores.title = "The title must contain at least 3 letters";
     }
-    else if (/^\s+$/.test(input.name)) {
-        errores.name = "The name cannot be a blank space";
+    else if (/^\s+$/.test(input.title)) {
+        errores.title = "The title cannot be a blank space";
     }
-    else if (!/^[a-zA-Z ]*$/.test(input.name)) {
-        errores.name = "The name must only contain letters";
+    else if (!/^[a-zA-Z ]*$/.test(input.title)) {
+        errores.title = "The title must only contain letters";
     }
-    else if (input.name.startsWith(" ")) {
-        errores.name = "Dont input blank spaces";
+    else if (input.title.startsWith(" ")) {
+        errores.title = "Dont input blank spaces";
     }
-    else if (input.name.endsWith(" ")) {
-        errores.name = "Dont input blank space";
+    else if (input.title.endsWith(" ")) {
+        errores.title = "Dont input blank space";
     }
 
     /*      PRICE         */
@@ -59,40 +59,40 @@ const validate = (input) => {
     }
 
     /*    IMG    */
-    else if (!input.image) {
-        errores.image = "URL Image is required";
+    else if (!input.thumbnail) {
+        errores.thumbnail = "URL thumbnail is required";
     }
-    else if (input.image.length < 5) {
-        errores.image = "The URl must contain at least 5 letters";
+    else if (input.thumbnail.length < 5) {
+        errores.thumbnail = "The URl must contain at least 5 letters";
     }
-    else if (/^\s+$/.test(input.image)) {
-        errores.image = "The URL cannot be a blank space";
+    else if (/^\s+$/.test(input.thumbnail)) {
+        errores.thumbnail = "The URL cannot be a blank space";
     }
-    else if (input.image.includes("https://")) {
-        errores.image = "The URL must not contain the text 'https://'";
+    else if (input.thumbnail.includes("https://")) {
+        errores.thumbnail = "The URL must not contain the text 'https://'";
     }
-    else if (input.image.includes("http://")) {
-        errores.image = "The URL must not contain the text 'http://'";
+    else if (input.thumbnail.includes("http://")) {
+        errores.thumbnail = "The URL must not contain the text 'http://'";
     }
-    else if (input.image.startsWith(" ")) {
-        errores.image = "Dont input blank spaces";
+    else if (input.thumbnail.startsWith(" ")) {
+        errores.thumbnail = "Dont input blank spaces";
     }
-    else if (input.image.endsWith(" ")) {
-        errores.image = "Dont input blank space";
+    else if (input.thumbnail.endsWith(" ")) {
+        errores.thumbnail = "Dont input blank space";
     }
 
     /*    marca   */
     else if (!input.marca) {
-        errores.marca = "marca name is required";
+        errores.marca = "marca title is required";
     }
     else if (input.marca.length < 3) {
-        errores.marca = "The marca name must contain at least 3 letters";
+        errores.marca = "The marca title must contain at least 3 letters";
     }
     else if (/^\s+$/.test(input.marca)) {
-        errores.marca = "The marca name cannot be a blank space";
+        errores.marca = "The marca title cannot be a blank space";
     }
     else if (!/^[a-zA-Z ]*$/.test(input.marca)) {
-        errores.marca = "The marca name must only contain letters";
+        errores.marca = "The marca title must only contain letters";
     }
     else if (input.marca.startsWith(" ")) {
         errores.marca = "Dont input blank spaces";
@@ -140,19 +140,18 @@ const CreateProduct = () => {
         title: "",
         price: 0,
         thumbnail: "",
-        edad:"",
-        color:"",
- Materiales del interior:"",
-// interiorMaterials:"",
-// "Talle filtrable"
-typeOfFootwear:"",
+        edad: "",
+        // niños,adultos
+        color: "",
+        materialesDelInterior: "",
+        materialesDelExterior: "",
+        // tipoDeCalzado: "",
         marca: "",
-        gender: "",
-        stock: 0,
-        size: "",
-        condition:"",
-        pictures:[],
-        
+        genero: "",
+        condition: "",
+        picture: "",
+        pictures: [],
+
     }
 
     // ESTADO PRINCIPAL
@@ -163,7 +162,7 @@ typeOfFootwear:"",
         e.preventDefault();
         setInput({
             ...input,
-            [e.target.name]: e.target.value,
+            [e.target.title]: e.target.value,
         })
         // Validacion:
         setError(
@@ -179,14 +178,13 @@ typeOfFootwear:"",
     const comprobacionInput = (input) => {
         console.log("entrar input comprobacion")
         if (
-            input.name &&
+            input.title &&
             input.price &&
-            input.image &&
+            input.thumbnail &&
             input.marca &&
-            input.gender &&
-            input.stock &&
-            input.size &&
-            input.description
+            input.genero &&
+            input.stock
+            // FALTAN ATRIBUTOS
         ) {
             return true;
         } else {
@@ -194,82 +192,61 @@ typeOfFootwear:"",
         }
     }
 
-    // AUMENTAR STOCK
-    const handleAumentar = (e) => {
-        e.preventDefault();
-        setInput({
-            ...input,
-            stock: input.stock += 1
-        });
-        // validacion Error
-        setError(
-            validate({
-                ...input,
-                stock: input.stock
-            }));
-    }
-
-    // DISMINUIR STOCK
-    const handleDecrementar = (e) => {
-        e.preventDefault();
-        setInput({
-            ...input,
-            stock: input.stock -= 1
-        });
-        // validacion ERROR
-        setError(
-            validate({
-                ...input,
-                stock: input.stock
-            }))
-    }
-
-    // TALLE
-    const handleSelectSize = (e) => {
-        setInput({
-            ...input,
-            size: e.target.value
-        })
-    }
 
     // GENERO
     const handleSelect = (e) => {
         // PARA CATEGORIA:
         // dispatch(getCategorys());
-        // let CategorysG = categorys.filter(element => element.gender === e.target.value);
+        // let CategorysG = categorys.filter(element => element.genero === e.target.value);
 
         setInput({
             ...input,
-            // categorysGender: CategorysG,
-            gender: e.target.value,
-            // nameCategory: "Disable",
+            // categorysgenero: CategorysG,
+            genero: e.target.value,
+            // titleCategory: "Disable",
         });
+    }
+
+    // ELIMINAR URL Picture
+    const handleDelete = (el) => {
+        setInput({
+            ...input,
+            pictures: input.pictures.filter(name => name !== el)
+        });
+    }
+
+    // AÑADIR URL Pictures
+    const hundlePictureAdd = (e) => {
+        e.preventDefault();
+        input.pictures.push(input.picture)
+        setInput({
+            ...input,
+            picture: ""
+        })
+
     }
 
     //  FUNCION PARA CREAR PRODUCTO
     const handleSubmit = (e) => {
         e.preventDefault();
         if (
-            input.name &&
+            input.title &&
             input.price &&
-            input.image &&
+            input.thumbnail &&
             input.marca &&
-            input.gender &&
+            input.genero &&
             input.stock &&
             input.size &&
             input.description
         ) {
             dispatch(CreateNewProduct({
-                name: input.name,
+                title: input.title,
                 price: input.price,
-                image: input.image,
                 marca: input.marca,
-                gender: input.gender,
-                stock: input.stock,
-                size: input.size,
-                description: input.description,
+                genero: input.genero,
+
                 // Talle filtrable
-                attributes:[{name:"edad", value:input.edad},{name:"marca",value:input.marca},{name:"Color",value:input.color},{name:"Materiales del exterior",value:input.MaterialesDelExterior},{name:"Tipo de calzado",value:input.TipoDeCalzado}]
+                // attributes: [{ title: "edad", value: input.edad }, { title: "marca", value: input.marca }, { title: "Color", value: input.color }, { title: "Materiales del exterior", value: input.MaterialesDelExterior }, { title: "Tipo de calzado", value: input.TipoDeCalzado }]
             }));
             swal({
                 title: "Product created successfully!",
@@ -290,15 +267,15 @@ typeOfFootwear:"",
                 <h2 className={style.titulo}>Product creation</h2>
                 {console.log(input)}
                 <div>
-                    <p>Name:</p>
-                    {error.name && ( // si hay un error hara un <p> nuevo con el error
-                        <p className={style.error}>{error.name}</p>
+                    <p>title:</p>
+                    {error.title && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{error.title}</p>
                     )}
                     <input
                         type="text"
-                        value={input.name}
+                        value={input.title}
                         className={style.field}
-                        name="name"
+                        title="title"
                         onChange={(e) => handleChange(e)}
                     />
                 </div>
@@ -313,7 +290,7 @@ typeOfFootwear:"",
                         step="25"
                         className={style.field}
                         value={input.price}
-                        name="price"
+                        title="price"
                         onChange={handleChange}
                     />
                 </div>
@@ -321,14 +298,14 @@ typeOfFootwear:"",
                 <div>
                     <div>
                         <p>Img:</p>
-                        {error.image && ( // si hay un error hara un <p> nuevo con el error
-                            <p className={style.error}>{error.image}</p>
+                        {error.thumbnail && ( // si hay un error hara un <p> nuevo con el error
+                            <p className={style.error}>{error.thumbnail}</p>
                         )}
                         <input
                             type="text"
-                            value={input.image}
+                            value={input.thumbnail}
                             className={style.field}
-                            name="image"
+                            title="thumbnail"
                             onChange={(e) => handleChange(e)}
                         />
                     </div>
@@ -341,94 +318,140 @@ typeOfFootwear:"",
                             type="text"
                             value={input.marca}
                             className={style.field}
-                            name="marca"
+                            title="marca"
                             onChange={(e) => handleChange(e)}
                         />
                     </div>
                 </div>
-
-                <div className={style.select}>
-                    {input.gender.length === 0 && ( // si hay un error hara un <p> nuevo con el error
-                        <p className={style.error}>{"choose a gender"}</p>
+                <div>
+                    <p>Color: </p>
+                    {error.color && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{error.price}</p>
                     )}
-                    <p>Select Gender:</p>
+                    <input
+                        type="text"
+                        value={input.color}
+                        className={style.field}
+                        title="color"
+                        onChange={(e) => handleChange(e)}
+                    />
+                </div>
+                <div>
+                    <p>Material Del Interior: </p>
+                    {error.color && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{error.price}</p>
+                    )}
+                    <input
+                        type="text"
+                        value={input.materialesDelInterior}
+                        className={style.field}
+                        title="materialesDelInterior"
+                        onChange={(e) => handleChange(e)}
+                    />
+                </div>
+                <div>
+                    <p>Material Del Exterior: </p>
+                    {error.color && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{error.price}</p>
+                    )}
+                    <input
+                        type="text"
+                        value={input.materialesDelExterior}
+                        className={style.field}
+                        title="materialesDelExterior"
+                        onChange={(e) => handleChange(e)}
+                    />
+                </div>
+
+                {/* CONDICION */}
+                <div className={style.select}>
+                    {input.condition.length === 0 && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{"choose a Condition"}</p>
+                    )}
+                    <p>Select Condition:</p>
                     <select className={style.select} onChange={(e) => handleSelect(e)}>
                         <option selected disabled>
-                            Select Gender
+                            Select Condition
+                        </option>
+                        <option value="Nuevo">Nuevo</option>
+                        <option value="Usado">Usado</option>
+                    </select>
+                </div>
+
+                {/* GENERO */}
+                <div className={style.select}>
+                    {input.genero.length === 0 && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{"choose a genero"}</p>
+                    )}
+                    <p>Select genero:</p>
+                    <select className={style.select} onChange={(e) => handleSelect(e)}>
+                        <option selected disabled>
+                            Select genero
                         </option>
                         <option value="Men">Men</option>
                         <option value="Women">Women</option>
                     </select>
                 </div>
 
-                {/* DESCRIPTION */}
-                <section className={style.ContainTextarea}>
-                    <p>Description: </p>
-                    {error.description && ( // si hay un error hara un <p> nuevo con el error
-                        <p className={style.error}>{error.description}</p>
-                    )}
-                    <textarea
-                        name="description"
-                        value={input.description}
-                        onChange={(e) => handleChange(e)}
-                        className={style.contactTextarea}
-                        placeholder="Description Product"
-                        cols="30"
-                        rows="8">
-                    </textarea>
-                </section>
-
-
-                {/* STOCK */}
-
-                <p className={style.stockTitle}>Create Stock:</p>
-                <div className={style.stockContainerPrincipal}>
-                    <p className={style.stockNumberContain}>stock Product:  <span className={style.stockNumber}>{input.stock}</span></p>
-                    {error.stock && ( // si hay un error hara un <p> nuevo con el error
-                        <p className={style.error}>{error.stock}</p>
-                    )}
-                    <section>
-                        <button className={style.buttonStock} onClick={(e) => handleAumentar(e)}>+</button>
-                        <button className={style.buttonStock} onClick={(e) => handleDecrementar(e)} >-</button>
-                    </section>
-                </div>
-
-                {/* TALLE */}
-
+                {/* EDAD */}
                 <div className={style.select}>
-                    {input.size.length === 0 && ( // si hay un error hara un <p> nuevo con el error
-                        <p className={style.error}>{"choose a Size"}</p>
+                    {input.edad.length === 0 && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{"choose a edad"}</p>
                     )}
-                    <p>Select Size:</p>
-                    <select className={style.select} onChange={(e) => handleSelectSize(e)}>
+                    <p>Select Edad:</p>
+                    <select className={style.select} onChange={(e) => handleSelect(e)}>
                         <option selected disabled>
-                            Select size
+                            Select Edad
                         </option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
+                        <option value="Adultos">Adulto</option>
+                        <option value="Niños">Niño</option>
                     </select>
                 </div>
 
+                <div>
+                    <p>Imagenes Adicionales:</p>
+                    {error.title && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{error.title}</p>
+                    )}
+                    <input
+                        type="text"
+                        value={input.picture}
+                        className={style.field}
+                        title="picture"
+                        onChange={(e) => handleChange(e)}
+                    />
+                    <button onClick={(e) => hundlePictureAdd(e)} > Añadir imagen</button>
+                </div>
 
                 {/* BUTTON */}
-                {Object.keys(error).length === 0 && comprobacionInput(input) ? (
-                    <button
-                        className={style.submit}
-                        type="submit"
-                        onClick={(e) => handleSubmit(e)}
-                    >
-                        Create New Product
-                    </button>
-                ) : (
-                    <p className={style.todosCampos}>
-                        You must fill in all the fields, to be able to Create your product
-                    </p>
-                )}
+                {
+                    Object.keys(error).length === 0 && comprobacionInput(input) ? (
+                        <button
+                            className={style.submit}
 
-                {/* <button className={style.submit} type='submit' onClick={(e) => handleSubmit(e)}>Create New Product</button> */}
+                            type="submit"
+                            onClick={(e) => handleSubmit(e)}
+                        >
+                            Create New Product
+                        </button>
+                    ) : (
+                        <p className={style.todosCampos}>
+                            You must fill in all the fields, to be able to Create your product
+                        </p>
+                    )
+                }
+
+                {/* Array Pictures */}
+                <div className={style.pictures}>
+                    {input.pictures.map(el =>  /**cada vez que coloquemos una opcion se creara una pequeña lista */
+                        <div key={el} className={style.divName}>
+                            <p>{el}</p>
+                            <button className={style.btnX} onClick={() => handleDelete(el)}>X</button>
+                        </div>)}
+                </div>
+
             </form >
-        </div>
+        </div >
     );
 }
 
