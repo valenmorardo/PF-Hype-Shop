@@ -22,7 +22,7 @@ const { conn } = require("./src/db.js");
 const { bulkCreate } = require("./src/utils/bulkCreate");
 
 // Syncing all the models at once.
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
     // BULKCREATE CREA LOS PRODUCTOS EN LA DB SI VE QUE LA DB ESTA VACIA
     bulkCreate();
