@@ -2,16 +2,19 @@ import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./Components/Home/Home";
 import About from "./Components/NavBar/About/About";
-import CardDetail from "./Components/Card/CardDetail/CardDetail";
+// import CardDetail from "./Components/Card/CardDetail/CardDetail";
 import CreateProduct from "./Components/CreateProduct/CreateProduct";
+// import SearchBar from './Components/NavBar/'
+// import Login from './Components/NavBar/Login/Login'
 
 function App() {
    return (
       <BrowserRouter>
          <div className="App">
             <Switch>
+               {/* <Route path="/" component={Login} /> */}
                <Route path="/home" component={Home} />
-               <Route path="/sneaker/:id" component={CardDetail} />
+               {/* <Route path="/sneaker/:id" component={CardDetail} /> */}
                <Route path="/createaccount" />
                <Route path="/about" component={About} />
                <Route path="/createProduct" component={CreateProduct} />

@@ -5,11 +5,11 @@ import { GET_SNEAKERS, SEARCH_SNEAKER } from "./actionTypes";
 export const getSneakers = () => {
    return async (dispatch) => {
       try {
-         const response = await axios.get("/sneakers");
+         const response = await axios.get("http://localhost:3001/dbSneakers");
          //console.log(response)
          dispatch({
             type: GET_SNEAKERS,
-            payload: response, //data
+            payload: response.data,
          });
       } catch (error) {
          console.log("error trying to GET_SNEAKERS", error);
