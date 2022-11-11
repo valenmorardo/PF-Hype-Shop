@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
+import Card from "./Card";
+import styles from "./Cards.module.css";
 
-const Cards = () => {
+const Cards = ({ sneakers }) => {
   return (
-    <div>Cards</div>
-  )
-}
+    <div className={styles.cards}>
+      {sneakers?.map((e) => (
+        <Card {...e} />
+      ))}
+    </div>
+  );
+};
 
-export default Cards
+export default Cards;
