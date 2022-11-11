@@ -4,7 +4,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSneakers } from "../../Redux/actions/index";
 
+
 import Cards from "../Cards/Cards";
+
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -16,16 +18,17 @@ const Home = () => {
 
   return (
     <div>
-      <h5>HypeSHOP</h5>
       {
         sneakers.map((e) => {
-          <div>
+          return(
             <div>
-              <Cards />
-            </div>
-          </div>;
+              <Card 
+                title={e.title}
+                price={e.price}
+                pictures={e.pictures} />
+            </div>  
+          )          
         })
-
       }
     
     </div>
