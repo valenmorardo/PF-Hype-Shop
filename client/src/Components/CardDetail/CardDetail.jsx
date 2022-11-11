@@ -20,7 +20,7 @@ const CardDetail = (props) => {
 
     {sneakerDetail?(
       <div>
-        {/* <h1>{sneakerDetail.title}</h1>*/}
+        <h1>{sneakerDetail.title}</h1>
       </div>
     ):<p>Loading...</p>}
 
