@@ -1,0 +1,14 @@
+.navbar {
+    background-color: rgba(55, 175, 239, 0.336);
+    
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    gap: 200px;
+    width: center;
+    margin: 0 auto;
+}
