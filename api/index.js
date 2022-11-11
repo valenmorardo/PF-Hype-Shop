@@ -19,10 +19,13 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
+const { bulkCreate } = require("./src/utils/bulkCreate");
 
 // Syncing all the models at once.
 conn.sync({ force: false }).then(() => {
   server.listen(3001, () => {
+    // BULKCREATE CREA LOS PRODUCTOS EN LA DB SI VE QUE LA DB ESTA VACIA
+    bulkCreate();
     console.log("%s listening at 3001"); // eslint-disable-line no-console
   });
 });

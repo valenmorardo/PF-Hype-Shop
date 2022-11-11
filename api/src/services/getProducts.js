@@ -47,43 +47,61 @@ const getApiProducts = async () => {
 };
 
 const getDbProducts = async (title) => {
-  const lowerCasedTitle = title?.toLowerCase();
+  const lowerCasedTitle = title?.toLowerCase().split(" ");
+  console.log(lowerCasedTitle);
 
   if (title) {
     const productFoundOnDb = await Product.findAll({
       where: {
         title: {
-          [Op.like]: `%${lowerCasedTitle}%`,
+          [Op.iLike]: `%${lowerCasedTitle[0]}%`,
+          [Op.iLike]: `%${lowerCasedTitle[1]}%`,
+          [Op.iLike]: `%${lowerCasedTitle[2]}%`,
+          [Op.iLike]: `%${lowerCasedTitle[2]}%`,
+          [Op.iLike]: `%${lowerCasedTitle[4]}%`,
         },
       },
+      raw: true,
     });
-    console.log(productFoundOnDb);
+    //No miren esto , es horrible pero no encontre otra forma
     return productFoundOnDb;
   }
   return await Product.findAll();
 };
 
 const getSingleApiProduct = async (id) => {
+  console.log(id);
   const apiProductData = await axios.get(
     `https://api.mercadolibre.com/items/${id}`
   );
-  return objectFormatter(apiProductData.data);
+  const prodata = apiProductData.data;
+  return objectFormatter(prodata);
 };
 
 const getSingleDbProduct = async (primaryKey) => {
   return await Product.findByPk(primaryKey);
 };
 
+const getAPiMultipleIds = async (ids) => {
+  const products = (
+    await axios.get(`https://api.mercadolibre.com/items?ids=${ids}`)
+  ).data;
+  const formattedData = products.map((product) => {
+    return objectFormatter(product.body);
+  });
+  return formattedData;
+};
+
 const getApiProductsByTitle = async (title) => {
-  if (title) {
-    const apiProductsFound = await axios.get(
-      `https://api.mercadolibre.com/sites/MLA/search?q=${title}`
-    );
-    const formatted = apiProductsFound.data.results.map((product) => {
-      return getSingleApiProduct(product.id);
-    });
-    return formatted;
-  }
+  if (!title) return;
+  const apiProductsFound = (
+    await axios.get(
+      `https://api.mercadolibre.com/sites/MLA/search?category=MLA109027&q=${title}&limit=20`
+    )
+  ).data;
+  const ids = apiProductsFound.results.map((product) => product.id);
+  const stringIds = ids.join(",");
+  return await getAPiMultipleIds(stringIds);
 };
 
 module.exports = {

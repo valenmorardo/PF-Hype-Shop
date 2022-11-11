@@ -1,6 +1,8 @@
 const objectFormatter = (details) => {
-  const { title, price, condition, thumbnail, pictures, attributes } = details;
+  const { id, title, price, condition, thumbnail, pictures, attributes } =
+    details;
   const objFormatted = {
+    id,
     title,
     price,
     condition,
