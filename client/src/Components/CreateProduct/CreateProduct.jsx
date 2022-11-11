@@ -81,24 +81,24 @@ const validate = (input) => {
         errores.image = "Dont input blank space";
     }
 
-    /*    BRAND   */
-    else if (!input.brand) {
-        errores.brand = "Brand name is required";
+    /*    marca   */
+    else if (!input.marca) {
+        errores.marca = "marca name is required";
     }
-    else if (input.brand.length < 3) {
-        errores.brand = "The Brand name must contain at least 3 letters";
+    else if (input.marca.length < 3) {
+        errores.marca = "The marca name must contain at least 3 letters";
     }
-    else if (/^\s+$/.test(input.brand)) {
-        errores.brand = "The Brand name cannot be a blank space";
+    else if (/^\s+$/.test(input.marca)) {
+        errores.marca = "The marca name cannot be a blank space";
     }
-    else if (!/^[a-zA-Z ]*$/.test(input.brand)) {
-        errores.brand = "The Brand name must only contain letters";
+    else if (!/^[a-zA-Z ]*$/.test(input.marca)) {
+        errores.marca = "The marca name must only contain letters";
     }
-    else if (input.brand.startsWith(" ")) {
-        errores.brand = "Dont input blank spaces";
+    else if (input.marca.startsWith(" ")) {
+        errores.marca = "Dont input blank spaces";
     }
-    else if (input.brand.endsWith(" ")) {
-        errores.brand = "Dont input blank space";
+    else if (input.marca.endsWith(" ")) {
+        errores.marca = "Dont input blank space";
     }
 
     /*      DESCRIPTION      */
@@ -137,15 +137,22 @@ const CreateProduct = () => {
     // para validaciones:
     const [error, setError] = useState({})
     const initialState = {
-        id: Math.floor(Math.random() * 1000),
-        name: "",
+        title: "",
         price: 0,
-        image: "",
-        brand: "",
+        thumbnail: "",
+        edad:"",
+        color:"",
+ Materiales del interior:"",
+// interiorMaterials:"",
+// "Talle filtrable"
+typeOfFootwear:"",
+        marca: "",
         gender: "",
         stock: 0,
         size: "",
-        description: "",
+        condition:"",
+        pictures:[],
+        
     }
 
     // ESTADO PRINCIPAL
@@ -175,7 +182,7 @@ const CreateProduct = () => {
             input.name &&
             input.price &&
             input.image &&
-            input.brand &&
+            input.marca &&
             input.gender &&
             input.stock &&
             input.size &&
@@ -246,7 +253,7 @@ const CreateProduct = () => {
             input.name &&
             input.price &&
             input.image &&
-            input.brand &&
+            input.marca &&
             input.gender &&
             input.stock &&
             input.size &&
@@ -256,11 +263,13 @@ const CreateProduct = () => {
                 name: input.name,
                 price: input.price,
                 image: input.image,
-                brand: input.brand,
+                marca: input.marca,
                 gender: input.gender,
                 stock: input.stock,
                 size: input.size,
                 description: input.description,
+                // Talle filtrable
+                attributes:[{name:"edad", value:input.edad},{name:"marca",value:input.marca},{name:"Color",value:input.color},{name:"Materiales del exterior",value:input.MaterialesDelExterior},{name:"Tipo de calzado",value:input.TipoDeCalzado}]
             }));
             swal({
                 title: "Product created successfully!",
@@ -324,15 +333,15 @@ const CreateProduct = () => {
                         />
                     </div>
                     <div>
-                        <p>brand:</p>
-                        {error.brand && ( // si hay un error hara un <p> nuevo con el error
-                            <p className={style.error}>{error.brand}</p>
+                        <p>marca:</p>
+                        {error.marca && ( // si hay un error hara un <p> nuevo con el error
+                            <p className={style.error}>{error.marca}</p>
                         )}
                         <input
                             type="text"
-                            value={input.brand}
+                            value={input.marca}
                             className={style.field}
-                            name="brand"
+                            name="marca"
                             onChange={(e) => handleChange(e)}
                         />
                     </div>
