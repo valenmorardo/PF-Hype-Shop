@@ -5,7 +5,7 @@ import { GET_SNEAKERS, SEARCH_SNEAKER } from "./actionTypes";
 export const getSneakers = () => {
    return async (dispatch) => {
       try {
-         const response = await axios.get("/sneakers");
+         const response = await axios.get("/dbSneakers");
          //console.log(response)
          dispatch({
             type: GET_SNEAKERS,
