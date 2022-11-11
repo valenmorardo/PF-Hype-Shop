@@ -4,7 +4,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSneakers } from "../../Redux/actions/index";
 
-import Card from "../Cards/Card";
+
+import Cards from "../Cards/Cards";
+
 
 const Home = () => {
   const dispatch = useDispatch();

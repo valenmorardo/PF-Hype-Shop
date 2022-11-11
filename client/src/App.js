@@ -2,8 +2,9 @@ import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./Components/Home/Home";
 import About from "./Components/NavBar/About/About";
-import CardDetail from "./Components/Card/CardDetail/CardDetail";
+import CardDetail from "./Components/CardDetail/CardDetail";
 import CreateProduct from "./Components/CreateProduct/CreateProduct";
+import error404 from "./Components/error404/error404";
 
 function App() {
    return (
@@ -15,6 +16,7 @@ function App() {
                <Route path="/createaccount" />
                <Route path="/about" component={About} />
                <Route path="/createProduct" component={CreateProduct} />
+               <Route path='*' component={error404}></Route>
             </Switch>
          </div>
       </BrowserRouter>
