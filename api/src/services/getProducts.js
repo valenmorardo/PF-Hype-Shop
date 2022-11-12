@@ -8,6 +8,7 @@ const getApiProducts = async () => {
   const fetch = await axios.get(
     "https://api.mercadolibre.com/sites/MLA/search?category=MLA109027"
   );
+
   const data = fetch.data.results;
   const arrayString = data.map((prod) => prod.id);
   const string1 = arrayString.slice(0, 20).join(",");
@@ -47,30 +48,25 @@ const getApiProducts = async () => {
 };
 
 const getDbProducts = async (title) => {
-  const lowerCasedTitle = title?.toLowerCase().split(" ");
-  console.log(lowerCasedTitle);
-
   if (title) {
+    const matches = title.split(" ").map((string) => ({
+      [Op.iLike]: `%${string}%`,
+    }));
+
     const productFoundOnDb = await Product.findAll({
       where: {
         title: {
-          [Op.iLike]: `%${lowerCasedTitle[0]}%`,
-          [Op.iLike]: `%${lowerCasedTitle[1]}%`,
-          [Op.iLike]: `%${lowerCasedTitle[2]}%`,
-          [Op.iLike]: `%${lowerCasedTitle[2]}%`,
-          [Op.iLike]: `%${lowerCasedTitle[4]}%`,
+          [Op.or]: matches,
         },
       },
       raw: true,
     });
-    //No miren esto , es horrible pero no encontre otra forma
     return productFoundOnDb;
   }
   return await Product.findAll();
 };
 
 const getSingleApiProduct = async (id) => {
-  console.log(id);
   const apiProductData = await axios.get(
     `https://api.mercadolibre.com/items/${id}`
   );
