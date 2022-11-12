@@ -1,7 +1,4 @@
-const { Products } = require("../db");
-
 const {
-  getApiProducts,
   getDbProducts,
   getSingleApiProduct,
   getSingleDbProduct,
@@ -27,13 +24,12 @@ const allData = async (req, res) => {
     const dbProduct = await getDbProducts();
     return res.send(dbProduct);
   } catch (e) {
-    res.status(400).json({ Error: e.message, Lugar: "sneakers" });
+    res.status(400).json({ Error: e.message });
   }
 };
 
 const getProductById = async (req, res) => {
   const { productId } = req.params;
-  console.log(productId);
 
   let product;
 
