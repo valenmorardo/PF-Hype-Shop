@@ -6,7 +6,7 @@ import { getSneakers } from "../../Redux/actions/index";
 
 import Cards from "../Cards/Cards";
 import Paginado from "../Paginado/Paginado";
-
+import NavBar from "../NavBar/NavBar";
 import styles from "./Home.module.css";
 
 const Home = () => {
@@ -35,7 +35,9 @@ const Home = () => {
         <div>
           <h1>HYPE SHOP</h1>
 
-          <div>{/* AQUI DEBE IR COMPONENTE NAVBAR */}</div>
+          <div>
+            <NavBar/>
+          </div>
 
           <div>
             <Paginado
@@ -57,11 +59,13 @@ const Home = () => {
             />
           </div>
         </div>
+
       ) : (
         <div>
           <h1>Loading...</h1>
         </div>
       )}
+
     </div>
   );
 };

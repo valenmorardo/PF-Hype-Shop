@@ -6,5 +6,6 @@ const router = Router();
 
 router.use("/", sneakersRoutes);
 
+
 module.exports = router;
 
