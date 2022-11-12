@@ -1,5 +1,5 @@
 const objectFormatter = (details) => {
-  const { title, price, condition, thumbnail, pictures, attributes } = details;
+  const {id, title, price, condition, thumbnail, pictures, attributes } = details;
 
   const requiredAttributes = [
     "BRAND",
@@ -22,6 +22,7 @@ const objectFormatter = (details) => {
   const attributesObject = Object.fromEntries(results);
 
   const objFormatted = {
+    id,
     title,
     price,
     condition,
