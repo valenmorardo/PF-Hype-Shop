@@ -12,6 +12,7 @@ const NavBar = () => {
             <div className={styles.container}>
                 <SearchBar/>
                 <Filtrado/>
+                <Link to='/createProduct'> <button> Create Product </button></Link>
                 <Link to='/about'> <button> ABOUT </button></Link>
             </div>
         </nav>
