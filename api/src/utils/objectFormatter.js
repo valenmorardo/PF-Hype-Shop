@@ -13,12 +13,7 @@ const objectFormatter = (details) => {
     })),
   };
   let obj2 = {};
-  // const convertirACamelCase = (texto) =>{
-  //   return texto.replace(/\W+(.)/g, function(coincidencia, c){
-  //    return c.UpperCase();
 
-  //   })
-  // }
   function convertirACamelCase(texto) {
     return texto.replace(/\W+(.)/g, function(coincidencia, c) {
        return  c.toUpperCase();

@@ -10,7 +10,7 @@ const getApiProducts = async () => {
   );
   const data = fetch.data.results;
   const arrayString = data.map((prod) => prod.id);
-  const string1 = arrayString.slice(0, 1).join(",");
+  const string1 = arrayString.slice(0, 20).join(",");
   const string2 = arrayString.slice(20, 40).join(",");
   const string3 = arrayString.slice(40, 50).join(",");
 
@@ -24,24 +24,24 @@ const getApiProducts = async () => {
       const details = objectFormatter(detalles);
       allData.push(details);
     });
-  // const dataFromString2 = await axios.get(
-  //   `https://api.mercadolibre.com/items?ids=${string2}`
-  // );
-  // dataFromString2.data
-  //   .map((prod) => prod.body)
-  //   .map((detalles) => {
-  //     const details = objectFormatter(detalles);
-  //     allData.push(details);
-  //   });
-  // const dataFromString3 = await axios.get(
-  //   `https://api.mercadolibre.com/items?ids=${string3}`
-  // );
-  // dataFromString3.data
-  //   .map((prod) => prod.body)
-  //   .map((detalles) => {
-  //     const details = objectFormatter(detalles);
-  //     allData.push(details);
-  //   });
+  const dataFromString2 = await axios.get(
+    `https://api.mercadolibre.com/items?ids=${string2}`
+  );
+  dataFromString2.data
+    .map((prod) => prod.body)
+    .map((detalles) => {
+      const details = objectFormatter(detalles);
+      allData.push(details);
+    });
+  const dataFromString3 = await axios.get(
+    `https://api.mercadolibre.com/items?ids=${string3}`
+  );
+  dataFromString3.data
+    .map((prod) => prod.body)
+    .map((detalles) => {
+      const details = objectFormatter(detalles);
+      allData.push(details);
+    });
 
   return allData;
 };
