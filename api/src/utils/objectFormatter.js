@@ -59,7 +59,7 @@ const objectFormatter = (details) => {
       ? Array.from(colors)
       : [attributesObject.COLOR];
 
-  const objFormatted = {
+  return {
     id,
     title,
     price,
@@ -75,8 +75,6 @@ const objectFormatter = (details) => {
     date_created,
     last_updated,
   };
-
-  return objFormatted;
 };
 
 module.exports = { objectFormatter };
