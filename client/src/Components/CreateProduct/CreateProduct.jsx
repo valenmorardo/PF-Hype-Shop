@@ -9,9 +9,9 @@ import style from "./CreateProduct.module.css"
 const validate = (input) => {
     let errores = {};
     let priceValidate;
-    function isNumeric(value) {
-        return /^-?\d+$/.test(value);
-    }
+    // function isNumeric(value) {
+    //     return /^-?\d+$/.test(value);
+    // }
     // for (let i = 0; i < input.price.length; i++) {
     //     let index = input.price.charAt(i)
     //     if(index>='0' && index<='9'){
@@ -140,16 +140,15 @@ const CreateProduct = () => {
         title: "",
         thumbnail: "",
         price: 0,
-        condition: "",
+        condition: "new",
         picture: "",
         pictures: [],
         age_group: "",
         brand: "",
         color: "",
         externalMaterial: "",
-        shoeStyle: "",
-        size: "",
-
+        shoeStyle: "Zapatilla",
+        size: 0,
         // genero: "",
     }
 
@@ -172,18 +171,40 @@ const CreateProduct = () => {
         );
     }
 
-    //comprobacion de INPUT que todo este Completo
+    // Funcion para Convertir numero en String y agregar "AR"
+    const handleChangeSize = (e) => {
+        e.preventDefault();
+        let numerosize = e.target.value;
+        let numeroString = numerosize.toString() + " AR";
 
+        setInput({
+            ...input,
+            size: numeroString,
+        })
+        // Validacion:
+        // setError(
+        //     validate({
+        //         ...input,
+        //         [e.target.name]: e.target.value,
+        //     })
+        // );
+    }
+
+    //comprobacion de INPUT que todo este Completo
     const comprobacionInput = (input) => {
         console.log("entrar input comprobacion")
         if (
+            input.thumbnail &&
             input.title &&
             input.price &&
-            input.thumbnail &&
+            input.condition &&
+            input.pictures &&
+            input.age_group &&
             input.brand &&
-            input.genero &&
-            input.stock
-            // FALTAN ATRIBUTOS
+            input.color &&
+            input.externalMaterial &&
+            input.shoeStyle &&
+            input.size
         ) {
             return true;
         } else {
@@ -192,17 +213,11 @@ const CreateProduct = () => {
     }
 
 
-    // GENERO
+    // AGE_GROUP
     const handleSelect = (e) => {
-        // PARA CATEGORIA:
-        // dispatch(getCategorys());
-        // let CategorysG = categorys.filter(element => element.genero === e.target.value);
-
         setInput({
             ...input,
-            // categorysgenero: CategorysG,
-            genero: e.target.value,
-            // titleCategory: "Disable",
+            age_group: e.target.value,
         });
     }
 
@@ -229,23 +244,31 @@ const CreateProduct = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (
+            input.thumbnail &&
             input.title &&
             input.price &&
-            input.thumbnail &&
+            input.condition &&
+            input.pictures &&
+            input.age_group &&
             input.brand &&
-            input.genero &&
-            input.stock &&
-            input.size &&
-            input.description
+            input.color &&
+            input.externalMaterial &&
+            input.shoeStyle &&
+            input.size
         ) {
             dispatch(CreateNewProduct({
+                thumbnail: input.thumbnail,
                 title: input.title,
                 price: input.price,
+                condition: input.condition,
+                pictures: input.pictures,
+                age_group: input.age_group,
                 brand: input.brand,
-                genero: input.genero,
+                color: input.color,
+                externalMaterial: input.externalMaterial,
+                shoeStyle: input.shoeStyle,
+                size: input.size
 
-                // Talle filtrable
-                // attributes: [{ title: "edad", value: input.edad }, { title: "brand", value: input.brand }, { title: "Color", value: input.color }, { title: "Materiales del exterior", value: input.externalMaterial }, { title: "Tipo de calzado", value: input.TipoDeCalzado }]
             }));
             swal({
                 title: "Product created successfully!",
@@ -257,16 +280,19 @@ const CreateProduct = () => {
         } else alert(" missing data for the creation of a new product");
     }
 
+    // --------------------------------------------------------------------------------------------
+    // COMPONENTE RENDER
     return (
         < div className={style.containerMain} >
             {/* {console.log(error)} */}
             <form className={style.form}
                 onSubmit={(e) => handleSubmit(e)}
             >
-                <h2 className={style.titulo}>Product creation</h2>
+                <h2 className={style.titulo}>Product Creation</h2>
                 {console.log(input)}
+                {/* TITLE */}
                 <div>
-                    <p>title:</p>
+                    <p>Title:</p>
                     {error.title && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{error.title}</p>
                     )}
@@ -278,6 +304,7 @@ const CreateProduct = () => {
                         onChange={(e) => handleChange(e)}
                     />
                 </div>
+                {/* PRICE */}
                 <div>
                     <p>Price: </p>
                     {error.price && ( // si hay un error hara un <p> nuevo con el error
@@ -293,7 +320,7 @@ const CreateProduct = () => {
                         onChange={handleChange}
                     />
                 </div>
-
+                {/* THUMBNAIL */}
                 <div>
                     <div>
                         <p>Img:</p>
@@ -308,8 +335,9 @@ const CreateProduct = () => {
                             onChange={(e) => handleChange(e)}
                         />
                     </div>
+                    {/* BRAND */}
                     <div>
-                        <p>brand:</p>
+                        <p>Brand:</p>
                         {error.brand && ( // si hay un error hara un <p> nuevo con el error
                             <p className={style.error}>{error.brand}</p>
                         )}
@@ -322,6 +350,7 @@ const CreateProduct = () => {
                         />
                     </div>
                 </div>
+                {/* COLOR */}
                 <div>
                     <p>Color: </p>
                     {error.color && ( // si hay un error hara un <p> nuevo con el error
@@ -335,7 +364,7 @@ const CreateProduct = () => {
                         onChange={(e) => handleChange(e)}
                     />
                 </div>
-                <div>
+                {/* <div>
                     <p>Material Del Interior: </p>
                     {error.color && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{error.price}</p>
@@ -347,7 +376,8 @@ const CreateProduct = () => {
                         title="materialesDelInterior"
                         onChange={(e) => handleChange(e)}
                     />
-                </div>
+                </div> */}
+                {/* EXTERNALMATERIAAL */}
                 <div>
                     <p>Material Del Exterior: </p>
                     {error.color && ( // si hay un error hara un <p> nuevo con el error
@@ -362,8 +392,23 @@ const CreateProduct = () => {
                     />
                 </div>
 
-                {/* CONDICION */}
-                <div className={style.select}>
+                <div>
+                    <p>Size: </p>
+                    {/* {error.color && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{error.price}</p>
+                    )} */}
+                    <input
+                        type="number"
+                        // value=0
+                        className={style.field}
+                        title="size"
+                        onChange={(e) => handleChangeSize(e)}
+                    />
+                </div>
+
+
+                {/* CONDITION */}
+                {/* <div className={style.select}>
                     {input.condition.length === 0 && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{"choose a Condition"}</p>
                     )}
@@ -375,10 +420,10 @@ const CreateProduct = () => {
                         <option value="Nuevo">Nuevo</option>
                         <option value="Usado">Usado</option>
                     </select>
-                </div>
+                </div> */}
 
                 {/* GENERO */}
-                <div className={style.select}>
+                {/* <div className={style.select}>
                     {input.genero.length === 0 && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{"choose a genero"}</p>
                     )}
@@ -390,23 +435,24 @@ const CreateProduct = () => {
                         <option value="Men">Men</option>
                         <option value="Women">Women</option>
                     </select>
-                </div>
+                </div> */}
 
-                {/* EDAD */}
+                {/* AGE_GROUP */}
                 <div className={style.select}>
-                    {input.edad.length === 0 && ( // si hay un error hara un <p> nuevo con el error
-                        <p className={style.error}>{"choose a edad"}</p>
+                    {input.age_group.length === 0 && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{"choose a age_group"}</p>
                     )}
-                    <p>Select Edad:</p>
+                    <p>Select age_group Group:</p>
                     <select className={style.select} onChange={(e) => handleSelect(e)}>
                         <option selected disabled>
-                            Select Edad
+                            Select age_group Group
                         </option>
-                        <option value="Adultos">Adulto</option>
-                        <option value="Niños">Niño</option>
+                        <option value="Adultos">Adultos</option>
+                        <option value="Niños">Niños</option>
                     </select>
                 </div>
 
+                {/* PICTURES */}
                 <div>
                     <p>Imagenes Adicionales:</p>
                     {error.title && ( // si hay un error hara un <p> nuevo con el error
@@ -440,7 +486,7 @@ const CreateProduct = () => {
                     )
                 }
 
-                {/* Array Pictures */}
+                {/* ARRAY PICTURES */}
                 <div className={style.pictures}>
                     {input.pictures.map(el =>  /**cada vez que coloquemos una opcion se creara una pequeña lista */
                         <div key={el} className={style.divName}>
