@@ -45,4 +45,45 @@ const getProductById = async (req, res) => {
   }
 };
 
-module.exports = { allData, getProductById };
+const createProduct = async (req, res) =>{
+  let {
+    title,
+    price,
+     condition,
+      thumbnail,
+       pictures,
+       age_group,
+       shoeStyle,
+       sizes,
+       date_created,
+       last_updated,
+       brand,
+       colors,
+       externalMaterial,
+  } = req.body
+  
+  try{
+    let productCreate = await Products.create({ 
+      title,
+      price,
+       condition,
+        thumbnail,
+         pictures,
+         age_group,
+         shoeStyle,
+         sizes,
+         date_created,
+         last_updated,
+         brand,
+         colors,
+         externalMaterial,
+         
+        
+    })
+
+    res.send(productCreate)
+  }catch(error){
+    res.status(400).send(error);
+  }
+}
+module.exports = { allData, getProductById, createProduct };
