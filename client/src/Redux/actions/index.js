@@ -1,6 +1,14 @@
 import axios from "axios";
 
-import { GET_SNEAKERS, SEARCH_SNEAKER, GET_DETAIL } from "./actionTypes";
+import {
+   GET_SNEAKERS,
+   SEARCH_SNEAKER,
+   GET_DETAIL,
+   FILTRO_GENERO,
+   FILTRO_MARCA,
+   SORT_BY_ALPHABET,
+   FILTRO_PRECIOS
+} from "./actionTypes";
 
 export const getSneakers = () => {
    return async (dispatch) => {
@@ -44,17 +52,46 @@ export function CreateNewProduct(payload) {
 }
 
 
-export function getDetail(id){
-   return async function(dispatch){
-       try {
-           let json = await axios.get(`http://localhost:3001/sneakers/${id}`)
-           return dispatch({
-               type: GET_DETAIL,
-               payload: json.data
-           })
-       } catch (error) {
-       return alert("Detail not found")
-       }
+export function getDetail(id) {
+   return async function (dispatch) {
+      try {
+         let json = await axios.get(`http://localhost:3001/sneakers/${id}`)
+         return dispatch({
+            type: GET_DETAIL,
+            payload: json.data
+         })
+      } catch (error) {
+         return alert("Detail not found")
+      }
    }
-
 }
+export const filtroMarca = (payload) => {
+   console.log("FiltroMarca")
+   return {
+      type: FILTRO_MARCA,
+      payload,
+   };
+};
+export const filtroGenero = (payload) => {
+   console.log("Filtro Generos")
+   return {
+      type: FILTRO_GENERO,
+      payload,
+   };
+};
+
+export const alphaSort = (payload) => {
+   console.log("Ordenamiento alfa")
+     return {
+       type: SORT_BY_ALPHABET,
+       payload,
+     };
+  };
+
+  export const filtroPrecios = (payload) => {
+   console.log("Filtro x precios")
+   return {
+      type: FILTRO_PRECIOS,
+      payload,
+   };
+};

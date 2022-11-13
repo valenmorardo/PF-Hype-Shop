@@ -9,12 +9,14 @@ import Paginado from "../Paginado/Paginado";
 import NavBar from "../NavBar/NavBar";
 import styles from "./Home.module.css";
 import SearchBar from "../NavBar/SearchBar/SearchBar";
+import Filtrado from "../NavBar/Filtrado/Filtrado";
 
 const Home = () => {
   const dispatch = useDispatch();
   const sneakers = useSelector((state) => state.allSneakers);
 
   //PAGINADO:
+  const [order, setOrder] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [sneakersPerPage, setSneakersPerPage] = useState(9);
   const indexLastSneaker = currentPage * sneakersPerPage;
@@ -37,11 +39,14 @@ const Home = () => {
 
 
           <div>
-            <NavBar/>
-       
+            <NavBar />
+
           </div>
 
-
+          <Filtrado 
+           setCurrentPage={setCurrentPage}
+           setOrder={setOrder}
+          />
 
           <div>
             <Paginado
