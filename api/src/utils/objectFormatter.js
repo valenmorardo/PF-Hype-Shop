@@ -62,7 +62,7 @@ const objectFormatter = (details) => {
   return {
     id,
     title,
-    price,
+    price: Number(price),
     condition,
     thumbnail,
     pictures: pictures.map((picture) => picture.url),
