@@ -54,9 +54,9 @@ const validate = (input) => {
     else if (input.price < 0) {
         errores.price = "The price must be a positive number";
     }
-    else if (!isNumeric(input.price)) {
-        errores.price = "The price must be a positive number";
-    }
+    // else if (!isNumeric(input.price)) {
+    //     errores.price = "The price must be a positive number";
+    // }
 
     /*    IMG    */
     else if (!input.thumbnail) {
