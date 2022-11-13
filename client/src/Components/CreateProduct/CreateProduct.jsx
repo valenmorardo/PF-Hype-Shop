@@ -9,9 +9,9 @@ import style from "./CreateProduct.module.css"
 const validate = (input) => {
     let errores = {};
     let priceValidate;
-    // function isNumeric(value) {
-    //     return /^-?\d+$/.test(value);
-    // }
+    function isNumeric(value) {
+        return /^-?\d+$/.test(value);
+    }
     // for (let i = 0; i < input.price.length; i++) {
     //     let index = input.price.charAt(i)
     //     if(index>='0' && index<='9'){
@@ -54,9 +54,9 @@ const validate = (input) => {
     else if (input.price < 0) {
         errores.price = "The price must be a positive number";
     }
-    // else if (!isNumeric(input.price)) {
-    //     errores.price = "The price must be a positive number";
-    // }
+    else if (!isNumeric(input.price)) {
+        errores.price = "The price must be a positive number";
+    }
 
     /*    IMG    */
     else if (!input.thumbnail) {
@@ -101,30 +101,86 @@ const validate = (input) => {
         errores.brand = "Dont input blank space";
     }
 
-    /*      DESCRIPTION      */
-    else if (!input.description) {
-        errores.description = "the description is required";
+    /*    color   */
+    else if (!input.color) {
+        errores.color = "color title is required";
     }
-    else if (input.description.length < 20) {
-        errores.description = "The description must contain at least 20 letters";
+    else if (input.color.length < 3) {
+        errores.color = "The color title must contain at least 3 letters";
     }
-    else if (/^\s+$/.test(input.description)) {
-        errores.description = "The description cannot be a blank space";
+    else if (/^\s+$/.test(input.color)) {
+        errores.color = "The color title cannot be a blank space";
     }
-    else if (input.description.startsWith(" ")) {
-        errores.description = "Dont input blank spaces";
+    else if (!/^[a-zA-Z ]*$/.test(input.color)) {
+        errores.color = "The color title must only contain letters";
     }
-    else if (input.description.endsWith(" ")) {
-        errores.description = "Dont input blank space";
+    else if (input.color.startsWith(" ")) {
+        errores.color = "Dont input blank spaces";
+    }
+    else if (input.color.endsWith(" ")) {
+        errores.color = "Dont input blank space";
     }
 
+    /*    color   */
+    else if (!input.externalMaterial) {
+        errores.externalMaterial = "external Material title is required";
+    }
+    else if (input.externalMaterial.length < 3) {
+        errores.externalMaterial = "The externa lMaterial title must contain at least 3 letters";
+    }
+    else if (/^\s+$/.test(input.externalMaterial)) {
+        errores.externalMaterial = "The externa lMaterial title cannot be a blank space";
+    }
+    else if (!/^[a-zA-Z ]*$/.test(input.externalMaterial)) {
+        errores.externalMaterial = "The externa lMaterial title must only contain letters";
+    }
+    else if (input.externalMaterial.startsWith(" ")) {
+        errores.externalMaterial = "Dont input blank spaces";
+    }
+    else if (input.externalMaterial.endsWith(" ")) {
+        errores.externalMaterial = "Dont input blank space";
+    }
+
+    /*      SIZE         */
+    // else if (input.size.length === 0) {
+    //     errores.size = "The size is required";
+    // }
+    // else if (input.size === 0) {
+    //     errores.size = "The size is not 0";
+    // }
+    // else if (input.size === null) {
+    //     errores.size = "The size is required";
+    // }
+    // else if (parseInt(input.size) < 0) {
+    //     errores.size = "The size must be a positive number";
+    // }
+    // else if (!isNumeric(input.size)) {
+    //     errores.size = "The size must be a positive number";
+    // }
+    /*      DESCRIPTION      */
+    // else if (!input.description) {
+    //     errores.description = "the description is required";
+    // }
+    // else if (input.description.length < 20) {
+    //     errores.description = "The description must contain at least 20 letters";
+    // }
+    // else if (/^\s+$/.test(input.description)) {
+    //     errores.description = "The description cannot be a blank space";
+    // }
+    // else if (input.description.startsWith(" ")) {
+    //     errores.description = "Dont input blank spaces";
+    // }
+    // else if (input.description.endsWith(" ")) {
+    //     errores.description = "Dont input blank space";
+    // }
+
     /*      SOTCK           */
-    else if (input.stock === 0) {
-        errores.stock = "Stock is not 0";
-    }
-    else if (input.stock < 0) {
-        errores.stock = "Stock is not less than 0";
-    }
+    // else if (input.stock === 0) {
+    //     errores.stock = "Stock is not 0";
+    // }
+    // else if (input.stock < 0) {
+    //     errores.stock = "Stock is not less than 0";
+    // }
 
     return errores; // retornamos lo errores
 }
@@ -137,8 +193,8 @@ const CreateProduct = () => {
     // para validaciones:
     const [error, setError] = useState({})
     const initialState = {
-        title: "",
         thumbnail: "",
+        title: "",
         price: 0,
         condition: "new",
         picture: "",
@@ -232,7 +288,8 @@ const CreateProduct = () => {
     // AÑADIR URL Pictures
     const hundlePictureAdd = (e) => {
         e.preventDefault();
-        input.pictures.push(input.picture)
+        if (input.picture !== "" && (/^\s+$/.test(input.brand)))
+            input.pictures.push(input.picture)
         setInput({
             ...input,
             picture: ""
@@ -284,7 +341,7 @@ const CreateProduct = () => {
     // COMPONENTE RENDER
     return (
         < div className={style.containerMain} >
-            {/* {console.log(error)} */}
+            {console.log("Errores", error)}
             <form className={style.form}
                 onSubmit={(e) => handleSubmit(e)}
             >
@@ -354,7 +411,7 @@ const CreateProduct = () => {
                 <div>
                     <p>Color: </p>
                     {error.color && ( // si hay un error hara un <p> nuevo con el error
-                        <p className={style.error}>{error.price}</p>
+                        <p className={style.error}>{error.color}</p>
                     )}
                     <input
                         type="text"
@@ -380,8 +437,8 @@ const CreateProduct = () => {
                 {/* EXTERNALMATERIAAL */}
                 <div>
                     <p>Material Del Exterior: </p>
-                    {error.color && ( // si hay un error hara un <p> nuevo con el error
-                        <p className={style.error}>{error.price}</p>
+                    {error.externalMaterial && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{error.externalMaterial}</p>
                     )}
                     <input
                         type="text"
@@ -394,9 +451,10 @@ const CreateProduct = () => {
 
                 <div>
                     <p>Size: </p>
-                    {/* {error.color && ( // si hay un error hara un <p> nuevo con el error
-                        <p className={style.error}>{error.price}</p>
-                    )} */}
+                    {error.size && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{error.size}</p>
+                    )}
+
                     <input
                         type="number"
                         // value=0
@@ -455,9 +513,9 @@ const CreateProduct = () => {
                 {/* PICTURES */}
                 <div>
                     <p>Imagenes Adicionales:</p>
-                    {error.title && ( // si hay un error hara un <p> nuevo con el error
+                    {/* {error.title && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{error.title}</p>
-                    )}
+                    )} */}
                     <input
                         type="text"
                         value={input.picture}
@@ -467,24 +525,26 @@ const CreateProduct = () => {
                     />
                     <button onClick={(e) => hundlePictureAdd(e)} > Añadir imagen</button>
                 </div>
-
                 {/* BUTTON */}
                 {
-                    Object.keys(error).length === 0 && comprobacionInput(input) ? (
-                        <button
-                            className={style.submit}
+                    Object.keys(error).length === 0 &&
+                        comprobacionInput(input)
+                        ? (
+                            <button
+                                className={style.submit}
 
-                            type="submit"
-                            onClick={(e) => handleSubmit(e)}
-                        >
-                            Create New Product
-                        </button>
-                    ) : (
-                        <p className={style.todosCampos}>
-                            You must fill in all the fields, to be able to Create your product
-                        </p>
-                    )
+                                type="submit"
+                                onClick={(e) => handleSubmit(e)}
+                            >
+                                Create New Product
+                            </button>
+                        ) : (
+                            <p className={style.todosCampos}>
+                                You must fill in all the fields, to be able to Create your product
+                            </p>
+                        )
                 }
+
 
                 {/* ARRAY PICTURES */}
                 <div className={style.pictures}>
