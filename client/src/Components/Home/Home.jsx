@@ -8,6 +8,7 @@ import Cards from "../Cards/Cards";
 import Paginado from "../Paginado/Paginado";
 import NavBar from "../NavBar/NavBar";
 import styles from "./Home.module.css";
+import SearchBar from "../NavBar/SearchBar/SearchBar";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -33,11 +34,14 @@ const Home = () => {
     <div className={styles.fondo}>
       {sneakers.length > 0 ? (
         <div>
-          <h1>HYPE SHOP</h1>
+
 
           <div>
             <NavBar/>
+       
           </div>
+
+
 
           <div>
             <Paginado
