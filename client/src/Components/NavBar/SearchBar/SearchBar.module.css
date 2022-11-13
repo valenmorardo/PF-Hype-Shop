@@ -1,22 +1,22 @@
 /* COLORES DE PRUEBA MODIFICAR DESPUES */
 
-.containSearchBar {
+/* .containSearchBar {
    margin-top: 40px;
-   /* quitar este margin-top si es necesario*/
+    quitar este margin-top si es necesario
    text-align: center;
    display: flex;
-   /* justify-items: flex-start; */
+    justify-items: flex-start; 
    align-items: center;
    justify-content: center;
-   /* flex-direction: column; */
+    flex-direction: column; 
    margin-bottom: 70px;
 }
 
 .mainInput {
    width: 230px;
    margin: 0 5px;
-   /* margin-bottom: 10px; */
-   /* background-color: aqua; */
+    margin-bottom: 10px; 
+    background-color: aqua; 
 }
 
 .mainInputContainer {
@@ -40,7 +40,7 @@
    outline: none;
 }
 
-/*    BUTTON     */
+
 
 .mainButtons {
    width: 230px;
@@ -64,4 +64,4 @@
    cursor: pointer;
    color: #1c1c1c;
    border: 1px solid #1c1c1c;
-}
+} */

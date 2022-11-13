@@ -6,8 +6,9 @@ import { getSneakers } from "../../Redux/actions/index";
 
 import Cards from "../Cards/Cards";
 import Paginado from "../Paginado/Paginado";
-import SearchBar from "../NavBar/SearchBar/SearchBar"
+import NavBar from "../NavBar/NavBar";
 import styles from "./Home.module.css";
+import SearchBar from "../NavBar/SearchBar/SearchBar";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -33,9 +34,14 @@ const Home = () => {
     <div className={styles.fondo}>
       {sneakers.length > 0 ? (
         <div>
-          <h1>HYPE SHOP</h1>
 
-          <div><SearchBar/></div>
+
+          <div>
+            <NavBar/>
+       
+          </div>
+
+
 
           <div>
             <Paginado
@@ -57,11 +63,13 @@ const Home = () => {
             />
           </div>
         </div>
+
       ) : (
         <div>
           <h1>Loading...</h1>
         </div>
       )}
+
     </div>
   );
 };
