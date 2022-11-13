@@ -14,11 +14,13 @@ const bulkCreate = async () => {
         thumbnail,
         pictures,
         age_group,
-        color,
-        size,
+        colors,
+        sizes,
         brand,
         externalMaterial,
         shoeStyle,
+        date_created,
+        last_updated,
       } = el;
       Product.findOrCreate({
         where: { title },
@@ -29,11 +31,13 @@ const bulkCreate = async () => {
           thumbnail,
           pictures,
           age_group,
-          color,
-          size,
+          colors,
+          sizes,
           brand,
           externalMaterial,
           shoeStyle,
+          date_created,
+          last_updated,
         },
       });
     });
