@@ -33,6 +33,7 @@ module.exports = (sequelize) => {
       },
       age_group: {
         type: DataTypes.STRING,
+        defaultValue: "Not specified",
         allowNull: false,
       },
       brand: {
@@ -40,7 +41,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       colors: {
-        type: DataTypes.JSON,
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,
       },
       externalMaterial: {
@@ -52,7 +53,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       sizes: {
-        type: DataTypes.JSON,
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,
       },
       date_created: {
