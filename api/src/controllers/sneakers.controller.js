@@ -49,4 +49,40 @@ const getProductById = async (req, res) => {
   }
 };
 
-module.exports = { allData, getProductById };
+const createProduct = async (req, res) =>{
+let {
+           title,
+           price,
+            condition,
+             thumbnail,
+              pictures,
+              edad,
+              genero,
+              marca,
+              color,
+              materialesDelExterior,
+              materialesDelInterior
+} = req.body
+
+try{
+  let productCreate = await Products.create({ 
+    title,
+    price,
+     condition,
+      thumbnail,
+       pictures,
+       edad,
+       genero,
+       marca,
+       color,
+       materialesDelExterior,
+       materialesDelInterior
+      
+  })
+}catch(error){
+  res.status(400).send(error);
+}
+
+
+}
+module.exports = { allData, getProductById, createProduct };

@@ -31,10 +31,30 @@ module.exports = (sequelize) => {
             type: DataTypes.JSON,
             allowNull: false,
         },
-        attributes:{
-            type: DataTypes.JSON,
-            allowNull: false,
+        edad:{
+            type: DataTypes.STRING,
+            
+        },
+        genero:{
+            type: DataTypes.STRING,
+            
+        },
+        marca:{
+            type: DataTypes.STRING,
+            
+        },
+        color:{
+            type: DataTypes.STRING,
+            
+        },
+        materialesDelExterior:{
+            type: DataTypes.STRING,
+            
+        },
+        materialesDelInterior:{
+            type: DataTypes.STRING,
         }
+
 
 
     });

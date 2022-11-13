@@ -7,10 +7,22 @@ const bulkCreate = async () => {
   if (!dbProducts.length) {
     const dataToBulk = await getApiProducts();
     dataToBulk.forEach((el) => {
-      const { title, price, condition, thumbnail, pictures, attributes } = el;
+      const { title, price,thumbnail, pictures} = el;
       Product.findOrCreate({
         where: { title },
-        defaults: { title, price, condition, thumbnail, pictures, attributes },
+        defaults: { 
+          title,
+           price,
+            condition: el.CondiciNDelTem,
+             thumbnail,
+              pictures,
+              edad: el.Edad,
+              genero: el.GNero,
+              marca: el.Marca,
+              color: el.Color,
+              materialesDelExterior: el.MaterialesDelExterior,
+              materialesDelInterior: el.MaterialesDelInterior
+             },
       });
     });
     console.log("Products succesfully created on db");

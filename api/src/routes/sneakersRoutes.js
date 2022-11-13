@@ -3,12 +3,15 @@ const { Router } = require("express");
 const {
   allData,
   getProductById,
+  createProduct
+
 } = require("../controllers/sneakers.controller");
 
 const router = Router();
 
 router.get("/sneakers", allData);
 router.get("/sneakers/:productId", getProductById);
+router.post('/newProduct', createProduct)
 // router.post('/newProduct', createProduct)
 // NO ESTA HECHA, ES UN EJEMPLO
 

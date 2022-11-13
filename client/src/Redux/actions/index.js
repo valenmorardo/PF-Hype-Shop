@@ -38,7 +38,7 @@ export const getSearchSneaker = (sneaker) => {
 
 export function CreateNewProduct(payload) {
    return async function () {
-      const response = await axios.post("RutaBack", payload);
+      const response = await axios.post("http://localhost:3001/newProduct", payload);
       return response;
    };
 }
