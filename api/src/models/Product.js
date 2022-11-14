@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
       },
       pictures: {
         type: DataTypes.JSON,
-        allowNull: false,
+        // allowNull: false,
       },
       age_group: {
         type: DataTypes.STRING,
@@ -50,7 +50,7 @@ module.exports = (sequelize) => {
       },
       shoeStyle: {
         type: DataTypes.STRING,
-        allowNull: false,
+        // allowNull: false,
       },
       sizes: {
         type: DataTypes.ARRAY(DataTypes.STRING),
@@ -58,11 +58,11 @@ module.exports = (sequelize) => {
       },
       date_created: {
         type: DataTypes.STRING,
-        allowNull: false,
+        // allowNull: false,
       },
       last_updated: {
         type: DataTypes.STRING,
-        allowNull: false,
+        // allowNull: false,
       },
     },
     { timestamps: false }

@@ -4,6 +4,7 @@ const {
   getSingleDbProduct,
   getApiProductsByTitle,
 } = require("../services/getProducts");
+const { Product } = require("../db");
 
 const allData = async (req, res) => {
   const { title } = req.query;
@@ -63,7 +64,7 @@ const createProduct = async (req, res) =>{
   } = req.body
   
   try{
-    let productCreate = await Products.create({ 
+    let productCreate = await Product.create({ 
       title,
       price,
        condition,
@@ -80,9 +81,11 @@ const createProduct = async (req, res) =>{
          
         
     })
+    console.log(productCreate)
 
     res.send(productCreate)
   }catch(error){
+    console.log(error)
     res.status(400).send(error);
   }
 }
