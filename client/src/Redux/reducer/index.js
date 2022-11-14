@@ -52,19 +52,19 @@ const rootReducer = (state = initialState, action) => {
             : state.allSneakers.sort((a, b) => b.title.localeCompare(a.title))
          return {
             ...state,
-            allSneakers: alpha,
+            allSneakers: [...alpha],
          };
 
       case FILTRO_PRECIOS:
          console.log(action.payload)
          const zapa = state.allSneakers;
          const precio =
-            action.payload === "menor"
+            action.payload === "mayor"
                ? zapa.sort((a, b) => {
                   if (b.price > a.price) return 1
                   if (b.price < a.price) return -1
                   return 0
-               }) : action.payload === "mayor"
+               }) : action.payload === "menor"
                   ? zapa.sort((a, b) => {
                      if (b.price < a.price) return 1
                      if (b.price > a.price) return -1
@@ -73,7 +73,7 @@ const rootReducer = (state = initialState, action) => {
                   : zapa;
          return {
             ...state,
-            allSneakers: precio,
+            allSneakers: [...precio],
          };
 
 
