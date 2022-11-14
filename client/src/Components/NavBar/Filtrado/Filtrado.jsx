@@ -11,7 +11,7 @@ const Filtrado = () => {
   const handleOrderByAlpha = (e) => {
     e.preventDefault();
     dispatch(alphaSort(e.target.value));
-    
+
   };
   const handleOrderByGeneros = (e) => {
     e.preventDefault();
@@ -49,9 +49,13 @@ const Filtrado = () => {
 
       <select onChange={(e) => mostrarMarcas(e)}>
         <option value="all">Marcas</option>
-        <option value="jaguar">Jaguar</option>
-        <option value="adidas">Adidas</option>
-        <option value="topper">Topper</option>
+        <option value="Jaguar">Jaguar</option>
+        <option value="Araquina">Araquina</option>
+        {/* <option value="Fila">Fila</option>Araquina
+        <option value="Fila">Fila</option>Araquina
+        <option value="Fila">Fila</option>Araquina
+ */}
+        <option value="Topper">Topper</option>
       </select><br />
 
 

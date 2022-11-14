@@ -27,7 +27,7 @@ const NavBar = () => {
       <div className="flex items-center">
         <ul className="flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium">
           <li>
-            <Link to="/home">
+            <Link to="/">
             <a href="#" className="text-gray-900 dark:text-white hover:underline" aria-current="page">Home</a>
             </Link>
           </li>
