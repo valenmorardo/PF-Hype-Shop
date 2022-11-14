@@ -24,6 +24,12 @@ const rootReducer = (state = initialState, action) => {
             allSneakers: action.payload,
          };
 
+
+            case "POST_PRODUCT":
+               return{
+                   ...state
+               }
+
       case GET_DETAIL:
          return {
             ...state,

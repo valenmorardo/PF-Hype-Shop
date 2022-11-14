@@ -8,6 +8,7 @@ import style from "./CreateProduct.module.css"
 // VALIDACIONES:
 const validate = (input) => {
     let errores = {};
+    console.log(errores)
     let priceValidate;
     function isNumeric(value) {
         return /^-?\d+$/.test(value);
@@ -59,27 +60,27 @@ const validate = (input) => {
     }
 
     /*    IMG    */
-    else if (!input.thumbnail) {
-        errores.thumbnail = "URL thumbnail is required";
-    }
-    else if (input.thumbnail.length < 5) {
-        errores.thumbnail = "The URl must contain at least 5 letters";
-    }
-    else if (/^\s+$/.test(input.thumbnail)) {
-        errores.thumbnail = "The URL cannot be a blank space";
-    }
-    else if (input.thumbnail.includes("https://")) {
-        errores.thumbnail = "The URL must not contain the text 'https://'";
-    }
-    else if (input.thumbnail.includes("http://")) {
-        errores.thumbnail = "The URL must not contain the text 'http://'";
-    }
-    else if (input.thumbnail.startsWith(" ")) {
-        errores.thumbnail = "Dont input blank spaces";
-    }
-    else if (input.thumbnail.endsWith(" ")) {
-        errores.thumbnail = "Dont input blank space";
-    }
+    // else if (!input.thumbnail) {
+    //     errores.thumbnail = "URL thumbnail is required";
+    // }
+    // else if (input.thumbnail.length < 5) {
+    //     errores.thumbnail = "The URl must contain at least 5 letters";
+    // }
+    // else if (/^\s+$/.test(input.thumbnail)) {
+    //     errores.thumbnail = "The URL cannot be a blank space";
+    // }
+    // else if (input.thumbnail.includes("https://")) {
+    //     errores.thumbnail = "The URL must not contain the text 'https://'";
+    // }
+    // else if (input.thumbnail.includes("http://")) {
+    //     errores.thumbnail = "The URL must not contain the text 'http://'";
+    // }
+    // else if (input.thumbnail.startsWith(" ")) {
+    //     errores.thumbnail = "Dont input blank spaces";
+    // }
+    // else if (input.thumbnail.endsWith(" ")) {
+    //     errores.thumbnail = "Dont input blank space";
+    // }
 
     /*    brand   */
     else if (!input.brand) {
@@ -101,38 +102,7 @@ const validate = (input) => {
         errores.brand = "Dont input blank space";
     }
 
-    /*    color   */
-    else if (!input.color) {
-        errores.color = "color title is required";
-    }
-    else if (input.color.length < 3) {
-        errores.color = "The color title must contain at least 3 letters";
-    }
-    else if (/^\s+$/.test(input.color)) {
-        errores.color = "The color title cannot be a blank space";
-    }
-    else if (!/^[a-zA-Z ]*$/.test(input.color)) {
-        errores.color = "The color title must only contain letters";
-    }
-    else if (input.color.startsWith(" ")) {
-        errores.color = "Dont input blank spaces";
-    }
-    else if (input.color.endsWith(" ")) {
-        errores.color = "Dont input blank space";
-    }
 
-    /*    color   */
-    else if (!input.externalMaterial) {
-        errores.externalMaterial = "external Material title is required";
-    }
-    else if (input.externalMaterial.length < 3) {
-        errores.externalMaterial = "The externa lMaterial title must contain at least 3 letters";
-    }
-    else if (/^\s+$/.test(input.externalMaterial)) {
-        errores.externalMaterial = "The externa lMaterial title cannot be a blank space";
-    }
-    else if (!/^[a-zA-Z ]*$/.test(input.externalMaterial)) {
-        errores.externalMaterial = "The externa lMaterial title must only contain letters";
     }
     else if (input.externalMaterial.startsWith(" ")) {
         errores.externalMaterial = "Dont input blank spaces";
@@ -201,10 +171,12 @@ const CreateProduct = () => {
         pictures: [],
         age_group: "",
         brand: "",
-        color: "",
+        color:"",
+        colors: [],
         externalMaterial: "",
         shoeStyle: "Zapatilla",
-        size: 0,
+        size:"",
+        sizes:[],
         // genero: "",
     }
 
@@ -228,14 +200,14 @@ const CreateProduct = () => {
     }
 
     // Funcion para Convertir numero en String y agregar "AR"
-    const handleChangeSize = (e) => {
+    const handleChangesizes = (e) => {
         e.preventDefault();
-        let numerosize = e.target.value;
-        let numeroString = numerosize.toString() + " AR";
+        let numerosizes = e.target.value;
+        let numeroString = numerosizes.toString() + " AR";
 
         setInput({
             ...input,
-            size: numeroString,
+            sizes: numeroString,
         })
         // Validacion:
         // setError(
@@ -257,10 +229,10 @@ const CreateProduct = () => {
             input.pictures &&
             input.age_group &&
             input.brand &&
-            input.color &&
+            input.colors &&
             input.externalMaterial &&
             input.shoeStyle &&
-            input.size
+            input.sizes
         ) {
             return true;
         } else {
@@ -297,6 +269,28 @@ const CreateProduct = () => {
 
     }
 
+        // AÑADIR URL colors
+        const hundleColorsAdd = (e) => {
+            e.preventDefault();
+            input.colors.push(input.color)
+            setInput({
+                ...input,
+                color: ""
+            })
+    
+        }
+
+                // AÑADIR URL colors
+                const hundleSizesAdd = (e) => {
+                    e.preventDefault();
+                    input.sizes.push(input.size)
+                    setInput({
+                        ...input,
+                        size: ""
+                    })
+            
+                }
+
     //  FUNCION PARA CREAR PRODUCTO
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -308,10 +302,10 @@ const CreateProduct = () => {
             input.pictures &&
             input.age_group &&
             input.brand &&
-            input.color &&
+            input.colors &&
             input.externalMaterial &&
             input.shoeStyle &&
-            input.size
+            input.sizes
         ) {
             dispatch(CreateNewProduct({
                 thumbnail: input.thumbnail,
@@ -321,10 +315,10 @@ const CreateProduct = () => {
                 pictures: input.pictures,
                 age_group: input.age_group,
                 brand: input.brand,
-                color: input.color,
+                colors: input.colors,
                 externalMaterial: input.externalMaterial,
                 shoeStyle: input.shoeStyle,
-                size: input.size
+                sizes: input.sizes
 
             }));
             swal({
@@ -346,7 +340,7 @@ const CreateProduct = () => {
                 onSubmit={(e) => handleSubmit(e)}
             >
                 <h2 className={style.titulo}>Product Creation</h2>
-                {console.log(input)}
+    
                 {/* TITLE */}
                 <div>
                     <p>Title:</p>
@@ -407,11 +401,14 @@ const CreateProduct = () => {
                         />
                     </div>
                 </div>
-                {/* COLOR */}
+                {/* colors */}
+
                 <div>
-                    <p>Color: </p>
-                    {error.color && ( // si hay un error hara un <p> nuevo con el error
-                        <p className={style.error}>{error.color}</p>
+
+                    <p>colors:</p>
+                    {error.title && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{error.colors}</p>
+
                     )}
                     <input
                         type="text"
@@ -420,10 +417,11 @@ const CreateProduct = () => {
                         title="color"
                         onChange={(e) => handleChange(e)}
                     />
+                    <button onClick={(e) => hundleColorsAdd(e)} > Añadir color</button>
                 </div>
                 {/* <div>
                     <p>Material Del Interior: </p>
-                    {error.color && ( // si hay un error hara un <p> nuevo con el error
+                    {error.colors && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{error.price}</p>
                     )}
                     <input
@@ -437,8 +435,10 @@ const CreateProduct = () => {
                 {/* EXTERNALMATERIAAL */}
                 <div>
                     <p>Material Del Exterior: </p>
-                    {error.externalMaterial && ( // si hay un error hara un <p> nuevo con el error
-                        <p className={style.error}>{error.externalMaterial}</p>
+
+                    {error.colors && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{error.price}</p>
+
                     )}
                     <input
                         type="text"
@@ -449,20 +449,24 @@ const CreateProduct = () => {
                     />
                 </div>
 
-                <div>
-                    <p>Size: </p>
-                    {error.size && ( // si hay un error hara un <p> nuevo con el error
-                        <p className={style.error}>{error.size}</p>
+
+                      <div>
+                    <p>sizes: </p>
+                    {error.title && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{error.colors}</p>
                     )}
 
                     <input
-                        type="number"
-                        // value=0
+                        type="text"
+                        value={input.size}
                         className={style.field}
                         title="size"
-                        onChange={(e) => handleChangeSize(e)}
+                        onChange={(e) => handleChange(e)}
                     />
+                    <button onClick={(e) => hundleSizesAdd(e)} > Añadir size</button>
                 </div>
+
+
 
 
                 {/* CONDITION */}
