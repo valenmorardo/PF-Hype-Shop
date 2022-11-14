@@ -66,7 +66,7 @@ export function getDetail(id) {
    }
 }
 export const filtroMarca = (payload) => {
-   console.log("FiltroMarca")
+   // console.log("FiltroMarca")
    return {
       type: FILTRO_MARCA,
       payload,
