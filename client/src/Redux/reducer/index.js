@@ -1,5 +1,5 @@
 import {
-   GET_SNEAKERS, SEARCH_SNEAKER, GET_DETAIL, FILTRO_GENERO, FILTRO_MARCA, SORT_BY_ALPHABET, FILTRO_PRECIOS
+   GET_SNEAKERS, SEARCH_SNEAKER, GET_DETAIL, FILTRO_GENERO, FILTRO_MARCA, SORT_BY_ALPHABET, FILTRO_PRECIOS, FILTRO_CATEGORIAS
 } from "../actions/actionTypes";
 const initialState = {
 
@@ -55,6 +55,7 @@ const rootReducer = (state = initialState, action) => {
             allSneakers: [...filteredByGender]
          };
 
+
       case SORT_BY_ALPHABET:
          console.log(state.allSneakers)
          let alpha = action.payload === "aToz"
@@ -86,6 +87,14 @@ const rootReducer = (state = initialState, action) => {
             allSneakers: [...precio],
          };
 
+      
+         case FILTRO_CATEGORIAS:
+         let filteredByCategories =
+         action.payload === "all" ? state.allSneakers : state.filtros.filter(el => el.category === action.payload);
+         return {
+            ...state,
+            allSneakers: [...filteredByCategories]
+         };
 
       default:
          return initialState;

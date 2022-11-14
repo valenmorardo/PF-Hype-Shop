@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import { getSneakers, filtroMarca, filtroGenero, alphaSort, filtroPrecios } from '../../../Redux/actions/index'
+import { getSneakers, filtroMarca, filtroGenero, alphaSort, filtroPrecios , filtroCategorias} from '../../../Redux/actions/index'
 import styles from '../Filtrado/Filtrado.module.css'
 
 const Filtrado = () => {
@@ -27,6 +27,11 @@ const Filtrado = () => {
     e.preventDefault();
     dispatch(filtroMarca(e.target.value));
 
+  }
+
+  const handleCategories=(e)=>{
+    e.preventDefault();
+    dispatch(filtroCategorias(e.target.value))
   }
   console.log(xx)
 
@@ -60,6 +65,13 @@ const Filtrado = () => {
         <option value="Fila">Fila</option>
         <option value="Topper">Topper</option>
       </select>
+
+      <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' onChange={(e) => handleCategories(e)} >
+        <option hidden value="all">Categorias</option>
+        <option value="Deportivo">Deportivo</option>
+        <option value="Urbano">Urbano</option>
+      </select>
+
 
      
 

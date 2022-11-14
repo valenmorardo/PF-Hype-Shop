@@ -7,7 +7,8 @@ import {
    FILTRO_GENERO,
    FILTRO_MARCA,
    SORT_BY_ALPHABET,
-   FILTRO_PRECIOS
+   FILTRO_PRECIOS,
+   FILTRO_CATEGORIAS
 } from "./actionTypes";
 
 export const getSneakers = () => {
@@ -80,6 +81,7 @@ export const filtroGenero = (payload) => {
    };
 };
 
+
 export const alphaSort = (payload) => {
    console.log("Ordenamiento alfa")
      return {
@@ -95,3 +97,10 @@ export const alphaSort = (payload) => {
       payload,
    };
 };
+
+export const filtroCategorias= (payload)=>{
+   return{
+      type:FILTRO_CATEGORIAS,
+      payload,
+   }
+}
