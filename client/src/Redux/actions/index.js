@@ -73,7 +73,7 @@ export const filtroMarca = (payload) => {
    };
 };
 export const filtroGenero = (payload) => {
-   console.log("Filtro Generos")
+   
    return {
       type: FILTRO_GENERO,
       payload,
