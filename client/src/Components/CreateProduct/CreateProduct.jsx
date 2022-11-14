@@ -523,7 +523,7 @@ const CreateProduct = () => {
                         title="picture"
                         onChange={(e) => handleChange(e)}
                     />
-                    <button onClick={(e) => hundlePictureAdd(e)} > Añadir imagen</button>
+                    <button className={style.addButton} onClick={(e) => hundlePictureAdd(e)} > Añadir imagen</button>
                 </div>
                 {/* BUTTON */}
                 {
