@@ -81,50 +81,106 @@ const validate = (input) => {
         errores.thumbnail = "Dont input blank space";
     }
 
-    /*    marca   */
-    else if (!input.marca) {
-        errores.marca = "marca title is required";
+    /*    brand   */
+    else if (!input.brand) {
+        errores.brand = "brand title is required";
     }
-    else if (input.marca.length < 3) {
-        errores.marca = "The marca title must contain at least 3 letters";
+    else if (input.brand.length < 3) {
+        errores.brand = "The brand title must contain at least 3 letters";
     }
-    else if (/^\s+$/.test(input.marca)) {
-        errores.marca = "The marca title cannot be a blank space";
+    else if (/^\s+$/.test(input.brand)) {
+        errores.brand = "The brand title cannot be a blank space";
     }
-    else if (!/^[a-zA-Z ]*$/.test(input.marca)) {
-        errores.marca = "The marca title must only contain letters";
+    else if (!/^[a-zA-Z ]*$/.test(input.brand)) {
+        errores.brand = "The brand title must only contain letters";
     }
-    else if (input.marca.startsWith(" ")) {
-        errores.marca = "Dont input blank spaces";
+    else if (input.brand.startsWith(" ")) {
+        errores.brand = "Dont input blank spaces";
     }
-    else if (input.marca.endsWith(" ")) {
-        errores.marca = "Dont input blank space";
+    else if (input.brand.endsWith(" ")) {
+        errores.brand = "Dont input blank space";
     }
 
+    /*    color   */
+    else if (!input.color) {
+        errores.color = "color title is required";
+    }
+    else if (input.color.length < 3) {
+        errores.color = "The color title must contain at least 3 letters";
+    }
+    else if (/^\s+$/.test(input.color)) {
+        errores.color = "The color title cannot be a blank space";
+    }
+    else if (!/^[a-zA-Z ]*$/.test(input.color)) {
+        errores.color = "The color title must only contain letters";
+    }
+    else if (input.color.startsWith(" ")) {
+        errores.color = "Dont input blank spaces";
+    }
+    else if (input.color.endsWith(" ")) {
+        errores.color = "Dont input blank space";
+    }
+
+    /*    color   */
+    else if (!input.externalMaterial) {
+        errores.externalMaterial = "external Material title is required";
+    }
+    else if (input.externalMaterial.length < 3) {
+        errores.externalMaterial = "The externa lMaterial title must contain at least 3 letters";
+    }
+    else if (/^\s+$/.test(input.externalMaterial)) {
+        errores.externalMaterial = "The externa lMaterial title cannot be a blank space";
+    }
+    else if (!/^[a-zA-Z ]*$/.test(input.externalMaterial)) {
+        errores.externalMaterial = "The externa lMaterial title must only contain letters";
+    }
+    else if (input.externalMaterial.startsWith(" ")) {
+        errores.externalMaterial = "Dont input blank spaces";
+    }
+    else if (input.externalMaterial.endsWith(" ")) {
+        errores.externalMaterial = "Dont input blank space";
+    }
+
+    /*      SIZE         */
+    // else if (input.size.length === 0) {
+    //     errores.size = "The size is required";
+    // }
+    // else if (input.size === 0) {
+    //     errores.size = "The size is not 0";
+    // }
+    // else if (input.size === null) {
+    //     errores.size = "The size is required";
+    // }
+    // else if (parseInt(input.size) < 0) {
+    //     errores.size = "The size must be a positive number";
+    // }
+    // else if (!isNumeric(input.size)) {
+    //     errores.size = "The size must be a positive number";
+    // }
     /*      DESCRIPTION      */
-    else if (!input.description) {
-        errores.description = "the description is required";
-    }
-    else if (input.description.length < 20) {
-        errores.description = "The description must contain at least 20 letters";
-    }
-    else if (/^\s+$/.test(input.description)) {
-        errores.description = "The description cannot be a blank space";
-    }
-    else if (input.description.startsWith(" ")) {
-        errores.description = "Dont input blank spaces";
-    }
-    else if (input.description.endsWith(" ")) {
-        errores.description = "Dont input blank space";
-    }
+    // else if (!input.description) {
+    //     errores.description = "the description is required";
+    // }
+    // else if (input.description.length < 20) {
+    //     errores.description = "The description must contain at least 20 letters";
+    // }
+    // else if (/^\s+$/.test(input.description)) {
+    //     errores.description = "The description cannot be a blank space";
+    // }
+    // else if (input.description.startsWith(" ")) {
+    //     errores.description = "Dont input blank spaces";
+    // }
+    // else if (input.description.endsWith(" ")) {
+    //     errores.description = "Dont input blank space";
+    // }
 
     /*      SOTCK           */
-    else if (input.stock === 0) {
-        errores.stock = "Stock is not 0";
-    }
-    else if (input.stock < 0) {
-        errores.stock = "Stock is not less than 0";
-    }
+    // else if (input.stock === 0) {
+    //     errores.stock = "Stock is not 0";
+    // }
+    // else if (input.stock < 0) {
+    //     errores.stock = "Stock is not less than 0";
+    // }
 
     return errores; // retornamos lo errores
 }
@@ -137,21 +193,19 @@ const CreateProduct = () => {
     // para validaciones:
     const [error, setError] = useState({})
     const initialState = {
+        thumbnail: "",
         title: "",
         price: 0,
-        thumbnail: "",
-        edad: "",
-        // niños,adultos
-        color: "",
-        materialesDelInterior: "",
-        materialesDelExterior: "",
-        // tipoDeCalzado: "",
-        marca: "",
-        genero: "",
-        condition: "",
+        condition: "new",
         picture: "",
         pictures: [],
-
+        age_group: "",
+        brand: "",
+        color: "",
+        externalMaterial: "",
+        shoeStyle: "Zapatilla",
+        size: 0,
+        // genero: "",
     }
 
     // ESTADO PRINCIPAL
@@ -173,18 +227,40 @@ const CreateProduct = () => {
         );
     }
 
-    //comprobacion de INPUT que todo este Completo
+    // Funcion para Convertir numero en String y agregar "AR"
+    const handleChangeSize = (e) => {
+        e.preventDefault();
+        let numerosize = e.target.value;
+        let numeroString = numerosize.toString() + " AR";
 
+        setInput({
+            ...input,
+            size: numeroString,
+        })
+        // Validacion:
+        // setError(
+        //     validate({
+        //         ...input,
+        //         [e.target.name]: e.target.value,
+        //     })
+        // );
+    }
+
+    //comprobacion de INPUT que todo este Completo
     const comprobacionInput = (input) => {
         console.log("entrar input comprobacion")
         if (
+            input.thumbnail &&
             input.title &&
             input.price &&
-            input.thumbnail &&
-            input.marca &&
-            input.genero &&
-            input.stock
-            // FALTAN ATRIBUTOS
+            input.condition &&
+            input.pictures &&
+            input.age_group &&
+            input.brand &&
+            input.color &&
+            input.externalMaterial &&
+            input.shoeStyle &&
+            input.size
         ) {
             return true;
         } else {
@@ -193,17 +269,11 @@ const CreateProduct = () => {
     }
 
 
-    // GENERO
+    // AGE_GROUP
     const handleSelect = (e) => {
-        // PARA CATEGORIA:
-        // dispatch(getCategorys());
-        // let CategorysG = categorys.filter(element => element.genero === e.target.value);
-
         setInput({
             ...input,
-            // categorysgenero: CategorysG,
-            genero: e.target.value,
-            // titleCategory: "Disable",
+            age_group: e.target.value,
         });
     }
 
@@ -218,7 +288,8 @@ const CreateProduct = () => {
     // AÑADIR URL Pictures
     const hundlePictureAdd = (e) => {
         e.preventDefault();
-        input.pictures.push(input.picture)
+        if (input.picture !== "" && (/^\s+$/.test(input.brand)))
+            input.pictures.push(input.picture)
         setInput({
             ...input,
             picture: ""
@@ -230,23 +301,31 @@ const CreateProduct = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (
+            input.thumbnail &&
             input.title &&
             input.price &&
-            input.thumbnail &&
-            input.marca &&
-            input.genero &&
-            input.stock &&
-            input.size &&
-            input.description
+            input.condition &&
+            input.pictures &&
+            input.age_group &&
+            input.brand &&
+            input.color &&
+            input.externalMaterial &&
+            input.shoeStyle &&
+            input.size
         ) {
             dispatch(CreateNewProduct({
+                thumbnail: input.thumbnail,
                 title: input.title,
                 price: input.price,
-                marca: input.marca,
-                genero: input.genero,
+                condition: input.condition,
+                pictures: input.pictures,
+                age_group: input.age_group,
+                brand: input.brand,
+                color: input.color,
+                externalMaterial: input.externalMaterial,
+                shoeStyle: input.shoeStyle,
+                size: input.size
 
-                // Talle filtrable
-                // attributes: [{ title: "edad", value: input.edad }, { title: "marca", value: input.marca }, { title: "Color", value: input.color }, { title: "Materiales del exterior", value: input.MaterialesDelExterior }, { title: "Tipo de calzado", value: input.TipoDeCalzado }]
             }));
             swal({
                 title: "Product created successfully!",
@@ -258,16 +337,19 @@ const CreateProduct = () => {
         } else alert(" missing data for the creation of a new product");
     }
 
+    // --------------------------------------------------------------------------------------------
+    // COMPONENTE RENDER
     return (
         < div className={style.containerMain} >
-            {/* {console.log(error)} */}
+            {console.log("Errores", error)}
             <form className={style.form}
                 onSubmit={(e) => handleSubmit(e)}
             >
-                <h2 className={style.titulo}>Product creation</h2>
+                <h2 className={style.titulo}>Product Creation</h2>
                 {console.log(input)}
+                {/* TITLE */}
                 <div>
-                    <p>title:</p>
+                    <p>Title:</p>
                     {error.title && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{error.title}</p>
                     )}
@@ -279,6 +361,7 @@ const CreateProduct = () => {
                         onChange={(e) => handleChange(e)}
                     />
                 </div>
+                {/* PRICE */}
                 <div>
                     <p>Price: </p>
                     {error.price && ( // si hay un error hara un <p> nuevo con el error
@@ -294,7 +377,7 @@ const CreateProduct = () => {
                         onChange={handleChange}
                     />
                 </div>
-
+                {/* THUMBNAIL */}
                 <div>
                     <div>
                         <p>Img:</p>
@@ -309,24 +392,26 @@ const CreateProduct = () => {
                             onChange={(e) => handleChange(e)}
                         />
                     </div>
+                    {/* BRAND */}
                     <div>
-                        <p>marca:</p>
-                        {error.marca && ( // si hay un error hara un <p> nuevo con el error
-                            <p className={style.error}>{error.marca}</p>
+                        <p>Brand:</p>
+                        {error.brand && ( // si hay un error hara un <p> nuevo con el error
+                            <p className={style.error}>{error.brand}</p>
                         )}
                         <input
                             type="text"
-                            value={input.marca}
+                            value={input.brand}
                             className={style.field}
-                            title="marca"
+                            title="brand"
                             onChange={(e) => handleChange(e)}
                         />
                     </div>
                 </div>
+                {/* COLOR */}
                 <div>
                     <p>Color: </p>
                     {error.color && ( // si hay un error hara un <p> nuevo con el error
-                        <p className={style.error}>{error.price}</p>
+                        <p className={style.error}>{error.color}</p>
                     )}
                     <input
                         type="text"
@@ -336,7 +421,7 @@ const CreateProduct = () => {
                         onChange={(e) => handleChange(e)}
                     />
                 </div>
-                <div>
+                {/* <div>
                     <p>Material Del Interior: </p>
                     {error.color && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{error.price}</p>
@@ -348,23 +433,40 @@ const CreateProduct = () => {
                         title="materialesDelInterior"
                         onChange={(e) => handleChange(e)}
                     />
-                </div>
+                </div> */}
+                {/* EXTERNALMATERIAAL */}
                 <div>
                     <p>Material Del Exterior: </p>
-                    {error.color && ( // si hay un error hara un <p> nuevo con el error
-                        <p className={style.error}>{error.price}</p>
+                    {error.externalMaterial && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{error.externalMaterial}</p>
                     )}
                     <input
                         type="text"
-                        value={input.materialesDelExterior}
+                        value={input.externalMaterial}
                         className={style.field}
-                        title="materialesDelExterior"
+                        title="externalMaterial"
                         onChange={(e) => handleChange(e)}
                     />
                 </div>
 
-                {/* CONDICION */}
-                <div className={style.select}>
+                <div>
+                    <p>Size: </p>
+                    {error.size && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{error.size}</p>
+                    )}
+
+                    <input
+                        type="number"
+                        // value=0
+                        className={style.field}
+                        title="size"
+                        onChange={(e) => handleChangeSize(e)}
+                    />
+                </div>
+
+
+                {/* CONDITION */}
+                {/* <div className={style.select}>
                     {input.condition.length === 0 && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{"choose a Condition"}</p>
                     )}
@@ -376,10 +478,10 @@ const CreateProduct = () => {
                         <option value="Nuevo">Nuevo</option>
                         <option value="Usado">Usado</option>
                     </select>
-                </div>
+                </div> */}
 
                 {/* GENERO */}
-                <div className={style.select}>
+                {/* <div className={style.select}>
                     {input.genero.length === 0 && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{"choose a genero"}</p>
                     )}
@@ -391,28 +493,29 @@ const CreateProduct = () => {
                         <option value="Men">Men</option>
                         <option value="Women">Women</option>
                     </select>
-                </div>
+                </div> */}
 
-                {/* EDAD */}
+                {/* AGE_GROUP */}
                 <div className={style.select}>
-                    {input.edad.length === 0 && ( // si hay un error hara un <p> nuevo con el error
-                        <p className={style.error}>{"choose a edad"}</p>
+                    {input.age_group.length === 0 && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{"choose a age_group"}</p>
                     )}
-                    <p>Select Edad:</p>
+                    <p>Select age_group Group:</p>
                     <select className={style.select} onChange={(e) => handleSelect(e)}>
                         <option selected disabled>
-                            Select Edad
+                            Select age_group Group
                         </option>
-                        <option value="Adultos">Adulto</option>
-                        <option value="Niños">Niño</option>
+                        <option value="Adultos">Adultos</option>
+                        <option value="Niños">Niños</option>
                     </select>
                 </div>
 
+                {/* PICTURES */}
                 <div>
                     <p>Imagenes Adicionales:</p>
-                    {error.title && ( // si hay un error hara un <p> nuevo con el error
+                    {/* {error.title && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{error.title}</p>
-                    )}
+                    )} */}
                     <input
                         type="text"
                         value={input.picture}
@@ -422,26 +525,28 @@ const CreateProduct = () => {
                     />
                     <button onClick={(e) => hundlePictureAdd(e)} > Añadir imagen</button>
                 </div>
-
                 {/* BUTTON */}
                 {
-                    Object.keys(error).length === 0 && comprobacionInput(input) ? (
-                        <button
-                            className={style.submit}
+                    Object.keys(error).length === 0 &&
+                        comprobacionInput(input)
+                        ? (
+                            <button
+                                className={style.submit}
 
-                            type="submit"
-                            onClick={(e) => handleSubmit(e)}
-                        >
-                            Create New Product
-                        </button>
-                    ) : (
-                        <p className={style.todosCampos}>
-                            You must fill in all the fields, to be able to Create your product
-                        </p>
-                    )
+                                type="submit"
+                                onClick={(e) => handleSubmit(e)}
+                            >
+                                Create New Product
+                            </button>
+                        ) : (
+                            <p className={style.todosCampos}>
+                                You must fill in all the fields, to be able to Create your product
+                            </p>
+                        )
                 }
 
-                {/* Array Pictures */}
+
+                {/* ARRAY PICTURES */}
                 <div className={style.pictures}>
                     {input.pictures.map(el =>  /**cada vez que coloquemos una opcion se creara una pequeña lista */
                         <div key={el} className={style.divName}>
