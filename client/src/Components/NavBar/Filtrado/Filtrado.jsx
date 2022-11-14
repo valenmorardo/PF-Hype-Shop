@@ -7,11 +7,11 @@ const Filtrado = () => {
 
   useEffect(() => dispatch(getSneakers()), [dispatch]);
   const xx = useSelector((state) => state.allSneakers);
-  xx.sort((a, b) => (a.title > b.title ? 1 : -1));
 
   const handleOrderByAlpha = (e) => {
     e.preventDefault();
     dispatch(alphaSort(e.target.value));
+    
   };
   const handleOrderByGeneros = (e) => {
     e.preventDefault();

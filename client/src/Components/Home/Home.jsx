@@ -28,45 +28,36 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getSneakers());
+
   }, [dispatch]);
 
-  console.log(sneakers);
+  // console.log(sneakers);
 
   return (
     <div className={styles.fondo}>
       {sneakers.length > 0 ? (
         <div>
 
+          <NavBar />
 
-          <div>
-            <NavBar />
-
-          </div>
-
-          <Filtrado 
-           setCurrentPage={setCurrentPage}
-           setOrder={setOrder}
+          <Filtrado
+            setCurrentPage={setCurrentPage}
+            setOrder={setOrder}
           />
 
-          <div>
-            <Paginado
-              sneakersPerPage={sneakersPerPage}
-              sneakers={sneakers.length}
-              paginado={paginado}
-            />
-          </div>
+          <Paginado
+            sneakersPerPage={sneakersPerPage}
+            sneakers={sneakers.length}
+            paginado={paginado}
+          />
 
-          <div>
-            <Cards sneakers={currentSneaker} />
-          </div>
+          <Cards sneakers={currentSneaker} />
 
-          <div>
-            <Paginado
-              sneakersPerPage={sneakersPerPage}
-              sneakers={sneakers.length}
-              paginado={paginado}
-            />
-          </div>
+          <Paginado
+            sneakersPerPage={sneakersPerPage}
+            sneakers={sneakers.length}
+            paginado={paginado}
+          />
         </div>
 
       ) : (

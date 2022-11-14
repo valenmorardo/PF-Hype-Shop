@@ -31,7 +31,7 @@ const rootReducer = (state = initialState, action) => {
          };
 
       case FILTRO_MARCA:
-      console.log(action.payload);
+         console.log(action.payload);
 
          return {
             ...state,
@@ -46,51 +46,34 @@ const rootReducer = (state = initialState, action) => {
          };
 
       case SORT_BY_ALPHABET:
-         console.log(action.payload)
-         const alpha =
-            action.payload === "aToz"
-               ? state.allSneakers.sort((a, b) => {
-                  if (a.title < b.title) {
-                     return -1;
-                  }
-                  if (a.title > b.title) {
-                     return 1;
-                  }
-                  return 0;
-               })
-               : state.allSneakers.sort((a, b) => {
-                  if (a.title > b.title) {
-                     return -1;
-                  }
-                  if (a.title < b.title) {
-                     return 1;
-                  }
-                  return 0;
-               });
+         console.log(state.allSneakers)
+         let alpha = action.payload === "aToz"
+            ? state.allSneakers.sort((a, b) => a.title.localeCompare(b.title))
+            : state.allSneakers.sort((a, b) => b.title.localeCompare(a.title))
          return {
             ...state,
-            allSneakers: action.payload === 'all' ? state.allSneakers : alpha,
+            allSneakers: alpha,
          };
 
       case FILTRO_PRECIOS:
          console.log(action.payload)
          const zapa = state.allSneakers;
          const precio =
-           action.payload === "menor"
-             ? zapa.sort((a, b) => {
-               if (b.price > a.price) return 1
-               if (b.price < a.price) return -1
-               return 0
-             }) : action.payload === "mayor"
+            action.payload === "menor"
                ? zapa.sort((a, b) => {
-                 if (b.price < a.price) return 1
-                 if (b.price > a.price) return -1
-                 return 0
-               })
-               : zapa;
+                  if (b.price > a.price) return 1
+                  if (b.price < a.price) return -1
+                  return 0
+               }) : action.payload === "mayor"
+                  ? zapa.sort((a, b) => {
+                     if (b.price < a.price) return 1
+                     if (b.price > a.price) return -1
+                     return 0
+                  })
+                  : zapa;
          return {
-           ...state,
-           allSneakers: precio,
+            ...state,
+            allSneakers: precio,
          };
 
 
