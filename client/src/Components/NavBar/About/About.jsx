@@ -201,7 +201,7 @@ const About = () => {
             Full-Stack Developer
             </p>
             <div className={styles.icons}>
-                  <a href='https://www.linkedin.com/in/santiago-gabriel-acu%C3%B1a-40a116190/' target="_blank">
+                  <a href='https://www.linkedin.com/in/santiago-gabriel-acu%C3%B1a-894ba9256/' target="_blank">
                     <img
                     src="https://raw.githubusercontent.com/AlanMauricioCastillo/Portfolio/master/public/stikersDeContacto/linked-in-alt.svg" 
                     alt=''

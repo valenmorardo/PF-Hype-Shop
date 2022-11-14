@@ -103,7 +103,7 @@ const validate = (input) => {
     }
 
 
-    }
+    
     else if (input.externalMaterial.startsWith(" ")) {
         errores.externalMaterial = "Dont input blank spaces";
     }
@@ -151,9 +151,8 @@ const validate = (input) => {
     // else if (input.stock < 0) {
     //     errores.stock = "Stock is not less than 0";
     // }
-
-    return errores; // retornamos lo errores
 }
+
 
 
 const CreateProduct = () => {
@@ -260,7 +259,7 @@ const CreateProduct = () => {
     // AÑADIR URL Pictures
     const hundlePictureAdd = (e) => {
         e.preventDefault();
-        if (input.picture !== "" && (/^\s+$/.test(input.brand)))
+
             input.pictures.push(input.picture)
         setInput({
             ...input,
@@ -344,9 +343,9 @@ const CreateProduct = () => {
                 {/* TITLE */}
                 <div>
                     <p>Title:</p>
-                    {error.title && ( // si hay un error hara un <p> nuevo con el error
+{/*                     {error.title && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{error.title}</p>
-                    )}
+                    )} */}
                     <input
                         type="text"
                         value={input.title}
@@ -358,9 +357,9 @@ const CreateProduct = () => {
                 {/* PRICE */}
                 <div>
                     <p>Price: </p>
-                    {error.price && ( // si hay un error hara un <p> nuevo con el error
+{/*                     {error.price && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{error.price}</p>
-                    )}
+                    )} */}
                     <input
                         type="number"
                         min="0"
@@ -375,9 +374,9 @@ const CreateProduct = () => {
                 <div>
                     <div>
                         <p>Img:</p>
-                        {error.thumbnail && ( // si hay un error hara un <p> nuevo con el error
+{/*                         {error.thumbnail && ( // si hay un error hara un <p> nuevo con el error
                             <p className={style.error}>{error.thumbnail}</p>
-                        )}
+                        )} */}
                         <input
                             type="text"
                             value={input.thumbnail}
@@ -389,9 +388,9 @@ const CreateProduct = () => {
                     {/* BRAND */}
                     <div>
                         <p>Brand:</p>
-                        {error.brand && ( // si hay un error hara un <p> nuevo con el error
+{/*                         {error.brand && ( // si hay un error hara un <p> nuevo con el error
                             <p className={style.error}>{error.brand}</p>
-                        )}
+                        )} */}
                         <input
                             type="text"
                             value={input.brand}
@@ -406,10 +405,10 @@ const CreateProduct = () => {
                 <div>
 
                     <p>colors:</p>
-                    {error.title && ( // si hay un error hara un <p> nuevo con el error
+ {/*                    {error.title && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{error.colors}</p>
 
-                    )}
+                    )} */}
                     <input
                         type="text"
                         value={input.color}
@@ -436,10 +435,10 @@ const CreateProduct = () => {
                 <div>
                     <p>Material Del Exterior: </p>
 
-                    {error.colors && ( // si hay un error hara un <p> nuevo con el error
+{/*                     {error.colors && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{error.price}</p>
 
-                    )}
+                    )} */}
                     <input
                         type="text"
                         value={input.externalMaterial}
@@ -452,9 +451,9 @@ const CreateProduct = () => {
 
                       <div>
                     <p>sizes: </p>
-                    {error.title && ( // si hay un error hara un <p> nuevo con el error
+{/*                     {error.title && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{error.colors}</p>
-                    )}
+                    )} */}
 
                     <input
                         type="text"
@@ -531,9 +530,9 @@ const CreateProduct = () => {
                 </div>
                 {/* BUTTON */}
                 {
-                    Object.keys(error).length === 0 &&
+/*                     Object.keys(error).length === 0 &&
                         comprobacionInput(input)
-                        ? (
+                        ? ( */
                             <button
                                 className={style.submit}
 
@@ -542,11 +541,11 @@ const CreateProduct = () => {
                             >
                                 Create New Product
                             </button>
-                        ) : (
+                        /* ) : (
                             <p className={style.todosCampos}>
                                 You must fill in all the fields, to be able to Create your product
                             </p>
-                        )
+                        ) */
                 }
 
 
@@ -565,4 +564,4 @@ const CreateProduct = () => {
 }
 
 
-export default CreateProduct
+export default CreateProduct;
