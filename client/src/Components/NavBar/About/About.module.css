@@ -1,54 +1,8 @@
-.container {
-    background-color: rgb(112, 110, 110);
-}
-.title{
-    font-family: 'Bebas Neue', cursive;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px;
-    color: rgb(180, 217, 248);
-}
-
-.text{
-    margin: 5px;
-    color: aliceblue;
-    
-}
-
-.imgBox{
-    border-radius: 80px;
-    width: 150px;
-    height: 150px;
-    border-style: groove;
-    border-width: 10px;
-    border-color: aqua;
-}
-
-.box{
-    display: flex;
-    align-items: center;
-    margin: 40px;
-    
-}
-
-.teamsContainer{
+.icons{
     display: flex;
     justify-content: space-around;
-    flex-wrap: wrap;
+    margin-top: 5px;
 }
-
-h3{
-    margin: 5px;
-    color: aliceblue;
-}
-
-h4{
-    margin: 5px;
-    font-size: 110%;
-    color: aliceblue;
-}
-
 .icon{
-    margin:3px;
+    margin:3px
 }
