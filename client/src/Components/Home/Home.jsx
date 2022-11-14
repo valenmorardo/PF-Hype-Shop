@@ -43,13 +43,13 @@ const Home = () => {
 
 
 
-          <div>
+          {/* <div>
             <Paginado
               sneakersPerPage={sneakersPerPage}
               sneakers={sneakers.length}
               paginado={paginado}
             />
-          </div>
+          </div> */}
 
           <div>
             <Cards sneakers={currentSneaker} />
