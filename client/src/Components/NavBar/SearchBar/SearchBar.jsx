@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import style from "./SearchBar.module.css";
 
-export default function SearchBar() {
+export default function SearchBar({paginaUno}) {
    const dispatch = useDispatch();
    const [title, SetTitle] = useState("");
 
@@ -19,6 +19,7 @@ export default function SearchBar() {
       dispatch(getSearchTitle(title));
 
       SetTitle("");
+      paginaUno();
    }
 
    return (

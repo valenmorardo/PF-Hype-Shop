@@ -15,6 +15,7 @@ const rootReducer = (state = initialState, action) => {
          return {
             ...state,
             allSneakers: action.payload,
+            filtros: action.payload,
          };
 
 
@@ -24,6 +25,12 @@ const rootReducer = (state = initialState, action) => {
             allSneakers: action.payload,
          };
 
+
+      case "POST_PRODUCT":
+         return {
+            ...state
+         }
+
       case GET_DETAIL:
          return {
             ...state,
@@ -31,12 +38,14 @@ const rootReducer = (state = initialState, action) => {
          };
 
       case FILTRO_MARCA:
-         console.log(action.payload);
-
+         const value = action.payload;
+         let filteredByBrand =
+            value === "all" ? state.allSneakers : state.filtros.filter(m => m.brand == value);
          return {
             ...state,
-            allSneakers: state.allSneakers,
-         };
+            allSneakers: [...filteredByBrand]
+
+         }
 
       case FILTRO_GENERO:
          console.log(action.payload)

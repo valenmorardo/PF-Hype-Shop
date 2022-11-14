@@ -3,6 +3,7 @@ import { getDetail } from "../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "react-multi-carousel";
 import 'react-multi-carousel/lib/styles.css';
+import { Link } from "react-router-dom";
 
 const CardDetail = (props) => {
   const dispatch = useDispatch();
@@ -44,7 +45,9 @@ const CardDetail = (props) => {
         
       <div className="pt-6">
        
-
+        <Link to='/'>
+          <button>VOLVER</button>
+        </Link>
         {/* Image gallery */}
         <Carousel infinite={true} responsive={responsive}>
     
@@ -98,13 +101,16 @@ const CardDetail = (props) => {
                       <span className="text-gray-600">Marca: {sneakerDetail.brand}</span>
                     </li>
                     <li className="text-gray-400">
-                    <span className="text-gray-600">Color: {sneakerDetail.color}</span>
+                    <span className="text-gray-600">Color: {
+                      sneakerDetail.colors.map(e => <h4>{e.toUpperCase()}</h4>)
+                    }
+                    </span>
                     </li>
                     <li className="text-gray-400">
-                    <span className="text-gray-600">Condicion: {sneakerDetail.condition}</span>
+                      <span className="text-gray-600">Condicion: {sneakerDetail.condition}</span>
                     </li>
                     <li className="text-gray-400">
-                    <span className="text-gray-600">Estilo: {sneakerDetail.shoeStyle}</span>
+                      <span className="text-gray-600">Estilo: {sneakerDetail.shoeStyle}</span>
                     </li>
                 </ul>
               </div>

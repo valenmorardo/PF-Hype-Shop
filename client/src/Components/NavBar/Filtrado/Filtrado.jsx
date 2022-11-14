@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import { getSneakers, filtroMarca, filtroGenero, alphaSort,filtroPrecios } from '../../../Redux/actions/index'
+import { getSneakers, filtroMarca, filtroGenero, alphaSort, filtroPrecios } from '../../../Redux/actions/index'
 
 const Filtrado = () => {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const Filtrado = () => {
   const handleOrderByAlpha = (e) => {
     e.preventDefault();
     dispatch(alphaSort(e.target.value));
-    
+
   };
   const handleOrderByGeneros = (e) => {
     e.preventDefault();
@@ -25,6 +25,7 @@ const Filtrado = () => {
   const mostrarMarcas = (e) => {
     e.preventDefault();
     dispatch(filtroMarca(e.target.value));
+
   }
 
   return (
@@ -48,10 +49,11 @@ const Filtrado = () => {
       </select><br />
 
       <select onChange={(e) => mostrarMarcas(e)}>
-        <option value="all">Marcas</option>
-        <option value="jaguar">Jaguar</option>
-        <option value="adidas">Adidas</option>
-        <option value="topper">Topper</option>
+        <option hidden value="all">Marcas</option>
+        <option value="Jaguar">Jaguar</option>
+        <option value="Araquina">Araquina</option>
+        <option value="Fila">Fila</option>
+        <option value="Topper">Topper</option>
       </select><br />
 
 

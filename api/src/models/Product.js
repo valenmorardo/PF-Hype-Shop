@@ -8,6 +8,7 @@ module.exports = (sequelize) => {
       primaryKey: true,
       unique: true,
       allowNull: false,
+
     },
     thumbnail: {
       type: DataTypes.STRING,

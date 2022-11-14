@@ -46,7 +46,7 @@ export const getSearchTitle = (title) => {
 
 export function CreateNewProduct(payload) {
    return async function () {
-      const response = await axios.post("RutaBack", payload);
+      const response = await axios.post("http://localhost:3001/sneakersCreate", payload);
       return response;
    };
 }
@@ -66,7 +66,7 @@ export function getDetail(id) {
    }
 }
 export const filtroMarca = (payload) => {
-   console.log("FiltroMarca")
+   // console.log("FiltroMarca")
    return {
       type: FILTRO_MARCA,
       payload,
