@@ -9,12 +9,14 @@ import Paginado from "../Paginado/Paginado";
 import NavBar from "../NavBar/NavBar";
 import styles from "./Home.module.css";
 import SearchBar from "../NavBar/SearchBar/SearchBar";
+import Filtrado from "../NavBar/Filtrado/Filtrado";
 
 const Home = () => {
   const dispatch = useDispatch();
   const sneakers = useSelector((state) => state.allSneakers);
 
   //PAGINADO:
+  const [order, setOrder] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [sneakersPerPage, setSneakersPerPage] = useState(9);
   const indexLastSneaker = currentPage * sneakersPerPage;
@@ -26,42 +28,39 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getSneakers());
+
   }, [dispatch]);
 
-  console.log(sneakers);
+  // console.log(sneakers);
 
   return (
     <div className={styles.fondo}>
       {sneakers.length > 0 ? (
         <div>
 
+          <NavBar />
 
-          <div>
-            <NavBar/>
-       
-          </div>
+          <Filtrado
+            setCurrentPage={setCurrentPage}
+            setOrder={setOrder}
+          />
 
-
-
-          <div>
+          {/* <div>
             <Paginado
               sneakersPerPage={sneakersPerPage}
               sneakers={sneakers.length}
               paginado={paginado}
             />
-          </div>
+          </div> */}
 
-          <div>
-            <Cards sneakers={currentSneaker} />
-          </div>
 
-          <div>
-            <Paginado
-              sneakersPerPage={sneakersPerPage}
-              sneakers={sneakers.length}
-              paginado={paginado}
-            />
-          </div>
+          <Cards sneakers={currentSneaker} />
+
+          <Paginado
+            sneakersPerPage={sneakersPerPage}
+            sneakers={sneakers.length}
+            paginado={paginado}
+          />
         </div>
 
       ) : (
