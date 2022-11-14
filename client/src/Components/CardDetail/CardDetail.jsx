@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { getDetail } from "../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "react-multi-carousel";
+import 'react-multi-carousel/lib/styles.css';
 
 const CardDetail = (props) => {
   const dispatch = useDispatch();
@@ -35,7 +36,6 @@ const CardDetail = (props) => {
   console.log(sneakerDetail);
 
     return (
-
     <>
       {
           sneakerDetail.id ?
@@ -46,60 +46,15 @@ const CardDetail = (props) => {
        
 
         {/* Image gallery */}
-        {/* <section id="skills">
-         <div >
-            <Carousel
-               responsive={responsive}
-               infinite={true}
-              
-            >
-               
-               <div >
-                  <img src={sneakerDetail?.pictures[0]} alt="Image Skill" />
-               </div>
-               <div >
-                  <img src={sneakerDetail?.pictures[1]} alt="Image Skill" />
-                
-               </div>
-               <div >
-                  <img src={sneakerDetail?.pictures[2]} alt="Image Skill" />
-               </div>
-            </Carousel>
-         </div>
-      </section> */}
-        {/* <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-          <div className="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
-            <img
-              src={sneakerDetail?.pictures[0]}
-              alt={sneakerDetail?.pictures[0]}
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
-          <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-            <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
-              <img
-                src={sneakerDetail?.pictures[1]}
-                alt={sneakerDetail?.pictures[1]}
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-            <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
-              <img
-                src={sneakerDetail?.pictures[2]}
-                alt={sneakerDetail?.pictures[2]}
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-          </div>
-          <div className="aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
-            <img
-              src={sneakerDetail?.pictures[3]}
-              alt={sneakerDetail?.pictures[3]}
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
-        </div> */}
-
+        <Carousel infinite={true} responsive={responsive}>
+    
+              {sneakerDetail.pictures?.map((e) => (
+                <div>
+                  <img  src={e} alt="i" />
+                </div>
+              ))}
+           
+</Carousel>;
         {/* Product info */}
         <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
           <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
