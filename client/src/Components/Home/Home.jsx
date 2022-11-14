@@ -45,11 +45,14 @@ const Home = () => {
             setOrder={setOrder}
           />
 
-          <Paginado
-            sneakersPerPage={sneakersPerPage}
-            sneakers={sneakers.length}
-            paginado={paginado}
-          />
+          {/* <div>
+            <Paginado
+              sneakersPerPage={sneakersPerPage}
+              sneakers={sneakers.length}
+              paginado={paginado}
+            />
+          </div> */}
+
 
           <Cards sneakers={currentSneaker} />
 
