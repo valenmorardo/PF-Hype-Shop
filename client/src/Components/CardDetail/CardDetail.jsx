@@ -54,7 +54,7 @@ const CardDetail = (props) => {
                 </div>
               ))}
            
-</Carousel>;
+</Carousel>
         {/* Product info */}
         <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
           <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
@@ -70,9 +70,11 @@ const CardDetail = (props) => {
               <div className="mt-10">
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-medium text-gray-900">TALLA</h3>
-                  <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                  {sneakerDetail.size}
-                  </a>
+                 
+                  {sneakerDetail.sizes.map(el=>
+                     <p className="text-sm font-medium text-indigo-600 hover:text-indigo-500"> {el}</p>
+                  )}
+                  
                 </div>
 
               </div>
