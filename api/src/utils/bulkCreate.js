@@ -18,9 +18,8 @@ const bulkCreate = async () => {
         sizes,
         brand,
         externalMaterial,
-        shoeStyle,
-        date_created,
-        last_updated,
+        gender,
+        category,
       } = el;
       Product.findOrCreate({
         where: { title },
@@ -35,9 +34,8 @@ const bulkCreate = async () => {
           sizes,
           brand,
           externalMaterial,
-          shoeStyle,
-          date_created,
-          last_updated,
+          gender,
+          category,
         },
       });
     });
