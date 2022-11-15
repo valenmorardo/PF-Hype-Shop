@@ -48,7 +48,8 @@ const NavBar = ({paginaUno}) => {
         </ul>
       </div>
       <div className="flex items-center">
-        <a href="#" className="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">Registrarse</a>
+        <Link to='/singIn'>Registrarse</Link>
+        {/* <a href="#" className="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">Registrarse</a> */}
       </div>
     </div>
   </nav>
