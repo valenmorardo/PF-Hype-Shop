@@ -4,7 +4,7 @@ import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
 import Profile from './Profile';
 
-const SingIn = () => {
+const IsAuthenticated = () => {
     const { isAuthenticated } = useAuth0();
     return (
         <div>
@@ -14,4 +14,4 @@ const SingIn = () => {
     )
 }
 
-export default SingIn
+export default IsAuthenticated
