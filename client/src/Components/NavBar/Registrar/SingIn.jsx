@@ -1,45 +1,15 @@
-import React,{useState} from 'react'
+import { useAuth0 } from '@auth0/auth0-react';
+import React from 'react';
+import LoginButton from './LoginButton';
+import LogoutButton from './LogoutButton';
+import Profile from './Profile';
 
 const SingIn = () => {
-
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-
-    const handleEmail = (e) => {
-        e.preventDefault()
-        setEmail(e.target.value)
-    }
-
-    const handlePassword = (e) => {
-        e.preventDefault()
-        setPassword(e.target.value)
-    }
-
-    const handleSingIn = (e) => {
-        e.preventDefault();
-        alert(`correo: ${email}  clave: ${password}`)
-    }
+    const { isAuthenticated } = useAuth0();
     return (
         <div>
-
-            <h5>Iniciar Sesion</h5><br/>
-            <form>
-                <input
-                    name='email'
-                    label='Email Address'
-                    placeholder='Email...'
-                    onChange={handleEmail}
-                /><br/><br/>
-                <input
-                    name='password'
-                    label='Password'
-                    type='password'
-                    placeholder='Password...'
-                    onChange={handlePassword}
-                /><br/><br/>
-                <button onClick={(e)=>handleSingIn(e)}>Sign In</button>
-            </form>
-
+            {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+            <Profile />
         </div>
     )
 }
