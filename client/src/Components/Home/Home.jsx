@@ -39,7 +39,7 @@ const Home = () => {
   // console.log(sneakers);
 
   return (
-    <div className={styles.fondo}>
+    <div className="bg-white mb-0">
       {sneakers.length > 0 ? (
         <div>
 
