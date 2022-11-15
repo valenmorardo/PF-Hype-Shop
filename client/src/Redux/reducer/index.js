@@ -1,5 +1,5 @@
 import {
-   GET_SNEAKERS, SEARCH_SNEAKER, GET_DETAIL, FILTRO_GENERO, FILTRO_MARCA, SORT_BY_ALPHABET, FILTRO_PRECIOS, FILTRO_CATEGORIAS
+   GET_SNEAKERS, SEARCH_SNEAKER, GET_DETAIL, FILTRO_GENERO, FILTRO_MARCA, SORT_BY_ALPHABET, FILTRO_PRECIOS
 } from "../actions/actionTypes";
 const initialState = {
 
@@ -40,7 +40,7 @@ const rootReducer = (state = initialState, action) => {
       case FILTRO_MARCA:
          const value = action.payload;
          let filteredByBrand =
-            value === "all" ? state.allSneakers : state.filtros.filter(m => m.brand === value);
+            value === "all" ? state.allSneakers : state.filtros.filter(m => m.brand == value);
          return {
             ...state,
             allSneakers: [...filteredByBrand]
@@ -48,13 +48,11 @@ const rootReducer = (state = initialState, action) => {
          }
 
       case FILTRO_GENERO:
-         let filteredByGender =
-         action.payload === "all" ? state.allSneakers : state.filtros.filter(el => el.gender === action.payload);
+         console.log(action.payload)
          return {
             ...state,
-            allSneakers: [...filteredByGender]
+            detail: action.payload
          };
-
 
       case SORT_BY_ALPHABET:
          console.log(state.allSneakers)
@@ -87,14 +85,6 @@ const rootReducer = (state = initialState, action) => {
             allSneakers: [...precio],
          };
 
-      
-         case FILTRO_CATEGORIAS:
-         let filteredByCategories =
-         action.payload === "all" ? state.allSneakers : state.filtros.filter(el => el.category === action.payload);
-         return {
-            ...state,
-            allSneakers: [...filteredByCategories]
-         };
 
       default:
          return initialState;
