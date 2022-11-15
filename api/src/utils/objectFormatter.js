@@ -8,8 +8,6 @@ const objectFormatter = (details) => {
     pictures,
     attributes,
     variations,
-    date_created,
-    last_updated,
   } = details;
 
   const requiredAttributes = [
@@ -17,8 +15,9 @@ const objectFormatter = (details) => {
     "AGE_GROUP",
     "COLOR",
     "SIZE",
-    "FOOTWEAR_TYPE",
     "EXTERIOR_MATERIALS",
+    "GENDER",
+    "STYLE",
   ];
   const results = [];
 
@@ -70,10 +69,9 @@ const objectFormatter = (details) => {
     brand: attributesObject.BRAND || "No especificado",
     colors: color,
     externalMaterial: attributesObject.EXTERIOR_MATERIALS || "No especificado",
-    shoeStyle: attributesObject.FOOTWEAR_TYPE || "No especificado",
     sizes: size,
-    date_created,
-    last_updated,
+    gender: attributesObject.GENDER,
+    category: attributesObject.STYLE,
   };
 };
 
