@@ -8,8 +8,6 @@ const objectFormatter = (details) => {
     pictures,
     attributes,
     variations,
-    date_created,
-    last_updated,
   } = details;
 
   const requiredAttributes = [
@@ -17,12 +15,13 @@ const objectFormatter = (details) => {
     "AGE_GROUP",
     "COLOR",
     "SIZE",
-    "FOOTWEAR_TYPE",
     "EXTERIOR_MATERIALS",
+    "GENDER",
+    "STYLE",
   ];
   const results = [];
 
-  attributes.forEach((attr) => {
+  attributes?.forEach((attr) => {
     const attributesArray = [attr.id, attr.value_name];
     for (const req of requiredAttributes) {
       if (attributesArray[0] === req) {
@@ -37,16 +36,13 @@ const objectFormatter = (details) => {
   const sizes = new Set();
 
   if (!attributesObject.COLOR) {
-    variations.forEach((everyVariation) => {
+    variations?.forEach((everyVariation) => {
       const combination = everyVariation.attribute_combinations;
       const colorVariant = combination[0];
-      let sizeVariant = combination[1];
-      sizeVariant.id === "SIZE"
-        ? (sizeVariant = combination[1])
-        : (sizeVariant = combination[2]);
+      const sizeVariant = combination.filter((attr) => attr.id === "SIZE");
 
       colors.add(colorVariant.value_name);
-      sizes.add(sizeVariant.value_name.slice(0, 2));
+      sizes.add(sizeVariant[0].value_name.slice(0, 2));
     });
   }
   const size =
@@ -59,6 +55,11 @@ const objectFormatter = (details) => {
       ? Array.from(colors)
       : [attributesObject.COLOR];
 
+  const category =
+    attributesObject.STYLE === undefined
+      ? "No especificado"
+      : attributesObject.STYLE;
+
   return {
     id,
     title,
@@ -70,10 +71,9 @@ const objectFormatter = (details) => {
     brand: attributesObject.BRAND || "No especificado",
     colors: color,
     externalMaterial: attributesObject.EXTERIOR_MATERIALS || "No especificado",
-    shoeStyle: attributesObject.FOOTWEAR_TYPE || "No especificado",
     sizes: size,
-    date_created,
-    last_updated,
+    gender: attributesObject.GENDER,
+    category,
   };
 };
 

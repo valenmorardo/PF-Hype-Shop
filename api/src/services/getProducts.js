@@ -5,58 +5,54 @@ const { Product } = require("../db");
 const { objectFormatter } = require("../utils/objectFormatter");
 
 const getApiProducts = async () => {
-  const fetch = await axios.get(
-    "https://api.mercadolibre.com/sites/MLA/search?category=MLA109027"
-  );
+  const dataArray = [];
 
-  const data = fetch.data.results;
-  const arrayString = data.map((prod) => prod.id);
-  const string1 = arrayString.slice(0, 20).join(",");
-  const string2 = arrayString.slice(20, 40).join(",");
-  const string3 = arrayString.slice(40, 50).join(",");
+  const totalApiCalls = 10;
+  const productsToRetrieve = [];
 
-  const allData = [];
-  const dataFromString1 = await axios.get(
-    `https://api.mercadolibre.com/items?ids=${string1}`
-  );
-  dataFromString1.data
-    .map((prod) => prod.body)
-    .map((detalles) => {
-      const details = objectFormatter(detalles);
-      allData.push(details);
-    });
-  const dataFromString2 = await axios.get(
-    `https://api.mercadolibre.com/items?ids=${string2}`
-  );
-  dataFromString2.data
-    .map((prod) => prod.body)
-    .map((detalles) => {
-      const details = objectFormatter(detalles);
-      allData.push(details);
-    });
-  const dataFromString3 = await axios.get(
-    `https://api.mercadolibre.com/items?ids=${string3}`
-  );
-  dataFromString3.data
-    .map((prod) => prod.body)
-    .map((detalles) => {
-      const details = objectFormatter(detalles);
-      allData.push(details);
-    });
+  for (let i = 1; i <= totalApiCalls; i++) {
+    productsToRetrieve.push(i * 50);
+  }
 
-  return allData;
+  for (const offset of productsToRetrieve) {
+    const fetch = await axios.get(
+      `https://api.mercadolibre.com/sites/MLA/search?category=MLA109027&offset=${offset}`
+    );
+    const data = fetch.data.results;
+    const arrayString = data.map((prod) => prod.id);
+
+    const firstTwentyIds = arrayString.slice(0, 20).join(",");
+    const secondTwentyIds = arrayString.slice(20, 40).join(",");
+    const thirdTwentyIds = arrayString.slice(40, 50).join(",");
+
+    const firstIdsFetch = await axios.get(
+      `https://api.mercadolibre.com/items?ids=${firstTwentyIds}`
+    );
+
+    const secondIdsFetch = await axios.get(
+      `https://api.mercadolibre.com/items?ids=${secondTwentyIds}`
+    );
+
+    const thirdIdsFetch = await axios.get(
+      `https://api.mercadolibre.com/items?ids=${thirdTwentyIds}`
+    );
+
+    [firstIdsFetch, secondIdsFetch, thirdIdsFetch].forEach((dataString) =>
+      dataString.data.forEach((prod) => {
+        const dataFormatted = objectFormatter(prod.body);
+        dataArray.push(dataFormatted);
+      })
+    );
+  }
+  return dataArray;
 };
 
 const getDbProducts = async (title) => {
   if (title) {
-    const matches = title.split(" ").map((string) => ({
-      [Op.iLike]: `%${string}%`,
-    }));
-
     const productFoundOnDb = await Product.findAll({
       where: {
         title: {
-          [Op.or]: matches,
+          [Op.iLike]: `%${title}%`,
         },
       },
       raw: true,
@@ -66,44 +62,12 @@ const getDbProducts = async (title) => {
   return await Product.findAll();
 };
 
-const getSingleApiProduct = async (id) => {
-  const apiProductData = await axios.get(
-    `https://api.mercadolibre.com/items/${id}`
-  );
-  const prodata = apiProductData.data;
-  return objectFormatter(prodata);
-};
-
 const getSingleDbProduct = async (primaryKey) => {
   return await Product.findByPk(primaryKey);
-};
-
-const getAPiMultipleIds = async (ids) => {
-  const products = (
-    await axios.get(`https://api.mercadolibre.com/items?ids=${ids}`)
-  ).data;
-  const formattedData = products.map((product) => {
-    return objectFormatter(product.body);
-  });
-  return formattedData;
-};
-
-const getApiProductsByTitle = async (title) => {
-  if (!title) return;
-  const apiProductsFound = (
-    await axios.get(
-      `https://api.mercadolibre.com/sites/MLA/search?category=MLA109027&q=${title}&limit=20`
-    )
-  ).data;
-  const ids = apiProductsFound.results.map((product) => product.id);
-  const stringIds = ids.join(",");
-  return await getAPiMultipleIds(stringIds);
 };
 
 module.exports = {
   getApiProducts,
   getDbProducts,
-  getSingleApiProduct,
   getSingleDbProduct,
-  getApiProductsByTitle,
 };

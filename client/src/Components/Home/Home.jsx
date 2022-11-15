@@ -26,9 +26,14 @@ const Home = () => {
     setCurrentPage(pageNumber);
   };
 
+  const paginaUno = () => {
+    setCurrentPage(1);
+  };
+
+
+
   useEffect(() => {
     dispatch(getSneakers());
-
   }, [dispatch]);
 
   // console.log(sneakers);
@@ -38,10 +43,10 @@ const Home = () => {
       {sneakers.length > 0 ? (
         <div>
 
-          <NavBar />
+          <NavBar paginaUno={paginaUno}/>
 
           <Filtrado
-            setCurrentPage={setCurrentPage}
+            paginaUno={paginaUno}
             setOrder={setOrder}
           />
 

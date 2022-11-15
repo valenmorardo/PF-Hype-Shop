@@ -4,9 +4,10 @@ import Filtrado from './Filtrado/Filtrado';
 import img from '../../Img/HypeShop2.png'
 
 
+
 import { Link } from 'react-router-dom';
 
-const NavBar = () => {
+const NavBar = ({paginaUno}) => {
   return (
         // <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">   
         //     <div>
@@ -20,7 +21,7 @@ const NavBar = () => {
 <div>
   <nav className="bg-white border-gray-200 dark:bg-gray-900">
     <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
-      <a href="#" className="flex items-center">
+      <a href="/" className="flex items-center">
         <img src={img} className="mr-3 h-6 sm:h-9" alt="HypeShop Logo" />
         <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">HypeShop</span>
       </a>
@@ -47,14 +48,15 @@ const NavBar = () => {
         </ul>
       </div>
       <div className="flex items-center">
-        <a href="#" className="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">Registrarse</a>
+        <Link to='/singIn'>Registrarse</Link>
+        {/* <a href="#" className="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">Registrarse</a> */}
       </div>
     </div>
   </nav>
   <nav className="bg-gray-50 dark:bg-gray-700">
     <div className="py-3 px-4 mx-auto max-w-screen-xl md:px-6">
   
-        <SearchBar/>
+        <SearchBar paginaUno={paginaUno}/>
     </div>
   </nav>
 </div>
