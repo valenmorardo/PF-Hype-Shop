@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
-import { getDetail } from "../../Redux/actions/index";
+import { getDetail, addCarry } from "../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "react-multi-carousel";
 import 'react-multi-carousel/lib/styles.css';
 import { Link } from "react-router-dom";
+// CARRITO:
+import useLocalStorage from "../useLocalStorage/useLocalstorage";
+
 
 const CardDetail = (props) => {
   const dispatch = useDispatch();
@@ -34,8 +37,15 @@ const CardDetail = (props) => {
   };
 
   // CARRITO:
-  const onAddCarry = () => {
-    console.log("CARRITO PRUEBA")
+  const [item, saveItem] = useLocalStorage("SNEAKERS", []);
+
+  const onAddCarry = (sneaker) => {
+    const newItem = [...item];
+    // console.log("item", newItem)
+    newItem.push(sneaker);
+    saveItem(newItem)
+    // console.log("añadir carrito")
+    // dispatch(addCarry(sneakerDetail))
   }
 
   console.log(sneakerDetail);
@@ -94,7 +104,7 @@ const CardDetail = (props) => {
                     {/* AÑADIR CARRITO */}
                     <button
                       type="submit"
-                      onClick={() => onAddCarry()}
+                      onClick={() => onAddCarry(sneakerDetail)}
                       className="mt-10 flex  w-200px items-center justify-center rounded-md border border-transparent bg-lime-500	 py-3 px-8 text-base font-medium text-white hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Añadir Carrito
