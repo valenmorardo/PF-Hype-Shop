@@ -59,6 +59,7 @@ const Filtrado = ({setIsLoading}) => {
   
 
   return (
+
     <div>
       <h1>FILTROS</h1>
       {/* FILTROS */}
@@ -91,6 +92,7 @@ const Filtrado = ({setIsLoading}) => {
         handler={handlerOrden("orderPrice")}
 
       />
+
 
     </div>
   );

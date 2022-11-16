@@ -39,7 +39,9 @@ const Home = () => {
   // console.log(sneakers);
 
   return (
+
     <div className={styles.fondo}>
+
 
         <div>
           <NavBar paginaUno={paginaUno}/>

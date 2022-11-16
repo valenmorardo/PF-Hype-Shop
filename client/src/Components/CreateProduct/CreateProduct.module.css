@@ -160,7 +160,7 @@
    border-color: #fff;
    color: #fff;
    padding: 5px 8px;
-   width: 60%;
+   width: 220px;
    height: 30px;
    border: none;
    box-shadow: none;
@@ -173,7 +173,7 @@
    color: #fff;
    content: "";
    position: absolute;
-   right: 90px;
+   right: 20px;
    bottom: 24px;
    width: 0;
    height: 0;
@@ -217,10 +217,11 @@
 }
 
 .todosCampos {
+   display: inline-block;
+   margin-top: 80px;
    color: #efb810;
    font-size: 26px;
    font-weight: 600;
-   margin-top: 50px;
 }
 
 /*  STOCK   */
@@ -360,4 +361,26 @@
    background-color: rgb(223, 16, 16);
    color: #fff;
    font-size: 14px;
+}
+
+/* BOTON ADD */
+
+.addButton {
+   margin: auto 10px;
+   background-color: #efb810;
+   border: none;
+   width: 130px;
+   height: 40px;
+   color: #000;
+   font-size: 16px;
+   font-weight: 600;
+   border-radius: 10px;
+   box-decoration-break: none;
+   cursor: pointer;
+   transition: all 1s;
+}
+
+.addButton:active {
+   color: #fff;
+   border: 1px solid #fff;
 }
