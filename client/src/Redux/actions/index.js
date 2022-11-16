@@ -14,7 +14,7 @@ import {
 export const getSneakers = () => {
    return async (dispatch) => {
       try {
-         const sneakers = await axios.get("http://localhost:3001/sneakers");
+         const sneakers = await axios.get("https://hype-shop.vercel.app/sneakers");
          /* console.log(response) */
 
          return dispatch({
@@ -31,7 +31,7 @@ export const getSearchTitle = (title) => {
    return async function (dispatch) {
       try {
          const response = await axios.get(
-            `http://localhost:3001/sneakers/?title=${title}`
+            `https://hype-shop.vercel.app/?title=${title}`
          );
          return dispatch({
             type: SEARCH_SNEAKER,
@@ -47,7 +47,7 @@ export const getSearchTitle = (title) => {
 
 export function CreateNewProduct(payload) {
    return async function () {
-      const response = await axios.post("http://localhost:3001/sneakersCreate", payload);
+      const response = await axios.post("https://hype-shop.vercel.app/sneakersCreate", payload);
       return response;
    };
 }
@@ -56,7 +56,7 @@ export function CreateNewProduct(payload) {
 export function getDetail(id) {
    return async function (dispatch) {
       try {
-         let json = await axios.get(`http://localhost:3001/sneakers/${id}`)
+         let json = await axios.get(`https://hype-shop.vercel.app/sneakers/${id}`)
          return dispatch({
             type: GET_DETAIL,
             payload: json.data
