@@ -1,11 +1,15 @@
 import {
-   GET_SNEAKERS, SEARCH_SNEAKER, GET_DETAIL, FILTRO_GENERO, FILTRO_MARCA, SORT_BY_ALPHABET, FILTRO_PRECIOS, FILTRO_CATEGORIAS
+   GET_SNEAKERS, SEARCH_SNEAKER, GET_DETAIL, FILTRO_GENERO, FILTRO_MARCA, SORT_BY_ALPHABET, FILTRO_PRECIOS, FILTRO_CATEGORIAS, GET_BRANDS, GET_CATEGORIES, GET_GENDERS, FILTER, ORDEN
 } from "../actions/actionTypes";
 const initialState = {
-
+   sneakersReducer: [],
    allSneakers: [],
    detail: [],
-   filtros: []
+   brands: [],
+   categories: [],
+   genders: [],
+   filtros: {},
+   orden: {}
 
 };
 
@@ -14,15 +18,21 @@ const rootReducer = (state = initialState, action) => {
       case GET_SNEAKERS:
          return {
             ...state,
-            allSneakers: action.payload,
-            filtros: action.payload,
-         };
+            allSneakers: action.payload, /* sneakers que renderizo en el home */
+            /* filtros: action.payload, */
+            sneakersReducer: action.payload, /* sneakers que me traigo intactos de la db para trabajarlos aca con los filtros */
+            filtros: {},
+            orden: {}
+         }
 
 
       case SEARCH_SNEAKER:
          return {
             ...state,
+            sneakersReducer: action.payload,
             allSneakers: action.payload,
+            filtros: {},
+            orden: {}
          };
 
 
@@ -37,7 +47,43 @@ const rootReducer = (state = initialState, action) => {
             detail: action.payload
          };
 
-      case FILTRO_MARCA:
+      case GET_BRANDS:
+         return {
+            ...state,
+            brands: action.payload
+         };
+      case GET_CATEGORIES:
+         return {
+            ...state,
+            categories: action.payload
+         };
+
+      case GET_GENDERS:
+         return {
+            ...state,
+            genders: action.payload
+         };
+
+
+      case FILTER:
+         return {
+            ...state,
+            allSneakers: action.payload.filter(state.sneakersReducer),
+            filtros: action.payload.filtros,
+            orden: action.payload.orden
+         }
+
+
+      case ORDEN:
+         return {
+            ...state,
+            allSneakers: action.payload(state.allSneakers)
+         }
+
+
+ 
+
+   /*   case FILTRO_MARCA:
          const value = action.payload;
          let filteredByBrand =
             value === "all" ? state.allSneakers : state.filtros.filter(m => m.brand === value);
@@ -95,6 +141,12 @@ const rootReducer = (state = initialState, action) => {
          };
 
 
+      case FILTER_SNEAKERS:
+         return {
+            ...state,
+            categories: action.payload
+         };
+ */
       default:
          return initialState;
    }
