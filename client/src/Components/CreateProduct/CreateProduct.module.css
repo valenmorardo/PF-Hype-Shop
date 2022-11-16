@@ -1,0 +1,363 @@
+.titulo {
+   color: white;
+   margin: 10px 0 0;
+   padding-bottom: 10px;
+   font-family: "Signika", sans-serif;
+   font-size: 2.2rem;
+}
+
+.containerMain {
+   /* background-image: url(../image/fondo.png); */
+   /* background-image: url(../image/Fondo2.png); */
+   /* background-size: cover; */
+   /* background-repeat: no-repeat; */
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.optionCreate {
+   color: #efb810;
+}
+
+/*                                FORMULARIO HORIZONTAL                 */
+
+/* form {
+    display: flex;
+    flex-direction: column;
+    font-family: "Signika", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    background-color: #343a40;
+    color: #fff;
+    padding: 10px 10px 30px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    width: 70%;
+    height: auto;
+    border-radius: 10px;
+ }
+ 
+ input {
+    margin-bottom: 15px;
+    width: 300px;
+    outline: none;
+    border-radius: 3px;
+    border: 0;
+ }
+ 
+ .inputsContainer {
+    display: flex;
+    justify-content: space-evenly;
+ }
+ 
+ .select {
+    position: relative;
+ }
+ 
+ .select select {
+    font-size: 16px;
+    border-style: solid;
+    border-width: 4px;
+    border-color: #fff;
+    color: #fff;
+    padding: 5px 8px;
+    width: 40%;
+    height: 30px;
+    border: none;
+    box-shadow: none;
+    background-color: #1e3d30;
+    background-image: none;
+    appearance: none;
+    text-align: center;
+ }
+ 
+ .select:before {
+    color: #fff;
+    content: "";
+    position: absolute;
+    right: 300px;
+    bottom: 8px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 7px 5px 0 5px;
+    border-color: #fff transparent transparent transparent;
+    z-index: 5;
+    pointer-events: none;
+ } */
+
+/*                        style vertical                       */
+
+.form {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   font-family: "Signika", sans-serif;
+   font-size: 20px;
+   font-weight: 500;
+   background-color: #343a40;
+   /* background: url("../image/FondoTarjetas.jpg"); */
+   /* background-size: cover; */
+   color: #fff;
+   padding: 10px 10px 30px;
+   width: 380px;
+   margin-top: 20px;
+   margin-bottom: 40px;
+   border-radius: 10px;
+   /*-webkit-box-shadow: 5px 5px 50px 5px #000000; 
+   box-shadow: 5px 5px 50px 5px #000000;*/
+}
+
+.form p {
+   margin-top: 0;
+}
+
+/* input {
+    margin-bottom: 15px;
+    outline: none;
+    border-radius: 3px;
+    border: 0;
+ } */
+
+.field {
+   margin-bottom: 15px;
+   outline: none;
+   border-radius: 3px;
+   border: 0;
+
+   border: solid 1px #ccc;
+   padding: 5px;
+}
+.field:focus {
+   border-color: #6852f2;
+}
+
+/*                      SELECT                                    */
+
+/* .select {
+   position: relative;
+   border: 1px solid #ccc;
+   width: 140px;
+   height: 30px;
+   overflow: "hiddens";
+   background-color: #fff;
+   color: #fff;
+   margin-top: 5px;
+   margin-left: 22px;
+   border-radius: 8px;
+} */
+
+.select {
+   position: relative;
+   margin-bottom: 15px;
+}
+
+.select .select {
+   font-size: 16px;
+   border-style: solid;
+   border-width: 4px;
+   border-color: #fff;
+   color: #fff;
+   padding: 5px 8px;
+   width: 60%;
+   height: 30px;
+   border: none;
+   box-shadow: none;
+   background-color: #1e3d30;
+   background-image: none;
+   appearance: none;
+}
+
+.select:before {
+   color: #fff;
+   content: "";
+   position: absolute;
+   right: 90px;
+   bottom: 24px;
+   width: 0;
+   height: 0;
+   border-style: solid;
+   border-width: 7px 5px 0 5px;
+   border-color: #fff transparent transparent transparent;
+   z-index: 5;
+   pointer-events: none;
+}
+/*                          BUTTTON SUBMIT                            */
+
+.submit {
+   margin-top: 20px;
+   margin-bottom: 20px;
+   background-color: #efb810;
+   border: none;
+   width: 200px;
+   height: 50px;
+   color: #000;
+   font-size: 21px;
+   font-weight: 600;
+   border-radius: 10px;
+   box-decoration-break: none;
+   cursor: pointer;
+   -webkit-transition-duration: 0.3s;
+   transition-duration: 0.3s;
+   -webkit-transition-property: box-shadow, transform;
+   transition-property: box-shadow, transform;
+}
+
+.submit:hover {
+   box-shadow: 0 0 20px rgba(255, 246, 246, 0.3);
+   -webkit-transform: scale(1.3);
+   transform: scale(1.3);
+}
+
+/*                             ERRORES                              */
+
+.error {
+   color: rgb(223, 16, 16);
+}
+
+.todosCampos {
+   color: #efb810;
+   font-size: 26px;
+   font-weight: 600;
+   margin-top: 50px;
+}
+
+/*  STOCK   */
+
+.stockTitle {
+   font-size: 35px;
+   margin-bottom: 18px;
+}
+
+.stockContainerPrincipal {
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   margin-bottom: 30px;
+}
+
+.stockNumberContain {
+   margin: 0 auto;
+   display: flex;
+   align-items: center;
+   margin-bottom: 10px;
+   /* padding-left: 10px; */
+}
+
+.stockNumber {
+   padding-left: 10px;
+   font-size: 34px;
+}
+
+.buttonStock {
+   margin: 0 10px;
+   background-color: #efb810;
+   border: none;
+   width: 60px;
+   height: 30px;
+   color: #000;
+   font-size: 22px;
+   font-weight: 600;
+   border-radius: 10px;
+   box-decoration-break: none;
+   cursor: pointer;
+}
+.buttonStock:active {
+   color: #fff;
+   border: 1px solid #fff;
+}
+
+.buttonCreateCategory {
+   margin: auto 10px;
+   background-color: #efb810;
+   border: none;
+   width: 100px;
+   height: 40px;
+   color: #000;
+   font-size: 16px;
+   font-weight: 600;
+   border-radius: 10px;
+   box-decoration-break: none;
+   cursor: pointer;
+   transition: all 1s;
+}
+.buttonCreateCategory:hover {
+   color: #333;
+   border: 1px solid #333;
+}
+
+.containerCrate {
+   height: 60px;
+   margin-top: 0px;
+   margin-bottom: 30px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.fieldCreate {
+   margin-bottom: 0px;
+   outline: none;
+   border-radius: 3px;
+   border: 0;
+   align-self: center;
+   border: solid 1px #ccc;
+   padding: 5px;
+}
+
+/*                          Description            */
+
+.ContainTextarea {
+   margin-bottom: 30px;
+}
+
+.contactTextarea {
+   resize: none;
+   font-family: "Signika", sans-serif;
+   border-radius: 10px;
+   width: 80%;
+   box-sizing: border-box;
+   padding: 14px;
+   outline: none;
+   border: none;
+   font-size: 1.1rem;
+}
+
+/* ARRAY PICTURES */
+.pictures {
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+}
+
+.divName {
+   display: flex;
+   align-items: center;
+   /* justify-content: center; */
+   background-color: #9fd948;
+   padding: 13px 20px;
+
+   /* height: 60px;
+   width: 120px; */
+   border-radius: 5px;
+   font-weight: 500;
+   margin: 10px;
+}
+
+.btnX {
+   display: flex;
+   margin: 0;
+   padding: 5px;
+   border-radius: 5px;
+   border: none;
+   margin-left: 20px;
+   transition: 0.3s;
+}
+
+.btnX:hover {
+   cursor: pointer;
+   background-color: rgb(223, 16, 16);
+   color: #fff;
+   font-size: 14px;
+}
