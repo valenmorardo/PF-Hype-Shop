@@ -2,6 +2,7 @@ import React from 'react'
 import SearchBar from './SearchBar/SearchBar';
 import Filtrado from './Filtrado/Filtrado';
 import img from '../../Img/HypeShop2.png'
+import IsAuthenticated from '../NavBar/Registrar/IsAuthenticated'
 
 
 
@@ -50,10 +51,7 @@ const NavBar = ({ paginaUno }) => {
               </li>
             </ul>
           </div>
-          <div className="flex items-center">
-            <Link to='/singIn'>Registrarse</Link>
-            {/* <a href="#" className="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">Registrarse</a> */}
-          </div>
+          <IsAuthenticated />
         </div>
       </nav>
       <nav className="bg-gray-50 dark:bg-gray-700">
