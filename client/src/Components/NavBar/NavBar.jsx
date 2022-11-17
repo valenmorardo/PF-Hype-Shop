@@ -3,10 +3,14 @@ import SearchBar from './SearchBar/SearchBar';
 import Filtrado from './Filtrado/Filtrado';
 import img from '../../Img/HypeShop2.png'
 import IsAuthenticated from '../NavBar/Registrar/IsAuthenticated'
+import iconCart from "../images/icon-cart.svg"
+import BubbleAlert from './BubbleAlert/BubbleAlert';
 
 
 
 import { Link } from 'react-router-dom';
+
+const cantidad = 0;
 
 const NavBar = ({ paginaUno }) => {
   return (
@@ -38,12 +42,6 @@ const NavBar = ({ paginaUno }) => {
                   <a href="#" className="text-gray-900 dark:text-white hover:underline">Vender Producto</a>
                 </Link>
               </li>
-              {/* ORDEN CARRITO */}
-              <li>
-                <Link to="/orderCarry" >
-                  <a href="#" className="text-gray-900 dark:text-white hover:underline">Carrito</a>
-                </Link>
-              </li>
               <li>
                 <Link to='/contactUs' >
                   <a href="#" className="text-gray-900 dark:text-white hover:underline">Contáctanos</a>
@@ -52,6 +50,18 @@ const NavBar = ({ paginaUno }) => {
               <li>
                 <Link to='/about' >
                   <a href="#" className="text-gray-900 dark:text-white hover:underline">Sobre nosotros</a>
+                </Link>
+              </li>
+              {/* ORDEN CARRITO */}
+              <li>
+                <Link to="/orderCarry" >
+                  <a href="#" className="text-gray-900 dark:text-white hover:underline"><img className='w-6 h-auto object-cover' src={iconCart} /></a>
+                  <span >
+                    {cantidad !== 0 ?
+                      <BubbleAlert value={cantidad} />
+                      : null
+                    }
+                  </span>
                 </Link>
               </li>
             </ul>
