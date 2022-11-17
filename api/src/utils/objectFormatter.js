@@ -38,6 +38,7 @@ const objectFormatter = (details) => {
   if (!attributesObject.COLOR) {
     variations?.forEach((everyVariation) => {
       const combination = everyVariation.attribute_combinations;
+      // console.log(combination[0]);
       const colorVariant = combination[0];
       const sizeVariant = combination.filter((attr) => attr.id === "SIZE");
 

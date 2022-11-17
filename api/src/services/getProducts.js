@@ -4,10 +4,17 @@ const { Product } = require("../db");
 
 const { objectFormatter } = require("../utils/objectFormatter");
 
+const MULTIPLE_IDS_URL =
+  "https://api.mercadolibre.com/items?attributes=attributes,variations,price,sold_quantity,available_quantity,secure_thumbnail,thumbnail,pictures,condition,title";
+
+const ITEM_REVIEW_URL = "https://api.mercadolibre.com/reviews/item/";
+const ITEM_REVIEW_ATTRIBUTES =
+  "?limit=10&attributes=paging,reviews,rating_average,rating_levels";
+
 const getApiProducts = async () => {
   const dataArray = [];
 
-  const totalApiCalls = 10;
+  const totalApiCalls = 1;
   const productsToRetrieve = [];
 
   for (let i = 1; i <= totalApiCalls; i++) {
@@ -26,15 +33,13 @@ const getApiProducts = async () => {
     const thirdTwentyIds = arrayString.slice(40, 50).join(",");
 
     const firstIdsFetch = await axios.get(
-      `https://api.mercadolibre.com/items?ids=${firstTwentyIds}`
+      `${MULTIPLE_IDS_URL}&ids=${firstTwentyIds}`
     );
-
     const secondIdsFetch = await axios.get(
-      `https://api.mercadolibre.com/items?ids=${secondTwentyIds}`
+      `${MULTIPLE_IDS_URL}&ids=${secondTwentyIds}`
     );
-
     const thirdIdsFetch = await axios.get(
-      `https://api.mercadolibre.com/items?ids=${thirdTwentyIds}`
+      `${MULTIPLE_IDS_URL}&ids=${thirdTwentyIds}`
     );
 
     [firstIdsFetch, secondIdsFetch, thirdIdsFetch].forEach((dataString) =>
