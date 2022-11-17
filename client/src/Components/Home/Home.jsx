@@ -18,18 +18,23 @@ const Home = () => {
   //PAGINADO:
   const [currentPage, setCurrentPage] = useState(1);
   const [sneakersPerPage, setSneakersPerPage] = useState(9);
+
   const indexLastSneaker = currentPage * sneakersPerPage;
   const indexFirstSneaker = indexLastSneaker - sneakersPerPage;
   const currentSneaker = sneakers.slice(indexFirstSneaker, indexLastSneaker);
-  const paginado = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  
+  const nextPage = (pageNumber) => {
+    if (currentPage < Math.ceil(sneakers.length / sneakersPerPage))
+      setCurrentPage(pageNumber);
   };
-  const paginaUno = () => {
-    setCurrentPage(1);
+
+
+  const prevPage = (pageNumber) => {
+    if (currentPage > 1) setCurrentPage(pageNumber);
+
   };
 
   const [isLoading, setIsLoading] = useState(true)
-
 
 
   useEffect(() => {
@@ -40,15 +45,16 @@ const Home = () => {
 
   return (
 
-    <div className={styles.fondo}>
 
-
-        <div>
-          <NavBar paginaUno={paginaUno}/>
+          <NavBar/>
 
           <Filtrado
-            paginaUno={paginaUno}
-            setIsLoading={setIsLoading}
+           
+            setOrder={setOrder}
+
+  
+
+
           />
 
 
@@ -61,9 +67,11 @@ const Home = () => {
           }
 
           <Paginado
+            nextPage={nextPage}
+            prevPage={prevPage}
+            currentPage={currentPage}
             sneakersPerPage={sneakersPerPage}
             sneakers={sneakers.length}
-            paginado={paginado}
           />
         </div>
     </div>
