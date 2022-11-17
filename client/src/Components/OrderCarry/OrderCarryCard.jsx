@@ -2,18 +2,18 @@ import React from "react";
 
 const OrderCarryCard = ({ id, title, brand, image, condicion, externalMaterial, price, onDeleteCarry }) => {
     return (
-        <div className="flex justify-between  bg-white py-7 px-4 w-3/5 h-48 mt-8 rounded-xl border border-solid border=[#e6e8eb] relative " >
+        <div className="flex justify-between  bg-white py-7 px-4 w-[850px] h-48 mt-8 rounded-xl border border-solid border=[#e6e8eb] relative " >
             <div className="flex">
-                <div className="overflow-hidden rounded-lg ">
+                <div className="overflow-hidden rounded-lg mx-9">
                     <img
                         src={image}
                         alt="imagem Producto"
                     // className="h-auto w-auto object-cover object-center group-hover:opacity-75"
                     />
                 </div>
-                <div className="max-w-md flex-col mx-4 ">
+                <div className="max-w-md flex-col mx-8 ">
                     <h1 className=" font-bold tracking-tight text-gray-900 sm:text-lg leading-none">{title}</h1>
-                    <p className=" font-bold tracking-tight text-gray-900 sm:text-base mt-3">${price}</p>
+                    <p className=" font-bold tracking-tight text-gray-900 sm:text-2xl mt-3">${price}</p>
                 </div>
 
             </div >
