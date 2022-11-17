@@ -13,7 +13,7 @@ const OrderCarryCard = ({ id, title, brand, image, condicion, externalMaterial, 
                 </div>
                 <div className="max-w-md flex-col mx-8 ">
                     <h1 className=" font-bold tracking-tight text-gray-900 sm:text-lg leading-none">{title}</h1>
-                    <p className=" font-bold tracking-tight text-gray-900 sm:text-base mt-3">${price}</p>
+                    <p className=" font-bold tracking-tight text-gray-900 sm:text-2xl mt-3">${price}</p>
                 </div>
 
             </div >
