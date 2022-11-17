@@ -20,6 +20,7 @@ const bulkCreate = async () => {
         externalMaterial,
         gender,
         category,
+        available_quantity,
       } = el;
       Product.findOrCreate({
         where: { title },
@@ -36,6 +37,7 @@ const bulkCreate = async () => {
           externalMaterial,
           gender,
           category,
+          available_quantity,
         },
       });
     });
