@@ -1,6 +1,18 @@
 import {
-
-   GET_SNEAKERS, SEARCH_SNEAKER, GET_DETAIL, FILTRO_GENERO, FILTRO_MARCA, SORT_BY_ALPHABET, FILTRO_PRECIOS, FILTRO_CATEGORIAS, GET_BRANDS, GET_CATEGORIES, GET_GENDERS, FILTER, ORDEN
+   GET_SNEAKERS,
+   SEARCH_SNEAKER,
+   GET_DETAIL,
+   FILTRO_GENERO,
+   FILTRO_MARCA,
+   SORT_BY_ALPHABET,
+   FILTRO_PRECIOS,
+   FILTRO_CATEGORIAS,
+   GET_BRANDS,
+   GET_CATEGORIES,
+   GET_GENDERS,
+   FILTER,
+   ORDEN,
+   DETAIL_ZERO,
 } from "../actions/actionTypes";
 const initialState = {
    sneakersReducer: [],
@@ -10,9 +22,7 @@ const initialState = {
    categories: [],
    genders: [],
    filtros: {},
-   orden: {}
-
-
+   orden: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -20,12 +30,13 @@ const rootReducer = (state = initialState, action) => {
       case GET_SNEAKERS:
          return {
             ...state,
-            allSneakers: action.payload, /* sneakers que renderizo en el home */
+            allSneakers: action.payload /* sneakers que renderizo en el home */,
             /* filtros: action.payload, */
-            sneakersReducer: action.payload, /* sneakers que me traigo intactos de la db para trabajarlos aca con los filtros */
+            sneakersReducer:
+               action.payload /* sneakers que me traigo intactos de la db para trabajarlos aca con los filtros */,
             filtros: {},
-            orden: {}
-         }
+            orden: {},
+         };
 
       case SEARCH_SNEAKER:
          return {
@@ -33,7 +44,7 @@ const rootReducer = (state = initialState, action) => {
             sneakersReducer: action.payload,
             allSneakers: action.payload,
             filtros: {},
-            orden: {}
+            orden: {},
          };
 
       case "POST_PRODUCT":
@@ -50,38 +61,41 @@ const rootReducer = (state = initialState, action) => {
       case GET_BRANDS:
          return {
             ...state,
-            brands: action.payload
+            brands: action.payload,
          };
       case GET_CATEGORIES:
          return {
             ...state,
-            categories: action.payload
+            categories: action.payload,
          };
 
       case GET_GENDERS:
          return {
             ...state,
-            genders: action.payload
+            genders: action.payload,
          };
-
 
       case FILTER:
          return {
             ...state,
             allSneakers: action.payload.filter(state.sneakersReducer),
             filtros: action.payload.filtros,
-            orden: action.payload.orden
-         }
-
+            orden: action.payload.orden,
+         };
 
       case ORDEN:
          return {
             ...state,
-            allSneakers: action.payload(state.allSneakers)
-         }
+            allSneakers: action.payload(state.allSneakers),
+         };
 
+      // DESMONTANDO COMPONENTE
+      case DETAIL_ZERO:
+         return {
+            ...state,
+            detail: action.payload,
+         };
 
-  
       default:
          return initialState;
    }
