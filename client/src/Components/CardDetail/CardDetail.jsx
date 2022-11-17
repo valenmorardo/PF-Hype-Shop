@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getDetail, addCarry } from "../../Redux/actions/index";
+import { getDetail, addCarry, detailZero } from "../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "react-multi-carousel";
 import 'react-multi-carousel/lib/styles.css';
@@ -14,7 +14,11 @@ const CardDetail = (props) => {
 
   useEffect(() => {
     dispatch(getDetail(props.match.params.id));
-  }, [dispatch, props.match.params.id]);
+    // desmontando Componente:
+    return () => { // arrow para poder ejecutarlo 
+      dispatch(detailZero());
+    };
+  }, [dispatch]);
 
   const responsive = {
     superLargeDesktop: {
@@ -105,7 +109,7 @@ const CardDetail = (props) => {
                     <button
                       type="submit"
                       onClick={() => onAddCarry(sneakerDetail)}
-                      className="mt-10 flex  w-200px items-center justify-center rounded-md border border-transparent bg-lime-500	 py-3 px-8 text-base font-medium text-white hover:bg-lime-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="mt-10 flex  w-200px items-center justify-center rounded-md border border-transparent bg-lime-500	 py-3 px-8 text-base font-medium text-white hover:bg-lime-400 focus:outline-none  "
                     >
                       Añadir Carrito
                     </button>

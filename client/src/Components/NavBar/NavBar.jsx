@@ -45,6 +45,11 @@ const NavBar = ({ paginaUno }) => {
                 </Link>
               </li>
               <li>
+                <Link to='/contactUs' >
+                  <a href="#" className="text-gray-900 dark:text-white hover:underline">Contáctanos</a>
+                </Link>
+              </li>
+              <li>
                 <Link to='/about' >
                   <a href="#" className="text-gray-900 dark:text-white hover:underline">Sobre nosotros</a>
                 </Link>

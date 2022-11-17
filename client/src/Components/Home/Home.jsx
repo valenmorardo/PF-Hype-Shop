@@ -8,15 +8,14 @@ import Cards from "../Cards/Cards";
 import Paginado from "../Paginado/Paginado";
 import NavBar from "../NavBar/NavBar";
 import styles from "./Home.module.css";
-import SearchBar from "../NavBar/SearchBar/SearchBar";
 import Filtrado from "../NavBar/Filtrado/Filtrado";
+import Loading from '../Loading/Loading';
 
 const Home = () => {
   const dispatch = useDispatch();
   const sneakers = useSelector((state) => state.allSneakers);
 
   //PAGINADO:
-  const [order, setOrder] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [sneakersPerPage, setSneakersPerPage] = useState(9);
 
@@ -29,9 +28,13 @@ const Home = () => {
       setCurrentPage(pageNumber);
   };
 
+
   const prevPage = (pageNumber) => {
     if (currentPage > 1) setCurrentPage(pageNumber);
+
   };
+
+  const [isLoading, setIsLoading] = useState(true)
 
 
   useEffect(() => {
@@ -41,27 +44,27 @@ const Home = () => {
   // console.log(sneakers);
 
   return (
-    <div className="bg-white mb-0">
-      {sneakers.length > 0 ? (
-        <div>
+
 
           <NavBar/>
 
           <Filtrado
            
             setOrder={setOrder}
+
+  
+
+
           />
 
-          {/* <div>
-            <Paginado
-              sneakersPerPage={sneakersPerPage}
-              sneakers={sneakers.length}
-              paginado={paginado}
-            />
-          </div> */}
 
-
-          <Cards sneakers={currentSneaker} />
+          { 
+          isLoading?
+            <Loading setIsLoading={setIsLoading}
+            isLoading={isLoading}/>
+            :
+            <Cards sneakers={currentSneaker} />
+          }
 
           <Paginado
             nextPage={nextPage}
@@ -71,13 +74,6 @@ const Home = () => {
             sneakers={sneakers.length}
           />
         </div>
-
-      ) : (
-        <div>
-          <h1>Loading...</h1>
-        </div>
-      )}
-
     </div>
   );
 };
