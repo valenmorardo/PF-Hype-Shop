@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import styles from './Loading.module.css'
 
 const Loading = ({setIsLoading, isloading}) => {
 
@@ -12,10 +13,15 @@ const Loading = ({setIsLoading, isloading}) => {
 
 
   return (
+<div className={styles.box}>
 
-    <div>
-     <h1>LOADING...</h1>
-    </div>
+<div className={styles.spinner}>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+</div>
     
   )
 
