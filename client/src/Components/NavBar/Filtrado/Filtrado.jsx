@@ -58,7 +58,7 @@ const Filtrado = ({ setIsLoading, paginaUno }) => {
     }
   }, [filtros, orden]);
 
-  console.log(Object.values(filtros));
+
   return (
     <>
       <h1 className="block mb-2 text-base font-medium text-gray-600">
