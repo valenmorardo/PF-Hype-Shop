@@ -9,7 +9,8 @@ import Paginado from "../Paginado/Paginado";
 import NavBar from "../NavBar/NavBar";
 import styles from "./Home.module.css";
 import Filtrado from "../NavBar/Filtrado/Filtrado";
-import Loading from '../Loading/Loading';
+import Loading from "../Loading/Loading";
+import RefreshPage from "../RefreshPage.jsx/RefreshPage";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -18,28 +19,23 @@ const Home = () => {
   //PAGINADO:
   const [currentPage, setCurrentPage] = useState(1);
   const [sneakersPerPage, setSneakersPerPage] = useState(9);
-
   const indexLastSneaker = currentPage * sneakersPerPage;
   const indexFirstSneaker = indexLastSneaker - sneakersPerPage;
   const currentSneaker = sneakers.slice(indexFirstSneaker, indexLastSneaker);
-  
+
   const nextPage = (pageNumber) => {
     if (currentPage < Math.ceil(sneakers.length / sneakersPerPage))
       setCurrentPage(pageNumber);
   };
-
-
   const prevPage = (pageNumber) => {
     if (currentPage > 1) setCurrentPage(pageNumber);
-
   };
 
   const paginaUno = () => {
     setCurrentPage(1);
   };
 
-  const [isLoading, setIsLoading] = useState(true)
-
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     dispatch(getSneakers());
@@ -48,33 +44,29 @@ const Home = () => {
   // console.log(sneakers);
 
   return (
-<div>
-<div>
+    <div>
+      <div>
+        <NavBar />
 
-          <NavBar/>
+        <Filtrado setIsLoading={setIsLoading} paginaUno={paginaUno} />
 
-          <Filtrado
-          setIsLoading={setIsLoading}
-          paginaUno={paginaUno}
-          />
-
-
-          { 
-          isLoading?
-            <Loading setIsLoading={setIsLoading}
-            isLoading={isLoading}/>
-            :
+        {isLoading ? (
+          <Loading setIsLoading={setIsLoading} isLoading={isLoading} />
+        ) : sneakers.length ? (
+          <div>
             <Cards sneakers={currentSneaker} />
-          }
-
-          <Paginado
-            nextPage={nextPage}
-            prevPage={prevPage}
-            currentPage={currentPage}
-            sneakersPerPage={sneakersPerPage}
-            sneakers={sneakers.length}
-          />
-        </div>
+            <Paginado
+              nextPage={nextPage}
+              prevPage={prevPage}
+              currentPage={currentPage}
+              sneakersPerPage={sneakersPerPage}
+              sneakers={sneakers.length}
+            />
+          </div>
+        ) : (
+          <RefreshPage />
+        )}
+      </div>
     </div>
   );
 };
