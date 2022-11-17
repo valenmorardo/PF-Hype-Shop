@@ -8,6 +8,7 @@ const objectFormatter = (details) => {
     pictures,
     attributes,
     variations,
+    available_quantity,
   } = details;
 
   const requiredAttributes = [
@@ -74,6 +75,7 @@ const objectFormatter = (details) => {
     sizes: size,
     gender: attributesObject.GENDER,
     category,
+    available_quantity,
   };
 };
 
