@@ -14,7 +14,7 @@ const Filtrado = ({setIsLoading, paginaUno}) => {
   const dispatch = useDispatch();
 
   
-  const orderPrice = ["MAYORPrecio", "MENORPrecio"];
+  const orderPrice = ["Menor a mayor", "Mayor a menor"];
 
   const brands = useSelector((state) => state.brands);
   const category = useSelector((state) => (state.categories));
