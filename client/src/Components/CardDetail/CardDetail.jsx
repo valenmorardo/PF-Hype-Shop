@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getDetail, addCarry } from "../../Redux/actions/index";
+import { getDetail, addCarry, detailZero } from "../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "react-multi-carousel";
 import 'react-multi-carousel/lib/styles.css';
@@ -14,7 +14,11 @@ const CardDetail = (props) => {
 
   useEffect(() => {
     dispatch(getDetail(props.match.params.id));
-  }, [dispatch, props.match.params.id]);
+    // desmontando Componente:
+    return () => { // arrow para poder ejecutarlo 
+      dispatch(detailZero());
+    };
+  }, [dispatch]);
 
   const responsive = {
     superLargeDesktop: {
