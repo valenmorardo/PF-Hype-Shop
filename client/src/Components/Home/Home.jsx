@@ -19,17 +19,19 @@ const Home = () => {
   const [order, setOrder] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [sneakersPerPage, setSneakersPerPage] = useState(9);
+
   const indexLastSneaker = currentPage * sneakersPerPage;
   const indexFirstSneaker = indexLastSneaker - sneakersPerPage;
   const currentSneaker = sneakers.slice(indexFirstSneaker, indexLastSneaker);
-  const paginado = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  
+  const nextPage = (pageNumber) => {
+    if (currentPage < Math.ceil(sneakers.length / sneakersPerPage))
+      setCurrentPage(pageNumber);
   };
 
-  const paginaUno = () => {
-    setCurrentPage(1);
+  const prevPage = (pageNumber) => {
+    if (currentPage > 1) setCurrentPage(pageNumber);
   };
-
 
 
   useEffect(() => {
@@ -43,10 +45,10 @@ const Home = () => {
       {sneakers.length > 0 ? (
         <div>
 
-          <NavBar paginaUno={paginaUno}/>
+          <NavBar/>
 
           <Filtrado
-            paginaUno={paginaUno}
+           
             setOrder={setOrder}
           />
 
@@ -62,9 +64,11 @@ const Home = () => {
           <Cards sneakers={currentSneaker} />
 
           <Paginado
+            nextPage={nextPage}
+            prevPage={prevPage}
+            currentPage={currentPage}
             sneakersPerPage={sneakersPerPage}
             sneakers={sneakers.length}
-            paginado={paginado}
           />
         </div>
 
