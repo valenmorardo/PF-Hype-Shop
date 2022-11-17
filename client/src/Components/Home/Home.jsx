@@ -34,6 +34,10 @@ const Home = () => {
 
   };
 
+  const paginaUno = () => {
+    setCurrentPage(1);
+  };
+
   const [isLoading, setIsLoading] = useState(true)
 
 
@@ -49,7 +53,10 @@ const Home = () => {
 
           <NavBar/>
 
-          <Filtrado/>
+          <Filtrado
+          setIsLoading={setIsLoading}
+          paginaUno={paginaUno}
+          />
 
 
           { 

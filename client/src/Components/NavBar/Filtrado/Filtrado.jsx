@@ -10,7 +10,7 @@ import {
 
 import CardFiltrado from "./cardFiltrado";
 
-const Filtrado = ({setIsLoading}) => {
+const Filtrado = ({setIsLoading, paginaUno}) => {
   const dispatch = useDispatch();
 
   
@@ -34,12 +34,14 @@ const Filtrado = ({setIsLoading}) => {
   function handlerFilter(propiedad) {
     return (valor) => {
       setFiltros({ ...filtros, [propiedad]: valor });
+      paginaUno()
     }
   }
 
   function handlerOrden(propiedad) {
     return (valor) => {
       setOrden({ ...orden, [propiedad]: valor });
+      paginaUno()
     }
   }
 
@@ -59,9 +61,9 @@ const Filtrado = ({setIsLoading}) => {
   
 
   return (
-
-    <div>
-      <h1>FILTROS</h1>
+<>
+      <h1 className="block mb-2 text-base font-medium text-gray-600">FILTROS</h1>
+    <div className="flex justify-around">
       {/* FILTROS */}
       <CardFiltrado
         options={brands}
@@ -95,6 +97,7 @@ const Filtrado = ({setIsLoading}) => {
 
 
     </div>
+    </>
   );
 };
 
