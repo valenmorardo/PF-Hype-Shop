@@ -1,82 +1,101 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getSneakers, filtroMarca, filtroGenero, alphaSort, filtroPrecios , filtroCategorias} from '../../../Redux/actions/index'
-import styles from '../Filtrado/Filtrado.module.css'
+import {
+  getBrands,
+  getCategories,
+  getGenders,
+  filterSneakers,
 
+} from "../../../Redux/actions/index";
 
-const Filtrado = () => {
+import CardFiltrado from "./cardFiltrado";
+
+const Filtrado = ({setIsLoading}) => {
   const dispatch = useDispatch();
 
-  useEffect(() => dispatch(getSneakers()), [dispatch]);
-  const xx = useSelector((state) => state.allSneakers);
+  
+  const orderPrice = ["MAYORPrecio", "MENORPrecio"];
 
-  const handleOrderByAlpha = (e) => {
-    e.preventDefault();
-    dispatch(alphaSort(e.target.value));
+  const brands = useSelector((state) => state.brands);
+  const category = useSelector((state) => (state.categories));
+  const gender = useSelector((state) => (state.genders))
 
-  };
-  const handleOrderByGeneros = (e) => {
-    e.preventDefault();
-    dispatch(filtroGenero(e.target.value));
-  };
-  const handleOrderByPrecios = (e) => {
-    e.preventDefault();
-    dispatch(filtroPrecios(e.target.value));
-  };
+  const [filtros, setFiltros] = useState({}); 
+  const [orden, setOrden] = useState({}); 
+  
 
-  const mostrarMarcas = (e) => {
-    e.preventDefault();
-    dispatch(filtroMarca(e.target.value));
+  useEffect(() => {
+    dispatch(getBrands());
+    dispatch(getCategories());
+    dispatch(getGenders());
+  }, [dispatch]);
 
+
+  function handlerFilter(propiedad) {
+    return (valor) => {
+      setFiltros({ ...filtros, [propiedad]: valor });
+    }
   }
 
-  const handleCategories=(e)=>{
-    e.preventDefault();
-    dispatch(filtroCategorias(e.target.value))
+  function handlerOrden(propiedad) {
+    return (valor) => {
+      setOrden({ ...orden, [propiedad]: valor });
+    }
   }
 
-  console.log(xx)
+  function setFilters() {
+    dispatch(filterSneakers({
+      filtros,
+      orden
+    }));
+    setIsLoading(true);
+  }
+
+  useEffect(() => {
+    if(Object.keys(filtros).length || Object.keys(orden).length) {
+      setFilters()
+    }
+  }, [filtros, orden]);
+  
+
   return (
-    <>
-    <h1 className="block mb-2 mt-3  text-base font-medium text-gray-900 dark:text-gray-400">FILTROS</h1>
-  <div className={styles.selects}>
-    <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-2 ml-2' onChange={(e) => handleOrderByAlpha(e)}>
-      <option hidden value="all">Nombre</option>
-        <option value="aToz">A-Z </option>
-        <option value="zToa">Z-A </option>
-      </select><br />
 
-      <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-2 ml-2' onChange={(e) => handleOrderByGeneros(e)}>
-        <option hidden value="all">Genero</option>
-        <option value="Hombre">Masculino</option>
-        <option value="Mujer">Femenino </option>
-        <option value="Sin género">Unisex</option>
-      </select>
+    <div>
+      <h1>FILTROS</h1>
+      {/* FILTROS */}
+      <CardFiltrado
+        options={brands}
+        titulo="Filtrar por marca"
+        handler={handlerFilter('brand')}
 
-     
-      <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-2 ml-2'onChange={(e) => handleOrderByPrecios(e)}>
-        <option hidden value="all">Precio</option>
-        <option value="mayor">Mayor a menor</option>
-        <option value="menor">Menor a mayor</option>
-      </select>
+ 
+      /> 
+      <CardFiltrado
+        options={category}
+        titulo="Filtrar por categoria"
+        handler={handlerFilter("category")}
+  
 
-      <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-2 ml-2' onChange={(e) => mostrarMarcas(e)}>
-        <option hidden value="all">Marca</option>
-        <option value="Jaguar">Jaguar</option>
-        <option value="Araquina">Araquina</option>
-        <option value="Fila">Fila</option>
-        <option value="Topper">Topper</option>
-      </select>
+      />
+      <CardFiltrado
+        options={gender}
+        titulo="Filtrar por genero"
+        handler={handlerFilter("gender")}
 
-      <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-2 ml-2' onChange={(e) => handleCategories(e)} >
-        <option hidden value="all">Categorias</option>
-        <option value="Deportivo">Deportivo</option>
-        <option value="Urbano">Urbano</option>
-      </select>
+
+      />
+
+      {/* ORDENAMIENTO: */}
+      <CardFiltrado
+        options={orderPrice}
+        titulo="Ordenar por precio"
+        handler={handlerOrden("orderPrice")}
+
+      />
+
 
     </div>
-</>
-  )
-}
+  );
+};
 
-export default Filtrado
+export default Filtrado;

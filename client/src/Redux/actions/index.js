@@ -1,14 +1,22 @@
 import axios from "axios";
+import filter from "../../utils/filter";
+import orden from "../../utils/orden";
 
 import {
    GET_SNEAKERS,
    SEARCH_SNEAKER,
    GET_DETAIL,
-   FILTRO_GENERO,
+   /*    FILTRO_GENERO,
    FILTRO_MARCA,
    SORT_BY_ALPHABET,
    FILTRO_PRECIOS,
-   FILTRO_CATEGORIAS
+   FILTRO_CATEGORIAS, */
+   GET_BRANDS,
+   GET_CATEGORIES,
+   GET_GENDERS,
+   FILTER,
+   ORDEN,
+   DETAIL_ZERO,
 } from "./actionTypes";
 
 export const getSneakers = () => {
@@ -47,26 +55,105 @@ export const getSearchTitle = (title) => {
 
 export function CreateNewProduct(payload) {
    return async function () {
-      const response = await axios.post("http://localhost:3001/sneakersCreate", payload);
+      const response = await axios.post(
+         "http://localhost:3001/sneakersCreate",
+         payload
+      );
       return response;
    };
 }
 
-
 export function getDetail(id) {
    return async function (dispatch) {
       try {
-         let json = await axios.get(`http://localhost:3001/sneakers/${id}`)
+         let json = await axios.get(`http://localhost:3001/sneakers/${id}`);
          return dispatch({
             type: GET_DETAIL,
-            payload: json.data
-         })
+            payload: json.data,
+         });
       } catch (error) {
-         return alert("Detail not found")
+         return alert("Detail not found");
       }
-   }
+   };
 }
-export const filtroMarca = (payload) => {
+
+export function getBrands() {
+   return async function (dispatch) {
+      try {
+         let json = await axios.get(`http://localhost:3001/filters/brand`);
+         json.data.unshift("Todos");
+         return dispatch({
+            type: GET_BRANDS,
+            payload: json.data,
+         });
+      } catch (error) {
+         return alert("Brands not found");
+      }
+   };
+}
+
+export function getCategories() {
+   return async function (dispatch) {
+      try {
+         let json = await axios.get(`http://localhost:3001/filters/category`);
+         json.data.unshift("Todos");
+         return dispatch({
+            type: GET_CATEGORIES,
+            payload: json.data,
+         });
+      } catch (error) {
+         return alert("Brands not found");
+      }
+   };
+}
+
+export function getGenders() {
+   return async function (dispatch) {
+      try {
+         let json = await axios.get(`http://localhost:3001/filters/gender`);
+         json.data.unshift("Todos");
+         return dispatch({
+            type: GET_GENDERS,
+            payload: json.data,
+         });
+      } catch (error) {
+         return alert("Brands not found");
+      }
+   };
+}
+
+export const filterSneakers = (payload) => {
+   const functionFilter = (products) => {
+      const filteredProducts = filter(payload.filtros, products);
+      return orden(payload.orden, filteredProducts);
+   };
+   return {
+      type: FILTER,
+      payload: {
+         filter: functionFilter,
+         filtros: payload.filtros,
+         orden: payload.orden,
+      },
+   };
+};
+
+export const orderSneakers = (payload) => {
+   return {
+      type: ORDEN,
+      payload: orden(payload),
+   };
+};
+
+// DESMONTANDO COMPONENTE DETAIL
+
+export const detailZero = () => {
+   return {
+      type: DETAIL_ZERO,
+      payload: [],
+   };
+};
+
+/* export const filtroMarca = (payload) => {
    // console.log("FiltroMarca")
    return {
       type: FILTRO_MARCA,
@@ -102,4 +189,4 @@ export const filtroCategorias= (payload)=>{
       type:FILTRO_CATEGORIAS,
       payload,
    }
-}
+} */
