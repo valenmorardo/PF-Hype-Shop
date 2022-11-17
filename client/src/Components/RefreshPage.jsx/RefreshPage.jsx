@@ -1,6 +1,9 @@
 import React from "react";
 
-const RefreshPage = () => {
+// ¡¡¡¡¡¡¡ COMPONENTE REUTILIZABLE !!!!!!!!
+// refresca la pagina
+
+const RefreshPage = ({title, textButton}) => {
   function refresh(e) {
     e.preventDefault();
     window.location.reload(false);
@@ -8,9 +11,9 @@ const RefreshPage = () => {
 
   return (
     <div>
-      <h1>No se encuentran productos</h1>
+      <h1>{title}</h1>
       <br />
-      <button onClick={(e) => refresh(e)}>Seguir explorando</button>
+      <button onClick={(e) => refresh(e)}>{textButton}</button>
     </div>
   );
 };
