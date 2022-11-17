@@ -44,18 +44,12 @@ const Home = () => {
   // console.log(sneakers);
 
   return (
-
+<div>
+<div>
 
           <NavBar/>
 
-          <Filtrado
-           
-            setOrder={setOrder}
-
-  
-
-
-          />
+          <Filtrado/>
 
 
           { 
