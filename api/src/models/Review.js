@@ -2,19 +2,27 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "color",
+    "review",
     {
       id: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         unique: true,
-        allowNull: false,
+        autoIncrement: true,
       },
-      name: {
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      rgb: {
+      rate: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          min: 0,
+          max: 5,
+        },
+      },
+      content: {
         type: DataTypes.STRING,
         allowNull: false,
       },
