@@ -69,7 +69,7 @@ function OrderCarry() {
                             />
                         ))}
                     </div>
-                    <div className='mt-10 w-1/5 h-96 static rounded-xl border border-solid border=[#e6e8eb]'>
+                    <div className='mt-10 w-1/5 h-[400px] static rounded-xl border border-solid border=[#e6e8eb]'>
                         <p className='font-bold tracking-tight sm:text-4xl mt-5 text-gray-900 '>Tu Orden</p>
                         <p className='font-bold tracking-tight sm:text-lg mt-3 text-gray-400 '>Revisa que se encuentren todos los productos que Agregaste anteriormente y ver que todo esté Correcto, antes de Realizar la Compra.</p>
                         <p className='font-bold tracking-tight sm:text-2xl mt-3 text-gray-900 '>Total:</p>
@@ -78,9 +78,9 @@ function OrderCarry() {
                         <button
                             type="submit"
                             // onClick={() => onAddCarry(sneakerDetail)}
-                            className="mt-4 w-200px items-center justify-center rounded-md border border-transparent bg-lime-500	 py-3 px-8 text-base font-medium text-white hover:bg-lime-400 focus:outline-none  "
+                            className="mt-4 w-200px items-center justify-center rounded-md border  border-transparent bg-lime-500	 py-3 px-8 text-lg font-bold text-white hover:bg-lime-400 focus:outline-none  "
                         >
-                            Añadir Carrito
+                            Comprar
                         </button>
                     </div>
                 </div>
