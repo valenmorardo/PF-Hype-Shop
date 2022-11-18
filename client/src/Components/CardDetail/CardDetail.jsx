@@ -8,6 +8,7 @@ import Loading from "../Loading/Loading";
 import { useHistory } from "react-router-dom";
 // CARRITO:
 import useLocalStorage from "../useLocalStorage/useLocalstorage";
+import swal from "sweetalert";
 
 
 const CardDetail = (props) => {
@@ -46,14 +47,52 @@ const CardDetail = (props) => {
   // CARRITO:
   const [item, saveItem] = useLocalStorage("SNEAKERS", []);
 
+  const addCarryNewQuantity = (id, cantidad) => {
+    const arrayNewQuantity = [];
+    item.forEach(it => {
+      if (it.id === id) {
+        arrayNewQuantity.push({
+          ...it,
+          cantidad: cantidad
+        })
+      } else {
+        arrayNewQuantity.push(it)
+      }
+    })
+    saveItem(arrayNewQuantity)
+  }
+
   const onAddCarry = (sneaker) => {
-    const newItem = [...item];
+
+    let carryItem = item.find(elem => elem.id === sneaker.id)
     // console.log("item", newItem)
-    newItem.push({
-      ...sneaker,
-      cantidad: 1
-    });
-    saveItem(newItem)
+    if (carryItem) {
+      if (carryItem.cantidad <= sneaker.available_quantity - 1) {
+        const itemIndex = item.findIndex((it) => it.id === sneaker.id);
+        const newItem = [...item];
+        newItem.splice(itemIndex, 1)
+        newItem.push({
+          ...carryItem,
+          cantidad: carryItem.cantidad + 1
+        });
+        saveItem(newItem)
+        return (swal("¡Agregaste de nuevo este Producto!", `Tu nueva Cantidad es: ${carryItem.cantidad + 1}`, "success"));
+      }
+      if (carryItem.cantidad === sneaker.available_quantity) {
+        return (swal("No Stock", "Tienes Todo el Stock que está disponible en tu Carrito.", "error"));
+      }
+    }
+    else {
+      const newItem = [...item];
+      newItem.push({
+        ...sneaker,
+        cantidad: 1
+      });
+      saveItem(newItem)
+      return (swal("Producto Agregado!", "Este producto ahora Hace parte de tu Carrito!", "success"));
+    }
+
+    // return console.log(carryItem)
     // console.log("añadir carrito")
     // dispatch(addCarry(sneakerDetail))
   }
@@ -68,7 +107,7 @@ const CardDetail = (props) => {
     history.push("/orderCarry")
   }
 
-  console.log(sneakerDetail);
+  // console.log(sneakerDetail);
 
   return (
     <>
@@ -106,6 +145,7 @@ const CardDetail = (props) => {
                     {/* Sizes */}
                     <div className="mt-10">
                       <div className="flex items-center justify-between">
+                        {/* {console.log(onAddCarry(sneakerDetail))} */}
                         <h3 className="text-sm font-medium text-gray-900">TALLA</h3>
                         {sneakerDetail.sizes.map(el =>
                           <p className="text-sm font-medium text-indigo-600 hover:text-indigo-500"> {el}</p>
@@ -147,14 +187,14 @@ const CardDetail = (props) => {
                           <li className="text-gray-400">
                             <span className="text-gray-600">Marca: {sneakerDetail.brand}</span>
                           </li>
-                          <br/>
+                          <br />
                           <li className="text-gray-400">
                             <span className="text-gray-600">Color: {
                               sneakerDetail.colors.map(e => <h4>{e.toUpperCase()}</h4>)
                             }
                             </span>
                           </li>
-                          <br/>
+                          <br />
                           <li className="text-gray-400">
                             <span className="text-gray-600">Condicion: {sneakerDetail.condition}</span>
                           </li>
@@ -169,7 +209,7 @@ const CardDetail = (props) => {
               </div>
             </div>)
 
-          : <Loading/>
+          : <Loading />
       }
     </>
   );
