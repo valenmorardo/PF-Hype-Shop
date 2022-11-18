@@ -8,7 +8,7 @@ const LogoutButton = () => {
 
     return (
         <div>
-            <button onClick={() => logout()}>Logout cool</button>
+            <button className="text-red-600 hover:text-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0   " onClick={() => logout()}>Cerrar sesion</button>
         </div>
     )
 }
