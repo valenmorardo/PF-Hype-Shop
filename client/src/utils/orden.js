@@ -1,6 +1,6 @@
  export default function orden(orden, products) {
   
-          if(orden.orderPrice === 'MENORPrecio') {
+          if(orden.orderPrice === 'Menor a mayor') {
             products.sort((a, b) =>{
               if (b.price < a.price) return 1
               if (b.price > a.price) return -1
@@ -8,7 +8,7 @@
             })
           } 
 
-          if(orden.orderPrice === 'MAYORPrecio') {
+          if(orden.orderPrice === 'Mayor a menor') {
             products.sort((a, b) =>{
               if (b.price > a.price) return 1
               if (b.price < a.price) return -1
