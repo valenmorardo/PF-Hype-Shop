@@ -18,14 +18,27 @@ function OrderCarry() {
     }
 
     const totalPrice = (item) => {
-        const arrayPrecio = item.map(it => it.price)
+        const arrayPrecio = item.map(it => it.price * it.cantidad)
         const sumaTotal = arrayPrecio.reduce((a, b) => a + b)
         return sumaTotal
     }
 
-    const pruebaConsole = () => {
-        console.log("Prueba Carry")
+    const addCarryNewQuantity = (id, cantidad) => {
+        const arrayNewQuantity = [];
+        item.forEach(it => {
+            if (it.id === id) {
+                arrayNewQuantity.push({
+                    ...it,
+                    cantidad: cantidad
+                })
+            } else {
+                arrayNewQuantity.push(it)
+            }
+        })
+        saveItem(arrayNewQuantity)
     }
+
+    // let priceFinal = totalPrice(item);
 
     return (
         <div className=' bg-slate-50'>
@@ -33,7 +46,8 @@ function OrderCarry() {
             {item && item.length >= 1 ?
                 <div div className='flex flex-row justify-evenly' >
                     <div className='flex content-center flex-col flex-wrap'>
-                        {console.log("Carrito", totalPrice(item))}
+                        {console.log("Carrito", item)}
+                        {/* {console.log("PruebaCarry", pruebaConsole('f8c9604c-e137-406d-bd70-a295d4378461', 4))} */}
                         {item && item.map(el => (
                             <OrderCarryCard
                                 key={el.id}
@@ -44,7 +58,14 @@ function OrderCarry() {
                                 condicion={el.condition}
                                 externalMaterial={el.externalMaterial}
                                 price={el.price}
+                                cantidad={el.cantidad}
                                 onDeleteCarry={onDeleteCarry}
+                                available_quantity={el.available_quantity}
+                                priceFinal={totalPrice(item)}
+                                saveItem={saveItem}
+                                addCarryNewQuantity={addCarryNewQuantity}
+
+
                             />
                         ))}
                     </div>
