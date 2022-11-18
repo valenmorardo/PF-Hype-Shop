@@ -11,8 +11,8 @@ const OrderCarryCard = ({ id, title, brand, image, cantidad, externalMaterial, p
         setOpenModal(true)
     }
     return (
-        <div className="flex justify-between  bg-white py-7 px-4 w-[850px] h-48 mt-8 rounded-xl border border-solid border=[#e6e8eb] relative " >
-            <div className="flex">
+        <div className="flex justify-between  bg-white py-7 px-4 w-[890px] h-48 mt-8 rounded-xl border border-solid border=[#e6e8eb] relative " >
+            <div className="flex ">
                 <div className="overflow-hidden rounded-lg mx-9">
                     <img
                         src={image}
@@ -20,15 +20,22 @@ const OrderCarryCard = ({ id, title, brand, image, cantidad, externalMaterial, p
                     // className="h-auto w-auto object-cover object-center group-hover:opacity-75"
                     />
                 </div>
-                <div className="max-w-md flex-col mx-8 ">
+                <div className=" flex w-[28rem] flex-col mx-8 items-center ">
                     <h1 className=" font-bold tracking-tight text-gray-900 sm:text-lg leading-none">{title}</h1>
+                    <div className="flex justify-center items-center gap-1">
+                        <p className=" font-bold tracking-tight text-gray-900 sm:text-lg mt-1">Talla: </p>
+                        <p className=" font-bold tracking-tight text-indigo-600 sm:text-xl mt-1">34</p>
+                    </div>
                     <p className=" font-bold tracking-tight text-gray-900 sm:text-2xl mt-3">${price}</p>
                 </div>
             </div >
-            <div>
+            <div className="mr-10 mt-8">
                 {/* <p>Modal: {brand}</p> */}
-                <p>Cantidad: {cantidad}</p>
-                <button onClick={() => handleOpenModal()}>Editar Cantidad</button>
+                <div className="flex justify-center items-end gap-1">
+                    <p className="font-bold text-2xl">Cantidad: </p>
+                    <p className=" font-bold tracking-tight text-indigo-600 sm:text-2xl mt-1">{cantidad}</p>
+                </div>
+                <button className="text-[#f15a24] font-semibold text-xl " onClick={() => handleOpenModal()}>Editar Cantidad</button>
                 {/* {openModal &&
                     <div>
                         <p>Modalito</p>
@@ -48,7 +55,7 @@ const OrderCarryCard = ({ id, title, brand, image, cantidad, externalMaterial, p
 
 
                     />}
-                <p>Material Externo: {externalMaterial}</p>
+                <p>Detalles</p>
             </div>
             <button className="absolute right-2 top-2  flex w-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 py-1 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" onClick={() => onDeleteCarry(id)}>X</button>
             {/* <p>{card}</p>
