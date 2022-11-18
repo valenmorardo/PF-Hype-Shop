@@ -46,7 +46,10 @@ const CardDetail = (props) => {
   const onAddCarry = (sneaker) => {
     const newItem = [...item];
     // console.log("item", newItem)
-    newItem.push(sneaker);
+    newItem.push({
+      ...sneaker,
+      cantidad: 1
+    });
     saveItem(newItem)
     // console.log("añadir carrito")
     // dispatch(addCarry(sneakerDetail))
@@ -95,6 +98,8 @@ const CardDetail = (props) => {
                           <p className="text-sm font-medium text-indigo-600 hover:text-indigo-500"> {el}</p>
                         )}
                       </div>
+                      <h3 className="text-xl font-medium text-gray-900 mt-2">Stock Disponible: {sneakerDetail.available_quantity}</h3>
+
 
                     </div>
 
