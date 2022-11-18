@@ -19,7 +19,7 @@ function OrderCarry() {
 
     const totalPrice = (item) => {
         const arrayPrecio = item.map(it => it.price * it.cantidad)
-        const sumaTotal = arrayPrecio.reduce((a, b) => a + b)
+        const sumaTotal = arrayPrecio.reduce((a, b) => a + b, 0)
         return sumaTotal
     }
 
@@ -53,7 +53,7 @@ function OrderCarry() {
                                 key={el.id}
                                 id={el.id}
                                 title={el.title}
-                                image={el.thumbnail}
+                                image={el.pictures[0]}
                                 brand={el.brand}
                                 condicion={el.condition}
                                 externalMaterial={el.externalMaterial}

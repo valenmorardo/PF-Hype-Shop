@@ -13,7 +13,7 @@ const OrderCarryCard = ({ id, title, brand, image, cantidad, externalMaterial, p
     return (
         <div className="flex justify-between  bg-white py-7 px-4 w-[890px] h-48 mt-8 rounded-xl border border-solid border=[#e6e8eb] relative " >
             <div className="flex ">
-                <div className="overflow-hidden rounded-lg mx-9">
+                <div className="aspect-w-1 aspect-h-1  h-min w-[140px] overflow-hidden rounded-lg">
                     <img
                         src={image}
                         alt="imagem Producto"

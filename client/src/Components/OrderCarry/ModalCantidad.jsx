@@ -45,7 +45,7 @@ const ModalCantidad = ({ id, title, image, cantidad, externalMaterial, price, se
                 <p className='font-bold tracking-tight sm:text-xl mt-0 text-gray-400 px-2'>Aquí podrás Editar la Cantidad de productos que Desees Comprar, Como también veras el Precio Final de todo Tu Carrito.</p>
                 <div className="flex justify-between mt-6" >
                     <div className="flex">
-                        <div className="overflow-hidden rounded-lg mx-9">
+                        <div className="aspect-w-1 aspect-h-1 h-min w-56 overflow-hidden rounded-lg">
                             <img
                                 src={image}
                                 alt="imagem Producto"
