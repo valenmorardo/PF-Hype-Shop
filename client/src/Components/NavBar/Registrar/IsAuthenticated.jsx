@@ -7,7 +7,7 @@ import Profile from './Profile';
 const IsAuthenticated = () => {
     const { isAuthenticated } = useAuth0();
     return (
-        <div>
+        <div className='flex justify-around'>
             {isAuthenticated ? <LogoutButton /> : <LoginButton />}
             <Profile />
         </div>
