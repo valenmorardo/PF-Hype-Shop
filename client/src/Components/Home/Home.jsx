@@ -64,7 +64,7 @@ const Home = () => {
             />
           </div>
         ) : (
-          <RefreshPage />
+          <RefreshPage title={'No se encontraron productos.'} textButton={'Seguir Explorando'}/>
         )}
       </div>
     </div>
