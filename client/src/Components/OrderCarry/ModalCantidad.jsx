@@ -41,8 +41,8 @@ const ModalCantidad = ({ id, title, image, cantidad, externalMaterial, price, se
         <div className="z-20 bg-[#f8fafc8c] fixed top-0 bottom-0 right-0 left-0 rounded-2xl">
             {/* <p className='font-bold tracking-tight sm:text-5xl mt-6 text-gray-900 '>Cambiar Cantidad</p> */}
             {/* Modal */}
-            <div className="flex items-center flex-col bg-white py-7 px-4 w-[850px] h-3/4 mt-8 mx-auto rounded-xl border border-solid border-gray-300">
-                <p className='font-bold tracking-tight sm:text-xl mt-2 text-gray-400 px-2'>Aquí podrás Editar la Cantidad de productos que Desees Comprar, Como también veras el Precio Final de todo Tu Carrito.</p>
+            <div className="flex items-center flex-col bg-white py-7 px-4 w-[850px] min-h-[3/4] mt-8 mx-auto rounded-xl border border-solid border-gray-300">
+                <p className='font-bold tracking-tight sm:text-xl mt-0 text-gray-400 px-2'>Aquí podrás Editar la Cantidad de productos que Desees Comprar, Como también veras el Precio Final de todo Tu Carrito.</p>
                 <div className="flex justify-between mt-6" >
                     <div className="flex">
                         <div className="overflow-hidden rounded-lg mx-9">
@@ -54,11 +54,21 @@ const ModalCantidad = ({ id, title, image, cantidad, externalMaterial, price, se
                         </div>
                         <div className="max-w-md flex-col mx-8 ">
 
-                            <h1 className=" font-bold tracking-tight text-gray-900 sm:text-lg leading-none">{title}</h1>
-                            <p className=" font-bold tracking-tight text-gray-900 sm:text-2xl mt-3">Precio Unidad: ${price}</p>
-                            <p>Stock Disponible: {available_quantity}</p>
-                            <p>Cantidad: {cantidadModal}</p>
-                            {console.log(cantidad)}
+                            <h1 className=" font-bold tracking-tight text-gray-900 sm:text-xl leading-none">{title}</h1>
+                            <div className="flex justify-center items-end gap-1 border-b-2 border-gray-300 border-solid  ">
+                                <p className=" font-bold tracking-tight text-gray-900 sm:text-2xl mt-0">Precio Unidad: </p>
+                                <p className=" font-bold tracking-tight text-gray-900 sm:text-3xl mt-1 ">${price}</p>
+                            </div>
+                            <div className="flex justify-center items-end gap-1 ">
+                                <p className=" font-bold tracking-tight text-gray-900 sm:text-lg mt-0">Stock Disponible: </p>
+                                <p className="font-bold tracking-tight text-[#f15a24] sm:text-2xl mt-1" >{available_quantity}</p>
+                            </div>
+                            <div className="flex justify-center items-end gap-1">
+                                <p className=" font-bold tracking-tight text-gray-900 sm:text-xl mt-0">Cantidad:</p>
+                                <p className="font-bold tracking-tight  text-indigo-700 sm:text-2xl mt-1"> {cantidadModal}</p>
+                            </div>
+
+                            {/* BOTONES */}
                             <div className="flex justify-center gap-3">
                                 {cantidadModal <= 1 ?
                                     <button
@@ -94,7 +104,7 @@ const ModalCantidad = ({ id, title, image, cantidad, externalMaterial, price, se
                     </div >
                 </div >
                 {/* PRECIO FINAL */}
-                <div>
+                <div className="mt-4">
                     <p className='font-bold tracking-tight sm:text-2xl mt-3 text-gray-900 '>Precio Final Total: </p>
                     <p className='font-bold tracking-tight sm:text-2xl mt-3 text-indigo-700'>${priceFinalModal()}</p>
                 </div>
