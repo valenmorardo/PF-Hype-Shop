@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Carousel from "react-multi-carousel";
 import 'react-multi-carousel/lib/styles.css';
 import { Link } from "react-router-dom";
+import Loading from "../Loading/Loading";
 // CARRITO:
 import useLocalStorage from "../useLocalStorage/useLocalstorage";
 
@@ -128,12 +129,14 @@ const CardDetail = (props) => {
                           <li className="text-gray-400">
                             <span className="text-gray-600">Marca: {sneakerDetail.brand}</span>
                           </li>
+                          <br/>
                           <li className="text-gray-400">
                             <span className="text-gray-600">Color: {
                               sneakerDetail.colors.map(e => <h4>{e.toUpperCase()}</h4>)
                             }
                             </span>
                           </li>
+                          <br/>
                           <li className="text-gray-400">
                             <span className="text-gray-600">Condicion: {sneakerDetail.condition}</span>
                           </li>
@@ -148,7 +151,7 @@ const CardDetail = (props) => {
               </div>
             </div>)
 
-          : <div>Cargando ...</div>
+          : <Loading/>
       }
     </>
   );

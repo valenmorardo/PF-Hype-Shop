@@ -63,7 +63,7 @@ const Filtrado = ({setIsLoading, paginaUno}) => {
   return (
 <>
       <h1 className="block mb-2 text-base font-medium text-gray-600">FILTROS</h1>
-    <div className="flex justify-around">
+    <div className="flex justify-around flex-wrap">
       {/* FILTROS */}
       <CardFiltrado
         options={brands}
