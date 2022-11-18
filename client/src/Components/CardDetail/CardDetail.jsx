@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Carousel from "react-multi-carousel";
 import 'react-multi-carousel/lib/styles.css';
 import { Link } from "react-router-dom";
+import Loading from "../Loading/Loading";
+import { useHistory } from "react-router-dom";
 // CARRITO:
 import useLocalStorage from "../useLocalStorage/useLocalstorage";
 
@@ -11,6 +13,7 @@ import useLocalStorage from "../useLocalStorage/useLocalstorage";
 const CardDetail = (props) => {
   const dispatch = useDispatch();
   const sneakerDetail = useSelector((state) => state.detail);
+  const history = useHistory()
 
   useEffect(() => {
     dispatch(getDetail(props.match.params.id));
@@ -50,6 +53,16 @@ const CardDetail = (props) => {
     saveItem(newItem)
     // console.log("añadir carrito")
     // dispatch(addCarry(sneakerDetail))
+  }
+
+  const buy = (sneaker) => {
+    const newItem = [...item];
+    // console.log("item", newItem)
+    newItem.push(sneaker);
+    saveItem(newItem)
+    // console.log("añadir carrito")
+    // dispatch(addCarry(sneakerDetail))
+    history.push("/orderCarry")
   }
 
   console.log(sneakerDetail);
@@ -97,22 +110,23 @@ const CardDetail = (props) => {
                       </div>
 
                     </div>
+                    {/* AÑADIR CARRITO */}
+                    <button
+                      type="submit"
+                      onClick={() => onAddCarry(sneakerDetail)}
+                      className="mt-10 flex  w-full items-center justify-center rounded-md border border-transparent bg-lime-500	 py-3 px-8 text-base font-medium text-white hover:bg-lime-400 focus:outline-none  "
+                    >
+                      Añadir Carrito
+                    </button>
 
                     <button
                       type="submit"
+                      onClick={() => buy(sneakerDetail)}
                       className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Comprar
                     </button>
 
-                    {/* AÑADIR CARRITO */}
-                    <button
-                      type="submit"
-                      onClick={() => onAddCarry(sneakerDetail)}
-                      className="mt-10 flex  w-200px items-center justify-center rounded-md border border-transparent bg-lime-500	 py-3 px-8 text-base font-medium text-white hover:bg-lime-400 focus:outline-none  "
-                    >
-                      Añadir Carrito
-                    </button>
 
                     {/* </form> */}
                   </div>
@@ -128,12 +142,14 @@ const CardDetail = (props) => {
                           <li className="text-gray-400">
                             <span className="text-gray-600">Marca: {sneakerDetail.brand}</span>
                           </li>
+                          <br/>
                           <li className="text-gray-400">
                             <span className="text-gray-600">Color: {
                               sneakerDetail.colors.map(e => <h4>{e.toUpperCase()}</h4>)
                             }
                             </span>
                           </li>
+                          <br/>
                           <li className="text-gray-400">
                             <span className="text-gray-600">Condicion: {sneakerDetail.condition}</span>
                           </li>
@@ -148,7 +164,7 @@ const CardDetail = (props) => {
               </div>
             </div>)
 
-          : <div>Cargando ...</div>
+          : <Loading/>
       }
     </>
   );

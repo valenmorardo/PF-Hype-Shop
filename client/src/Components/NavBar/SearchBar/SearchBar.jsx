@@ -23,31 +23,6 @@ export default function SearchBar({paginaUno}) {
    }
 
    return (
-      // <div className={style.containSearchBar}>
-      //    <section className={style.mainInput}>
-      //       {console.log(title)}
-      //       {/* <p>Hola MUNDO</p> */}
-      //       <div className={style.mainInputContainer}>
-      //          <input
-      //             type="text"
-      //             value={title}
-      //             placeholder="Search Sneaker"
-      //             onChange={(e) => handleInputChange(e)}
-      //          />
-      //       </div>
-      //    </section>
-      //    <section className={style.mainButtons}>
-      //       <button
-      //          onClick={(e) => handleSubmit(e)}
-      //          type="submit"
-      //          outline="none"
-      //       >
-      //          Search
-      //       </button>
-      //    </section>
-      // </div>
-
-//HAY QUE AGRAGAR LOS FILTROS
 
 
 <div className={styles.container}>   

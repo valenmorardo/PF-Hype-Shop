@@ -60,22 +60,22 @@ const Filtrado = ({ setIsLoading, paginaUno }) => {
 
 
   return (
-    <>
-      <h1 className="block mb-2 text-base font-medium text-gray-600">
-        FILTROS
-      </h1>
-      <div className="flex justify-around">
-        {/* FILTROS */}
-        <CardFiltrado
-          options={brands}
-          titulo="Filtrar por marca"
-          handler={handlerFilter("brand")}
-        />
-        <CardFiltrado
-          options={category}
-          titulo="Filtrar por categoria"
-          handler={handlerFilter("category")}
-        />
+<>
+      <h1 className="block mb-2 text-base font-medium text-gray-600">FILTROS</h1>
+    <div className="flex justify-around flex-wrap">
+      {/* FILTROS */}
+      <CardFiltrado
+        options={brands}
+        titulo="Filtrar por marca"
+        handler={handlerFilter('brand')}
+      /> 
+      
+      <CardFiltrado
+        options={category}
+        titulo="Filtrar por categoria"
+        handler={handlerFilter("category")}
+       /> 
+
         <CardFiltrado
           options={gender}
           titulo="Filtrar por genero"
