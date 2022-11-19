@@ -121,6 +121,7 @@
  } */
 
 .field {
+   color: black;
    margin-bottom: 15px;
    outline: none;
    border-radius: 3px;

@@ -48,6 +48,7 @@ export const getSearchTitle = (title) => {
 export function CreateNewProduct(payload) {
    return async function () {
       const response = await axios.post("http://localhost:3001/sneakersCreate", payload);
+      console.log(payload)
       return response;
    };
 }

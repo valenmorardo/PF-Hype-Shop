@@ -17,8 +17,8 @@ const Card = ({ title, pictures, price , id}) =>
             <a key={id} href={id} className="group">
               <div className="aspect-w-1 aspect-h-1  h-64 w-full overflow-hidden rounded-lg   xl:aspect-w-7 xl:aspect-h-8">
                 <img
-                  src={pictures}
-                  alt={pictures}
+                  src={pictures[0]}
+                  alt={pictures[0]}
                   className="max-h-200 w-full object-cover object-center group-hover:opacity-75"
                 />
               </div>
