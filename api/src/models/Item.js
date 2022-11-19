@@ -2,18 +2,19 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "cart",
+    "items",
     {
-      id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+      variation_id: {
+        type: DataTypes.STRING,
         primaryKey: true,
-        unique: true,
         allowNull: false,
       },
-      cart_total: {
-        type: DataTypes.DECIMAL(14, 2),
-        defaultValue: 0,
+      cart_id: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+      },
+      quantity: {
+        type: DataTypes.INTEGER,
       },
     },
     { timestamps: false }

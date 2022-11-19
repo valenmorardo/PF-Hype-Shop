@@ -30,5 +30,13 @@ module.exports = (sequelize) => {
       },
     },
     { timestamps: false }
-  );
+  ),
+    {
+      indexes: [
+        {
+          unique: true,
+          fields: ["product_id", "color_id", "size_id"],
+        },
+      ],
+    };
 };
