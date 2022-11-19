@@ -42,6 +42,14 @@ function OrderCarry() {
 
     return (
         <div className=' bg-slate-50'>
+            <Link to='/' className='absolute left-0 top-4'>
+                <button
+                    type="submit"
+                    className="mt-2 ml-6 flex w-3 items-center justify-center rounded-md border border-transparent bg-[#f15a24]  py-2 px-9 text-base font-medium text-white hover:bg-orange-500 focus:outline-none  "
+                >
+                    Volver
+                </button>
+            </Link>
             <p className='font-bold tracking-tight sm:text-4xl mt-3 text-indigo-700'>TU CARRITO</p>
             {item && item.length >= 1 ?
                 <div div className='flex flex-row justify-evenly' >
