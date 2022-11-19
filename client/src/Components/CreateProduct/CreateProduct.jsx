@@ -4,19 +4,6 @@ import swal from "sweetalert";
 import { useDispatch } from 'react-redux'
 import { CreateNewProduct } from '../../Redux/actions';
 import style from "./CreateProduct.module.css"
-import {Container, FormGroup, Input, InputGroup} from 'reactstrap'
-
-
-// CloudName =dvh8g0fcw
-// APIKey= 714962974347638
-// CLOUDINARY_URL=cloudinary://714962974347638:e6MMpdwoDNm_g9E63lFID-jJXM0@dvh8g0fcw
-// apiSecret= e6MMpdwoDNm_g9E63lFID-jJXM0
-
-// cloudinary.config({ 
-//     cloud_name: 'dvh8g0fcw', 
-//     api_key: '714962974347638', 
-//     api_secret: 'e6MMpdwoDNm_g9E63lFID-jJXM0' 
-//   });
 
 // VALIDACIONES:
 const validate = (input) => {
@@ -167,13 +154,6 @@ const validate = (input) => {
 }
 
 
-
-    
-  
-  
-
-
-
 const CreateProduct = () => {
 
     const history = useHistory()
@@ -204,12 +184,6 @@ const CreateProduct = () => {
 
     // ESTADO PRINCIPAL
     const [input, setInput] = useState(initialState);
-
-
-    
-
-    const [laImg, setLaImg] = useState("");
-    // const [imgInput,setImgInput] = useState(0);
 
     const handleRenderChangeLocal = (e) => {
         e.preventDefault();
@@ -403,15 +377,6 @@ const CreateProduct = () => {
             input.shoeStyle &&
             input.sizes
         ) {
-
-        
-        
-
-
-   
-
-            
-
 
             dispatch(CreateNewProduct({
                 thumbnail: input.thumbnail,
@@ -704,57 +669,7 @@ const CreateProduct = () => {
     </div>)
   
     }
-    const SubiendoImagenesImg = (info) => {
-
-        const [image,setImage] = useState("");
-
-      
-      
-      const uploadImage = async (e) => {
-
-        setImage(info)
-      
-        const files = e;
-        
-        const data = new FormData();
-        data.append("file", files);
-        data.append("upload_preset","images");
-      // https://api.cloudinary.com/v1_1/dvh8g0fcw/image/upload
-       
-        
-        const upload = await fetch("https://api.cloudinary.com/v1_1/dvh8g0fcw/image/upload",
-        {
-          method: "POST",
-          body: data,
-        });
-      
-        const file = await upload.json();
-        console.log(upload);
-      
-        setImage(file.secure_url);
-      
-        console.log(file.secure_url)
-        setInput({
-            ...input,
-        thumbnail: image})
-
-        return file.secure_url
-      }
-      
-      return image
-      
-      }
-
-  const[localThumbnail,setLocalThumbnail] = useState("");
-
-  useEffect( () =>{
-    setInput({
-        input,
-        localThumbnailInput: localThumbnail
-
-    })
-
-},[localThumbnail])
+   
 
       const [localPictures,setLocalPictures] = useState([]);
       
@@ -804,17 +719,6 @@ if(images){
     var fotito = subirthumbnail[0]
     console.log(fotito)
 
-    setLocalThumbnail({
-    localThumbnail,
-        localThumbnail: fotito
-    })
-            setInput({
-          ...input,
-          localThumbnailInput: localThumbnail
-      })
-
-      console.log(localThumbnail)
-
 }
 
 let fotosURl = input.pictures
@@ -834,15 +738,9 @@ let fotosURl = input.pictures
         let pato = subir
 
         
-        // console.log(pato)
-        // console.log(fotosURl)
+
        let pato2= pato.concat(fotosURl)
-// console.log(localThumbnail)
-//        if(localThumbnail){
-//         var localll = localThumbnail
-//         console.log =localll
-//         pato2.unshift(localll)
-//        }
+
 if(fotito){
 pato2.unshift(fotito)}
 
@@ -851,34 +749,12 @@ pato2.unshift(fotito)}
         console.log(thumbnaill)
         pato2.unshift(thumbnaill)
     }
-    
-       
-      
 
-        // console.log(pato)
-        // console.log(pato2)
 
         setInput({
             ...input,
             pictures: pato2
         })
-
-        //           console.log(localPictures)
-        // console.log(input.pictures)
-           
-
-        //    let fotosLocal= input.iLocalPictures
-        //    console.log(fotosLocal)
-        //    fotosURl.concat(fotosLocal)
-        //    console.log(fotosURl)
-           
-
-    
-
-
-  
-      
-
 
         return urls
      }
@@ -936,29 +812,7 @@ pato2.unshift(fotito)}
 {input.imgInput === true && <LocalRender/>}
 {input.imgInput === false && <URLRender/>}
 
-                         {/* <button
-                         onClick={(e) => handleLocalFunction(e)}>
-                        Subir img local
-                        </button>
-                        
-                        <button
-                        onClick={(e) => handleInputURL(e)}>Insertar URL</button> */}
-
-                         {/* {imgInput === 2 && <input
-                            type="text"
-                            value={input.thumbnail}
-                            className={style.field}
-                            title="thumbnail"
-                            onChange={(e) => handleChange(e)}
-                        />} 
-                        {console.log(imgInput)} */}
-                        {/* <input
-                            type="text"
-                            value={input.thumbnail}
-                            className={style.field}
-                            title="thumbnail"
-                            onChange={(e) => handleChange(e)}
-                        /> */}
+                      
                     </div>
                     {/* BRAND */}
                     <div>
@@ -1112,14 +966,6 @@ pato2.unshift(fotito)}
                         </div>)}
                 </div>
 
-                    {/* <input
-                        type="text"
-                        value={input.picture}
-                        className={style.field}
-                        title="picture"
-                        onChange={(e) => handleChange(e)}
-                    />
-                    <button onClick={(e) => hundlePictureAdd(e)} > Añadir imagen</button> */}
                 </div>
                 {/* BUTTON */}
                 {
