@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     thumbnail: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     title: {
@@ -52,11 +52,11 @@ module.exports = (sequelize) => {
     },
     category: {
       type: DataTypes.STRING,
-      allowNull: false,
+      // allowNull: false,
     },
     gender: {
       type: DataTypes.STRING,
-      allowNull: false,
+      // allowNull: false,
     },
   });
 };
