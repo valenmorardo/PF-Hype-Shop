@@ -8,29 +8,34 @@ import Cards from "../Cards/Cards";
 import Paginado from "../Paginado/Paginado";
 import NavBar from "../NavBar/NavBar";
 import styles from "./Home.module.css";
-import SearchBar from "../NavBar/SearchBar/SearchBar";
 import Filtrado from "../NavBar/Filtrado/Filtrado";
+import Loading from "../Loading/Loading";
+import RefreshPage from "../RefreshPage.jsx/RefreshPage";
 
 const Home = () => {
   const dispatch = useDispatch();
   const sneakers = useSelector((state) => state.allSneakers);
 
   //PAGINADO:
-  const [order, setOrder] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [sneakersPerPage, setSneakersPerPage] = useState(9);
   const indexLastSneaker = currentPage * sneakersPerPage;
   const indexFirstSneaker = indexLastSneaker - sneakersPerPage;
   const currentSneaker = sneakers.slice(indexFirstSneaker, indexLastSneaker);
-  const paginado = (pageNumber) => {
-    setCurrentPage(pageNumber);
+
+  const nextPage = (pageNumber) => {
+    if (currentPage < Math.ceil(sneakers.length / sneakersPerPage))
+      setCurrentPage(pageNumber);
+  };
+  const prevPage = (pageNumber) => {
+    if (currentPage > 1) setCurrentPage(pageNumber);
   };
 
   const paginaUno = () => {
     setCurrentPage(1);
   };
 
-
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     dispatch(getSneakers());
@@ -39,41 +44,29 @@ const Home = () => {
   // console.log(sneakers);
 
   return (
-    <div className="bg-white mb-0">
-      {sneakers.length > 0 ? (
-        <div>
+    <div>
+      <div>
+        <NavBar />
 
-          <NavBar paginaUno={paginaUno}/>
+        <Filtrado setIsLoading={setIsLoading} paginaUno={paginaUno} />
 
-          <Filtrado
-            paginaUno={paginaUno}
-            setOrder={setOrder}
-          />
-
-          {/* <div>
+        {isLoading ? (
+          <Loading setIsLoading={setIsLoading} isLoading={isLoading} />
+        ) : sneakers.length ? (
+          <div>
+            <Cards sneakers={currentSneaker} />
             <Paginado
+              nextPage={nextPage}
+              prevPage={prevPage}
+              currentPage={currentPage}
               sneakersPerPage={sneakersPerPage}
               sneakers={sneakers.length}
-              paginado={paginado}
             />
-          </div> */}
-
-
-          <Cards sneakers={currentSneaker} />
-
-          <Paginado
-            sneakersPerPage={sneakersPerPage}
-            sneakers={sneakers.length}
-            paginado={paginado}
-          />
-        </div>
-
-      ) : (
-        <div>
-          <h1>Loading...</h1>
-        </div>
-      )}
-
+          </div>
+        ) : (
+          <RefreshPage title={'No se encontraron productos.'} textButton={'Seguir Explorando'}/>
+        )}
+      </div>
     </div>
   );
 };

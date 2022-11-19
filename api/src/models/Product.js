@@ -58,6 +58,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       // allowNull: false,
     },
+    available_quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   });
 };
 
