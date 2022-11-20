@@ -364,36 +364,50 @@
    font-size: 14px;
 }
 
-
-.btnImg{
+.btnImg {
    background-color: rgb(86, 173, 202);
    padding: 5px;
    border-radius: 5px;
    border: none;
    margin: 10px;
+}
 
+.btnImgLocal {
+   background-color: #f15a24;
+   padding: 5px;
+   border-radius: 5px;
+   border: none;
+   margin: 10px;
+}
+
+.btnPrev {
+   background-color: #4338ca;
+   padding: 5px;
+   border-radius: 5px;
+   border: none;
+   margin: 10px;
 }
 
 .imgSelect {
-   background-color: rgb(86, 173, 202);
+   background-color: #f15a24;
    padding: 5px;
    border-radius: 5px;
    border: none;
    margin: 10px;
 }
 
-.imgSelect:hover{
+.imgSelect:hover {
    cursor: pointer;
 }
 
-.btnSubir{
-   background-color:rgb(173, 120, 22);
+.btnSubir {
+   background-color: rgb(173, 120, 22);
    padding: 5px;
    border-radius: 5px;
    border: none;
    margin: 10px;
 }
-=======
+
 /* BOTON ADD */
 
 .addButton {
@@ -415,4 +429,3 @@
    color: #fff;
    border: 1px solid #fff;
 }
-

@@ -141,7 +141,7 @@ const CardDetail = (props) => {
                   <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
                     <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{sneakerDetail.title}</h1>
                   </div>
-
+                  {console.log(sneakerDetail)}
                   {/* Options */}
                   <div className="mt-4 lg:row-span-3 lg:mt-0">
                     <h2 className="sr-only">Product information</h2>
@@ -200,7 +200,7 @@ const CardDetail = (props) => {
                             <span className="text-gray-900 text-xl font-medium">Condicion: {sneakerDetail.condition}</span>
                           </li>
                           <li className="text-gray-400">
-                            <span className="text-gray-900 text-xl font-medium">Estilo: {sneakerDetail.category}</span>
+                            <span className="text-gray-900 text-xl font-medium">Edad: {sneakerDetail.age_group}</span>
                           </li>
                           <li className="text-gray-400">
                             <span className="text-gray-900 text-xl font-medium">Material Externo: {sneakerDetail.externalMaterial}</span>
