@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
@@ -34,8 +33,6 @@ const CreateProduct = () => {
     iLocalPictures: [],
     genero: "",
     available_quantity: 6
-
-
   };
 
   // ESTADO PRINCIPAL
@@ -43,11 +40,10 @@ const CreateProduct = () => {
   // PREVISUALIZAR
   const [ModalPrev, setModalPrev] = useState(false)
   // ABRIR MODAL
-  const handleOpenModal = async (e) => {
-    await subirImg(e);
+  const handleOpenModal = (e) => {
+    e.preventDefault();
     setModalPrev(true)
   }
-
 
   const handleRenderChangeLocal = (e) => {
     e.preventDefault();
@@ -77,7 +73,7 @@ const CreateProduct = () => {
   const URLRender = () => {
     return (
       <div>
-        <button className={style.btnImg} onClick={(e) => handleRenderChangeLocal(e)}>
+        <button className={style.btnImgLocal} onClick={(e) => handleRenderChangeLocal(e)}>
           Subir img local
         </button>
 
@@ -95,7 +91,7 @@ const CreateProduct = () => {
   const RenderizadoBotones = () => {
     return (
       <div>
-        <button className={style.btnImg} onClick={(e) => handleRenderChangeLocal(e)}>
+        <button className={style.btnImgLocal} onClick={(e) => handleRenderChangeLocal(e)}>
           Subir img local
         </button>
 
@@ -206,15 +202,13 @@ const CreateProduct = () => {
       input.shoeStyle &&
       input.sizes
     ) {
-      // await subirImg(e)
-
       dispatch(
         CreateNewProduct({
           thumbnail: input.thumbnail,
           title: input.title,
           price: input.price,
           condition: input.condition,
-          pictures: input.pictures,
+          pictures: [input.thumbnail, ...input.pictures],
           age_group: input.age_group,
           brand: input.brand,
           colors: input.colors,
@@ -222,8 +216,6 @@ const CreateProduct = () => {
           shoeStyle: input.shoeStyle,
           sizes: input.sizes,
           available_quantity: input.available_quantity
-
-
         })
       );
       swal({
@@ -241,17 +233,19 @@ const CreateProduct = () => {
   useEffect(() => {
     setInput({
       ...input,
-      thumbnail: images[0]?.url
+      thumbnail: images
     })
 
   }, [images]);
 
   const EditSesionUrl = () => {
-    const changeInput = (e) => {
+    const changeInput = async (e) => {
 
       let newImgsToState = readmultifiles(e);
-
-      setimages(newImgsToState);
+      console.log(newImgsToState)
+      let thumbnail = await uploadImgLocal(newImgsToState)
+      console.log(thumbnail)
+      setimages(thumbnail[0]);
     };
 
     function readmultifiles(e, indexInicial) {
@@ -304,10 +298,11 @@ const CreateProduct = () => {
                 >
                   x
                 </button>
-
+                {console.log(images)}
                 <img
                   alt="algo"
-                  src={images[0].url}
+                  src={images}
+
                   data-toggle="modal"
                   data-target="#ModalPreViewImg"
                   className="img-responsive"
@@ -321,9 +316,14 @@ const CreateProduct = () => {
   };
   const [pictures, setPictures] = useState([]);
 
-  useEffect(() => { }, [pictures]);
+  useEffect(() => {
+    setInput({
+      ...input,
+      pictures: pictures
+    })
+  }, [pictures]);
   const EditSesionLocal = () => {
-    const changeInput = (e) => {
+    const changeInput = async (e) => {
       //esto es el indice que se le dará a cada imagen, a partir del indice de la ultima foto
       let indexImg;
 
@@ -334,10 +334,19 @@ const CreateProduct = () => {
       }
 
       let newImgsToState = readmultifiles(e, indexImg);
-      let newImgsState = [...pictures, ...newImgsToState];
-      setPictures(newImgsState);
+      let pictures2 = await uploadImgLocal(newImgsToState)
+      console.log(pictures2[0])
 
-      console.log(newImgsState);
+      if (input.thumbnail && pictures2[0]) {
+        if (pictures[0] !== input.thumbnail) {
+          pictures2.unshift(input.thumbnail);
+        }
+      }
+      let newImgsState2 = pictures.concat(pictures2)
+
+      setPictures(newImgsState2);
+
+      console.log(newImgsState2);
     };
 
     function readmultifiles(e, indexInicial) {
@@ -393,9 +402,10 @@ const CreateProduct = () => {
                 >
                   x
                 </button>
+                {console.log(pictures)}
                 <img
-                  alt="algo"
-                  src={pictures.url}
+                  alt={pictures}
+                  src={pictures}
                   data-toggle="modal"
                   data-target="#ModalPreViewImg"
                   className="img-responsive"
@@ -410,7 +420,7 @@ const CreateProduct = () => {
   const RenderizadoBotonesPictures = () => {
     return (
       <div>
-        <button className={style.btnImg} onClick={(e) => handleRenderChangeLocalPictures(e)}>
+        <button className={style.btnImgLocal} onClick={(e) => handleRenderChangeLocalPictures(e)}>
           Subir img local
         </button>
 
@@ -451,7 +461,7 @@ const CreateProduct = () => {
   const URLRenderPictures = () => {
     return (
       <div>
-        <button className={style.btnImg} onClick={(e) => handleRenderChangeLocalPictures(e)}>
+        <button className={style.btnImgLocal} onClick={(e) => handleRenderChangeLocalPictures(e)}>
           {" "}
           Subir img local{" "}
         </button>
@@ -466,6 +476,12 @@ const CreateProduct = () => {
       </div>
     );
   };
+
+  const [thumbnail2, setThumbnail2] = useState("");
+  useEffect(() => {
+
+  }, [thumbnail2]);
+
 
   const [localPictures, setLocalPictures] = useState([]);
 
@@ -501,69 +517,35 @@ const CreateProduct = () => {
     return urls;
   };
 
-  const subirImg = async (e) => {
-    e.preventDefault(e);
-    console.log(images);
-    if (images) {
-      console.log(images);
-      let thumbnailLocal = images;
-      let subirthumbnail = await uploadImgLocal(thumbnailLocal);
-      var fotito = subirthumbnail[0];
-      console.log(fotito);
-    }
-
-    let fotosURl = input.pictures;
-    let arr = pictures;
-    let urls = [];
-
-    let subir = await uploadImgLocal(arr);
-    setLocalPictures({
-      localPictures,
-      localPictures: subir,
-    });
-
-    setInput({
-      ...input,
-      iLocalPictures: localPictures,
-    });
-    let pato = subir;
-    let pato2 = pato.concat(fotosURl);
-
-    if (fotito) {
-      pato2.unshift(fotito);
-    }
-
-    if (input.thumbnail) {
-      var thumbnaill = input.thumbnail;
-      console.log(thumbnaill);
-      pato2.unshift(thumbnaill);
-    }
-
-    setInput({
-      ...input,
-      pictures: pato2,
-    });
-
-    return urls;
-  };
 
   // --------------------------------------------------------------------------------------------
   // COMPONENTE RENDER
   return (
     <div className={style.containerMain}>
-      {/* PREVISUALIZAR */}
-      <div>
-        <button className={style.btnSubir} onClick={(e) => handleOpenModal(e)}> Previsualizar</button>
-        {
-          ModalPrev &&
-          <ModalPrevisualizar
-            setModalPrev={setModalPrev}
-          />
-        }
-      </div>
       {console.log("Errores", error)}
       <form className={style.form}>
         <h2 className={style.titulo}>Product Creation</h2>
+        {/* Previsualizar */}
+        <button className={style.btnPrev} onClick={(e) => handleOpenModal(e)}>Previsualizar</button>
+        {
+          ModalPrev &&
+          <ModalPrevisualizar
+            title={input.title}
+            picture={input.thumbnail}
+            price={input.price}
+            setModalPrev={setModalPrev}
+            brand={input.brand}
+            gender={input.genero}
+            condition={input.condition}
+            externalMaterial={input.externalMaterial}
+            age_group={input.age_group}
+            // Carrousel
+            pictures={input.pictures}
+            colors={input.colors}
+            sizes={input.sizes}
+
+          />
+        }
 
         {/* TITLE */}
         <div>
@@ -709,7 +691,7 @@ const CreateProduct = () => {
           {input.laImg === true && <LocalRenderPictures />}
           {input.laImg === false && <URLRenderPictures />}
 
-          <button className={style.btnSubir} onClick={(e) => subirImg(e)}> funcion de subir</button>
+
 
           {/* ARRAY PICTURES  */}
           <div className={style.pictures}>
