@@ -56,7 +56,7 @@ export function CreateNewProduct(payload) {
     );
     return response;
   };
-
+}
 
 export function getDetail(id) {
   return async function (dispatch) {
