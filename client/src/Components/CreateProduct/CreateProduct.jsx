@@ -14,6 +14,7 @@ const CreateProduct = () => {
   const [error, setError] = useState({});
   const initialState = {
     thumbnail: "",
+    localThumbnailInput: "",
     title: "",
     price: 0,
     condition: "new",
@@ -144,6 +145,14 @@ const CreateProduct = () => {
     setInput({
       ...input,
       genero: e.target.value,
+    });
+  };
+
+  // ELIMINAR URL Picture
+  const handleDelete = (el) => {
+    setInput({
+      ...input,
+      pictures: input.pictures.filter((name) => name !== el),
     });
   };
 
@@ -293,6 +302,7 @@ const CreateProduct = () => {
                 <img
                   alt="algo"
                   src={images}
+
                   data-toggle="modal"
                   data-target="#ModalPreViewImg"
                   className="img-responsive"
@@ -362,9 +372,9 @@ const CreateProduct = () => {
       return arrayImages;
     }
 
-    function deleteImg(img) {
+    function deleteImg(indice) {
       const newImgs = pictures.filter(function (element) {
-        return element !== img;
+        return element.index !== indice;
       });
       setPictures(newImgs);
     }
@@ -388,7 +398,7 @@ const CreateProduct = () => {
               <div className="content_img">
                 <button
                   className="position-absolute btn btn-danger"
-                  onClick={() => deleteImg(pictures)}
+                  onClick={deleteImg.bind(this, pictures.index)}
                 >
                   x
                 </button>
@@ -497,6 +507,7 @@ const CreateProduct = () => {
           body: data,
         }
       );
+
       const file = await upload.json();
       console.log(upload);
       console.log(file.secure_url);
@@ -505,6 +516,7 @@ const CreateProduct = () => {
     }
     return urls;
   };
+
 
   // --------------------------------------------------------------------------------------------
   // COMPONENTE RENDER
@@ -671,6 +683,9 @@ const CreateProduct = () => {
         {/* PICTURES */}
         <div>
           <p>Imagenes Adicionales:</p>
+          {/* {error.title && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{error.title}</p>
+                    )} */}
 
           {input.laImg === 0 && <RenderizadoBotonesPictures />}
           {input.laImg === true && <LocalRenderPictures />}
@@ -696,7 +711,7 @@ const CreateProduct = () => {
               )
             )}
           </div>
-        </div >
+        </div>
         {/* BUTTON */}
         {
           <button
@@ -707,8 +722,8 @@ const CreateProduct = () => {
             Create New Product
           </button>
         }
-      </form >
-    </div >
+      </form>
+    </div>
   );
 };
 
