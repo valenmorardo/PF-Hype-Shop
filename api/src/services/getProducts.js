@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { Op } = require("sequelize");
-const { Product, Attribute } = require("../db");
+const { Product, Attribute, Variation, Color, Size } = require("../db");
 
 const { objectFormatter } = require("../utils/objectFormatter");
 
@@ -93,17 +93,18 @@ const getApiProducts = async () => {
 const getDbProducts = async (title) => {
   if (title) {
     const productFoundOnDb = await Product.findAll({
+      include: [Attribute, Variation],
       where: {
         title: {
           [Op.iLike]: `%${title}%`,
         },
       },
-      raw: true,
-      include: Attribute,
     });
     return productFoundOnDb;
   }
-  return await Product.findAll();
+  return await Product.findAll({
+    include: [Attribute, Variation],
+  });
 };
 
 const getSingleDbProduct = async (primaryKey) => {

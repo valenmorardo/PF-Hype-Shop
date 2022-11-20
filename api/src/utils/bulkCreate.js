@@ -5,11 +5,10 @@ const { bulkSizesInDB, bulkColorsInDB } = require("../services/getAttributes");
 const { getApiProducts } = require("../services/getProducts");
 
 const bulkCreate = async () => {
-  // await bulkColorsInDB();
-  // await bulkSizesInDB();
+  await bulkColorsInDB();
+  await bulkSizesInDB();
 
   const dataToBulk = await getApiProducts();
-
   dataToBulk.forEach(async (product) => {
     const productCreated = await Product.findOrCreate({
       where: { title: product.title },
@@ -34,11 +33,16 @@ const bulkCreate = async () => {
         available_quantity,
         picture_ids,
       });
-      await productCreated[0].addVariations(variationCreated);
-    });
 
-    // const data = await Product.findAll({ include: Variation });
-    // console.log(data);
+      await variationCreated.setProduct(productCreated[0]);
+
+      variation.attribute_combinations.forEach(async (attr) => {
+        const color = await Color.findOne({ where: { id: attr.value_id } });
+        const size = await Size.findOne({ where: { id: attr.value_id } });
+        await variationCreated.setColor(color);
+        await variationCreated.setSize(size);
+      });
+    });
 
     // ============================================================
 

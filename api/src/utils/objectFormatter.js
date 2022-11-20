@@ -40,6 +40,7 @@ const objectFormatter = (details) => {
         sold_quantity: variation.sold_quantity,
         available_quantity: variation.available_quantity,
         picture_ids: variation.picture_ids,
+        attribute_combinations: variation.attribute_combinations,
       });
     });
   }
