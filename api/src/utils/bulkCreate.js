@@ -1,37 +1,16 @@
 const axios = require("axios");
 const { Product, Color, Size } = require("../db");
+const { bulkSizesInDB, bulkColorsInDB } = require("../services/getAttributes");
 
 const { getApiProducts } = require("../services/getProducts");
 
 const bulkCreate = async () => {
   // const dbProducts = await Product.findAll();
-  const bulkColorsInDB = async () => {
-    const fetchColors = await axios.get(
-      "https://api.mercadolibre.com/categories/MLA109027/attributes"
-    );
-    const colorArray = fetchColors.data.find(
-      (color) => color.id === "MAIN_COLOR"
-    );
-    const bulk = colorArray.values.map((color) => {
-      return { id: color.id, name: color.name, rgb: color.metadata.rgb };
-    });
-    await Color.bulkCreate(bulk);
-  };
 
-  const bulkSizesInDB = async () => {
-    const fetchSize = await axios.get(
-      "https://api.mercadolibre.com/categories/MLA109027/attributes"
-    );
-    const sizesArray = fetchSize.data.find((items) => items.id === "SIZE");
-    const bulk = sizesArray.values.map((size) => {
-      return { id: size.id, value: size.name };
-    });
-    await Size.bulkCreate(bulk);
-  };
-  // bulkColorsInDB();
-  // bulkSizesInDB();
+  // await bulkColorsInDB();
+  // await bulkSizesInDB();
 
-  // const dataToBulk = await getApiProducts();
+  const dataToBulk = await getApiProducts();
   // dataToBulk.forEach((el) => {
   //   const {
   //     title,

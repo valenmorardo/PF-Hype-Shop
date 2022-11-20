@@ -32,34 +32,34 @@ const objectFormatter = (details) => {
 
   const attributesObject = Object.fromEntries(results);
 
-  const colors = new Set();
-  const sizes = new Set();
+  // const colors = new Set();
+  // const sizes = new Set();
 
-  if (!attributesObject.COLOR) {
-    variations?.forEach((everyVariation) => {
-      const combination = everyVariation.attribute_combinations;
-      // console.log(combination[0]);
-      const colorVariant = combination[0];
-      const sizeVariant = combination.filter((attr) => attr.id === "SIZE");
+  // if (!attributesObject.COLOR) {
+  //   variations?.forEach((everyVariation) => {
+  //     const combination = everyVariation.attribute_combinations;
+  //     // console.log(combination[0]);
+  //     const colorVariant = combination[0];
+  //     const sizeVariant = combination.filter((attr) => attr.id === "SIZE");
 
-      colors.add(colorVariant.value_name);
-      sizes.add(sizeVariant[0].value_name.slice(0, 2));
-    });
-  }
-  const size =
-    attributesObject.SIZE === undefined
-      ? Array.from(sizes)
-      : [attributesObject.SIZE.slice(0, 2)];
+  //     colors.add(colorVariant.value_name);
+  //     sizes.add(sizeVariant[0].value_name.slice(0, 2));
+  //   });
+  // }
+  // const size =
+  //   attributesObject.SIZE === undefined
+  //     ? Array.from(sizes)
+  //     : [attributesObject.SIZE.slice(0, 2)];
 
-  const color =
-    attributesObject.COLOR === undefined
-      ? Array.from(colors)
-      : [attributesObject.COLOR];
+  // const color =
+  //   attributesObject.COLOR === undefined
+  //     ? Array.from(colors)
+  //     : [attributesObject.COLOR];
 
-  const category =
-    attributesObject.STYLE === undefined
-      ? "No especificado"
-      : attributesObject.STYLE;
+  // const category =
+  //   attributesObject.STYLE === undefined
+  //     ? "No especificado"
+  //     : attributesObject.STYLE;
 
   return {
     id,
@@ -67,14 +67,12 @@ const objectFormatter = (details) => {
     price: Number(price),
     condition,
     thumbnail,
+    attributes,
+    variations,
     pictures: pictures.map((picture) => picture.url),
     age_group: attributesObject.AGE_GROUP || "No especificado",
     brand: attributesObject.BRAND || "No especificado",
-    colors: color,
     externalMaterial: attributesObject.EXTERIOR_MATERIALS || "No especificado",
-    sizes: size,
-    gender: attributesObject.GENDER,
-    category,
   };
 };
 
