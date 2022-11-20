@@ -6,7 +6,7 @@ import CardDetailModal from "./CardDetailModal"
 
 const ModalPrevisualizar = ({ setModalPrev, title, price, picture, brand, gender, condition, externalMaterial, age_group, pictures, colors, sizes }) => {
     return (
-        <div className="z-20 bg-white max-w-full min-h-[100rem] absolute top-0 bottom-0 right-0 left-0 rounded-2xl">
+        <div className="z-20 bg-white max-w-full min-h-[120rem] absolute top-0 bottom-0 right-0 left-0 rounded-2xl">
             <button className="mt-4 ml-6 flex w-auto items-center justify-center rounded-md border border-transparent bg-[#f15a24]  py-2 px-6 text-xl font-medium text-white hover:bg-orange-500 focus:outline-none  " onClick={() => setModalPrev(false)}>Cerrar Visualizacion</button>
             <div className="flex flex-col max-w-full items-center gap-6">
                 <p className="font-bold tracking-tight sm:text-3xl mt-3 text-gray-900 ">Vista Home</p>
@@ -27,7 +27,7 @@ const ModalPrevisualizar = ({ setModalPrev, title, price, picture, brand, gender
                         <CardDetailModal
                             pictures={(pictures.length === 0) ? ["https://vignette2.wikia.nocookie.net/invizimals/images/6/64/Ejemplo.png/revision/latest?cb=20110924141453&path-prefix=es", "https://vignette2.wikia.nocookie.net/invizimals/images/6/64/Ejemplo.png/revision/latest?cb=20110924141453&path-prefix=es", "https://vignette2.wikia.nocookie.net/invizimals/images/6/64/Ejemplo.png/revision/latest?cb=20110924141453&path-prefix=es"] : [picture, ...pictures]}
                             title={title || "titulo Referencia"}
-                            sizes={(sizes.length === 0) ? ["ColorRef", "ColorRef"] : sizes}
+                            sizes={(sizes.length === 0) ? ["TallaRef", "TallaRef"] : sizes}
 
                             price={price || "Precio Referencia"}
                             // Debemos Cambiar la Cantidad

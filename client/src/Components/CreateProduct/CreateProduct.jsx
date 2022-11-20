@@ -156,6 +156,22 @@ const CreateProduct = () => {
     });
   };
 
+  //ELIMAR ARRAY COLOR
+  const handleDeleteColor = (el) => {
+    setInput({
+      ...input,
+      colors: input.colors.filter((name) => name !== el),
+    });
+  };
+
+  //ELIMAR SIZES
+  const handleDeleteSizes = (el) => {
+    setInput({
+      ...input,
+      sizes: input.sizes.filter((name) => name !== el),
+    });
+  };
+
   // AÑADIR URL Pictures
   const hundlePictureAdd = (e) => {
     e.preventDefault();
@@ -608,6 +624,24 @@ const CreateProduct = () => {
           />
           <button className={style.btnImg} onClick={(e) => hundleColorsAdd(e)}> Añadir color</button>
         </div>
+        {/* ARRAY COLORS  */}
+        <div className={style.pictures}>
+          {input.colors?.map(
+            (
+              el //cada vez que coloquemos una opcion se creara una pequeña lista
+            ) => (
+              <div key={el} className={style.containArray}>
+                <p>{el}</p>
+                <button
+                  className={style.btnX}
+                  onClick={() => handleDeleteColor(el)}
+                >
+                  X
+                </button>
+              </div>
+            )
+          )}
+        </div>
 
         {/* EXTERNALMATERIAAL */}
         <div>
@@ -622,9 +656,9 @@ const CreateProduct = () => {
           />
         </div>
 
+        {/* SIZES */}
         <div>
           <p>sizes: </p>
-
           <input
             type="text"
             value={input.size}
@@ -633,6 +667,24 @@ const CreateProduct = () => {
             onChange={(e) => handleChange(e)}
           />
           <button className={style.btnImg} onClick={(e) => hundleSizesAdd(e)}> Añadir size</button>
+        </div>
+        {/* ARRAY SIZES  */}
+        <div className={style.pictures}>
+          {input.sizes?.map(
+            (
+              el //cada vez que coloquemos una opcion se creara una pequeña lista
+            ) => (
+              <div key={el} className={style.containArray}>
+                <p>{el}</p>
+                <button
+                  className={style.btnX}
+                  onClick={() => handleDeleteSizes(el)}
+                >
+                  X
+                </button>
+              </div>
+            )
+          )}
         </div>
 
         {/* CONDITION */}
@@ -667,9 +719,9 @@ const CreateProduct = () => {
 
         {/* AGE_GROUP */}
         <div className={style.select}>
-          {input.age_group && ( // si hay un error hara un <p> nuevo con el error
+          {/* {input.age_group && ( // si hay un error hara un <p> nuevo con el error
             <p className={style.error}>{"choose a age_group"}</p>
-          )}
+          )} */}
           <p>Select age_group Group:</p>
           <select className={style.select} onChange={(e) => handleSelect(e)}>
             <option selected disabled>

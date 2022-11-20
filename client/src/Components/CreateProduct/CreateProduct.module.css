@@ -347,6 +347,19 @@
    margin: 10px;
 }
 
+.containArray {
+   display: flex;
+   align-items: center;
+   /* justify-content: center; */
+   background-color: #9fd948;
+   padding: 1px 5px;
+   /* height: 60px;
+   width: 120px; */
+   border-radius: 5px;
+   font-weight: 500;
+   margin: 10px;
+}
+
 .btnX {
    display: flex;
    margin: 0;
