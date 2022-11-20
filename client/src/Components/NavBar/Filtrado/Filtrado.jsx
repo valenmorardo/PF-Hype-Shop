@@ -5,28 +5,23 @@ import {
   getCategories,
   getGenders,
   filterSneakers,
+  getSneakers,
 } from "../../../Redux/actions/index";
-
 import CardFiltrado from "./cardFiltrado";
-import RefreshPage from "../../RefreshPage.jsx/RefreshPage";
+import Button from "../../Button/Button";
 
 const Filtrado = ({ setIsLoading, paginaUno }) => {
   const dispatch = useDispatch();
 
-  const orderPrice = ["Menor a mayor", "Mayor a menor"];
+  const filtrosReducer = useSelector((state) => state.filtros);
+  const ordenReducer = useSelector((state) => state.orden);
+  const [filtros, setFiltros] = useState(filtrosReducer);
+  const [orden, setOrden] = useState(ordenReducer);
 
+  const orderPrice = ["Menor a mayor", "Mayor a menor"];
   const brands = useSelector((state) => state.brands);
   const category = useSelector((state) => state.categories);
   const gender = useSelector((state) => state.genders);
-
-  const [filtros, setFiltros] = useState({});
-  const [orden, setOrden] = useState({});
-
-  useEffect(() => {
-    dispatch(getBrands());
-    dispatch(getCategories());
-    dispatch(getGenders());
-  }, [dispatch]);
 
   function handlerFilter(propiedad) {
     return (valor) => {
@@ -52,34 +47,61 @@ const Filtrado = ({ setIsLoading, paginaUno }) => {
     setIsLoading(true);
   }
 
+  function resetFilters() {
+    dispatch(getSneakers());
+    setFiltros({});
+    setOrden({});
+    setIsLoading(true);
+    paginaUno();
+  }
+
+  useEffect(() => {
+    dispatch(getBrands());
+    dispatch(getCategories());
+    dispatch(getGenders());
+  }, [dispatch]);
+
   useEffect(() => {
     if (Object.keys(filtros).length || Object.keys(orden).length) {
       setFilters();
     }
   }, [filtros, orden]);
 
+  useEffect(() => {
+    if (
+      !(Object.keys(filtrosReducer).length || Object.keys(ordenReducer).length)
+    ) {
+      setFiltros({});
+      setOrden({});
+    }
+  }, [filtrosReducer, ordenReducer]);
 
   return (
-<>
-      <h1 className="block mb-2 text-base font-medium text-gray-600">FILTROS</h1>
-    <div className="flex justify-around flex-wrap">
-      {/* FILTROS */}
-      <CardFiltrado
-        options={brands}
-        titulo="Filtrar por marca"
-        handler={handlerFilter('brand')}
-      /> 
-      
-      <CardFiltrado
-        options={category}
-        titulo="Filtrar por categoria"
-        handler={handlerFilter("category")}
-       /> 
+    <>
+      <h1 className="block mb-2 text-base font-medium text-gray-600">
+        FILTROS
+      </h1>
+      <div className="flex justify-around flex-wrap">
+        {/* FILTROS */}
+        <CardFiltrado
+          options={brands}
+          titulo="Filtrar por marca"
+          handler={handlerFilter("brand")}
+          propiedad={"brand"}
+        />
+
+        <CardFiltrado
+          options={category}
+          titulo="Filtrar por categoria"
+          handler={handlerFilter("category")}
+          propiedad={"category"}
+        />
 
         <CardFiltrado
           options={gender}
           titulo="Filtrar por genero"
           handler={handlerFilter("gender")}
+          propiedad={"gender"}
         />
 
         {/* ORDENAMIENTO: */}
@@ -87,10 +109,11 @@ const Filtrado = ({ setIsLoading, paginaUno }) => {
           options={orderPrice}
           titulo="Ordenar por precio"
           handler={handlerOrden("orderPrice")}
+          propiedad={"orden"}
         />
 
-        {Object.values(filtros).length  || Object.values(orden).length? (
-          <RefreshPage textButton={"Reiniciar Filtros"} />
+        {Object.values(filtros).length || Object.values(orden).length ? (
+          <Button textButton={"Reiniciar filtros"} onClick={resetFilters} />
         ) : (
           <></>
         )}

@@ -10,7 +10,7 @@ import NavBar from "../NavBar/NavBar";
 import styles from "./Home.module.css";
 import Filtrado from "../NavBar/Filtrado/Filtrado";
 import Loading from "../Loading/Loading";
-import RefreshPage from "../RefreshPage.jsx/RefreshPage";
+import Button from "../Button/Button";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -43,6 +43,10 @@ const Home = () => {
 
   // console.log(sneakers);
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   return (
     <div>
       <div>
@@ -64,7 +68,13 @@ const Home = () => {
             />
           </div>
         ) : (
-          <RefreshPage title={'No se encontraron productos.'} textButton={'Seguir Explorando'}/>
+          <Button
+            title={
+              "No se encontraron productos. Por favor, recargar la pagina o reiniciar filtros."
+            }
+            textButton={"Recargar"}
+            onClick={refreshPage}
+          />
         )}
       </div>
     </div>
