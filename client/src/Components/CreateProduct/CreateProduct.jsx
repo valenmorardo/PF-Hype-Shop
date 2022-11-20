@@ -1,10 +1,11 @@
-
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import { useDispatch } from "react-redux";
 import { CreateNewProduct } from "../../Redux/actions";
 import style from "./CreateProduct.module.css";
+// Previsualizar
+import ModalPrevisualizar from "./ModalPrevisualizar/ModalPrevisualizar";
 
 const CreateProduct = () => {
   const history = useHistory();
@@ -13,6 +14,7 @@ const CreateProduct = () => {
   const [error, setError] = useState({});
   const initialState = {
     thumbnail: "",
+    localThumbnailInput: "",
     title: "",
     price: 0,
     condition: "new",
@@ -28,11 +30,20 @@ const CreateProduct = () => {
     sizes: [],
     imgInput: 0,
     laImg: 0,
-     genero: "",
+    iLocalPictures: [],
+    genero: "",
+    available_quantity: 6
   };
 
   // ESTADO PRINCIPAL
   const [input, setInput] = useState(initialState);
+  // PREVISUALIZAR
+  const [ModalPrev, setModalPrev] = useState(false)
+  // ABRIR MODAL
+  const handleOpenModal = (e) => {
+    e.preventDefault();
+    setModalPrev(true)
+  }
 
   const handleRenderChangeLocal = (e) => {
     e.preventDefault();
@@ -62,7 +73,7 @@ const CreateProduct = () => {
   const URLRender = () => {
     return (
       <div>
-        <button className={style.btnImg} onClick={(e) => handleRenderChangeLocal(e)}>
+        <button className={style.btnImgLocal} onClick={(e) => handleRenderChangeLocal(e)}>
           Subir img local
         </button>
 
@@ -80,11 +91,11 @@ const CreateProduct = () => {
   const RenderizadoBotones = () => {
     return (
       <div>
-        <button className ={style.btnImg} onClick={(e) => handleRenderChangeLocal(e)}>
+        <button className={style.btnImgLocal} onClick={(e) => handleRenderChangeLocal(e)}>
           Subir img local
         </button>
 
-        <button className ={style.btnImg} onClick={(e) => handleRenderChangeURL(e)}>Subir con URL</button>
+        <button className={style.btnImg} onClick={(e) => handleRenderChangeURL(e)}>Subir con URL</button>
       </div>
     );
   };
@@ -136,7 +147,15 @@ const CreateProduct = () => {
       genero: e.target.value,
     });
   };
-  
+
+  // ELIMINAR URL Picture
+  const handleDelete = (el) => {
+    setInput({
+      ...input,
+      pictures: input.pictures.filter((name) => name !== el),
+    });
+  };
+
   // AÑADIR URL Pictures
   const hundlePictureAdd = (e) => {
     e.preventDefault();
@@ -189,13 +208,14 @@ const CreateProduct = () => {
           title: input.title,
           price: input.price,
           condition: input.condition,
-          pictures: input.pictures,
+          pictures: [input.thumbnail, ...input.pictures],
           age_group: input.age_group,
           brand: input.brand,
           colors: input.colors,
           externalMaterial: input.externalMaterial,
           shoeStyle: input.shoeStyle,
           sizes: input.sizes,
+          available_quantity: input.available_quantity
         })
       );
       swal({
@@ -213,18 +233,18 @@ const CreateProduct = () => {
   useEffect(() => {
     setInput({
       ...input,
-      thumbnail:images
+      thumbnail: images
     })
-   
+
   }, [images]);
 
   const EditSesionUrl = () => {
-    const changeInput  = async (e) => {
+    const changeInput = async (e) => {
 
       let newImgsToState = readmultifiles(e);
       console.log(newImgsToState)
-    let thumbnail = await uploadImgLocal(newImgsToState)
-    console.log(thumbnail)
+      let thumbnail = await uploadImgLocal(newImgsToState)
+      console.log(thumbnail)
       setimages(thumbnail[0]);
     };
 
@@ -282,7 +302,7 @@ const CreateProduct = () => {
                 <img
                   alt="algo"
                   src={images}
-                  
+
                   data-toggle="modal"
                   data-target="#ModalPreViewImg"
                   className="img-responsive"
@@ -298,10 +318,10 @@ const CreateProduct = () => {
 
   useEffect(() => {
     setInput({
-       ...input,
-        pictures: pictures
-       })
-      }, [pictures]);
+      ...input,
+      pictures: pictures
+    })
+  }, [pictures]);
   const EditSesionLocal = () => {
     const changeInput = async (e) => {
       //esto es el indice que se le dará a cada imagen, a partir del indice de la ultima foto
@@ -317,13 +337,13 @@ const CreateProduct = () => {
       let pictures2 = await uploadImgLocal(newImgsToState)
       console.log(pictures2[0])
 
-      if(input.thumbnail && pictures2[0]){
-       if(pictures[0] !== input.thumbnail){
-pictures2.unshift(input.thumbnail);
-       }
+      if (input.thumbnail && pictures2[0]) {
+        if (pictures[0] !== input.thumbnail) {
+          pictures2.unshift(input.thumbnail);
+        }
       }
       let newImgsState2 = pictures.concat(pictures2)
-     
+
       setPictures(newImgsState2);
 
       console.log(newImgsState2);
@@ -352,9 +372,9 @@ pictures2.unshift(input.thumbnail);
       return arrayImages;
     }
 
-    function deleteImg(img) {
+    function deleteImg(indice) {
       const newImgs = pictures.filter(function (element) {
-        return element !== img;
+        return element.index !== indice;
       });
       setPictures(newImgs);
     }
@@ -378,7 +398,7 @@ pictures2.unshift(input.thumbnail);
               <div className="content_img">
                 <button
                   className="position-absolute btn btn-danger"
-                  onClick={() => deleteImg(pictures)}
+                  onClick={deleteImg.bind(this, pictures.index)}
                 >
                   x
                 </button>
@@ -400,7 +420,7 @@ pictures2.unshift(input.thumbnail);
   const RenderizadoBotonesPictures = () => {
     return (
       <div>
-        <button className={style.btnImg} onClick={(e) => handleRenderChangeLocalPictures(e)}>
+        <button className={style.btnImgLocal} onClick={(e) => handleRenderChangeLocalPictures(e)}>
           Subir img local
         </button>
 
@@ -430,7 +450,7 @@ pictures2.unshift(input.thumbnail);
   const LocalRenderPictures = () => {
     return (
       <div>
-        <button className = {style.btnImg} onClick={(e) => handleRenderChangeURLPictures(e)}>
+        <button className={style.btnImg} onClick={(e) => handleRenderChangeURLPictures(e)}>
           Subir con URL
         </button>
         {EditSesionLocal()}
@@ -441,7 +461,7 @@ pictures2.unshift(input.thumbnail);
   const URLRenderPictures = () => {
     return (
       <div>
-        <button className = {style.btnImg}onClick={(e) => handleRenderChangeLocalPictures(e)}>
+        <button className={style.btnImgLocal} onClick={(e) => handleRenderChangeLocalPictures(e)}>
           {" "}
           Subir img local{" "}
         </button>
@@ -452,11 +472,26 @@ pictures2.unshift(input.thumbnail);
           title="picture"
           onChange={(e) => handleChange(e)}
         />
-        <button className={style.btnImg} onClick={(e) =>hundlePictureAdd(e)}> Añadir imagen</button>
+        <button className={style.btnImg} onClick={(e) => hundlePictureAdd(e)}> Añadir imagen</button>
       </div>
     );
   };
-  
+
+  const [thumbnail2, setThumbnail2] = useState("");
+  useEffect(() => {
+
+  }, [thumbnail2]);
+
+
+  const [localPictures, setLocalPictures] = useState([]);
+
+  useEffect(() => {
+    setInput({
+      ...input,
+      iLocalPictures: localPictures,
+    });
+  }, [localPictures]);
+
   const uploadImgLocal = async (files) => {
     let archivos = files.length - 1;
     let urls = [];
@@ -472,6 +507,7 @@ pictures2.unshift(input.thumbnail);
           body: data,
         }
       );
+
       const file = await upload.json();
       console.log(upload);
       console.log(file.secure_url);
@@ -481,6 +517,7 @@ pictures2.unshift(input.thumbnail);
     return urls;
   };
 
+
   // --------------------------------------------------------------------------------------------
   // COMPONENTE RENDER
   return (
@@ -488,6 +525,27 @@ pictures2.unshift(input.thumbnail);
       {console.log("Errores", error)}
       <form className={style.form}>
         <h2 className={style.titulo}>Product Creation</h2>
+        {/* Previsualizar */}
+        <button className={style.btnPrev} onClick={(e) => handleOpenModal(e)}>Previsualizar</button>
+        {
+          ModalPrev &&
+          <ModalPrevisualizar
+            title={input.title}
+            picture={input.thumbnail}
+            price={input.price}
+            setModalPrev={setModalPrev}
+            brand={input.brand}
+            gender={input.genero}
+            condition={input.condition}
+            externalMaterial={input.externalMaterial}
+            age_group={input.age_group}
+            // Carrousel
+            pictures={input.pictures}
+            colors={input.colors}
+            sizes={input.sizes}
+
+          />
+        }
 
         {/* TITLE */}
         <div>
@@ -520,7 +578,7 @@ pictures2.unshift(input.thumbnail);
           <div>
             <p>Img:</p>
 
-            {input.imgInput === 0 && <RenderizadoBotones/>}
+            {input.imgInput === 0 && <RenderizadoBotones />}
             {input.imgInput === true && <LocalRender />}
             {input.imgInput === false && <URLRender />}
           </div>
@@ -625,11 +683,34 @@ pictures2.unshift(input.thumbnail);
         {/* PICTURES */}
         <div>
           <p>Imagenes Adicionales:</p>
+          {/* {error.title && ( // si hay un error hara un <p> nuevo con el error
+                        <p className={style.error}>{error.title}</p>
+                    )} */}
 
           {input.laImg === 0 && <RenderizadoBotonesPictures />}
           {input.laImg === true && <LocalRenderPictures />}
           {input.laImg === false && <URLRenderPictures />}
 
+
+
+          {/* ARRAY PICTURES  */}
+          <div className={style.pictures}>
+            {input.pictures?.map(
+              (
+                el //cada vez que coloquemos una opcion se creara una pequeña lista
+              ) => (
+                <div key={el} className={style.divName}>
+                  <p>{el}</p>
+                  <button
+                    className={style.btnX}
+                    onClick={() => handleDelete(el)}
+                  >
+                    X
+                  </button>
+                </div>
+              )
+            )}
+          </div>
         </div>
         {/* BUTTON */}
         {
