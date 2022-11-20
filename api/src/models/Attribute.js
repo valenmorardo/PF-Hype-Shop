@@ -5,15 +5,13 @@ module.exports = (sequelize) => {
     "attribute",
     {
       id: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         primaryKey: true,
-        unique: true,
         allowNull: false,
+        unique: true,
+        autoIncrement: true,
       },
       name: {
-        type: DataTypes.STRING,
-      },
-      value_id: {
         type: DataTypes.STRING,
       },
       value_name: {

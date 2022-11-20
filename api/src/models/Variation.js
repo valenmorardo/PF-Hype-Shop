@@ -9,9 +9,10 @@ module.exports = (sequelize) => {
         primaryKey: true,
         unique: true,
         allowNull: false,
+        autoIncrement: true,
       },
       price: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
       },
       sold_quantity: {
         type: DataTypes.INTEGER,
@@ -20,7 +21,7 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
       },
       picture_ids: {
-        type: DataTypes.STRING,
+        type: DataTypes.ARRAY(DataTypes.STRING),
       },
       available_quantity: {
         type: DataTypes.INTEGER,

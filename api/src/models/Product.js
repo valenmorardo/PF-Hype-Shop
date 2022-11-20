@@ -11,15 +11,15 @@ module.exports = (sequelize) => {
         unique: true,
         allowNull: false,
       },
-      thumbnail: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       price: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+      },
+      sold_quantity: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       pictures: {
-        type: DataTypes.JSON,
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,
       },
     },

@@ -5,7 +5,7 @@ const { Product, Attribute } = require("../db");
 const { objectFormatter } = require("../utils/objectFormatter");
 
 const MULTIPLE_IDS_URL =
-  "https://api.mercadolibre.com/items?attributes=attributes,variations,price,sold_quantity,available_quantity,secure_thumbnail,thumbnail,pictures,condition,title";
+  "https://api.mercadolibre.com/items?attributes=attributes,variations,price,sold_quantity,available_quantity,pictures,condition,title";
 
 // const ITEM_REVIEW_URL = "https://api.mercadolibre.com/reviews/item/";
 // const ITEM_REVIEW_ATTRIBUTES =
@@ -56,36 +56,37 @@ const getApiProducts = async () => {
     );
   }
 
-  const newProduct = await Product.findOrCreate({
-    where: { title: dataArray[1].title },
-    defaults: {
-      title: dataArray[1].title,
-      price: dataArray[1].price,
-      condition: dataArray[1].condition,
-      thumbnail: dataArray[1].thumbnail,
-      pictures: dataArray[1].pictures,
-    },
-  });
-  console.log(newProduct);
-
-  const attribute1 = dataArray[0].attributes[0];
-  // const adjustmentType = await Attribute.findOrCreate({
-  //   where: { value_id: attribute1.value_id },
-  //   defaults: attribute1,
+  // const newProduct = await Product.findOrCreate({
+  //   where: { title: dataArray[1].title },
+  //   defaults: {
+  //     title: dataArray[1].title,
+  //     price: dataArray[1].price,
+  //     condition: dataArray[1].condition,
+  //     thumbnail: dataArray[1].thumbnail,
+  //     pictures: dataArray[1].pictures,
+  //   },
   // });
-  const adjustmentType = await Attribute.findOrCreate({
-    where: { value_name: attribute1.value_name },
-    defaults: {
-      id: attribute1.id,
-      name: attribute1.value_name,
-      value_id: attribute1.value_id,
-      value_name: attribute1.value_name,
-    },
-  });
+  // console.log(newProduct);
 
-  console.log(adjustmentType[0]);
-  await newProduct[1].addAttributes(adjustmentType[0]);
+  // const attribute1 = dataArray[0].attributes[0];
+  // // const adjustmentType = await Attribute.findOrCreate({
+  // //   where: { value_id: attribute1.value_id },
+  // //   defaults: attribute1,
+  // // });
+  // const adjustmentType = await Attribute.findOrCreate({
+  //   where: { value_name: attribute1.value_name },
+  //   defaults: {
+  //     id: attribute1.id,
+  //     name: attribute1.value_name,
+  //     value_id: attribute1.value_id,
+  //     value_name: attribute1.value_name,
+  //   },
+  // });
 
+  // console.log(adjustmentType[0]);
+  // await newProduct[1].addAttributes(adjustmentType[0]);
+
+  // console.log(dataArray);
   return dataArray;
 };
 
@@ -98,6 +99,7 @@ const getDbProducts = async (title) => {
         },
       },
       raw: true,
+      include: Attribute,
     });
     return productFoundOnDb;
   }
