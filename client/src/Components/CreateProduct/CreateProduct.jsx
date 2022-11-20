@@ -5,6 +5,8 @@ import swal from "sweetalert";
 import { useDispatch } from "react-redux";
 import { CreateNewProduct } from "../../Redux/actions";
 import style from "./CreateProduct.module.css";
+// Previsualizar
+import ModalPrevisualizar from "./ModalPrevisualizar/ModalPrevisualizar";
 
 const CreateProduct = () => {
   const history = useHistory();
@@ -30,11 +32,22 @@ const CreateProduct = () => {
     imgInput: 0,
     laImg: 0,
     iLocalPictures: [],
-     genero: "",
+    genero: "",
+    available_quantity: 6
+
+
   };
 
   // ESTADO PRINCIPAL
   const [input, setInput] = useState(initialState);
+  // PREVISUALIZAR
+  const [ModalPrev, setModalPrev] = useState(false)
+  // ABRIR MODAL
+  const handleOpenModal = async (e) => {
+    await subirImg(e);
+    setModalPrev(true)
+  }
+
 
   const handleRenderChangeLocal = (e) => {
     e.preventDefault();
@@ -82,11 +95,11 @@ const CreateProduct = () => {
   const RenderizadoBotones = () => {
     return (
       <div>
-        <button className ={style.btnImg} onClick={(e) => handleRenderChangeLocal(e)}>
+        <button className={style.btnImg} onClick={(e) => handleRenderChangeLocal(e)}>
           Subir img local
         </button>
 
-        <button className ={style.btnImg} onClick={(e) => handleRenderChangeURL(e)}>Subir con URL</button>
+        <button className={style.btnImg} onClick={(e) => handleRenderChangeURL(e)}>Subir con URL</button>
       </div>
     );
   };
@@ -193,6 +206,8 @@ const CreateProduct = () => {
       input.shoeStyle &&
       input.sizes
     ) {
+      // await subirImg(e)
+
       dispatch(
         CreateNewProduct({
           thumbnail: input.thumbnail,
@@ -206,6 +221,9 @@ const CreateProduct = () => {
           externalMaterial: input.externalMaterial,
           shoeStyle: input.shoeStyle,
           sizes: input.sizes,
+          available_quantity: input.available_quantity
+
+
         })
       );
       swal({
@@ -221,7 +239,11 @@ const CreateProduct = () => {
   const [images, setimages] = useState("");
 
   useEffect(() => {
-   
+    setInput({
+      ...input,
+      thumbnail: images[0]?.url
+    })
+
   }, [images]);
 
   const EditSesionUrl = () => {
@@ -299,7 +321,7 @@ const CreateProduct = () => {
   };
   const [pictures, setPictures] = useState([]);
 
-  useEffect(() => {}, [pictures]);
+  useEffect(() => { }, [pictures]);
   const EditSesionLocal = () => {
     const changeInput = (e) => {
       //esto es el indice que se le dará a cada imagen, a partir del indice de la ultima foto
@@ -418,7 +440,7 @@ const CreateProduct = () => {
   const LocalRenderPictures = () => {
     return (
       <div>
-        <button className = {style.btnImg} onClick={(e) => handleRenderChangeURLPictures(e)}>
+        <button className={style.btnImg} onClick={(e) => handleRenderChangeURLPictures(e)}>
           Subir con URL
         </button>
         {EditSesionLocal()}
@@ -429,7 +451,7 @@ const CreateProduct = () => {
   const URLRenderPictures = () => {
     return (
       <div>
-        <button className = {style.btnImg}onClick={(e) => handleRenderChangeLocalPictures(e)}>
+        <button className={style.btnImg} onClick={(e) => handleRenderChangeLocalPictures(e)}>
           {" "}
           Subir img local{" "}
         </button>
@@ -440,7 +462,7 @@ const CreateProduct = () => {
           title="picture"
           onChange={(e) => handleChange(e)}
         />
-        <button className={style.btnImg} onClick={(e) =>hundlePictureAdd(e)}> Añadir imagen</button>
+        <button className={style.btnImg} onClick={(e) => hundlePictureAdd(e)}> Añadir imagen</button>
       </div>
     );
   };
@@ -529,6 +551,16 @@ const CreateProduct = () => {
   // COMPONENTE RENDER
   return (
     <div className={style.containerMain}>
+      {/* PREVISUALIZAR */}
+      <div>
+        <button className={style.btnSubir} onClick={(e) => handleOpenModal(e)}> Previsualizar</button>
+        {
+          ModalPrev &&
+          <ModalPrevisualizar
+            setModalPrev={setModalPrev}
+          />
+        }
+      </div>
       {console.log("Errores", error)}
       <form className={style.form}>
         <h2 className={style.titulo}>Product Creation</h2>
@@ -564,7 +596,7 @@ const CreateProduct = () => {
           <div>
             <p>Img:</p>
 
-            {input.imgInput === 0 && <RenderizadoBotones/>}
+            {input.imgInput === 0 && <RenderizadoBotones />}
             {input.imgInput === true && <LocalRender />}
             {input.imgInput === false && <URLRender />}
           </div>
@@ -677,7 +709,7 @@ const CreateProduct = () => {
           {input.laImg === true && <LocalRenderPictures />}
           {input.laImg === false && <URLRenderPictures />}
 
-          <button className = {style.btnSubir}onClick={(e) => subirImg(e)}> fucion de subir</button>
+          <button className={style.btnSubir} onClick={(e) => subirImg(e)}> funcion de subir</button>
 
           {/* ARRAY PICTURES  */}
           <div className={style.pictures}>
