@@ -50,7 +50,7 @@ const Home = () => {
   return (
     <div>
       <div>
-        <NavBar />
+        <NavBar paginaUno={paginaUno}/>
 
         <Filtrado setIsLoading={setIsLoading} paginaUno={paginaUno} />
 
