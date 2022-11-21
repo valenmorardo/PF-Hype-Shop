@@ -7,6 +7,7 @@ import {
   GET_GENDERS,
   FILTER,
   DETAIL_ZERO,
+  SET_CURRENT_USER,
 } from "../actions/actionTypes";
 const initialState = {
   sneakersReducer: [],
@@ -18,6 +19,7 @@ const initialState = {
   filtros: {},
   orden: {},
   search: [],
+  currentUser: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -87,9 +89,15 @@ const rootReducer = (state = initialState, action) => {
         detail: action.payload,
       };
 
+    case SET_CURRENT_USER:
+      return {
+        ...state,
+        currentUser: action.payload,
+      };
     default:
       return initialState;
   }
 };
 
 export default rootReducer;
+

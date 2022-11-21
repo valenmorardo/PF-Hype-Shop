@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const PayButton = ({ cartItems }) => {
-  console.log(cartItems);
-  // const user = useSelector((state) => state.currentUser)
+  const user = useSelector((state) => state.currentUser);
   const handleCheckout = () => {
     axios
       .post("http://localhost:3001/checkout", { cartItems })
@@ -17,12 +17,20 @@ const PayButton = ({ cartItems }) => {
 
   return (
     <>
-      <button
-        className="px-10 py-2 mt-2 text-xl text-white bg-blue-600 rounded-lg"
-        onClick={handleCheckout}
-      >
-        Comprar
-      </button>
+      {user ? (
+        <button
+          className="px-10 py-2 mt-2 text-xl text-white bg-blue-600 rounded-lg"
+          onClick={handleCheckout}
+        >
+          Comprar
+        </button>
+      ) : (
+        <Link to="/">
+          <button className="px-10 py-2 mt-2 text-xl text-white bg-blue-600 rounded-lg">
+            Logueate para comprar
+          </button>
+        </Link>
+      )}
     </>
   );
 };
