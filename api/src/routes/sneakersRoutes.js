@@ -1,11 +1,12 @@
 const { Router } = require("express");
-const { Product } = require("../db");
+const { Product, User } = require("../db");
 
 const {
   allData,
   getProductById,
   createProduct,
 } = require("../controllers/sneakers.controller");
+const { defaults } = require("pg");
 
 const router = Router();
 
@@ -41,4 +42,16 @@ router.get("/filters/:filter", async (req, res) => {
 
 router.post("/sneakersCreate", createProduct);
 
+router.post("/authentication", async (req, res) => {
+  const user = await User.findOrCreate({
+    where: { email: req.body.email },
+    defaults: {
+      name: req.body.name,
+      email: req.body.email,
+    },
+  });
+  res.json(user);
+});
+
 module.exports = router;
+

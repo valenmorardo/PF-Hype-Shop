@@ -14,3 +14,4 @@ export const FILTER = "FILTER";
 export const ORDEN = "ORDEN";
 // DESMONTANDO DETALLE
 export const DETAIL_ZERO = "DETAIL_ZERO";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
