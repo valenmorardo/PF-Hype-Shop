@@ -1,7 +1,6 @@
 import React from "react";
 
-
-const Paginado = ({ sneakersPerPage, sneakers, paginado }) => {
+const Paginado = ({ nextPage, prevPage, currentPage, sneakersPerPage, sneakers}) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(sneakers / sneakersPerPage); i++) {
@@ -9,12 +8,19 @@ const Paginado = ({ sneakersPerPage, sneakers, paginado }) => {
   }
 
   return (
-    <nav>
-      {pageNumbers &&
-        pageNumbers.map((number) => (
-          <button className="py-2 px-3 ml-2 mr-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" onClick={() => paginado(number)}>{number}</button>
-        ))}
-    </nav>
+    <div className="flex justify-center ">
+      <button className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-900  " onClick={() => prevPage(currentPage - 1)}>
+       ANTERIOR
+      </button>
+      <p className=" inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg ">
+        Página {currentPage} de {Math.ceil(sneakers / sneakersPerPage)}
+      </p>
+      <button className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-900 " onClick={() => nextPage(currentPage + 1)}>
+        SIGUIENTE 
+      </button>
+    </div>
+  );
+};
 //     <nav aria-label="Page navigation example">
 //   <ul class="inline-flex items-center -space-x-px">
 //     <li>
@@ -46,7 +52,6 @@ const Paginado = ({ sneakersPerPage, sneakers, paginado }) => {
 //     </li>
 //   </ul>
 // </nav>
-  );
-};
+  
 
 export default Paginado;

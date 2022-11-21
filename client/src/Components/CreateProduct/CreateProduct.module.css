@@ -121,6 +121,7 @@
  } */
 
 .field {
+   color: black;
    margin-bottom: 15px;
    outline: none;
    border-radius: 3px;
@@ -160,7 +161,7 @@
    border-color: #fff;
    color: #fff;
    padding: 5px 8px;
-   width: 60%;
+   width: 220px;
    height: 30px;
    border: none;
    box-shadow: none;
@@ -173,7 +174,7 @@
    color: #fff;
    content: "";
    position: absolute;
-   right: 90px;
+   right: 20px;
    bottom: 24px;
    width: 0;
    height: 0;
@@ -217,10 +218,11 @@
 }
 
 .todosCampos {
+   display: inline-block;
+   margin-top: 80px;
    color: #efb810;
    font-size: 26px;
    font-weight: 600;
-   margin-top: 50px;
 }
 
 /*  STOCK   */
@@ -345,6 +347,19 @@
    margin: 10px;
 }
 
+.containArray {
+   display: flex;
+   align-items: center;
+   /* justify-content: center; */
+   background-color: #9fd948;
+   padding: 1px 5px;
+   /* height: 60px;
+   width: 120px; */
+   border-radius: 5px;
+   font-weight: 500;
+   margin: 10px;
+}
+
 .btnX {
    display: flex;
    margin: 0;
@@ -360,4 +375,70 @@
    background-color: rgb(223, 16, 16);
    color: #fff;
    font-size: 14px;
+}
+
+.btnImg {
+   background-color: rgb(86, 173, 202);
+   padding: 5px;
+   border-radius: 5px;
+   border: none;
+   margin: 10px;
+}
+
+.btnImgLocal {
+   background-color: #f15a24;
+   padding: 5px;
+   border-radius: 5px;
+   border: none;
+   margin: 10px;
+}
+
+.btnPrev {
+   background-color: #4338ca;
+   padding: 5px;
+   border-radius: 5px;
+   border: none;
+   margin: 10px;
+}
+
+.imgSelect {
+   background-color: #f15a24;
+   padding: 5px;
+   border-radius: 5px;
+   border: none;
+   margin: 10px;
+}
+
+.imgSelect:hover {
+   cursor: pointer;
+}
+
+.btnSubir {
+   background-color: rgb(173, 120, 22);
+   padding: 5px;
+   border-radius: 5px;
+   border: none;
+   margin: 10px;
+}
+
+/* BOTON ADD */
+
+.addButton {
+   margin: auto 10px;
+   background-color: #efb810;
+   border: none;
+   width: 130px;
+   height: 40px;
+   color: #000;
+   font-size: 16px;
+   font-weight: 600;
+   border-radius: 10px;
+   box-decoration-break: none;
+   cursor: pointer;
+   transition: all 1s;
+}
+
+.addButton:active {
+   color: #fff;
+   border: 1px solid #fff;
 }
