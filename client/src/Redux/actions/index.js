@@ -35,7 +35,7 @@ export const getSearchTitle = (title) => {
    return async function (dispatch) {
       try {
          const response = await axios.get(
-            `https://hype-shop.vercel.app/?title=${title}`
+            `https://hype-shop.vercel.app/sneakers?title=${title}`
          );
          return dispatch({
             type: SEARCH_SNEAKER,
