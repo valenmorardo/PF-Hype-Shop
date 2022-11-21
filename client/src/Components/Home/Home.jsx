@@ -50,7 +50,7 @@ const Home = () => {
   return (
     <div>
       <div>
-        <NavBar paginaUno={paginaUno}/>
+        <NavBar paginaUno={paginaUno} />
 
         <Filtrado setIsLoading={setIsLoading} paginaUno={paginaUno} />
 
@@ -81,3 +81,4 @@ const Home = () => {
   );
 };
 export default Home;
+
