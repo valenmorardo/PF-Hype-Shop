@@ -10,26 +10,28 @@ import CheckoutSuccess from "./Components/CheckoutSuccess/CheckoutSuccess";
 // CARRITO
 import OrderCarry from "./Components/OrderCarry/OrderCarry";
 import ContactUs from "./Components/ContactUS/ContactUs";
+// REGISTER
+import Register from "./Components/Register/Register";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <div className="App">
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/sneaker/:id" component={CardDetail} />
-          <Route path="/orderCarry" component={OrderCarry} />
-          <Route path="/contactUs" component={ContactUs} />
-          <Route path="/checkout-success" component={CheckoutSuccess} />
-          <Route path="/createaccount" />
-          <Route path="/about" component={About} />
-          <Route exact path="/createProduct" component={CreateProduct} />
-          <Route path="*" component={error404}></Route>
-        </Switch>
-      </div>
-    </BrowserRouter>
-  );
+   return (
+      <BrowserRouter>
+         <div className="App">
+            <Switch>
+               <Route exact path="/" component={Home} />
+               <Route path="/sneaker/:id" component={CardDetail} />
+               <Route path="/orderCarry" component={OrderCarry} />
+               <Route path="/contactUs" component={ContactUs} />
+               <Route path="/register" component={Register} />
+               <Route path="/checkout-success" component={CheckoutSuccess} />
+               <Route path="/createaccount" />
+               <Route path="/about" component={About} />
+               <Route exact path="/createProduct" component={CreateProduct} />
+               <Route path="*" component={error404}></Route>
+            </Switch>
+         </div>
+      </BrowserRouter>
+   );
 }
 
 export default App;
-
