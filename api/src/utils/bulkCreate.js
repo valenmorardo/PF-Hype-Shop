@@ -4,26 +4,27 @@ const { bulkSizesInDB, bulkColorsInDB } = require("../services/getAttributes");
 
 const { getApiProducts } = require("../services/getProducts");
 
+const createProduct = async (product) => {
+  const productCreated = await Product.create({
+    title: product.title,
+    price: product.price,
+    sold_quantity: product.sold_quantity,
+    condition: product.condition,
+    pictures: product.pictures,
+  });
+  return productCreated;
+};
+
+const addAttributes = async () => {};
+
 const bulkCreate = async () => {
   await bulkColorsInDB();
   await bulkSizesInDB();
 
   const dataToBulk = await getApiProducts();
   dataToBulk.forEach(async (product) => {
-    const productCreated = await Product.findOrCreate({
-      where: { title: product.title },
-      defaults: {
-        title: product.title,
-        price: product.price,
-        sold_quantity: product.sold_quantity,
-        condition: product.condition,
-        pictures: product.pictures,
-      },
-    });
+    const productCreated = await createProduct(product);
 
-    // VARIATIONS LAS ANIADE BIEN
-    // ===============================================================
-    // await Variation.bulkCreate(product.variations);
     product.variations.forEach(async (variation) => {
       const { price, sold_quantity, available_quantity, picture_ids } =
         variation;
@@ -31,20 +32,27 @@ const bulkCreate = async () => {
         price,
         sold_quantity,
         available_quantity,
-        picture_ids,
+        picture_ids: picture_ids.map(
+          (picture) => `https://http2.mlstatic.com/D_${picture}-O.jpg`
+        ),
       });
 
-      await variationCreated.setProduct(productCreated[0]);
+      await variationCreated.setProduct(productCreated);
 
       variation.attribute_combinations.forEach(async (attr) => {
-        const color = await Color.findOne({ where: { id: attr.value_id } });
-        const size = await Size.findOne({ where: { id: attr.value_id } });
-        await variationCreated.setColor(color);
-        await variationCreated.setSize(size);
+        if (attr.id === "COLOR") {
+          const color = await Color.findOne({
+            where: { name: attr.value_name },
+          });
+          await variationCreated.setColor(color);
+        } else {
+          const size = await Size.findOne({
+            where: { value: attr.value_name },
+          });
+          await variationCreated.setSize(size);
+        }
       });
     });
-
-    // ============================================================
 
     product.attributes.forEach(async (attribute) => {
       const addedAttributeOnDB = await Attribute.create({
@@ -52,25 +60,11 @@ const bulkCreate = async () => {
         name: attribute.name,
         value_name: attribute.value_name,
       });
-      await productCreated[0].addAttributes(addedAttributeOnDB);
+      await productCreated.addAttributes(addedAttributeOnDB);
     });
   });
   console.log("Products succesfully created on db");
   // const data = await Product.findAll();
-  // console.log(data);
 };
 
 module.exports = { bulkCreate };
-
-// const attribute1 = await Attribute.create({
-//   id: dataToBulk[0].attributes[0].id,
-//   name: dataToBulk[0].attributes[0].name,
-//   value_name: dataToBulk[0].attributes[0].value_name,
-// });
-
-// const brand = await Attribute.findOne({ where: { id: "BRAND" } });
-// console.log(brand);
-// brand.setProduct(productCreated.id);
-// await productCreated.addAttribute(product.attributes);
-
-// await attribute1.setProduct();

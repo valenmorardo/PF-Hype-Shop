@@ -28,7 +28,7 @@ const getApiProducts = async () => {
     const data = fetch.data.results;
     const arrayString = data.map((prod) => prod.id);
 
-    const firstTwentyIds = arrayString.slice(0, 2).join(",");
+    const firstTwentyIds = arrayString.slice(0, 20).join(",");
     // const secondTwentyIds = arrayString.slice(20, 40).join(",");
     // const thirdTwentyIds = arrayString.slice(40, 50).join(",");
 
@@ -56,44 +56,23 @@ const getApiProducts = async () => {
     );
   }
 
-  // const newProduct = await Product.findOrCreate({
-  //   where: { title: dataArray[1].title },
-  //   defaults: {
-  //     title: dataArray[1].title,
-  //     price: dataArray[1].price,
-  //     condition: dataArray[1].condition,
-  //     thumbnail: dataArray[1].thumbnail,
-  //     pictures: dataArray[1].pictures,
-  //   },
-  // });
-  // console.log(newProduct);
-
-  // const attribute1 = dataArray[0].attributes[0];
-  // // const adjustmentType = await Attribute.findOrCreate({
-  // //   where: { value_id: attribute1.value_id },
-  // //   defaults: attribute1,
-  // // });
-  // const adjustmentType = await Attribute.findOrCreate({
-  //   where: { value_name: attribute1.value_name },
-  //   defaults: {
-  //     id: attribute1.id,
-  //     name: attribute1.value_name,
-  //     value_id: attribute1.value_id,
-  //     value_name: attribute1.value_name,
-  //   },
-  // });
-
-  // console.log(adjustmentType[0]);
-  // await newProduct[1].addAttributes(adjustmentType[0]);
-
-  // console.log(dataArray);
   return dataArray;
 };
 
 const getDbProducts = async (title) => {
   if (title) {
     const productFoundOnDb = await Product.findAll({
-      include: [Attribute, Variation],
+      include: [
+        {
+          model: Attribute,
+          attributes: { exclude: ["productId"] },
+        },
+        {
+          model: Variation,
+          attributes: { exclude: ["colorId", "sizeId", "productId"] },
+          include: [{ model: Size }, { model: Color }],
+        },
+      ],
       where: {
         title: {
           [Op.iLike]: `%${title}%`,
@@ -102,9 +81,20 @@ const getDbProducts = async (title) => {
     });
     return productFoundOnDb;
   }
-  return await Product.findAll({
-    include: [Attribute, Variation],
+  const productsData = await Product.findAll({
+    include: [
+      {
+        model: Attribute,
+        attributes: { exclude: ["productId"] },
+      },
+      {
+        model: Variation,
+        attributes: { exclude: ["colorId", "sizeId", "productId"] },
+        include: [{ model: Size }, { model: Color }],
+      },
+    ],
   });
+  return productsData;
 };
 
 const getSingleDbProduct = async (primaryKey) => {
