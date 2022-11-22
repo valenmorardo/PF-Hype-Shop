@@ -16,7 +16,6 @@ const bulkColorsInDB = async () => {
     for (const item of colorArray) {
       if (color.name === item.name) {
         colorsWithRGB.push({
-          id: color.id,
           name: color.name,
           rgb: item.metadata.rgb,
         });
@@ -32,7 +31,7 @@ const bulkSizesInDB = async () => {
   );
   const sizesArray = fetchSize.data.find((items) => items.id === "SIZE");
   const bulk = sizesArray.values.map((size) => {
-    return { id: size.id, value: size.name };
+    return { value: size.name };
   });
   await Size.bulkCreate(bulk);
 };

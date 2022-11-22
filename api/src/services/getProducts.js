@@ -28,16 +28,17 @@ const getApiProducts = async () => {
     const data = fetch.data.results;
     const arrayString = data.map((prod) => prod.id);
 
-    const firstTwentyIds = arrayString.slice(0, 20).join(",");
-    // const secondTwentyIds = arrayString.slice(20, 40).join(",");
+    const firstTwentyIds = arrayString.slice(5, 20).join(",");
+    const secondTwentyIds = arrayString.slice(20, 40).join(",");
     // const thirdTwentyIds = arrayString.slice(40, 50).join(",");
 
     const firstIdsFetch = await axios.get(
       `${MULTIPLE_IDS_URL}&ids=${firstTwentyIds}`
     );
-    // const secondIdsFetch = await axios.get(
-    //   `${MULTIPLE_IDS_URL}&ids=${secondTwentyIds}`
-    // );
+
+    const secondIdsFetch = await axios.get(
+      `${MULTIPLE_IDS_URL}&ids=${secondTwentyIds}`
+    );
     // const thirdIdsFetch = await axios.get(
     //   `${MULTIPLE_IDS_URL}&ids=${thirdTwentyIds}`
     // );
@@ -48,7 +49,7 @@ const getApiProducts = async () => {
     //     dataArray.push(dataFormatted);
     //   })
     // );
-    [firstIdsFetch].forEach((dataString) =>
+    [firstIdsFetch, secondIdsFetch].forEach((dataString) =>
       dataString.data.forEach((prod) => {
         const dataFormatted = objectFormatter(prod.body);
         dataArray.push(dataFormatted);

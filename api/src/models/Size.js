@@ -5,8 +5,11 @@ module.exports = (sequelize) => {
     "size",
     {
       id: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         primaryKey: true,
+        unique: true,
+        allowNull: false,
+        autoIncrement: true,
       },
       value: {
         type: DataTypes.STRING,

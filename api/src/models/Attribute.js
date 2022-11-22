@@ -13,6 +13,7 @@ module.exports = (sequelize) => {
       },
       name: {
         type: DataTypes.STRING,
+        defaultValue: "No especificado",
       },
       value_name: {
         type: DataTypes.STRING,
