@@ -27,7 +27,7 @@ const PayButton = ({ cartItems }) => {
       ) : (
         <Link to="/">
           <button className="px-10 py-2 mt-2 text-xl text-white bg-blue-600 rounded-lg">
-            Logueate para comprar
+            Inicia sesion para comprar
           </button>
         </Link>
       )}

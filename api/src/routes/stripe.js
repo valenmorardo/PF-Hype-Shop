@@ -1,7 +1,7 @@
 const { Router } = require("express");
 
 const stripe = require("stripe")(
-  "sk_test_51M5ZTdGXvMNs99wedH7zQmaBdkEQGmqkztmE7RWHeWEnRSBCxtxgXKDqloiL7INNZj1LvQpivdLpQxJEBS48Mzcl00UgYTB76P"
+  "sk_test_51M7OX4DZco7m31EklNnEF4oBrOryJQCAgIphkarbNMFBwzr3cDSFBBlGQUMY4pWVUuwE3ARGpQ4VUyR2RyAURqIg00H2Qspnhk"
 );
 
 const router = Router();
