@@ -7,7 +7,8 @@ const stripe = require("stripe")(
 const router = Router();
 
 router.post("/checkout", async (req, res) => {
-  const line_items = req.body.cartItems.map((item) => {
+  
+  const line_items = await req.body.cartItems.map((item) => {
     return {
       price_data: {
         currency: "ars",
@@ -24,10 +25,27 @@ router.post("/checkout", async (req, res) => {
   });
 
   const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    
+    shipping_address_collection: {allowed_countries: ['AR']},
+    shipping_options: [
+      
+      {
+        shipping_rate_data: {
+          type: "fixed_amount",
+          fixed_amount: {amount: 0, currency: 'ars'},
+          display_name: 'Free shipping',
+          delivery_estimate: {
+            minimum: {unit: 'business_day', value: 5},
+            maximum: {unit: 'business_day', value: 7},
+          },
+        },
+      },
+    ],
     line_items,
     mode: "payment",
-    success_url: "https://hype-gamma.vercel.app/checkout-success",
-    cancel_url: "https://hype-gamma.vercel.app/",
+    success_url: "http://localhost:3000/checkout-success",
+    cancel_url: "http://localhost:3000/",
   });
 
   res.send({ url: session.url });
