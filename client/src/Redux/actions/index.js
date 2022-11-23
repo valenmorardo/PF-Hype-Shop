@@ -77,9 +77,10 @@ export function getBrands() {
     try {
       let json = await axios.get(`https://hype-shop.vercel.app/filters/brand`);
       json.data.unshift("Todos");
+      let marcas = json.data.filter(e => e != null)
       return dispatch({
         type: GET_BRANDS,
-        payload: json.data,
+        payload: marcas,
       });
     } catch (error) {
       return alert("Brands not found");
@@ -90,13 +91,13 @@ export function getBrands() {
 export function getCategories() {
   return async function (dispatch) {
     try {
-      let json = await axios.get(
-        `https://hype-shop.vercel.app/filters/category`
-      );
+      let json = await axios.get(`https://hype-shop.vercel.app/filters/category`);
       json.data.unshift("Todos");
+      let marcas = json.data.filter(e => e != null)
+
       return dispatch({
         type: GET_CATEGORIES,
-        payload: json.data,
+        payload: marcas,
       });
     } catch (error) {
       return alert("Brands not found");
@@ -109,9 +110,11 @@ export function getGenders() {
     try {
       let json = await axios.get(`https://hype-shop.vercel.app/filters/gender`);
       json.data.unshift("Todos");
+      let generos  = json.data.filter(e => e != null && e != 'Men')
+
       return dispatch({
         type: GET_GENDERS,
-        payload: json.data,
+        payload: generos,
       });
     } catch (error) {
       return alert("Brands not found");

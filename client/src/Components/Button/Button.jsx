@@ -2,7 +2,7 @@ import React from "react";
 
 //BOTON REUTILIZABLE
 
-const ResetFilters = ({ title, textButton, onClick }) => {
+const Button = ({ title, textButton, onClick }) => {
   return (
     <div>
       <h1 className="my-10 text-base font-medium text-gray-800">{title}</h1>
@@ -16,4 +16,4 @@ const ResetFilters = ({ title, textButton, onClick }) => {
   );
 };
 
-export default ResetFilters;
+export default Button;
