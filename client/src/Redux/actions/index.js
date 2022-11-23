@@ -17,7 +17,7 @@ import {
 export const getSneakers = () => {
   return async (dispatch) => {
     try {
-      const sneakers = await axios.get("https://hype-shop.vercel.app/sneakers");
+      const sneakers = await axios.get("http://localhost:3001/sneakers");
       /* console.log(response) */
 
       return dispatch({
@@ -34,7 +34,7 @@ export const getSearchTitle = (title) => {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `https://hype-shop.vercel.app/sneakers?title=${title}`
+        `http://localhost:3001/sneakers?title=${title}`
       );
       return dispatch({
         type: SEARCH_SNEAKER,
@@ -51,7 +51,7 @@ export const getSearchTitle = (title) => {
 export function CreateNewProduct(payload) {
   return async function () {
     const response = await axios.post(
-      "https://hype-shop.vercel.app/sneakersCreate",
+      "http://localhost:3001/sneakersCreate",
       payload
     );
     return response;
@@ -61,7 +61,7 @@ export function CreateNewProduct(payload) {
 export function getDetail(id) {
   return async function (dispatch) {
     try {
-      let json = await axios.get(`https://hype-shop.vercel.app/sneakers/${id}`);
+      let json = await axios.get(`http://localhost:3001/sneakers/${id}`);
       return dispatch({
         type: GET_DETAIL,
         payload: json.data,
@@ -75,7 +75,7 @@ export function getDetail(id) {
 export function getBrands() {
   return async function (dispatch) {
     try {
-      let json = await axios.get(`https://hype-shop.vercel.app/filters/brand`);
+      let json = await axios.get(`http://localhost:3001/filters/brand`);
       json.data.unshift("Todos");
       let marcas = json.data.filter(e => e != null)
       return dispatch({
@@ -91,7 +91,9 @@ export function getBrands() {
 export function getCategories() {
   return async function (dispatch) {
     try {
+
       let json = await axios.get(`https://hype-shop.vercel.app/filters/category`);
+
       json.data.unshift("Todos");
       let marcas = json.data.filter(e => e != null)
 
@@ -108,7 +110,7 @@ export function getCategories() {
 export function getGenders() {
   return async function (dispatch) {
     try {
-      let json = await axios.get(`https://hype-shop.vercel.app/filters/gender`);
+      let json = await axios.get(`http://localhost:3001/filters/gender`);
       json.data.unshift("Todos");
       let generos  = json.data.filter(e => e != null && e != 'Men')
 

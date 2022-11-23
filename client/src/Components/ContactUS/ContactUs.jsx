@@ -91,7 +91,7 @@ export default function ContactUs() {
                                         type="hidden"
                                         name="_next"
                                         // ESto se debe cambiar al momento del DEPLOY
-                                        value="https://hype-shop.vercel.app/"
+                                        value="http://localhost:3000/"
                                     />
                                 </div>
                             </div>
