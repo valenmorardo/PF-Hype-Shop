@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-// import OrderCarryCard from "../OrderCarry/OrderCarryCard";
+import { getOrders } from "../../Redux/actions";
 import AdminOrdersCard from "./AdminOrdersCard/AdminOrdersCard";
+import { useSelector, useDispatch, } from "react-redux";
+
 
 const AdminOrders = () => {
+    // PARA TRAER ELEMENTOS
+    // const dispatch = useDispatch();
+    // const orders = useSelector((state) => state.orders);
+
+
+    // useEffect(() => {
+    //     dispatch(getOrders());
+    // }, [dispatch]);
 
     const dataFalse = [
         {

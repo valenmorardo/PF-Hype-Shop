@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import swal from "sweetalert"
+import { patchOrder } from "../../../Redux/actions";
 
 const AdminOrdersModal = ({ setOpenModal, id, estado }) => {
+
+    const dispatch = useDispatch();
     // ESTADO
     const [estadoOrder, setEstadoOrder] = useState(estado)
 
@@ -23,7 +27,8 @@ const AdminOrdersModal = ({ setOpenModal, id, estado }) => {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    // AQUI SE DEBE MANDAR AL BACK CON UN PUT
+                    // AQUI SE DEBE MANDAR AL BACK CON UN PUT:
+                    // dispatch(patchOrder(id, { estado: estadoOrder }))
                     console.log("Confirmacion")
                     swal("Cambio Realizado", `El Nuevo Estado Es: ${estado} `, {
                         icon: "success",
