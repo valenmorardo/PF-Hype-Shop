@@ -23,6 +23,7 @@ const { bulkCreate } = require("./src/utils/bulkCreate");
 
 conn.sync({ force: false }).then(() => {
   server.listen(3001, () => {
+    // conn.drop();
     bulkCreate();
     console.log("%s listening at 3001"); // eslint-disable-line no-console
   });
