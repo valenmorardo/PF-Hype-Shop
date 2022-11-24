@@ -12,6 +12,8 @@ import OrderCarry from "./Components/OrderCarry/OrderCarry";
 import ContactUs from "./Components/ContactUS/ContactUs";
 // REGISTER
 import Register from "./Components/Register/Register";
+// AdminOrder
+import AdminOrders from "./Components/AdminOrders/AdminOrders";
 
 function App() {
    return (
@@ -23,6 +25,7 @@ function App() {
                <Route path="/orderCarry" component={OrderCarry} />
                <Route path="/contactUs" component={ContactUs} />
                <Route path="/register" component={Register} />
+               <Route path="/adminOrders" component={AdminOrders} />
                <Route path="/checkout-success" component={CheckoutSuccess} />
                <Route path="/createaccount" />
                <Route path="/about" component={About} />
