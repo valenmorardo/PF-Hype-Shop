@@ -39,7 +39,6 @@ const bulkCreate = async () => {
 
       if (reviews[index].reviews.length) {
         reviews[index].reviews.forEach(async (review) => {
-          console.log(review);
           const newReview = await Review.create({
             title: review.title,
             content: review.content,
