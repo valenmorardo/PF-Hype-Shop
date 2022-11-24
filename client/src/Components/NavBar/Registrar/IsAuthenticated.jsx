@@ -19,8 +19,8 @@ const IsAuthenticated = () => {
 
   return (
     <div className="flex justify-around">
-      {isAuthenticated ? <LogoutButton /> : <LoginButton />}
-      <Profile />
+      {isAuthenticated ? <Profile /> : <LoginButton />}
+      
     </div>
   );
 };
