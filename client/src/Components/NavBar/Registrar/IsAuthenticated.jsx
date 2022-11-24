@@ -12,7 +12,7 @@ const IsAuthenticated = () => {
   const dispatch = useDispatch();
 
   if (user) {
-    axios.post("https://hype-shop.vercel.app/authentication", user).then((res) => {
+    axios.post("http://localhost:3001/authentication", user).then((res) => {
       dispatch(setCurrentUser(res.data[0]));
     });
   }

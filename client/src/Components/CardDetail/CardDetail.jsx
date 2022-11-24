@@ -15,6 +15,7 @@ const CardDetail = (props) => {
   const dispatch = useDispatch();
   const sneakerDetail = useSelector((state) => state.detail);
   const history = useHistory()
+  console.log(sneakerDetail)
 
   useEffect(() => {
     dispatch(getDetail(props.match.params.id));
@@ -196,6 +197,10 @@ const CardDetail = (props) => {
                           <li className="text-gray-400">
                             <span className="text-gray-900 text-xl font-medium">Genero: {sneakerDetail.gender}</span>
                           </li>
+                          <li className="text-gray-400">
+                            <span className="text-gray-900 text-xl font-medium">Categoria/s: {sneakerDetail.category}</span>
+                          </li>
+
                           <li className="text-gray-400">
                             <span className="text-gray-900 text-xl font-medium">Condicion: {sneakerDetail.condition}</span>
                           </li>
