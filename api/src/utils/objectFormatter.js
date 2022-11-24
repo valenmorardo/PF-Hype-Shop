@@ -1,6 +1,5 @@
 const objectFormatter = (details) => {
   const {
-    id,
     title,
     price,
     condition,
@@ -47,7 +46,6 @@ const objectFormatter = (details) => {
   }
 
   return {
-    id,
     title,
     price: Number(price),
     condition,

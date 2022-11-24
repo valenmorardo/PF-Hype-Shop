@@ -13,10 +13,10 @@ const { objectFormatter } = require("../utils/objectFormatter");
 const getApiProducts = async () => {
   // const dataArray = [];
 
-  // const totalApiCalls = 1;
+  // const totalApiCalls = 2;
   // const productsToRetrieve = [];
 
-  // for (let i = 1; i <= totalApiCalls; i++) {
+  // for (let i = ; i <= totalApiCalls; i++) {
   //   productsToRetrieve.push(i * 50);
   // }
 
