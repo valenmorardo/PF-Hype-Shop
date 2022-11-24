@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { Op } = require("sequelize");
-const { Product, Color, Size, Attribute, Variation } = require("../db");
+const { Product, Color, Size, Attribute, Variation, Review } = require("../db");
 const { bulkSizesInDB, bulkColorsInDB } = require("../services/getAttributes");
 
 const { getApiProducts } = require("../services/getProducts");
@@ -19,6 +19,8 @@ const createProduct = async (product) => {
   return productCreated;
 };
 
+const createReview = async (review) => {};
+
 const bulkCreate = async () => {
   const productsOnDatabase = await Product.findAll();
 
@@ -32,10 +34,21 @@ const bulkCreate = async () => {
     // const dataToBulk = await getApiProducts();
     const dataToBulk = products;
 
-    dataToBulk.forEach(async (product) => {
+    dataToBulk.forEach(async (product, index) => {
       const productCreated = await createProduct(product);
 
-      // hacer lo de reviews
+      if (reviews[index].reviews.length) {
+        reviews[index].reviews.forEach(async (review) => {
+          console.log(review);
+          const newReview = await Review.create({
+            title: review.title,
+            content: review.content,
+            rate: review.rate,
+          });
+
+          await productCreated.addReview(newReview);
+        });
+      }
 
       product.attributes.forEach(async (attr) => {
         const attribute = await Attribute.create({
