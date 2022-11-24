@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const transporter = require("../config/mailer");
-const Bienvenido = require("../Html/Trigger newsletter");
+// const Bienvenido = require("../Html/Trigger newsletter");
 // const { Product, User } = require("../db");
 
 const router = Router();
