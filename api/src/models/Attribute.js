@@ -13,10 +13,10 @@ module.exports = (sequelize) => {
       },
       name: {
         type: DataTypes.STRING,
-        defaultValue: "No especificado",
       },
-      value_name: {
+      value: {
         type: DataTypes.STRING,
+        defaultValue: "No especificado",
       },
     },
     { timestamps: false }

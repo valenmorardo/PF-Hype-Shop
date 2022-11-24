@@ -42,3 +42,4 @@ router.get("/filters/:filter", async (req, res) => {
 router.post("/sneakersCreate", createProduct);
 
 module.exports = router;
+

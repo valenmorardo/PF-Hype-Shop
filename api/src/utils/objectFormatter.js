@@ -8,6 +8,7 @@ const objectFormatter = (details) => {
     attributes,
     variations,
     sold_quantity,
+    available_quantity,
   } = details;
 
   const requiredAttributes = [
@@ -46,6 +47,7 @@ const objectFormatter = (details) => {
   }
 
   return {
+    id,
     title,
     price: Number(price),
     condition,
@@ -53,6 +55,7 @@ const objectFormatter = (details) => {
     variations: arrayOfVariations,
     pictures: pictures.map((picture) => picture.url),
     sold_quantity,
+    available_quantity,
   };
 };
 
