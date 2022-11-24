@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "product",
+    "user",
     {
       id: {
         type: DataTypes.UUID,
@@ -11,29 +11,25 @@ module.exports = (sequelize) => {
         unique: true,
         allowNull: false,
       },
-      title: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      price: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
-      },
-      sold_quantity: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      condition: {
+      email: {
         type: DataTypes.STRING,
-        allowNull: false,
       },
-      pictures: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull: false,
+      password: {
+        type: DataTypes.STRING,
       },
-      available_quantity: {
-        type: DataTypes.INTEGER,
+      isAdmin: {
+        type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
+      },
+      isActive: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
       },
     },
     { timestamps: false }
