@@ -99,13 +99,37 @@ const CardDetail = (props) => {
   }
 
   const buy = (sneaker) => {
-    const newItem = [...item];
+    let carryItem = item.find(elem => elem.id === sneaker.id)
     // console.log("item", newItem)
-    newItem.push(sneaker);
-    saveItem(newItem)
-    // console.log("añadir carrito")
-    // dispatch(addCarry(sneakerDetail))
-    history.push("/orderCarry")
+    if (carryItem) {
+      if (carryItem.cantidad <= sneaker.available_quantity - 1) {
+        const itemIndex = item.findIndex((it) => it.id === sneaker.id);
+        const newItem = [...item];
+        newItem.splice(itemIndex, 1)
+        newItem.push({
+          ...carryItem,
+          cantidad: carryItem.cantidad + 1
+        });
+        saveItem(newItem)
+        history.push("/orderCarry")
+        return (swal("¡Agregaste de nuevo este Producto!", `Tu nueva Cantidad es: ${carryItem.cantidad + 1}`, "success"), history.push("/orderCarry"));
+      }
+      if (carryItem.cantidad === sneaker.available_quantity) {
+        return (swal("No Stock", "Tienes Todo el Stock que está disponible en tu Carrito.", "error"));
+      }
+    }
+    else {
+      const newItem = [...item];
+      newItem.push({
+        ...sneaker,
+        cantidad: 1
+      });
+      saveItem(newItem)
+      history.push("/orderCarry")
+      return (swal("Producto Agregado!", "Este producto ahora Hace parte de tu Carrito!", "success"));
+    }
+
+    
   }
 
   // console.log(sneakerDetail);
@@ -172,7 +196,7 @@ const CardDetail = (props) => {
 
                     <button
                       type="submit"
-                      disabled={true}
+
                       onClick={() => buy(sneakerDetail)}
                       className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
