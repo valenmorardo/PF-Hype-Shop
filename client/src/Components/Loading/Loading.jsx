@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import styles from './Loading.module.css'
 
-const Loading = ({setIsLoading, isloading}) => {
+const Loading = ({ isloading, setIsLoading}) => {
 
     useEffect(() => {
         setTimeout(() => {

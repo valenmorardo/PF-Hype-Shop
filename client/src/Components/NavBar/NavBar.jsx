@@ -73,6 +73,13 @@ const NavBar = ({ paginaUno }) => {
                   </a>
                 </Link>
               </li>
+              <li>
+              <Link to="/dashboard">
+                  <a href="#" className="text-gray-900  hover:underline" >
+                    Dashboard
+                  </a>
+                </Link>
+                </li>
             </ul>
           </div>
           <IsAuthenticated />

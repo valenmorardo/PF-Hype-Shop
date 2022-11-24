@@ -24,6 +24,7 @@ const ModalPrevisualizar = ({ setModalPrev, title, price, picture, brand, gender
                 <p className="font-bold tracking-tight sm:text-3xl mt- text-gray-900 ">Vista Detalle</p>
                 <section className="rounded-xl border border-solid border-gray-300 w-11/12 px-3">
                     <div className="w-full mt-6">
+                    {console.log(pictures)}
                         <CardDetailModal
                             pictures={(pictures.length === 0) ? ["https://vignette2.wikia.nocookie.net/invizimals/images/6/64/Ejemplo.png/revision/latest?cb=20110924141453&path-prefix=es", "https://vignette2.wikia.nocookie.net/invizimals/images/6/64/Ejemplo.png/revision/latest?cb=20110924141453&path-prefix=es", "https://vignette2.wikia.nocookie.net/invizimals/images/6/64/Ejemplo.png/revision/latest?cb=20110924141453&path-prefix=es"] : [picture, ...pictures]}
                             title={title || "titulo Referencia"}

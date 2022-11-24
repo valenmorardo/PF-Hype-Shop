@@ -50,6 +50,10 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+      case "POST_PRODUCT_UPDATE":
+        return {
+          ...state,
+        };
 
     case GET_DETAIL:
       return {

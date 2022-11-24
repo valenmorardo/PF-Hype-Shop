@@ -1,0 +1,10 @@
+.container{
+  position: relative;
+}
+
+.catalogo{
+  position: absolute;
+  right: -400px;
+  width: 100%;
+  top: 100px;
+}
