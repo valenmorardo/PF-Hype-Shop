@@ -11,13 +11,11 @@ const objectFormatter = (details) => {
   } = details;
 
   const requiredAttributes = [
-    "BRAND",
-    "AGE_GROUP",
-    "COLOR",
-    "SIZE",
-    "EXTERIOR_MATERIALS",
-    "GENDER",
-    "STYLE",
+    "Marca",
+    "Edad",
+    "Materiales del exterior",
+    "Género",
+    "Estilo",
   ];
   const results = [];
 
@@ -46,14 +44,21 @@ const objectFormatter = (details) => {
   }
 
   return {
+    id,
     title,
     price: Number(price),
     condition,
-    attributes: results,
-    variations: arrayOfVariations,
+    thumbnail,
     pictures: pictures.map((picture) => picture.url),
-    sold_quantity,
-    available_quantity,
+    age_group: attributesObject.AGE_GROUP || "No especificado",
+    brand: attributesObject.BRAND || "No especificado",
+    colors: color,
+    externalMaterial: attributesObject.EXTERIOR_MATERIALS || "No especificado",
+    shoeStyle: attributesObject.FOOTWEAR_TYPE || "No especificado",
+    sizes: size,
+    last_updated,
+    gender: attributesObject.GENDER,
+    category: attributesObject.STYLE,
   };
 };
 
