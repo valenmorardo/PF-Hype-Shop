@@ -190,3 +190,18 @@ export const patchOrder = (id, payload) => {
       }
    };
 };
+
+// FILTROS ADMIN_ORDERS
+export const filterState = (payload) => {
+   return {
+      type: FILTER_STATE,
+      payload: payload,
+   };
+};
+
+export const filterDate = (payload) => {
+   return {
+      type: FILTER_DATE,
+      payload: payload,
+   };
+};
