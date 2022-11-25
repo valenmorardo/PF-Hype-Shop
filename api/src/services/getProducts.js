@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { Op } = require("sequelize");
-const { Product, Attribute, Variation, Color, Size } = require("../db");
+const { Product, Attribute, Variation, Color, Size, Review } = require("../db");
 
 const { objectFormatter } = require("../utils/objectFormatter");
 
@@ -73,6 +73,9 @@ const getDbProducts = async (title) => {
           attributes: { exclude: ["colorId", "sizeId", "productId"] },
           include: [{ model: Size }, { model: Color }],
         },
+        {
+          model: Review,
+        },
       ],
       where: {
         title: {
@@ -93,6 +96,9 @@ const getDbProducts = async (title) => {
         attributes: { exclude: ["colorId", "sizeId", "productId"] },
         include: [{ model: Size }, { model: Color }],
       },
+      {
+        model: Review,
+      },
     ],
   });
   const productsObject = JSON.parse(JSON.stringify(productsData));
@@ -102,7 +108,11 @@ const getDbProducts = async (title) => {
 };
 
 const getSingleDbProduct = async (primaryKey) => {
-  return await Product.findByPk(primaryKey);
+
+  return await Product.findByPk(primaryKey, {
+    include: [{ model: Attribute }, { model: Variation }, {model: Review}],
+  });
+
 };
 
 module.exports = {
