@@ -6,7 +6,7 @@ const CardShowReview = ({review}) => {
 
   return (
     
-    <div class=" border-solid border-2 border-black pb-10" > 
+    <div className="bg-gray-50 border border-blue-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 mb-10  w-2/4"> 
  
         {
           review.userId === null?
