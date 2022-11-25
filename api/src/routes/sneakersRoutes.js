@@ -21,12 +21,6 @@ router.get("/filters/:filter", async (req, res) => {
       include: [
         {
           model: Attribute,
-          attributes: { exclude: ["productId"] },
-        },
-        {
-          model: Variation,
-          attributes: { exclude: ["colorId", "sizeId", "productId"] },
-          include: [{ model: Size }, { model: Color }],
         },
       ],
     });
@@ -45,24 +39,22 @@ router.post("/sneakersCreate", createProduct);
 
 router.post("/authentication", async (req, res, next) => {
   try {
-    const{email, name} = req.body
+    const { email, name } = req.body;
     const [user, created] = await User.findOrCreate({
-      where: {email: email },
+      where: { email: email },
       defaults: {
         name,
         email,
       },
     });
-res.status(200).json({created, user})
+    res.status(200).json({ created, user });
   } catch (error) {
-    next(error)
+    next(error);
   }
 });
 
-
-
 //   res.status(200).json({created, pokemon})
-//   } 
+//   }
 //   catch (error) {
 //       next(error);
 //   }

@@ -91,28 +91,28 @@ const getDbProducts = async (title) => {
         model: Attribute,
         attributes: { exclude: ["productId"] },
       },
-      {
-        model: Variation,
-        attributes: { exclude: ["colorId", "sizeId", "productId"] },
-        include: [{ model: Size }, { model: Color }],
-      },
-      {
-        model: Review,
-      },
+      // {
+      //   model: Variation,
+      //   // attributes: { exclude: ["colorId", "sizeId", "productId"] },
+      //   include: [{ model: Size }, { model: Color }],
+      // },
+      // {
+      //   model: Review,
+      // },
     ],
   });
-  const productsObject = JSON.parse(JSON.stringify(productsData));
-  const products = productsObject.map((prod) => objectFormatter(prod));
+  // const productsData = await Product.findAll({nested: true });
+  // const productsObject = JSON.parse(JSON.stringify(productsData));
+  // const products = productsObject.map((prod) => objectFormatter(prod));
 
-  return products;
+  // console.log(productsDATA)
+  return productsData;
 };
 
 const getSingleDbProduct = async (primaryKey) => {
-
   return await Product.findByPk(primaryKey, {
-    include: [{ model: Attribute }, { model: Variation }, {model: Review}],
+    include: [{ model: Attribute }, { model: Variation }, { model: Review }],
   });
-
 };
 
 module.exports = {
