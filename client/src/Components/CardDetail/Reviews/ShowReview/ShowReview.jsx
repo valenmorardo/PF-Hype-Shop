@@ -9,9 +9,9 @@ const ShowReview = ({reviews}) => {
   return (
 
     <div >
-      <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl mb-5">REVIEWS DEL PRODUCTO</h1>
+      <h1 className=" text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl mb-5 ">REVIEWS DEL PRODUCTO</h1>
 
-      <div>
+      <div className='flex flex-col items-center'>
         {
           reviews.map(e=> (
             <CardShowReview review={e}/>
