@@ -6,6 +6,7 @@ import 'react-multi-carousel/lib/styles.css';
 import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import { useHistory } from "react-router-dom";
+import ShowReview from "./Reviews/ShowReview/ShowReview";
 // CARRITO:
 import useLocalStorage from "../useLocalStorage/useLocalstorage";
 import swal from "sweetalert";
@@ -15,7 +16,8 @@ const CardDetail = (props) => {
   const dispatch = useDispatch();
   const sneakerDetail = useSelector((state) => state.detail);
   const history = useHistory()
-  console.log(sneakerDetail)
+  
+
 
   useEffect(() => {
     dispatch(getDetail(props.match.params.id));
@@ -139,10 +141,11 @@ const CardDetail = (props) => {
                 </Carousel>
                 {/* Product info */}
                 <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
+
                   <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
                     <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{sneakerDetail.title}</h1>
                   </div>
-                  {console.log(sneakerDetail)}
+                  {/* {console.log(sneakerDetail)} */}
                   {/* Options */}
                   <div className="mt-4 lg:row-span-3 lg:mt-0">
                     <h2 className="sr-only">Product information</h2>
@@ -153,9 +156,9 @@ const CardDetail = (props) => {
                       <div className="flex items-center justify-between">
                         {/* {console.log(onAddCarry(sneakerDetail))} */}
                         <h3 className="text-sm font-medium text-gray-900">TALLA</h3>
-                        {sneakerDetail.sizes.map(el =>
+{/*                         {sneakerDetail.sizes.map(el =>
                           <p className="text-sm font-medium text-indigo-600 hover:text-indigo-500"> {el}</p>
-                        )}
+                        )} */}
                       </div>
                       <h3 className="text-xl font-medium text-gray-900 mt-2">Stock Disponible: {sneakerDetail.available_quantity}</h3>
 
@@ -212,10 +215,10 @@ const CardDetail = (props) => {
                           </li>
                           <br />
                           <li className="text-gray-400">
-                            <span className="text-gray-900 text-xl font-medium">Color: {
+{/*                             <span className="text-gray-900 text-xl font-medium">Color: {
                               sneakerDetail.colors.map(e => <h3>{e.toUpperCase()}</h3>)
                             }
-                            </span>
+                            </span> */}
                           </li>
                           <br />
                         </ul>
@@ -224,7 +227,14 @@ const CardDetail = (props) => {
                   </div>
                 </div>
               </div>
-            </div>)
+
+              <div>
+                  <ShowReview reviews={sneakerDetail.reviews}/>
+              </div>
+              
+            </div>
+
+            )
 
           : <Loading />
       }

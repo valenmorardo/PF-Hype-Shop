@@ -106,7 +106,11 @@ const getDbProducts = async (title) => {
 };
 
 const getSingleDbProduct = async (primaryKey) => {
-  return await Product.findByPk(primaryKey);
+
+  return await Product.findByPk(primaryKey, {
+    include: [{ model: Attribute }, { model: Variation }, {model: Review}],
+  });
+
 };
 
 module.exports = {
