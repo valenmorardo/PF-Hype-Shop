@@ -12,8 +12,15 @@ import OrderCarry from "./Components/OrderCarry/OrderCarry";
 import ContactUs from "./Components/ContactUS/ContactUs";
 // REGISTER
 import Register from "./Components/Register/Register";
+
+//USER DASHBOARD
+import UserInformation from "./Components/UserDashboard/UserInformation";
+import UserOrder from "./Components/UserDashboard/UserOrders";
+import Favorites from "./Components/UserDashboard/UserFavorites";
+
 // AdminOrder
 import AdminOrders from "./Components/AdminOrders/AdminOrders";
+
 
 function App() {
    return (
@@ -29,6 +36,9 @@ function App() {
                <Route path="/checkout-success" component={CheckoutSuccess} />
                <Route path="/createaccount" />
                <Route path="/about" component={About} />
+               <Route path="/account" component={UserInformation}/>
+               <Route path="/orders" component={UserOrder}/>
+               <Route path ="/favorites" component={Favorites}/>
                <Route exact path="/createProduct" component={CreateProduct} />
                <Route path="*" component={error404}></Route>
             </Switch>
