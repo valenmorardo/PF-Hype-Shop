@@ -42,16 +42,30 @@ router.get("/filters/:filter", async (req, res) => {
 
 router.post("/sneakersCreate", createProduct);
 
-router.post("/authentication", async (req, res) => {
-  const user = await User.findOrCreate({
-    where: { email: req.body.email },
-    defaults: {
-      name: req.body.name,
-      email: req.body.email,
-    },
-  });
-  res.json(user);
+router.post("/authentication", async (req, res, next) => {
+  try {
+    const{email, name} = req.body
+    const [user, created] = await User.findOrCreate({
+      where: {email: email },
+      defaults: {
+        name,
+        email,
+      },
+    });
+res.status(200).json({created, user})
+  } catch (error) {
+    next(error)
+  }
 });
+
+
+
+//   res.status(200).json({created, pokemon})
+//   } 
+//   catch (error) {
+//       next(error);
+//   }
+// })
 
 module.exports = router;
 
