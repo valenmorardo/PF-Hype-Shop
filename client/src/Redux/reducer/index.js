@@ -106,6 +106,16 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             orders: action.payload,
          };
+
+      // FILTROS ORDER ADMIN
+      case FILTER_STATE:
+         // Crear Filtros/ AQUI HIRA LOGICA
+         return {};
+
+      case FILTER_DATE:
+         // CREAR FILTROS ASCENDETE / DESCENDETE LOGICA
+         return {};
+
       default:
          return initialState;
    }
