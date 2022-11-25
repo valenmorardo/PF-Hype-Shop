@@ -10,55 +10,55 @@ const { objectFormatter } = require("../utils/objectFormatter");
 // const ITEM_REVIEW_ATTRIBUTES =
 //   "?limit=10&attributes=paging,reviews,rating_average,rating_levels";
 
-const getApiProducts = async () => {
-  // const dataArray = [];
+// const getApiProducts = async () => {
+// const dataArray = [];
 
-  // const totalApiCalls = 2;
-  // const productsToRetrieve = [];
+// const totalApiCalls = 2;
+// const productsToRetrieve = [];
 
-  // for (let i = ; i <= totalApiCalls; i++) {
-  //   productsToRetrieve.push(i * 50);
-  // }
+// for (let i = ; i <= totalApiCalls; i++) {
+//   productsToRetrieve.push(i * 50);
+// }
 
-  // for (const offset of productsToRetrieve) {
-  //   const fetch = await axios.get(
-  //     `https://api.mercadolibre.com/sites/MLA/search?category=MLA109027&offset=${offset}`
-  //   );
-  //   const data = fetch.data.results;
-  //   const arrayString = data.map((prod) => prod.id);
+// for (const offset of productsToRetrieve) {
+//   const fetch = await axios.get(
+//     `https://api.mercadolibre.com/sites/MLA/search?category=MLA109027&offset=${offset}`
+//   );
+//   const data = fetch.data.results;
+//   const arrayString = data.map((prod) => prod.id);
 
-  //   const firstTwentyIds = arrayString.slice(0, 20).join(",");
-  //   // const secondTwentyIds = arrayString.slice(20, 40).join(",");
-  //   // const thirdTwentyIds = arrayString.slice(40, 50).join(",");
+//   const firstTwentyIds = arrayString.slice(0, 20).join(",");
+//   // const secondTwentyIds = arrayString.slice(20, 40).join(",");
+//   // const thirdTwentyIds = arrayString.slice(40, 50).join(",");
 
-  //   const firstIdsFetch = await axios.get(
-  //     `${MULTIPLE_IDS_URL}&ids=${firstTwentyIds}`
-  //   );
+//   const firstIdsFetch = await axios.get(
+//     `${MULTIPLE_IDS_URL}&ids=${firstTwentyIds}`
+//   );
 
-  //   // const secondIdsFetch = await axios.get(
-  //   //   `${MULTIPLE_IDS_URL}&ids=${secondTwentyIds}`
-  //   // );
-  //   // const thirdIdsFetch = await axios.get(
-  //   //   `${MULTIPLE_IDS_URL}&ids=${thirdTwentyIds}`
-  //   // );
+//   // const secondIdsFetch = await axios.get(
+//   //   `${MULTIPLE_IDS_URL}&ids=${secondTwentyIds}`
+//   // );
+//   // const thirdIdsFetch = await axios.get(
+//   //   `${MULTIPLE_IDS_URL}&ids=${thirdTwentyIds}`
+//   // );
 
-  //   // [firstIdsFetch, secondIdsFetch, thirdIdsFetch].forEach((dataString) =>
-  //   //   dataString.data.forEach((prod) => {
-  //   //     const dataFormatted = objectFormatter(prod.body);
-  //   //     dataArray.push(dataFormatted);
-  //   //   })
-  //   // );
+//   // [firstIdsFetch, secondIdsFetch, thirdIdsFetch].forEach((dataString) =>
+//   //   dataString.data.forEach((prod) => {
+//   //     const dataFormatted = objectFormatter(prod.body);
+//   //     dataArray.push(dataFormatted);
+//   //   })
+//   // );
 
-  //   [firstIdsFetch].forEach((dataString) =>
-  //     dataString.data.forEach((prod) => {
-  //       const dataFormatted = objectFormatter(prod.body);
-  //       dataArray.push(dataFormatted);
-  //     })
-  //   );
-  // }
+//   [firstIdsFetch].forEach((dataString) =>
+//     dataString.data.forEach((prod) => {
+//       const dataFormatted = objectFormatter(prod.body);
+//       dataArray.push(dataFormatted);
+//     })
+//   );
+// }
 
-  return dataArray;
-};
+// return dataArray;
+// };
 
 const getDbProducts = async (title) => {
   if (title) {
@@ -95,8 +95,10 @@ const getDbProducts = async (title) => {
       },
     ],
   });
+  const productsObject = JSON.parse(JSON.stringify(productsData));
+  const products = productsObject.map((prod) => objectFormatter(prod));
 
-  return productsData;
+  return products;
 };
 
 const getSingleDbProduct = async (primaryKey) => {
@@ -104,7 +106,7 @@ const getSingleDbProduct = async (primaryKey) => {
 };
 
 module.exports = {
-  getApiProducts,
+  // getApiProducts,
   getDbProducts,
   getSingleDbProduct,
 };

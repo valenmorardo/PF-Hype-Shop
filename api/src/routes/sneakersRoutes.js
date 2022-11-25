@@ -1,12 +1,12 @@
 const { Router } = require("express");
-const { Product, User } = require("../db");
+const { Product, User, Attribute, Variation, Size, Color } = require("../db");
 
 const {
   allData,
   getProductById,
   createProduct,
 } = require("../controllers/sneakers.controller");
-const { defaults } = require("pg");
+const { objectFormatter } = require("../utils/objectFormatter");
 
 const router = Router();
 
@@ -18,23 +18,24 @@ router.get("/filters/:filter", async (req, res) => {
   const filter = req.params.filter;
   try {
     const attributeFromDb = await Product.findAll({
-      attributes: [`${filter}`],
-      raw: true,
+      include: [
+        {
+          model: Attribute,
+          attributes: { exclude: ["productId"] },
+        },
+        {
+          model: Variation,
+          attributes: { exclude: ["colorId", "sizeId", "productId"] },
+          include: [{ model: Size }, { model: Color }],
+        },
+      ],
     });
 
-    let results;
-    if (filter === "colors" || filter === "sizes") {
-      results = new Set(
-        attributeFromDb.map((size) => {
-          if (!size[filter].length) return "40";
-          return size[filter][0];
-        })
-      );
-      res.status(200).json(Array.from(results));
-    } else {
-      results = attributeFromDb.map((attr) => attr[filter]);
-      res.status(200).json(Array.from(new Set(results)));
-    }
+    const productsObject = JSON.parse(JSON.stringify(attributeFromDb));
+    const products = productsObject.map((prod) => objectFormatter(prod));
+
+    const results = products.map((attr) => attr[filter]);
+    res.status(200).json(Array.from(new Set(results)));
   } catch (e) {
     res.status(400).json({ Error: e.message });
   }
