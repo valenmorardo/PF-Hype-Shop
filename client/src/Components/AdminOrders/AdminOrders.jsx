@@ -145,6 +145,7 @@ const AdminOrders = () => {
                                     fecha={el.fecha_Compra}
                                     direccion={el.direccion}
                                     estado={el.estado}
+                                    products={el.Compra}
 
                                 />
                             ))}
