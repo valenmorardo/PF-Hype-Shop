@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AdminOrdersModal from "./AdminOrdersModal";
 
-const AdminOrdersCard = ({ id, nombre, email, image, estado, fecha, direccion, }) => {
+const AdminOrdersCard = ({ id, nombre, email, image, estado, fecha, direccion, products }) => {
 
     const [openModal, setOpenModal] = useState(false)
 
@@ -57,6 +57,7 @@ const AdminOrdersCard = ({ id, nombre, email, image, estado, fecha, direccion, }
                         setOpenModal={setOpenModal}
                         id={id}
                         estado={estado}
+                        products={products}
                     />
                     // <ModalCantidad
                     //     id={id}
