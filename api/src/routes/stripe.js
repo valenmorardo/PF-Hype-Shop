@@ -15,7 +15,7 @@ router.post("/checkout", async (req, res) => {
         product_data: {
           name: item.title,
           images: item.pictures,
-          description: `Zapatilla marca ${item.brand} color ${item.colors[0]} para ${item.gender} talle ${item.sizes[0]}`,
+          description: `Zapatilla`,
           metadata: { id: item.id },
         },
         unit_amount: item.price * 100,
@@ -47,6 +47,7 @@ router.post("/checkout", async (req, res) => {
     success_url: "http://localhost:3000/checkout-success",
     cancel_url: "http://localhost:3000/",
   });
+  console.log(session)
 
   res.send({ url: session.url });
 });
