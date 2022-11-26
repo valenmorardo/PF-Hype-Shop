@@ -16,7 +16,7 @@ const CardDetail = (props) => {
   const dispatch = useDispatch();
   const sneakerDetail = useSelector((state) => state.detail);
   const history = useHistory()
-  
+
 
 
   useEffect(() => {
@@ -131,7 +131,7 @@ const CardDetail = (props) => {
       return (swal("Producto Agregado!", "Este producto ahora Hace parte de tu Carrito!", "success"));
     }
 
-    
+
   }
 
   // console.log(sneakerDetail);
@@ -169,7 +169,7 @@ const CardDetail = (props) => {
                   <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
                     <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{sneakerDetail.title}</h1>
                   </div>
-                  {/* {console.log(sneakerDetail)} */}
+                  {console.log(sneakerDetail)}
                   {/* Options */}
                   <div className="mt-4 lg:row-span-3 lg:mt-0">
                     <h2 className="sr-only">Product information</h2>
@@ -180,7 +180,7 @@ const CardDetail = (props) => {
                       <div className="flex items-center justify-between">
                         {/* {console.log(onAddCarry(sneakerDetail))} */}
                         <h3 className="text-sm font-medium text-gray-900">TALLA</h3>
-{/*                         {sneakerDetail.sizes.map(el =>
+                        {/*                         {sneakerDetail.sizes.map(el =>
                           <p className="text-sm font-medium text-indigo-600 hover:text-indigo-500"> {el}</p>
                         )} */}
                       </div>
@@ -239,7 +239,7 @@ const CardDetail = (props) => {
                           </li>
                           <br />
                           <li className="text-gray-400">
-{/*                             <span className="text-gray-900 text-xl font-medium">Color: {
+                            {/*                             <span className="text-gray-900 text-xl font-medium">Color: {
                               sneakerDetail.colors.map(e => <h3>{e.toUpperCase()}</h3>)
                             }
                             </span> */}
@@ -253,12 +253,12 @@ const CardDetail = (props) => {
               </div>
 
               <div>
-                  <ShowReview reviews={sneakerDetail.reviews}/>
+                <ShowReview reviews={sneakerDetail.reviews} />
               </div>
-              
+
             </div>
 
-            )
+          )
 
           : <Loading />
       }
