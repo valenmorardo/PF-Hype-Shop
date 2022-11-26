@@ -2,21 +2,12 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import swal from "sweetalert"
 import { patchOrder } from "../../../Redux/actions";
-import DetailProductBuy from "../../DetailProductBuy/DetailProductBuy";
+
 
 const AdminOrdersModal = ({ setOpenModal, id, estado, products }) => {
     const dispatch = useDispatch();
 
-    // ESTADO PARA VER DETALLE:
-    const [openDetail, setOpenDetail] = useState(false)
 
-    const handleOpenDetail = () => {
-        setOpenDetail(true)
-    }
-
-    const handleCloseDetail = () => {
-        setOpenDetail(false)
-    }
 
     // ESTADO
     const [estadoOrder, setEstadoOrder] = useState(estado)
@@ -53,21 +44,14 @@ const AdminOrdersModal = ({ setOpenModal, id, estado, products }) => {
 
     }
     return (
-
-        <div className="z-20 bg-[#f8fafc8c] absolute top-0 bottom-0 right-0 left-0 rounded-2xl ">
-            <div className="flex items-center flex-col bg-white py-7 px-4 w-[850px] min-h-[3/4] mt-8 mx-auto rounded-xl border border-solid border-gray-300">
+        <div className="z-20 bg-[#f8fafc8c] max-w-full min-h-[120rem] fixed top-0 bottom-0 right-0 left-0 rounded-2xl" >
+            < div className="flex items-center flex-col bg-white py-7 px-4 w-[850px] min-h-[3/3] mt-8 mx-auto rounded-xl border border-solid border-gray-300" >
                 <p className='font-bold tracking-tight sm:text-xl mt-0 text-gray-400 px-2'><b className="text-[#e00000] text-2xl">Precaucion</b> Todos los Cambios que Realices Aquí serán Notificados automáticamente al Usuario Por Email, Confirma El Estado Con la Empresa Transportadora Antes De Cualquier Cambio.</p>
                 <div className="flex justify-between mt-4" >
                     <div className="flex">
                         <div className="max-w-md flex-col mx-8 ">
                             {console.log(estadoOrder)}
-                            <button onClick={() => handleOpenDetail()} className=" font-bold tracking-tight text-[#f15a24]  sm:text-xl leading-none">Detalle Compra</button>
-                            {/* Detail Compra */}
-                            {openDetail &&
-                                <DetailProductBuy
-                                    onClose={handleCloseDetail}
-                                    products={products}
-                                />}
+
                             <div className="flex justify-center items-end gap-1 border-b-2 border-gray-300 border-solid  ">
                                 <p className=" font-bold tracking-tight text-gray-900 sm:text-2xl mt-0">ID Pedido: </p>
                                 <p className=" font-bold tracking-tight text-gray-900 sm:text-3xl mt-1 "> {id}</p>
@@ -118,7 +102,7 @@ const AdminOrdersModal = ({ setOpenModal, id, estado, products }) => {
                         onClick={(e) => handleConfirm(e, estadoOrder)}
                     >Aceptar</button>
                 </div>
-            </div>
+            </ div >
             {/* <button onClick={() => handleCloseModal()}>Cerrar</button> */}
         </div >
 
