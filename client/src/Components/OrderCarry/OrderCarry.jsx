@@ -77,7 +77,7 @@ function OrderCarry() {
                 />
               ))}
           </div>
-          <div className="mt-10 w-1/5 h-[400px] static rounded-xl border border-solid border=[#e6e8eb]">
+          <div className="mt-10 w-1/5 h-[400px] sticky top-3 rounded-xl border border-solid border=[#e6e8eb]">
             <p className="mt-5 font-bold tracking-tight text-gray-900 sm:text-4xl ">
               Tu Orden
             </p>
