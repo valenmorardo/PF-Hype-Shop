@@ -47,7 +47,7 @@ router.post("/checkout", async (req, res) => {
     success_url: "http://localhost:3000/checkout-success",
     cancel_url: "http://localhost:3000/",
   });
-  console.log(session)
+  
 
   res.send({ url: session.url });
 });
