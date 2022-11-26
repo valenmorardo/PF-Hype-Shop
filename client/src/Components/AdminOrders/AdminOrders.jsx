@@ -80,7 +80,7 @@ const AdminOrders = () => {
     ]
 
     return (
-        <div className=" bg-slate-50">
+        <div className=" bg-slate-50 ">
             <Link to="/" className="absolute left-0 top-4">
                 <button
                     type="submit"
@@ -93,7 +93,7 @@ const AdminOrders = () => {
                 ADMINISTRAR ORDENES
             </p>
             {dataFalse && dataFalse.length >= 1 ? (
-                <div div className="flex flex-row justify-evenly">
+                <div div className="flex flex-row justify-evenly h-max">
                     {/* FILTROS */}
                     <div className="mt-10 w-1/5 h-[440px] static rounded-xl border border-solid border=[#e6e8eb]">
                         <p className="mt-5 font-bold tracking-tight text-gray-900 sm:text-4xl ">
@@ -127,7 +127,7 @@ const AdminOrders = () => {
                                     </select>
                                 </div>
                             </div>
-                            <div className="mt-6">
+                            <div className="mt-6 text-white w-36 m-auto bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-1 py-2">
                                 <button>Quitar Filtros</button>
                             </div>
                         </div>
