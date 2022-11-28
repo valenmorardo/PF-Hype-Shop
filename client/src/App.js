@@ -17,7 +17,7 @@ import Register from "./Components/Register/Register";
 import UserInformation from "./Components/UserDashboard/UserInformation";
 import UserOrder from "./Components/UserDashboard/UserOrders";
 import Favorites from "./Components/UserDashboard/UserFavorites";
-
+import NavBar from "./Components/NavBar/NavBar";
 // AdminOrder
 import AdminOrders from "./Components/AdminOrders/AdminOrders";
 
@@ -26,6 +26,7 @@ function App() {
    return (
       <BrowserRouter>
          <div className="App">
+            <Route path="/" component={NavBar}/>
             <Switch>
                <Route exact path="/" component={Home} />
                <Route path="/sneaker/:id" component={CardDetail} />
