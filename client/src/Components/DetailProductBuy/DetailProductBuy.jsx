@@ -17,9 +17,17 @@ const DetailProductBuy = ({ onClose, products }) => {
                 <div className="flex flex-col items-center  ">
                     <p className="mt-3 font-bold tracking-tight text-indigo-700 sm:text-4xl mb-6" >Detalle Compra</p>
                     <div className="flex justify-center flex-wrap w-11/12 h-5/6 gap-4 ">
-                        {products.length > 0 && array.map((el) => (
+                        {products.length > 0 && products.map((el) => (
                             <DetailProductBuyCard
                                 title={el.title}
+                                image={el.pictures[0]}
+                                brand={el.brand}
+                                category={el.category}
+                                colors={el.colors}
+                                gender={el.gender}
+                                cantidad={el.cantidad}
+                                price={el.price}
+                                externalMaterial={el.externalMaterial}
                             />
                         ))}
                     </div>
