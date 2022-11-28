@@ -194,6 +194,8 @@ const CardDetail = (props) => {
                   {sneakerDetail.title}
                 </h1>
               </div>
+              {console.log(sneakerDetail)}
+              {console.log("Variaciones", variationChoosen)}
               {/* Options */}
               <div className="mt-4 lg:row-span-3 lg:mt-0">
                 <h2 className="sr-only">Product information</h2>
@@ -212,7 +214,12 @@ const CardDetail = (props) => {
                 )}
                 <button
                   type="submit"
-                  onClick={() => onAddCarry(variationChoosen)}
+                  onClick={() =>
+                    onAddCarry({
+                      title: sneakerDetail.title,
+                      ...variationChoosen,
+                    })
+                  }
                   className="flex items-center justify-center w-full px-8 py-3 mt-10 text-base font-medium text-white border border-transparent rounded-md bg-lime-500 hover:bg-lime-400 focus:outline-none "
                 >
                   Añadir Carrito
@@ -220,7 +227,12 @@ const CardDetail = (props) => {
 
                 <button
                   type="submit"
-                  onClick={() => buy(variationChoosen)}
+                  onClick={() =>
+                    buy({
+                      title: sneakerDetail.title,
+                      ...variationChoosen,
+                    })
+                  }
                   className="flex items-center justify-center w-full px-8 py-3 mt-10 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Comprar
