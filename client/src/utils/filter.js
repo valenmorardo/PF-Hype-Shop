@@ -1,10 +1,5 @@
 export default function filter(filtros, products) {
-  console.log(filtros);
-  /* console.log(products) */
-
   let filteredProducts = products.filter((product) => {
-    /* console.log(product.attributes) */
-
     product.attributes.filter((e) => {
       if (e.name === "Marca") {
         product.Marca = e.value;
@@ -16,8 +11,6 @@ export default function filter(filtros, products) {
         product.Estilo = e.value;
       }
     });
-
-    console.log(product);
 
     for (const i in filtros) {
       if (product[i] !== filtros[i] && filtros[i] !== "Todos") {
