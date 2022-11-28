@@ -10,22 +10,28 @@ import ShowReview from "./Reviews/ShowReview/ShowReview";
 // CARRITO:
 import useLocalStorage from "../useLocalStorage/useLocalstorage";
 import swal from "sweetalert";
+import Variations from "./Variations/Variations";
 
 const CardDetail = (props) => {
   const dispatch = useDispatch();
   const sneakerDetail = useSelector((state) => state.detail);
   const history = useHistory();
 
-  const [variationChoosen, setVariationChoosen] = useState(null);
+  const [variationChoosen, setVariationChoosen] = useState(sneakerDetail);
 
   useEffect(() => {
     dispatch(getDetail(props.match.params.id));
+    setVariationChoosen(sneakerDetail);
     // desmontando Componente:
     return () => {
       // arrow para poder ejecutarlo
       dispatch(detailZero());
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    setVariationChoosen(sneakerDetail);
+  }, [sneakerDetail]);
 
   const responsive = {
     superLargeDesktop: {
@@ -156,11 +162,13 @@ const CardDetail = (props) => {
     }
   };
 
-  // console.log(sneakerDetail);
+  const handleVariationChange = (sneaker) => {
+    setVariationChoosen(sneaker);
+  };
 
   return (
     <>
-      {sneakerDetail.id ? (
+      {variationChoosen.id ? (
         <div className="bg-white">
           <div className="pt-6">
             <Link to="/">
@@ -186,7 +194,6 @@ const CardDetail = (props) => {
                   {sneakerDetail.title}
                 </h1>
               </div>
-              {console.log(sneakerDetail)}
               {/* Options */}
               <div className="mt-4 lg:row-span-3 lg:mt-0">
                 <h2 className="sr-only">Product information</h2>
@@ -194,23 +201,19 @@ const CardDetail = (props) => {
                   PRECIO: ${sneakerDetail.price}
                 </p>
 
-                {/* Sizes */}
-                <p className="mt-2 text-xl font-medium text-gray-900">
-                  {sneakerDetail.variations.length ? (
-                    <span>
-                      Cantidad disponible :
-                      {variationChoosen?.available_quantity}
-                    </span>
-                  ) : (
-                    <span>
-                      Cantidad disponible : {sneakerDetail.available_quantity}
-                    </span>
-                  )}
-                  {/* AÑADIR CARRITO */}
-                </p>
+                {sneakerDetail.variations.length ? (
+                  <Variations
+                    handleVariationChange={handleVariationChange}
+                    firstVariation={sneakerDetail.variations[0]}
+                    variationChoosen={variationChoosen}
+                    variations={sneakerDetail.variations}
+                  />
+                ) : (
+                  <p>Cantidad disponible: {sneakerDetail.available_quantity}</p>
+                )}
                 <button
                   type="submit"
-                  onClick={() => onAddCarry(sneakerDetail)}
+                  onClick={() => onAddCarry(variationChoosen)}
                   className="flex items-center justify-center w-full px-8 py-3 mt-10 text-base font-medium text-white border border-transparent rounded-md bg-lime-500 hover:bg-lime-400 focus:outline-none "
                 >
                   Añadir Carrito
@@ -218,7 +221,7 @@ const CardDetail = (props) => {
 
                 <button
                   type="submit"
-                  onClick={() => buy(sneakerDetail)}
+                  onClick={() => buy(variationChoosen)}
                   className="flex items-center justify-center w-full px-8 py-3 mt-10 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Comprar

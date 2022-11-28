@@ -63,7 +63,7 @@ function OrderCarry() {
                   key={el.id}
                   id={el.id}
                   title={el.title}
-                  image={el.pictures[0]}
+                  image={el.pictures ? el.pictures[0] : el.picture_ids[0]}
                   brand={el.brand}
                   condicion={el.condition}
                   externalMaterial={el.externalMaterial}
