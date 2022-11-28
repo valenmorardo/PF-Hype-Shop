@@ -2,6 +2,7 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
+export default function Error404(){
 
     return(
         <section className="flex items-center h-full p-16 ">
