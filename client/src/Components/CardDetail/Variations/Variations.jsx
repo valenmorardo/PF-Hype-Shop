@@ -4,7 +4,6 @@ const Variations = ({
   variations,
   handleVariationChange,
   variationChoosen,
-  firstVariation,
 }) => {
   useEffect(() => {
     handleVariationChange(variations[0]);
@@ -21,7 +20,7 @@ const Variations = ({
             className={`w-20 h-20 m-2 ${
               variation.id === variationChoosen.id
                 ? "border-4 rounded-md  border-blue-600"
-                : "border-l-pink-700"
+                : ""
             }`}
             style={{
               backgroundImage: `url(${variation.picture_ids[0]})`,

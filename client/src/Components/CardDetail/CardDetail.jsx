@@ -204,7 +204,6 @@ const CardDetail = (props) => {
                 {sneakerDetail.variations.length ? (
                   <Variations
                     handleVariationChange={handleVariationChange}
-                    firstVariation={sneakerDetail.variations[0]}
                     variationChoosen={variationChoosen}
                     variations={sneakerDetail.variations}
                   />
