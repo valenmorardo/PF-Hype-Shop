@@ -110,9 +110,29 @@ const getDbProducts = async (title) => {
 };
 
 const getSingleDbProduct = async (primaryKey) => {
-  return await Product.findByPk(primaryKey, {
-    include: [{ model: Attribute }, { model: Variation }, { model: Review }],
+  const productRetrieved = await Product.findByPk(primaryKey, {
+    include: [
+      { model: Attribute },
+      { model: Variation, include: [Size, Color], nested: true },
+      { model: Review },
+    ],
   });
+  const productInfo = JSON.parse(JSON.stringify(productRetrieved));
+
+  if (productInfo.variations.length) {
+    const available_quantity = productInfo.variations.reduce(
+      (total, current) => {
+        return (total += current.available_quantity);
+      },
+      0
+    );
+    const sold_quantity = productInfo.variations.reduce((total, current) => {
+      return (total += current.sold_quantity);
+    }, 0);
+    return { ...productInfo, available_quantity, sold_quantity };
+  }
+
+  return productRetrieved;
 };
 
 module.exports = {
