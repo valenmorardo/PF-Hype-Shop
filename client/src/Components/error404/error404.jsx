@@ -1,6 +1,7 @@
-// import styles from '../error404/error404.module.css'
+import React from "react";
 
-export default function Error404(){
+import { Link } from "react-router-dom";
+
 
     return(
         <section className="flex items-center h-full p-16 ">
@@ -15,5 +16,6 @@ export default function Error404(){
 		</div>
 	</div>
 </section>
+
     )
 }

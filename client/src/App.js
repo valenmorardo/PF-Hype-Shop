@@ -21,7 +21,6 @@ import NavBar from "./Components/NavBar/NavBar";
 // AdminOrder
 import AdminOrders from "./Components/AdminOrders/AdminOrders";
 
-
 function App() {
    return (
       <BrowserRouter>
@@ -37,9 +36,9 @@ function App() {
                <Route path="/checkout-success" component={CheckoutSuccess} />
                <Route path="/createaccount" />
                <Route path="/about" component={About} />
-               <Route path="/account" component={UserInformation}/>
-               <Route path="/orders" component={UserOrder}/>
-               <Route path ="/favorites" component={Favorites}/>
+               <Route path="/account" component={UserInformation} />
+               <Route path="/orders" component={UserOrder} />
+               <Route path="/favorites" component={Favorites} />
                <Route exact path="/createProduct" component={CreateProduct} />
                <Route path="*" component={error404}></Route>
             </Switch>

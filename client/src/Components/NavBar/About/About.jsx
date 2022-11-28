@@ -1,16 +1,24 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "../About/About.module.css";
 
 const About = () => {
   return (
+    <>
+    <Link to='/'>
+      <button
+        type="submit"
+        className="mt-6 ml-6 flex w-3 items-center justify-center rounded-md border border-transparent bg-[#f15a24]  py-2 px-9 text-base font-medium text-white hover:bg-orange-500 focus:outline-none  "
+      >Volver</button>
+    </Link>
     <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
       <div className="text-center pb-12">
         <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl font-heading text-gray-900">
-          Check our awesome team members
+          Miembros del equipo
         </h1>
         <br/>
         <h2 className="text-base font-bold text-indigo-600">
-        We are a group of dedicated programmers who enjoy working as a team. During this experience we learned a lot about programming and about communication and working together.
+        Somos un grupo de programadores dedicados que disfrutan trabajar en equipo. Durante esta experiencia aprendimos mucho sobre programación y sobre comunicación y trabajo conjunto.
         </h2>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -18,7 +26,7 @@ const About = () => {
           <div className="mb-8">
             <img
               className="object-center object-cover rounded-full h-36 w-36"
-              src="https://media-exp1.licdn.com/dms/image/D4D35AQG0Ff8fe5EFHw/profile-framedphoto-shrink_200_200/0/1664543314586?e=1668877200&v=beta&t=ZM_1fRC9kR_AsGB-p0H53PTDg15NgRyNw6quTRr0ZNc"
+              src="https://media-exp1.licdn.com/dms/image/D4D35AQG0Ff8fe5EFHw/profile-framedphoto-shrink_400_400/0/1664543314586?e=1670191200&v=beta&t=d66ABWurNxEwEAEZy2_Ykqx107o2y-3BVfbDe-XJq-8"
               alt="photo"
             />
           </div>
@@ -53,7 +61,7 @@ const About = () => {
           <div className="mb-8">
             <img
               className="object-center object-cover rounded-full h-36 w-36"
-              src='https://media-exp1.licdn.com/dms/image/D4E35AQEmu8vMzXD0vg/profile-framedphoto-shrink_200_200/0/1666981054470?e=1668877200&v=beta&t=9Z2J2hm82xO9Zw5xndgYZGN02D-z1AJ7On_Rm6wlOYA'
+              src='https://media-exp1.licdn.com/dms/image/D4E35AQEmu8vMzXD0vg/profile-framedphoto-shrink_400_400/0/1666981054470?e=1670191200&v=beta&t=EMfOD7V-4lQw6f5sRfGksniVjRMMiYXfac9j9ReG8UQ'
               alt="photo"
             />
           </div>
@@ -88,7 +96,7 @@ const About = () => {
           <div className="mb-8">
             <img
               className="object-center object-cover rounded-full h-36 w-36"
-              src="https://media-exp1.licdn.com/dms/image/D4D35AQFhSgnc8xSdtA/profile-framedphoto-shrink_200_200/0/1667352021537?e=1668877200&v=beta&t=ubUTMNsDBVKXCVh6_OyteM0mvRoW26bgxorq6XBPBWU"
+              src="https://media-exp1.licdn.com/dms/image/D4D35AQHYxvn17zbAkQ/profile-framedphoto-shrink_400_400/0/1669254200611?e=1670191200&v=beta&t=Nq2qgxdwcabBRGo-CIUbTw_CGknhOQfkZKEoxEliU00"
               alt="photo"
             />
           </div>
@@ -257,6 +265,7 @@ const About = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

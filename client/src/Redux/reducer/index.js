@@ -59,7 +59,10 @@ const rootReducer = (state = initialState, action) => {
       case GET_DETAIL:
          return {
             ...state,
-            detail: action.payload,
+            detail: {
+               ...action.payload,
+               price: Math.trunc(action.payload.price),
+            },
          };
 
       case GET_BRANDS:
