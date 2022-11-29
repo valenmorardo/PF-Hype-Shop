@@ -6,7 +6,7 @@ import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import { useHistory } from "react-router-dom";
-import ShowReview from "./Reviews/ShowReview/ShowReview";
+import ShowReview from './ShowReviews/ShowReview'
 // CARRITO:
 import useLocalStorage from "../useLocalStorage/useLocalstorage";
 import swal from "sweetalert";
