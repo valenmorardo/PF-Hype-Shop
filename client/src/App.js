@@ -21,11 +21,13 @@ import NavBar from "./Components/NavBar/NavBar";
 // AdminOrder
 import AdminOrders from "./Components/AdminOrders/AdminOrders";
 
+import PageNoAdmin from "./Components/PageNoAdmin/PageNoAdmin";
+
 function App() {
    return (
       <BrowserRouter>
          <div className="App">
-            <Route path="/" component={NavBar}/>
+            <Route path="/" component={NavBar} />
             <Switch>
                <Route exact path="/" component={Home} />
                <Route path="/sneaker/:id" component={CardDetail} />
@@ -38,6 +40,7 @@ function App() {
                <Route path="/about" component={About} />
                <Route path="/account" component={UserInformation} />
                <Route path="/orders" component={UserOrder} />
+               <Route path="/pageNoFound" component={PageNoAdmin} />
                <Route path="/favorites" component={Favorites} />
                <Route exact path="/createProduct" component={CreateProduct} />
                <Route path="*" component={error404}></Route>
