@@ -19,7 +19,7 @@ function OrderCarry() {
   const totalPrice = (item) => {
     const arrayPrecio = item.map((it) => it.price * it.cantidad);
     const sumaTotal = arrayPrecio.reduce((a, b) => a + b, 0);
-    return sumaTotal;
+    return Math.trunc(sumaTotal);
   };
 
   const addCarryNewQuantity = (id, cantidad) => {
@@ -56,18 +56,19 @@ function OrderCarry() {
         <div div className="flex flex-row justify-evenly">
           <div className="flex flex-col flex-wrap content-center">
             {console.log("Carrito", item)}
-            {/* {console.log("PruebaCarry", pruebaConsole('f8c9604c-e137-406d-bd70-a295d4378461', 4))} */}
+            {/* {console.log("PruebaCarry", item[1].size)} */}
             {item &&
               item.map((el) => (
                 <OrderCarryCard
                   key={el.id}
                   id={el.id}
                   title={el.title}
-                  image={el.pictures[0]}
+                  image={el.pictures ? el.pictures[0] : el.picture_ids[0]}
                   brand={el.brand}
+                  size={el.attributes ? el.attributes : el.size.value}
                   condicion={el.condition}
                   externalMaterial={el.externalMaterial}
-                  price={el.price}
+                  price={Math.trunc(el.price)}
                   cantidad={el.cantidad}
                   onDeleteCarry={onDeleteCarry}
                   available_quantity={el.available_quantity}

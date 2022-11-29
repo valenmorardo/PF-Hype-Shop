@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AdminOrdersModal from "./AdminOrdersModal";
 import DetailProductBuy from "../../DetailProductBuy/DetailProductBuy";
 
-const AdminOrdersCard = ({ id, nombre, email, image, estado, fecha, direccion, products }) => {
+const AdminOrdersCard = ({ id, nombre, email, image, estado, fecha, direccion, products, precioTotal }) => {
 
     const [openModal, setOpenModal] = useState(false)
 
@@ -29,6 +29,7 @@ const AdminOrdersCard = ({ id, nombre, email, image, estado, fecha, direccion, p
                 <DetailProductBuy
                     onClose={handleCloseDetail}
                     products={products}
+                    precioTotal={precioTotal}
                 />
             }
             <div className="flex justify-between bg-white py-7 px-4 w-[890px] h-56 mt-8 rounded-xl border border-solid border=[#e6e8eb] relative " >
@@ -58,6 +59,7 @@ const AdminOrdersCard = ({ id, nombre, email, image, estado, fecha, direccion, p
                             <p className=" font-bold tracking-tight text-gray-900 sm:text-lg mt-1">Direccion: </p>
                             <p className=" font-bold tracking-tight text-indigo-600 sm:text-xl mt-1">{direccion}</p>
                         </div>
+                        <button onClick={() => handleOpenDetail()} className=" font-bold tracking-tight text-[#f15a24]  sm:text-xl leading-none">Detalle Compra</button>
                         {/* <p className=" font-bold tracking-tight text-gray-900 sm:text-2xl mt-3">${price}</p> */}
                     </div>
                 </div >
@@ -67,7 +69,7 @@ const AdminOrdersCard = ({ id, nombre, email, image, estado, fecha, direccion, p
                         <p className="font-bold text-2xl">Estado: </p>
                         <p className=" font-bold tracking-tight text-indigo-600 sm:text-2xl mt-1">{estado}</p>
                     </div>
-                    <button className="text-[#f15a24] font-semibold text-xl " onClick={() => handleOpenModal()}>Cambiar Estado</button>
+                    <button className=" font-bold tracking-tight text-[#f15a24]  sm:text-xl leading-none" onClick={() => handleOpenModal()}>Cambiar Estado</button>
                     {/* {openModal &&
                     <div>
                         <p>Modalito</p>
@@ -96,7 +98,7 @@ const AdminOrdersCard = ({ id, nombre, email, image, estado, fecha, direccion, p
                         // />
 
                     }
-                    <button onClick={() => handleOpenDetail()} className=" font-bold tracking-tight text-[#f15a24]  sm:text-xl leading-none">Detalle Compra</button>
+
                     {/* Detail Compra */}
                     <p className="text-white">Detalles</p>
                 </div>
@@ -106,7 +108,7 @@ const AdminOrdersCard = ({ id, nombre, email, image, estado, fecha, direccion, p
             <p>{card}</p>
             <p>{card}</p> */}
             </div >
-        </div>
+        </div >
     )
 }
 

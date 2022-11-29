@@ -16,6 +16,7 @@ import styles from "./Home.module.css";
 import Filtrado from "../NavBar/Filtrado/Filtrado";
 import Loading from "../Loading/Loading";
 import Button from "../Button/Button";
+import SearchBar from "../NavBar/SearchBar/SearchBar";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -55,7 +56,12 @@ const Home = () => {
   return (
     <div>
       <div>
-        <NavBar paginaUno={paginaUno} />
+        {/* <NavBar paginaUno={paginaUno} />
+        <nav className="bg-gray-50">
+      </nav> */}
+      <div className="py-3 px-4 mx-auto max-w-screen-xl md:px-6">
+        <SearchBar paginaUno={paginaUno} />
+      </div>
 
         <LightSpeed right delay={500} ssrFadeout>
           <Filtrado setIsLoading={setIsLoading} paginaUno={paginaUno} />
