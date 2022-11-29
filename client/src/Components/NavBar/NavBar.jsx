@@ -5,19 +5,14 @@ import img from "../../Img/HypeShop2.png";
 import IsAuthenticated from "../NavBar/Registrar/IsAuthenticated";
 import CarryIcon from "./CarryIcon/CarryIcon";
 import { useState } from "react";
+import Slide from 'react-reveal/Slide';
+
 
 import { Link } from "react-router-dom";
 
 const NavBar = ({ paginaUno }) => {
   return (
-    // <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
-    //     <div>
-    //         {/* <SearchBar/> */}
-    //         <Filtrado/>
-    //         <Link to='/createProduct'> <button> Create Product </button></Link>
-    //         <Link to='/about'> <button> ABOUT </button></Link>
-    //     </div>
-    // </nav>
+    <Slide top ssrFadeout>
 
     <div>
       <nav className="bg-white border-gray-200 ">
@@ -84,6 +79,8 @@ const NavBar = ({ paginaUno }) => {
         </div>
       </nav>
     </div>
+    </Slide>
+
   );
 };
 

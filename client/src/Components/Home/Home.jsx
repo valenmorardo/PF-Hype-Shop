@@ -4,6 +4,11 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSneakers } from "../../Redux/actions/index";
 
+import BounceExample from '../ChatBot/BounceExample'
+import LightSpeed from 'react-reveal/LightSpeed';
+import Zoom from 'react-reveal/Zoom';
+
+
 import Cards from "../Cards/Cards";
 import Paginado from "../Paginado/Paginado";
 import NavBar from "../NavBar/NavBar";
@@ -52,13 +57,21 @@ const Home = () => {
       <div>
         <NavBar paginaUno={paginaUno} />
 
-        <Filtrado setIsLoading={setIsLoading} paginaUno={paginaUno} />
+        <LightSpeed right delay={500} ssrFadeout>
+          <Filtrado setIsLoading={setIsLoading} paginaUno={paginaUno} />
+        </LightSpeed>
 
         {isLoading ? (
           <Loading setIsLoading={setIsLoading} isLoading={isLoading} />
         ) : sneakers.length ? (
           <div>
-            <Cards sneakers={currentSneaker} />
+
+            <Zoom ssrFadeout>
+              <Cards sneakers={currentSneaker} />
+            </Zoom>
+            
+            <BounceExample />
+
             <Paginado
               nextPage={nextPage}
               prevPage={prevPage}
