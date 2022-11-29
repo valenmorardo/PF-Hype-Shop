@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSneakers } from "../../Redux/actions/index";
 
 import BounceExample from '../ChatBot/BounceExample'
+//estilos 
 import LightSpeed from 'react-reveal/LightSpeed';
 import Zoom from 'react-reveal/Zoom';
 
@@ -58,13 +59,16 @@ const Home = () => {
         <NavBar paginaUno={paginaUno} />
 
         <LightSpeed right delay={500} ssrFadeout>
+       
           <Filtrado setIsLoading={setIsLoading} paginaUno={paginaUno} />
+       
         </LightSpeed>
 
         {isLoading ? (
           <Loading setIsLoading={setIsLoading} isLoading={isLoading} />
         ) : sneakers.length ? (
           <div>
+
 
             <Zoom ssrFadeout>
               <Cards sneakers={currentSneaker} />

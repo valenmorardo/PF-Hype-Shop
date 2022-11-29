@@ -5,6 +5,7 @@ import img from "../../Img/HypeShop2.png";
 import IsAuthenticated from "../NavBar/Registrar/IsAuthenticated";
 import CarryIcon from "./CarryIcon/CarryIcon";
 import { useState } from "react";
+//estilos
 import Slide from 'react-reveal/Slide';
 
 
@@ -12,6 +13,7 @@ import { Link } from "react-router-dom";
 
 const NavBar = ({ paginaUno }) => {
   return (
+    
     <Slide top ssrFadeout>
 
     <div>
