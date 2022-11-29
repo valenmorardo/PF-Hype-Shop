@@ -5,19 +5,17 @@ import { Link } from "react-router-dom";
 const PageNoAdmin = () => {
 
 	return (
-		<section className="flex items-center h-full p-16 ">
-			<div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
-				<div className="max-w-md text-center">
-					<h2 className="mb-8 font-extrabold text-9xl text-orange-600">
-						<span className="sr-only ">Error</span>404
-					</h2>
-					<p className="text-2xl font-semibold md:text-3xl">Lo sentimos, No logramos encontrar esta pagina.</p>
-					<p className="mt-4 mb-8 ">Pero no te preocupes, puedes encontrar mas sneakers en nuestra pagina de inicio.</p>
-					<a href="/" className="px-8 py-3 font-semibold  text-white bg-blue-600 rounded-lg ">Volver al inicio</a>
-				</div>
+		<div className="flex w-full flex-col items-center justify-center min-h-screen gap-20 bg-white">
+			<div>
+				<p className="flex items-center justify-center text-5xl font-bold text-[rgb(141, 141, 141)] duration-200 ease-in tracking-normal hover:scale-[1.1] hover:tracking-[5px] hover:text-black">❌Error 404 No Eres Admin!❌</p>
+				<p className="flex items-center justify-center mt-3 text-5xl font-bold text-[rgb(141, 141, 141)] duration-300 ease-in tracking-normal hover:scale-[1.1] hover:tracking-wide hover:text-black">No Tienes Autorización Para Estar Aquí👟👞👡</p>
 			</div>
-		</section>
-
+			<div>
+				<Link className="no-underline w-44 h-44 text-white  bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-4 py-2 duration-200 ease-out hover:-scale-100" to="/">
+					<button>Volver Al Inicio</button>
+				</Link>
+			</div>
+		</div >
 	)
 }
 
