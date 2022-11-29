@@ -37,6 +37,7 @@ const AdminOrders = () => {
             direccion: "CalleFalsa 123",
             fecha_Compra: "11-nov-2022",
             estado: "Comprado",
+            precioTotal: 32000,
             Compra: [{
                 age_group: "Adultos",
                 available_quantity: 11,
@@ -74,8 +75,6 @@ const AdminOrders = () => {
                 title: "Calzado Urbano Van Con Plataforma",
                 updatedAt: "2022-11-21T00:54:32.614Z"
             }],
-
-
         }
     ]
 
@@ -146,6 +145,7 @@ const AdminOrders = () => {
                                     direccion={el.direccion}
                                     estado={el.estado}
                                     products={el.Compra}
+                                    precioTotal={el.precioTotal}
 
                                 />
                             ))}
