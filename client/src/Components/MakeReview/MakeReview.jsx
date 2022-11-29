@@ -5,15 +5,19 @@ import { createReview } from "../../Redux/actions";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
+import { CreateReview } from "../../Redux/actions";
 
-const MakeReview = () => {
+const MakeReview = ({idProduct}) => {
 
   const dispatch = useDispatch();
 
   const [puntaje, setPuntaje] = useState(null);
-  const [review, setReview] = useState({})
+  const [review, setReview] = useState({
+    productId: idProduct
+  })
 
  
+
   function handleChange(e) { 
     setReview({
         ...review,
@@ -27,8 +31,8 @@ const MakeReview = () => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    if(Object.values(review).length === 3) {
-      /* dispatch(createReview(review)) */
+    if(Object.values(review).length) {
+      dispatch(CreateReview(review))
       setReview({});
     } else {
       alert('llene todos los campos porfavor')
