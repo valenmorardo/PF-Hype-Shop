@@ -6,12 +6,10 @@ function Index() {
   const [show, setShow] = useState(false);
   const [data, setData] = useState(false);
 
-  // const algo=response.charts[attributes].map((el)=>el.name)
 
   useEffect(() => {
     if(show){
       setData(response)
-      // console.log("ASASASSA",algo);
 
     }
 

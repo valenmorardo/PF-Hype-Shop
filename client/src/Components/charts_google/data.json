@@ -2,7 +2,8 @@
   "version": 1.0,
   "totalCharts": 32,
   "charts": [
-      {
+      
+    {
           "name": "Pie",
           "chartType": "PieChart",
           "data": [

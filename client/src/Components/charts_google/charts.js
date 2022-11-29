@@ -3,6 +3,7 @@ import { Chart } from "react-google-charts";
 const charts = (prop) => {
 
   return (
+    
     <Chart
       chartType={prop.chart.chartType}
       data={prop.chart.data}
