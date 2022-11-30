@@ -4,10 +4,12 @@ import { getOrders } from "../../Redux/actions";
 import AdminOrdersCard from "./AdminOrdersCard/AdminOrdersCard";
 import { filterState, filterDate } from "../../Redux/actions";
 import { useSelector, useDispatch, } from "react-redux";
+import PageNoAdmin from "../PageNoAdmin/PageNoAdmin";
 
 
 const AdminOrders = () => {
     // PARA TRAER ELEMENTOS
+    const user = useSelector((state) => state.currentUser)
     const dispatch = useDispatch();
     // const orders = useSelector((state) => state.orders);
 
@@ -79,91 +81,95 @@ const AdminOrders = () => {
     ]
 
     return (
-        <div className=" bg-slate-50 ">
-            <Link to="/" className="absolute left-0 top-4">
-                <button
-                    type="submit"
-                    className="mt-2 ml-6 flex w-3 items-center justify-center rounded-md border border-transparent bg-[#f15a24]  py-2 px-9 text-base font-medium text-white hover:bg-orange-500 focus:outline-none  "
-                >
-                    Volver
-                </button>
-            </Link>
-            <p className="mt-3 font-bold tracking-tight text-[#f15a24]  sm:text-4xl">
-                ADMINISTRAR ORDENES
-            </p>
-            {dataFalse && dataFalse.length >= 1 ? (
-                <div div className="flex flex-row justify-evenly h-max">
-                    {/* FILTROS */}
-                    <div className="mt-10 w-1/5 h-[440px] static rounded-xl border border-solid border=[#e6e8eb]">
-                        <p className="mt-5 font-bold tracking-tight text-gray-900 sm:text-4xl ">
-                            Estado De Ordenes
-                        </p>
-                        <p className="mt-3 font-bold tracking-tight text-gray-400 sm:text-lg ">
-                            Cambia el Estado De cada Orden: -Comprado, -Enviado, -Recibido Si Necesitas Tambien Tienes Disponibles Filtros.
-                        </p>
-                        <p className="mt-1 font-bold tracking-tight text-gray-900 sm:text-2xl ">
-                            Filtros:
-                        </p>
-                        <div>
-                            <div className="">
-                                <label for="estado" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Filtrar Por Estado:</label>
+        <div>
+
+            {user && user.isAdmin === true ?
+                <div className=" bg-slate-50 ">
+                    <Link to="/" className="absolute left-0 top-4">
+                        <button
+                            type="submit"
+                            className="mt-2 ml-6 flex w-3 items-center justify-center rounded-md border border-transparent bg-[#f15a24]  py-2 px-9 text-base font-medium text-white hover:bg-orange-500 focus:outline-none  "
+                        >
+                            Volver
+                        </button>
+                    </Link>
+                    <p className="mt-3 font-bold tracking-tight text-[#f15a24]  sm:text-4xl">
+                        ADMINISTRAR ORDENES
+                    </p>
+                    {dataFalse && dataFalse.length >= 1 ? (
+                        <div div className="flex flex-row justify-evenly h-max">
+                            {/* FILTROS */}
+                            <div className="mt-10 w-1/5 h-[440px] static rounded-xl border border-solid border=[#e6e8eb]">
+                                <p className="mt-5 font-bold tracking-tight text-gray-900 sm:text-4xl ">
+                                    Estado De Ordenes
+                                </p>
+                                <p className="mt-3 font-bold tracking-tight text-gray-400 sm:text-lg ">
+                                    Cambia el Estado De cada Orden: -Comprado, -Enviado, -Recibido Si Necesitas Tambien Tienes Disponibles Filtros.
+                                </p>
+                                <p className="mt-1 font-bold tracking-tight text-gray-900 sm:text-2xl ">
+                                    Filtros:
+                                </p>
                                 <div>
-                                    <select onChange={(e) => handleFilterState(e)} id="estado" className="block w-3/4 p-2 mb-3 mx-auto text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-800 ">
-                                        <option value={filtroEst} selected disabled >Estado</option>
-                                        <option value="Comprado">Comprado</option>
-                                        <option value="Despachado">Despachado</option>
-                                        <option value="Entregado">Entregado</option>
-                                    </select>
+                                    <div className="">
+                                        <label for="estado" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Filtrar Por Estado:</label>
+                                        <div>
+                                            <select onChange={(e) => handleFilterState(e)} id="estado" className="block w-3/4 p-2 mb-3 mx-auto text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-800 ">
+                                                <option value={filtroEst} selected disabled >Estado</option>
+                                                <option value="Comprado">Comprado</option>
+                                                <option value="Despachado">Despachado</option>
+                                                <option value="Entregado">Entregado</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="fecha" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Filtrar Por Fecha</label>
+                                        <div className="">
+                                            <select onChange={(e) => handleFilterDate(e)} id="fecha" className="block w-3/4 p-2 mb-3 mx-auto text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-800 ">
+                                                <option selected disabled >Fecha</option>
+                                                <option value="Ascendente">Ascendente</option>
+                                                <option value="Descendente">Descendente</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="mt-6 text-white w-36 m-auto bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-1 py-2">
+                                        <button>Quitar Filtros</button>
+                                    </div>
                                 </div>
                             </div>
-                            <div>
-                                <label for="fecha" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Filtrar Por Fecha</label>
-                                <div className="">
-                                    <select onChange={(e) => handleFilterDate(e)} id="fecha" className="block w-3/4 p-2 mb-3 mx-auto text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-800 ">
-                                        <option selected disabled >Fecha</option>
-                                        <option value="Ascendente">Ascendente</option>
-                                        <option value="Descendente">Descendente</option>
-                                    </select>
-                                </div>
+                            {/* CARDS */}
+                            <div className="flex flex-col flex-wrap content-center">
+                                {dataFalse &&
+                                    dataFalse.map((el) => (
+                                        <AdminOrdersCard
+                                            key={el.id}
+                                            id={el.id}
+                                            image={el.image}
+                                            nombre={el.nombre}
+                                            email={el.email}
+                                            fecha={el.fecha_Compra}
+                                            direccion={el.direccion}
+                                            estado={el.estado}
+                                            products={el.Compra}
+                                            precioTotal={el.precioTotal}
+
+                                        />
+                                    ))}
                             </div>
-                            <div className="mt-6 text-white w-36 m-auto bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-1 py-2">
-                                <button>Quitar Filtros</button>
-                            </div>
+
                         </div>
-                    </div>
-                    {/* CARDS */}
-                    <div className="flex flex-col flex-wrap content-center">
-                        {dataFalse &&
-                            dataFalse.map((el) => (
-                                <AdminOrdersCard
-                                    key={el.id}
-                                    id={el.id}
-                                    image={el.image}
-                                    nombre={el.nombre}
-                                    email={el.email}
-                                    fecha={el.fecha_Compra}
-                                    direccion={el.direccion}
-                                    estado={el.estado}
-                                    products={el.Compra}
-                                    precioTotal={el.precioTotal}
-
-                                />
-                            ))}
-                    </div>
-
-                </div>
-            ) : (
-                <div>
-                    <p className="mt-20 font-bold tracking-tight text-gray-900 sm:text-7xl">
-                        No Hay Ordenes
-                    </p>
-                    <p className="font-bold tracking-tight text-gray-900 sm:text-4xl ">
-                        Los Clientes No han Realizado Compras Aun.
-                    </p>
-                </div>
-            )
-            }
-        </div >
+                    ) : (
+                        <div>
+                            <p className="mt-20 font-bold tracking-tight text-gray-900 sm:text-7xl">
+                                No Hay Ordenes
+                            </p>
+                            <p className="font-bold tracking-tight text-gray-900 sm:text-4xl ">
+                                Los Clientes No han Realizado Compras Aun.
+                            </p>
+                        </div>
+                    )
+                    }
+                </div > : <PageNoAdmin />}
+        </div>
     )
 }
 
