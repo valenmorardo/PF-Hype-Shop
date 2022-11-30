@@ -3,7 +3,7 @@ const {
    getSingleDbProduct,
 } = require("../services/getProducts");
 
-const { Product } = require("../db");
+const { Product, Review } = require("../db");
 
 const allData = async (req, res) => {
    const { title } = req.query;
@@ -74,4 +74,30 @@ const createProduct = async (req, res) => {
       res.status(400).send(error);
    }
 };
-module.exports = { allData, getProductById, createProduct };
+
+const createReview = async (req, res) => {
+   let {
+      title,
+      content,
+      rate,
+      productId
+   } = req.body;
+
+   try {
+      let reviewCreate = await Review.create({
+         title,
+         content,
+         rate,
+         productId
+      });
+      console.log(reviewCreate);
+
+      res.send(reviewCreate);
+   } catch (error) {
+      console.log(error);
+      res.status(400).send(error);
+   }
+};
+
+
+module.exports = { allData, getProductById, createProduct, createReview};

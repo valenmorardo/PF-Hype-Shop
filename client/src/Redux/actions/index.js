@@ -203,3 +203,12 @@ export const filterDate = (payload) => {
       payload: payload,
    };
 };
+
+// POST REview
+export function CreateReview(payload) {
+  return async function() {
+    const response = await axios.post("http://localhost:3001/createReview", payload)
+    return response
+  };
+}
+

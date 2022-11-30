@@ -5,6 +5,7 @@ const {
   allData,
   getProductById,
   createProduct,
+  createReview,
 } = require("../controllers/sneakers.controller");
 const { objectFormatter } = require("../utils/objectFormatter");
 
@@ -52,6 +53,9 @@ router.post("/authentication", async (req, res, next) => {
     next(error);
   }
 });
+
+
+router.post("/createReview", createReview);
 
 //   res.status(200).json({created, pokemon})
 //   }
