@@ -18,7 +18,7 @@ import {
   FILTER_DATE,
   FILTER_STATE,
   GET_USERS,
-  
+
 } from "./actionTypes";
 
 export const getSneakers = () => {
@@ -293,4 +293,12 @@ export function CreateReview(payload) {
   };
 }
 
+
+//create order
+export function CreateOrder(payload) {
+  return async function() {
+    const response = await axios.post("http://localhost:3001/createOrder", payload)
+    return response;
+  };
+}
 
