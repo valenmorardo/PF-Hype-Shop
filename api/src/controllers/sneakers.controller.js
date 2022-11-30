@@ -5,7 +5,7 @@ const {
 
 // const { Product, User} = require("../db");
 
-const { Product, Review, User } = require("../db");
+const { Product, Review, User, Order } = require("../db");
 
 const allData = async (req, res) => {
    const { title } = req.query;
@@ -280,21 +280,115 @@ const sacarAdmin = async (req, res) => {
 };
 
 const createReview = async (req, res) => {
-   let { title, content, rate, productId } = req.body;
+   let { title, content, rate, productId, userId } = req.body;
 
    try {
+      let seacrhProduct = await Product.findByPk(productId);
+      let searchUser = await User.findByPk(userId);
       let reviewCreate = await Review.create({
          title,
          content,
          rate,
-         productId,
       });
+      console.log("antes", searchUser);
+      seacrhProduct.addReview(reviewCreate);
+      searchUser.addReview(reviewCreate);
+
       console.log(reviewCreate);
 
       res.send(reviewCreate);
    } catch (error) {
       console.log(error);
       res.status(400).send(error);
+   }
+};
+
+// CREACION DE ORDER
+
+const createOrder = async (req, res) => {
+   let { estado, carrito, precioTotal, usuarioId } = req.body;
+
+   try {
+      let createOrder = await Order.create({
+         estado,
+         carrito,
+         precioTotal,
+      });
+      console.log("id", usuarioId);
+
+      let seacrhUser = await User.findByPk(usuarioId);
+      // Relacion
+      seacrhUser.addOrder(createOrder);
+      // createOrder.addUser(seacrhUser);
+
+      console.log(seacrhUser);
+
+      res.send(seacrhUser);
+   } catch (error) {
+      res.status(400).send(error);
+      console.log(error);
+   }
+};
+
+// RUTA ADMIN
+const getOrdersAdmin = async (req, res) => {
+   try {
+      let allOrders = await Order.findAll({
+         include: [
+            {
+               model: User,
+            },
+         ],
+      });
+      res.status(200).send(allOrders);
+   } catch (error) {
+      res.status(400).send(error);
+   }
+};
+
+// PUT ORDER
+
+const orderState = async (req, res) => {
+   let { estado, idOder } = req.body;
+
+   try {
+      // Mandar Email
+      let email = await Order.findAll({
+         where: { id: idOder },
+         include: [
+            {
+               model: User,
+            },
+         ],
+      });
+
+      let cambioOrder = await Order.update(
+         {
+            estado: estado,
+         },
+         {
+            where: { id: idOder },
+         }
+      );
+      res.send(cambioOrder);
+   } catch (error) {
+      res.send(error);
+   }
+};
+
+// RUTA USER
+
+const getOrdersUser = async (req, res) => {
+   let { id } = req.params;
+   try {
+      let allOrders = await Order.findAll({
+         where: {
+            userId: id,
+         },
+      });
+      res.send(allOrders);
+   } catch (error) {
+      res.send(error);
    }
 };
 
@@ -312,4 +406,8 @@ module.exports = {
    getProductById,
    createProduct,
    createReview,
+   createOrder,
+   getOrdersAdmin,
+   getOrdersUser,
+   orderState,
 };

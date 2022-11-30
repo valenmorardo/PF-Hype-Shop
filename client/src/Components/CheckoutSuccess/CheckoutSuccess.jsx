@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 
 const CheckoutSuccess = () => {
 
+
+  // -usuario toda la informacion
+  // carrito
+  // precio total del carrito
+
+
   useEffect(() => {
     localStorage.clear()
   }, [])
