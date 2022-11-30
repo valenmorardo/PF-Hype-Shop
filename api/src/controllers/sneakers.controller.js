@@ -280,14 +280,20 @@ const sacarAdmin = async (req, res) => {
 };
 
 const createReview = async (req, res) => {
-   let { title, content, rate, productId } = req.body;
+   let { title, content, rate, productId, userId } = req.body;
 
    try {
+      let seacrhProduct = await Product.findByPk(productId);
+      let searchUser = await User.findByPk(userId);
       let reviewCreate = await Review.create({
          title,
          content,
          rate,
       });
+      console.log("antes", searchUser);
+      seacrhProduct.addReview(reviewCreate);
+      searchUser.addReview(reviewCreate);
+
       console.log(reviewCreate);
 
       res.send(reviewCreate);
