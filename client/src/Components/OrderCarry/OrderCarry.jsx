@@ -106,7 +106,7 @@ function OrderCarry() {
             Agrega Productos{" "}
             <Link
               to="/"
-              className="text-gray-900 dark:text-white hover:underline hover:text-indigo-700 focus:outline-none "
+              className="text-blue-600 hover:underline hover:text-blue-700 focus:outline-none "
               aria-current="page"
             >
               AQUI
