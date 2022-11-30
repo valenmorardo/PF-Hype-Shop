@@ -12,7 +12,7 @@ const FormularioReview = ({closeModal}) => {
 
   const [puntaje, setPuntaje] = useState(null);
   const [review, setReview] = useState({
-    productId: 'fa1c985e-6643-4d46-b2f9-558e8a4a88a2',
+    productId: null,
   })
 
  
