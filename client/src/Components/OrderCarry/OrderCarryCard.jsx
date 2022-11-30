@@ -7,6 +7,7 @@ const OrderCarryCard = ({ id, title, brand, image, cantidad, size, externalMater
     const [openModal, setOpenModal] = useState(false)
 
     const talla =
+    
         typeof size !== "string"
             ? Object.values(size)
                 .find((attr) => attr.name === "Talle")
