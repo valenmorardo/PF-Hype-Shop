@@ -13,7 +13,8 @@ import {
   DETAIL_ZERO,
   SET_CURRENT_USER,
   // ORDER ADMIN
-  GET_ORDERS,
+  GET_ORDERS_USERS,
+  GET_ORDERS_ADMIN,
   PATCH_ORDER,
   FILTER_DATE,
   FILTER_STATE,
@@ -159,20 +160,7 @@ export const detailZero = () => {
   };
 };
 
-export const getOrders = () => {
-  return async (dispatch) => {
-    try {
-      const orders = await axios.get("http://localhost:3001/orders");
 
-      return dispatch({
-        type: GET_ORDERS,
-        payload: orders.data,
-      });
-    } catch (error) {
-      console.log("error trying to GET_ORDERS", error);
-    }
-  };
-};
 
 // SE MANDA EL ID POR QUERY Y INFO POR BODY
 export const patchOrder = (id, payload) => {
@@ -302,3 +290,34 @@ export function CreateOrder(payload) {
   };
 }
 
+//AGARRAR ORDENES USUARIOS
+export const getOrdersUsers = (id) => {
+  return async (dispatch) => {
+    try {
+      const orders = await axios.get(`http://localhost:3001/userOrders/${id}`);
+
+      return dispatch({
+        type: GET_ORDERS_USERS,
+        payload: orders.data,
+      });
+    } catch (error) {
+      console.log("error trying to GET_ORDERS", error);
+    }
+  };
+};
+
+//AGARRAR ORDENES ADMINS
+export const getOrdersAdmin = () => {
+  return async (dispatch) => {
+    try {
+      const orders = await axios.get(`http://localhost:3001/adminOrders`);
+
+      return dispatch({
+        type: GET_ORDERS_ADMIN,
+        payload: orders.data,
+      });
+    } catch (error) {
+      console.log("error trying to GET_ORDERS", error);
+    }
+  };
+};

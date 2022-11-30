@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import UserOrderCard from "./UserOrderCard";
 import { useSelector } from "react-redux";
+import { getOrdersUsers } from '../../Redux/actions/index'
+import { useDispatch } from "react-redux";
 import MakeReview from './MakeReview/MakeReview';
 
 
 const UserOrder = () => {
+    const dispatch = useDispatch()
 
+    const usuario = useSelector((state) => state.currentUser);
+    const orders = useSelector((state) => state.ordersUsers);
     
+    console.log(orders)
 
-    const dataFalse = [
+    useEffect(() => {
+        dispatch(getOrdersUsers(usuario.id));
+      }, []);
+   
+
+ /*    const dataFalse = [
         {
             id: "222-34-ffefef-re32323",
             image: "https://cdn-icons-png.flaticon.com/512/1160/1160040.png?w=740&t=st=1662562187~exp=1662562787~hmac=4e81ab45c142d4e1ba117cc74f05df4bfa43bd3ec69b23769d5443b1cb0f0529",
@@ -56,7 +67,7 @@ const UserOrder = () => {
                 updatedAt: "2022-11-21T00:54:32.614Z"
             }],
         }
-    ]
+    ] */
 
 
     return (
