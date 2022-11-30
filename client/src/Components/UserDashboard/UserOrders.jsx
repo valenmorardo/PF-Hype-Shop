@@ -1,11 +1,12 @@
 import React from "react";
 import UserOrderCard from "./UserOrderCard";
 import { useSelector } from "react-redux";
+import MakeReview from './MakeReview/MakeReview';
 
 
 const UserOrder = () => {
 
-    const user = (useSelector((state) => state.currentUser));
+    
 
     const dataFalse = [
         {
@@ -63,7 +64,7 @@ const UserOrder = () => {
             <p className="mt-0 font-bold tracking-tight text-[#f15a24] sm:text-4xl ">
                 Estado De Tus Ordenes
             </p>
-            {console.log(user.isAdmin)}
+            
             <div className="flex flex-col flex-wrap content-center">
                 {dataFalse &&
                     dataFalse.map((el) => (
@@ -81,6 +82,10 @@ const UserOrder = () => {
 
                         />
                     ))}
+            </div>
+
+            <div>
+                <MakeReview/>
             </div>
         </div>
     )

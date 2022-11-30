@@ -9,29 +9,30 @@
     display: none;
     justify-content: center;
     align-items: center;
-
 }
 
 .modal.is-open {
     display: flex;
-
 } 
 
 .modal-container {
     position: relative;
     padding: 1rem;
-    min-width: 500px;
-    max-width: 500px;
-    min-height: 200px;
-    max-height: 500px;
+    min-width: 900px;
+    max-width: 800px;
+    min-height: 400px;
+    max-height: 900px;
     overflow-y: auto;
     background-color: #fff;
-
+    border-radius: 20px;
 }
 
 .modal-close {
     position: absolute;
     top: 1rem;
     right: 1rem;
-
+    font-size: 25px;
+}
+.modal-close:hover {
+    color: red;
 }
