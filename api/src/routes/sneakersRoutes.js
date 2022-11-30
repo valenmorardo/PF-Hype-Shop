@@ -1,12 +1,22 @@
 const { Router } = require("express");
-const { Product, User } = require("../db");
+const { Product, User, Attribute, Variation, Size, Color} = require("../db");
 
 const {
   allData,
   getProductById,
   createProduct,
+
+  updateProduct,
+  deleteProduct,
+  deshabilitarUser,
+  habilitarUser,
+  darAdmin,
+  sacarAdmin,
+
+  createReview,
+
 } = require("../controllers/sneakers.controller");
-const { defaults } = require("pg");
+const { objectFormatter } = require("../utils/objectFormatter");
 
 const router = Router();
 
@@ -18,23 +28,18 @@ router.get("/filters/:filter", async (req, res) => {
   const filter = req.params.filter;
   try {
     const attributeFromDb = await Product.findAll({
-      attributes: [`${filter}`],
-      raw: true,
+      include: [
+        {
+          model: Attribute,
+        },
+      ],
     });
 
-    let results;
-    if (filter === "colors" || filter === "sizes") {
-      results = new Set(
-        attributeFromDb.map((size) => {
-          if (!size[filter].length) return "40";
-          return size[filter][0];
-        })
-      );
-      res.status(200).json(Array.from(results));
-    } else {
-      results = attributeFromDb.map((attr) => attr[filter]);
-      res.status(200).json(Array.from(new Set(results)));
-    }
+    const productsObject = JSON.parse(JSON.stringify(attributeFromDb));
+    const products = productsObject.map((prod) => objectFormatter(prod));
+
+    const results = products.map((attr) => attr[filter]);
+    res.status(200).json(Array.from(new Set(results)));
   } catch (e) {
     res.status(400).json({ Error: e.message });
   }
@@ -42,16 +47,49 @@ router.get("/filters/:filter", async (req, res) => {
 
 router.post("/sneakersCreate", createProduct);
 
-router.post("/authentication", async (req, res) => {
-  const user = await User.findOrCreate({
-    where: { email: req.body.email },
-    defaults: {
-      name: req.body.name,
-      email: req.body.email,
-    },
-  });
-  res.json(user);
+router.post("/authentication", async (req, res, next) => {
+  try {
+    const { email, name } = req.body;
+    const user = await User.findOrCreate({
+      where: { email: email },
+      defaults: {
+        name,
+        email,
+      },
+    });
+    res.status(200).json(user );
+  } catch (error) {
+    next(error);
+  }
 });
+router.get("/usuarios" , async (req, res) => {
+  const productsData = await User.findAll()
+  
+  res.send(productsData);
+})
+
+
+//Dashboard Admin
+
+router.put("/sneakersUpdate" , updateProduct)
+router.put("/sneakersDelete" , deleteProduct)
+
+router.put("/deshabilitarUser", deshabilitarUser)
+router.put("/habilitarUser", habilitarUser)
+
+router.put("/admin", darAdmin);
+router.put("/sacarAdmin", sacarAdmin); 
+
+
+router.post("/createReview", createReview);
+
+//   res.status(200).json({created, pokemon})
+//   }
+//   catch (error) {
+//       next(error);
+//   }
+// })
+
 
 module.exports = router;
 

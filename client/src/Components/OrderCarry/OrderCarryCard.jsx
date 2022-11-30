@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 import ModalCantidad from "./ModalCantidad";
 
-const OrderCarryCard = ({ id, title, brand, image, cantidad, externalMaterial, price, onDeleteCarry, saveItem, available_quantity, priceFinal, addCarryNewQuantity
+const OrderCarryCard = ({ id, title, brand, image, cantidad, size, externalMaterial, price, onDeleteCarry, saveItem, available_quantity, priceFinal, addCarryNewQuantity
 }) => {
 
     const [openModal, setOpenModal] = useState(false)
+
+    const talla =
+    
+        typeof size !== "string"
+            ? Object.values(size)
+                .find((attr) => attr.name === "Talle")
+                .value.slice(0, 2)
+            : size;
+
 
     // funcion que entre al array con el propio objeto con un modal que sera aparte
     const handleOpenModal = () => {
@@ -24,7 +33,7 @@ const OrderCarryCard = ({ id, title, brand, image, cantidad, externalMaterial, p
                     <h1 className=" font-bold tracking-tight text-gray-900 sm:text-lg leading-none">{title}</h1>
                     <div className="flex justify-center items-center gap-1">
                         <p className=" font-bold tracking-tight text-gray-900 sm:text-lg mt-1">Talla: </p>
-                        <p className=" font-bold tracking-tight text-indigo-600 sm:text-xl mt-1">34</p>
+                        <p className=" font-bold tracking-tight text-indigo-600 sm:text-xl mt-1">{talla}</p>
                     </div>
                     <p className=" font-bold tracking-tight text-gray-900 sm:text-2xl mt-3">${price}</p>
                 </div>
@@ -55,7 +64,7 @@ const OrderCarryCard = ({ id, title, brand, image, cantidad, externalMaterial, p
 
 
                     />}
-                <p>Detalles</p>
+                {/* <p className="">Detalles</p> */}
             </div>
             <button className="absolute right-2 top-2  flex w-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 py-1 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" onClick={() => onDeleteCarry(id)}>X</button>
             {/* <p>{card}</p>

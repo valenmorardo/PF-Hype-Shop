@@ -1,15 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CreateNewProduct } from "../../Redux/actions";
 import style from "./CreateProduct.module.css";
+import { getBrands, getCategories, getGenders } from "../../Redux/actions";
 // Previsualizar
 import ModalPrevisualizar from "./ModalPrevisualizar/ModalPrevisualizar";
+import PageNoAdmin from "../PageNoAdmin/PageNoAdmin";
 
 const CreateProduct = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.currentUser)
+  const brand = (useSelector((state) => state.brands)).filter(e => e != 'Todos');
+  const category = (useSelector((state) => state.categories)).filter(e => e != 'Todos');
+  const gender = (useSelector((state) => state.genders)).filter(e => e != 'Todos');
+
+
+  useEffect(() => {
+    dispatch(getBrands());
+    dispatch(getCategories());
+    dispatch(getGenders());
+  }, [dispatch]);
+
   // para validaciones:
   const [error, setError] = useState({});
   const initialState = {
@@ -32,6 +47,7 @@ const CreateProduct = () => {
     laImg: 0,
     iLocalPictures: [],
     genero: "",
+    category: "",
     available_quantity: 6
   };
 
@@ -127,6 +143,14 @@ const CreateProduct = () => {
     });
   };
 
+  // BRAND
+  const handleSelectBrand = (e) => {
+    setInput({
+      ...input,
+      brand: e.target.value,
+    });
+  };
+
   // AGE_GROUP
   const handleSelect = (e) => {
     setInput({
@@ -140,6 +164,14 @@ const CreateProduct = () => {
       condition: e.target.value,
     });
   };
+
+  const handleSelectCategory = (e) => {
+    setInput({
+      ...input,
+      category: e.target.value,
+    });
+  };
+
 
   const handleSelectGenero = (e) => {
     setInput({
@@ -216,7 +248,9 @@ const CreateProduct = () => {
       input.colors &&
       input.externalMaterial &&
       input.shoeStyle &&
-      input.sizes
+      input.sizes &&
+      input.genero &&
+      input.category
     ) {
       dispatch(
         CreateNewProduct({
@@ -231,6 +265,8 @@ const CreateProduct = () => {
           externalMaterial: input.externalMaterial,
           shoeStyle: input.shoeStyle,
           sizes: input.sizes,
+          category: input.category,
+          gender: input.genero,
           available_quantity: input.available_quantity
         })
       );
@@ -537,244 +573,279 @@ const CreateProduct = () => {
   // --------------------------------------------------------------------------------------------
   // COMPONENTE RENDER
   return (
-    <div className={style.containerMain}>
-      {console.log("Errores", error)}
-      <form className={style.form}>
-        <h2 className={style.titulo}>Product Creation</h2>
-        {/* Previsualizar */}
-        <button className={style.btnPrev} onClick={(e) => handleOpenModal(e)}>Previsualizar</button>
-        {
-          ModalPrev &&
-          <ModalPrevisualizar
-            title={input.title}
-            picture={input.thumbnail}
-            price={input.price}
-            setModalPrev={setModalPrev}
-            brand={input.brand}
-            gender={input.genero}
-            condition={input.condition}
-            externalMaterial={input.externalMaterial}
-            age_group={input.age_group}
-            // Carrousel
-            pictures={input.pictures}
-            colors={input.colors}
-            sizes={input.sizes}
+    <div>
+      {user && user.isAdmin === true ?
+        <div className={style.containerMain}>
+          {console.log("Errores", error)}
+          <form className={style.form}>
+            <h2 className={style.titulo}>Product Creation</h2>
+            {/* Previsualizar */}
+            <button className={style.btnPrev} onClick={(e) => handleOpenModal(e)}>Previsualizar</button>
+            {
+              ModalPrev &&
+              <ModalPrevisualizar
+                title={input.title}
+                picture={input.thumbnail}
+                price={input.price}
+                setModalPrev={setModalPrev}
+                brand={input.brand}
+                gender={input.genero}
+                condition={input.condition}
+                externalMaterial={input.externalMaterial}
+                age_group={input.age_group}
+                // Carrousel
+                pictures={input.pictures}
+                colors={input.colors}
+                sizes={input.sizes}
 
-          />
-        }
+              />
+            }
 
-        {/* TITLE */}
-        <div>
-          <p>Title:</p>
+            {/* TITLE */}
+            <div>
+              <p>Title:</p>
 
-          <input
-            type="text"
-            value={input.title}
-            className={style.field}
-            title="title"
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        {/* PRICE */}
-        <div>
-          <p>Price: </p>
+              <input
+                type="text"
+                value={input.title}
+                className={style.field}
+                title="title"
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
 
-          <input
-            type="number"
-            min="0"
-            step="25"
-            className={style.field}
-            value={input.price}
-            title="price"
-            onChange={handleChange}
-          />
-        </div>
-        {/* THUMBNAIL */}
-        <div>
-          <div>
-            <p>Img:</p>
+            {/* PRICE */}
+            <div>
+              <p>Price: </p>
+              <input
+                type="number"
+                min="0"
+                step="25"
+                className={style.field}
+                value={input.price}
+                title="price"
+                onChange={handleChange}
+              />
+            </div>
 
-            {input.imgInput === 0 && <RenderizadoBotones />}
-            {input.imgInput === true && <LocalRender />}
-            {input.imgInput === false && <URLRender />}
-          </div>
-          {/* BRAND */}
-          <div>
-            <p>Brand:</p>
+            {/* THUMBNAIL */}
+            <div>
+              <div>
+                <p>Img:</p>
 
-            <input
-              type="text"
-              value={input.brand}
-              className={style.field}
-              title="brand"
-              onChange={(e) => handleChange(e)}
-            />
-          </div>
-        </div>
-        {/* colors */}
-        <div>
-          <p>colors:</p>
-
-          <input
-            type="text"
-            value={input.color}
-            className={style.field}
-            title="color"
-            onChange={(e) => handleChange(e)}
-          />
-          <button className={style.btnImg} onClick={(e) => hundleColorsAdd(e)}> Añadir color</button>
-        </div>
-        {/* ARRAY COLORS  */}
-        <div className={style.pictures}>
-          {input.colors?.map(
-            (
-              el //cada vez que coloquemos una opcion se creara una pequeña lista
-            ) => (
-              <div key={el} className={style.containArray}>
-                <p>{el}</p>
-                <button
-                  className={style.btnX}
-                  onClick={() => handleDeleteColor(el)}
-                >
-                  X
-                </button>
+                {input.imgInput === 0 && <RenderizadoBotones />}
+                {input.imgInput === true && <LocalRender />}
+                {input.imgInput === false && <URLRender />}
               </div>
-            )
-          )}
-        </div>
+            </div>
 
-        {/* EXTERNALMATERIAAL */}
-        <div>
-          <p>Material Del Exterior: </p>
-
-          <input
-            type="text"
-            value={input.externalMaterial}
-            className={style.field}
-            title="externalMaterial"
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-
-        {/* SIZES */}
-        <div>
-          <p>sizes: </p>
-          <input
-            type="text"
-            value={input.size}
-            className={style.field}
-            title="size"
-            onChange={(e) => handleChange(e)}
-          />
-          <button className={style.btnImg} onClick={(e) => hundleSizesAdd(e)}> Añadir size</button>
-        </div>
-        {/* ARRAY SIZES  */}
-        <div className={style.pictures}>
-          {input.sizes?.map(
-            (
-              el //cada vez que coloquemos una opcion se creara una pequeña lista
-            ) => (
-              <div key={el} className={style.containArray}>
-                <p>{el}</p>
-                <button
-                  className={style.btnX}
-                  onClick={() => handleDeleteSizes(el)}
-                >
-                  X
-                </button>
+            {/* BRAND */}
+            <div>
+              <div className={style.select}>
+                {input.brand.length === 0 && ( // si hay un error hara un <p> nuevo con el error
+                  <p className={style.error}>{"choose a brand"}</p>
+                )}
+                <p>Select brand:</p>
+                <select className={style.select} onChange={(e) => handleSelectBrand(e)}>
+                  <option selected disabled>
+                    Select brand
+                  </option>
+                  {
+                    brand.map((e) => (
+                      <option value={e}>{e}</option>
+                    ))
+                  }
+                </select>
               </div>
-            )
-          )}
-        </div>
+            </div>
 
-        {/* CONDITION */}
-        <div className={style.select}>
-          {input.condition.length === 0 && ( // si hay un error hara un <p> nuevo con el error
-            <p className={style.error}>{"choose a Condition"}</p>
-          )}
-          <p>Select Condition:</p>
-          <select className={style.select} onChange={(e) => handleSelectCondition(e)}>
-            <option selected disabled>
-              Select Condition
-            </option>
-            <option value="Nuevo">Nuevo</option>
-            <option value="Usado">Usado</option>
-          </select>
-        </div>
+            {/* colors */}
+            <div>
+              <p>colors:</p>
+              <input
+                type="text"
+                value={input.color}
+                className={style.field}
+                title="color"
+                onChange={(e) => handleChange(e)}
+              />
+              <button className={style.btnImg} onClick={(e) => hundleColorsAdd(e)}> Añadir color</button>
+            </div>
 
-        {/* GENERO */}
-        <div className={style.select}>
-          {input.genero.length === 0 && ( // si hay un error hara un <p> nuevo con el error
-            <p className={style.error}>{"choose a genero"}</p>
-          )}
-          <p>Select genero:</p>
-          <select className={style.select} onChange={(e) => handleSelectGenero(e)}>
-            <option selected disabled>
-              Select genero
-            </option>
-            <option value="Men">Men</option>
-            <option value="Women">Women</option>
-          </select>
-        </div>
+            {/* ARRAY COLORS  */}
+            <div className={style.pictures}>
+              {input.colors?.map(
+                (
+                  el //cada vez que coloquemos una opcion se creara una pequeña lista
+                ) => (
+                  <div key={el} className={style.containArray}>
+                    <p>{el}</p>
+                    <button
+                      className={style.btnX}
+                      onClick={() => handleDeleteColor(el)}
+                    >
+                      X
+                    </button>
+                  </div>
+                )
+              )}
+            </div>
 
-        {/* AGE_GROUP */}
-        <div className={style.select}>
-          {/* {input.age_group && ( // si hay un error hara un <p> nuevo con el error
+            {/* EXTERNALMATERIAAL */}
+            <div>
+              <p>Material Del Exterior: </p>
+
+              <input
+                type="text"
+                value={input.externalMaterial}
+                className={style.field}
+                title="externalMaterial"
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+
+            {/* SIZES */}
+            <div>
+              <p>sizes: </p>
+              <input
+                type="text"
+                value={input.size}
+                className={style.field}
+                title="size"
+                onChange={(e) => handleChange(e)}
+              />
+              <button className={style.btnImg} onClick={(e) => hundleSizesAdd(e)}> Añadir size</button>
+            </div>
+
+            {/* ARRAY SIZES  */}
+            <div className={style.pictures}>
+              {input.sizes?.map(
+                (
+                  el //cada vez que coloquemos una opcion se creara una pequeña lista
+                ) => (
+                  <div key={el} className={style.containArray}>
+                    <p>{el}</p>
+                    <button
+                      className={style.btnX}
+                      onClick={() => handleDeleteSizes(el)}
+                    >
+                      X
+                    </button>
+                  </div>
+                )
+              )}
+            </div>
+
+            {/* CONDITION */}
+            <div className={style.select}>
+              {input.condition.length === 0 && ( // si hay un error hara un <p> nuevo con el error
+                <p className={style.error}>{"choose a Condition"}</p>
+              )}
+              <p>Select Condition:</p>
+              <select className={style.select} onChange={(e) => handleSelectCondition(e)}>
+                <option selected disabled>
+                  Select Condition
+                </option>
+                <option value="Nuevo">Nuevo</option>
+                <option value="Usado">Usado</option>
+              </select>
+            </div>
+
+            {/* CATEGORIA */}
+            <div className={style.select}>
+              {input.category.length === 0 && ( // si hay un error hara un <p> nuevo con el error
+                <p className={style.error}>{"choose a Category"}</p>
+              )}
+              <p>Select Category:</p>
+              <select className={style.select} onChange={(e) => handleSelectCategory(e)}>
+                <option selected disabled>
+                  Select Category
+                </option>
+                {
+                  category.map((e) => (
+                    <option value={e}>{e}</option>
+                  ))
+                }
+              </select>
+            </div>
+
+            {/* GENERO */}
+            <div className={style.select}>
+              {input.genero.length === 0 && ( // si hay un error hara un <p> nuevo con el error
+                <p className={style.error}>{"choose a genero"}</p>
+              )}
+              <p>Select genero:</p>
+              <select className={style.select} onChange={(e) => handleSelectGenero(e)}>
+                <option selected disabled>
+                  Select genero
+                </option>
+                {
+                  gender.map((e) => (
+                    <option value={e}>{e}</option>
+                  ))
+                }
+              </select>
+            </div>
+
+            {/* AGE_GROUP */}
+            <div className={style.select}>
+              {/* {input.age_group && ( // si hay un error hara un <p> nuevo con el error
             <p className={style.error}>{"choose a age_group"}</p>
           )} */}
-          <p>Select age_group Group:</p>
-          <select className={style.select} onChange={(e) => handleSelect(e)}>
-            <option selected disabled>
-              Select age_group Group
-            </option>
-            <option value="Adultos">Adultos</option>
-            <option value="Niños">Niños</option>
-          </select>
-        </div>
+              <p>Select Age Group:</p>
+              <select className={style.select} onChange={(e) => handleSelect(e)}>
+                <option selected disabled>
+                  Select Age Group
+                </option>
+                <option value="Adultos">Adultos</option>
+                <option value="Niños">Niños</option>
+              </select>
+            </div>
 
-        {/* PICTURES */}
-        <div>
-          <p>Imagenes Adicionales:</p>
-          {/* {error.title && ( // si hay un error hara un <p> nuevo con el error
+            {/* PICTURES */}
+            <div>
+              <p>Imagenes Adicionales:</p>
+              {/* {error.title && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{error.title}</p>
-                    )} */}
+                      )} */}
 
-          {input.laImg === 0 && <RenderizadoBotonesPictures />}
-          {input.laImg === true && <LocalRenderPictures />}
-          {input.laImg === false && <URLRenderPictures />}
+              {input.laImg === 0 && <RenderizadoBotonesPictures />}
+              {input.laImg === true && <LocalRenderPictures />}
+              {input.laImg === false && <URLRenderPictures />}
 
 
 
-          {/* ARRAY PICTURES  */}
-          <div className={style.pictures}>
-            {input.pictures?.map(
-              (
-                el //cada vez que coloquemos una opcion se creara una pequeña lista
-              ) => (
-                <div key={el} className={style.divName}>
-                  <p>{el}</p>
-                  <button
-                    className={style.btnX}
-                    onClick={() => handleDelete(el)}
-                  >
-                    X
-                  </button>
-                </div>
-              )
-            )}
-          </div>
-        </div>
-        {/* BUTTON */}
-        {
-          <button
-            className={style.submit}
-            type="submit"
-            onClick={(e) => handleSubmit(e)}
-          >
-            Create New Product
-          </button>
-        }
-      </form>
+              {/* ARRAY PICTURES  */}
+              <div className={style.pictures}>
+                {input.pictures?.map(
+                  (
+                    el //cada vez que coloquemos una opcion se creara una pequeña lista
+                  ) => (
+                    <div key={el} className={style.divName}>
+                      <p>{el}</p>
+                      <button
+                        className={style.btnX}
+                        onClick={() => handleDelete(el)}
+                      >
+                        X
+                      </button>
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+            {/* BUTTON */}
+            {
+              <button
+                className={style.submit}
+                type="submit"
+                onClick={(e) => handleSubmit(e)}
+              >
+                Create New Product
+              </button>
+            }
+          </form>
+        </div> : <PageNoAdmin />}
     </div>
   );
 };

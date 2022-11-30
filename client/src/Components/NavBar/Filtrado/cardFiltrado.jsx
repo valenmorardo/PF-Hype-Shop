@@ -48,7 +48,7 @@ const CardFiltrado = ({ options, titulo, handler, propiedad }) => {
         {propiedad === "brand" ? (
           <select
             id="brand"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+            className="bg-gray-50 mt-2 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 "
             onChange={(e) => {
               handler(e.target.value);
             }}
@@ -63,7 +63,7 @@ const CardFiltrado = ({ options, titulo, handler, propiedad }) => {
         ) : propiedad === "category" ? (
           <select
             id="category"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+            className="bg-gray-50 mt-2  mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 "
             onChange={(e) => {
               handler(e.target.value);
             }}
@@ -78,7 +78,7 @@ const CardFiltrado = ({ options, titulo, handler, propiedad }) => {
         ) : propiedad === "gender" ? (
           <select
             id="gender"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+            className="bg-gray-50 mt-2 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 "
             onChange={(e) => {
               handler(e.target.value);
             }}
@@ -93,7 +93,7 @@ const CardFiltrado = ({ options, titulo, handler, propiedad }) => {
         ) : propiedad === "orden" ? (
           <select
             id="orden"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+            className="bg-gray-50 mt-2 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 "
             onChange={(e) => {
               handler(e.target.value);
             }}
@@ -114,5 +114,3 @@ const CardFiltrado = ({ options, titulo, handler, propiedad }) => {
 };
 
 export default CardFiltrado;
-
-/* className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ' */

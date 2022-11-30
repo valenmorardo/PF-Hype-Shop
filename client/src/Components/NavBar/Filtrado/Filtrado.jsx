@@ -19,6 +19,7 @@ const Filtrado = ({ setIsLoading, paginaUno }) => {
   const [orden, setOrden] = useState(ordenReducer);
 
   const orderPrice = ["Menor a mayor", "Mayor a menor"];
+
   const brands = useSelector((state) => state.brands);
   const category = useSelector((state) => state.categories);
   const gender = useSelector((state) => state.genders);
@@ -86,21 +87,21 @@ const Filtrado = ({ setIsLoading, paginaUno }) => {
         <CardFiltrado
           options={brands}
           titulo="Filtrar por marca"
-          handler={handlerFilter("brand")}
+          handler={handlerFilter("Marca")}
           propiedad={"brand"}
         />
 
         <CardFiltrado
           options={category}
           titulo="Filtrar por categoria"
-          handler={handlerFilter("category")}
+          handler={handlerFilter("Estilo")}
           propiedad={"category"}
         />
 
         <CardFiltrado
           options={gender}
           titulo="Filtrar por genero"
-          handler={handlerFilter("gender")}
+          handler={handlerFilter("Género")}
           propiedad={"gender"}
         />
 

@@ -3,9 +3,11 @@ import React from "react";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import Profile from "./Profile";
+import UnloginProfile from "./UnlogingProfile";
 import axios from "axios";
 import { setCurrentUser } from "../../../Redux/actions";
 import { useDispatch } from "react-redux";
+import icon from "../../images/user2.png"
 
 const IsAuthenticated = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -18,9 +20,9 @@ const IsAuthenticated = () => {
   }
 
   return (
-    <div className="flex justify-around">
-      {isAuthenticated ? <LogoutButton /> : <LoginButton />}
-      <Profile />
+    <div className="relative flex justify-around">
+      {isAuthenticated ? <Profile /> : <UnloginProfile/>}
+      
     </div>
   );
 };

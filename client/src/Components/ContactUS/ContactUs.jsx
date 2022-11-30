@@ -91,7 +91,9 @@ export default function ContactUs() {
                                         type="hidden"
                                         name="_next"
                                         // ESto se debe cambiar al momento del DEPLOY
+
                                         value="https://hype-gamma.vercel.app/"
+
                                     />
                                 </div>
                             </div>

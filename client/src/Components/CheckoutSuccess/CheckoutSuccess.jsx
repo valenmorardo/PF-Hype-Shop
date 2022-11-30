@@ -1,6 +1,12 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const CheckoutSuccess = () => {
+
+  useEffect(() => {
+    localStorage.clear()
+  }, [])
+
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-screen-md min-h-[80vh] m-auto">
       <h2 className="mb-2 text-5xl text-green-400">
