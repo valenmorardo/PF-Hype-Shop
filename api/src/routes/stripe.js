@@ -42,7 +42,7 @@ router.post("/checkout", async (req, res) => {
       ],
       line_items,
       mode: "payment",
-      success_url: "http://localhost:3000/checkout-success",
+      success_url: "http://localhost:3000/checkout-success?paid=true",
       cancel_url: "http://localhost:3000/",
    });
 
