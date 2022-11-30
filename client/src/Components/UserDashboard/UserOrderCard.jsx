@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import DetailProductBuy from "../DetailProductBuy/DetailProductBuy";
 import ticket from "../../Img/ticket.svg"
 import bolsaCheck from "../images/bolsa-check.png";
-import entrega from "../images/camion.png";
+import entrega from "../images/camion-gray.png";
 import entregaCheck from "../images/camion-check.png";
-import check from "../images/check.png";
+import check from "../images/check-gray.png";
 import checkCheck from "../images/check-check.png";
 
 
