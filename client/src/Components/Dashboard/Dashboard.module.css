@@ -1,0 +1,26 @@
+.container{
+  position: relative;
+}
+
+.catalogo{
+  position: absolute;
+  right: -400px;
+  width: 100%;
+  top: -50px;
+}
+
+.btn1{
+  background-color: red;
+}
+
+.btn2{
+  background-color: blue;
+}
+
+.btn3{
+  background-color: orange;
+}
+
+.btn4{
+  background-color: green;
+}

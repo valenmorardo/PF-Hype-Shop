@@ -1,10 +1,16 @@
 const { Router } = require("express");
-const { Product, User, Attribute, Variation, Size, Color } = require("../db");
+const { Product, User, Attribute, Variation, Size, Color} = require("../db");
 
 const {
   allData,
   getProductById,
   createProduct,
+  updateProduct,
+  deleteProduct,
+  deshabilitarUser,
+  habilitarUser,
+  darAdmin,
+  sacarAdmin,
 } = require("../controllers/sneakers.controller");
 const { objectFormatter } = require("../utils/objectFormatter");
 
@@ -52,13 +58,22 @@ router.post("/authentication", async (req, res, next) => {
     next(error);
   }
 });
+router.get("/usuarios" , async (req, res) => {
+  const productsData = await User.findAll()
+  
+  res.send(productsData);
+})
 
-//   res.status(200).json({created, pokemon})
-//   }
-//   catch (error) {
-//       next(error);
-//   }
-// })
+//Dashboard Admin
+
+router.put("/sneakersUpdate" , updateProduct)
+router.put("/sneakersDelete" , deleteProduct)
+
+router.put("/deshabilitarUser", deshabilitarUser)
+router.put("/habilitarUser", habilitarUser)
+
+router.put("/admin", darAdmin);
+router.put("/sacarAdmin", sacarAdmin); 
 
 module.exports = router;
 

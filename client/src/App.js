@@ -21,6 +21,12 @@ import NavBar from "./Components/NavBar/NavBar";
 // AdminOrder
 import AdminOrders from "./Components/AdminOrders/AdminOrders";
 
+// AdminDashboard
+
+import Dashboard from "./Components/Dashboard/Dashboard"
+import CardDetailAdmin from "./Components/Dashboard/CardDetailAdmin"
+import UpdateProduct from "./Components/Dashboard/modificarCard"; 
+
 function App() {
    return (
       <BrowserRouter>
@@ -29,6 +35,7 @@ function App() {
             <Switch>
                <Route exact path="/" component={Home} />
                <Route path="/sneaker/:id" component={CardDetail} />
+               <Route path = "/sneakerAdmin/:id" component={CardDetailAdmin}/>
                <Route path="/orderCarry" component={OrderCarry} />
                <Route path="/contactUs" component={ContactUs} />
                <Route path="/register" component={Register} />
@@ -40,6 +47,8 @@ function App() {
                <Route path="/orders" component={UserOrder} />
                <Route path="/favorites" component={Favorites} />
                <Route exact path="/createProduct" component={CreateProduct} />
+               <Route path="/updateProduct" component={UpdateProduct} />
+               <Route exact path="/dashboard" component={Dashboard} />
                <Route path="*" component={error404}></Route>
             </Switch>
          </div>
