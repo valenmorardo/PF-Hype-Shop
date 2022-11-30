@@ -206,6 +206,7 @@ export const filterDate = (payload) => {
    };
 };
 
+
 //Dashboard actions
 
 export function UpdateProductPost(payload){
@@ -283,3 +284,13 @@ return async function () {
   return response;
 }
 }
+
+// POST REview
+export function CreateReview(payload) {
+  return async function() {
+    const response = await axios.post("http://localhost:3001/createReview", payload)
+    return response
+  };
+}
+
+

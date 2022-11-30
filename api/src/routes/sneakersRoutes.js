@@ -5,12 +5,16 @@ const {
   allData,
   getProductById,
   createProduct,
+
   updateProduct,
   deleteProduct,
   deshabilitarUser,
   habilitarUser,
   darAdmin,
   sacarAdmin,
+
+  createReview,
+
 } = require("../controllers/sneakers.controller");
 const { objectFormatter } = require("../utils/objectFormatter");
 
@@ -64,6 +68,7 @@ router.get("/usuarios" , async (req, res) => {
   res.send(productsData);
 })
 
+
 //Dashboard Admin
 
 router.put("/sneakersUpdate" , updateProduct)
@@ -74,6 +79,17 @@ router.put("/habilitarUser", habilitarUser)
 
 router.put("/admin", darAdmin);
 router.put("/sacarAdmin", sacarAdmin); 
+
+
+router.post("/createReview", createReview);
+
+//   res.status(200).json({created, pokemon})
+//   }
+//   catch (error) {
+//       next(error);
+//   }
+// })
+
 
 module.exports = router;
 

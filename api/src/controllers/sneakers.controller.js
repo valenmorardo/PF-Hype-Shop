@@ -3,7 +3,10 @@ const {
    getSingleDbProduct,
 } = require("../services/getProducts");
 
+
 const { Product, User} = require("../db");
+
+const { Product, Review , User} = require("../db");
 
 const allData = async (req, res) => {
    const { title } = req.query;
@@ -87,6 +90,7 @@ const createProduct = async (req, res) => {
       res.status(400).send(error);
    }
 };
+
 
 
 const updateProduct = async (req, res) => {
@@ -252,4 +256,32 @@ const updateProduct = async (req, res) => {
       }
 
       }
-module.exports = { allData, getProductById, createProduct, updateProduct, deleteProduct, deshabilitarUser, habilitarUser,darAdmin, sacarAdmin};
+
+
+const createReview = async (req, res) => {
+   let {
+      title,
+      content,
+      rate,
+      productId
+   } = req.body;
+
+   try {
+      let reviewCreate = await Review.create({
+         title,
+         content,
+         rate,
+         productId
+      });
+      console.log(reviewCreate);
+
+      res.send(reviewCreate);
+   } catch (error) {
+      console.log(error);
+      res.status(400).send(error);
+   }
+};
+
+
+module.exports = { allData, getProductById, createProduct, updateProduct, deleteProduct, deshabilitarUser, habilitarUser,darAdmin, sacarAdmin , allData, getProductById, createProduct, createReview};
+
