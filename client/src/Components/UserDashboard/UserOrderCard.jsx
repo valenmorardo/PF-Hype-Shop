@@ -47,13 +47,13 @@ const UserOrderCard = ({ id, nombre, email, image, estado, fecha, direccion, pro
             <div className="flex flex-col justify-around items-center bg-white py-7 px-4 w-[880px] h-80 mt-8 rounded-xl border border-solid border=[#e6e8eb] relative " >
                 <section className="flex">
                     <div className="flex  justify-center ">
-                        <div className="aspect-w-1 aspect-h-1  h-min w-[100px] overflow-hidden rounded-lg self-center">
+                        {/* <div className="aspect-w-1 aspect-h-1  h-min w-[100px] overflow-hidden rounded-lg self-center">
                             <img
                                 src={image}
                                 alt="imagem Producto"
                             // className="h-auto w-auto object-cover object-center group-hover:opacity-75"
                             />
-                        </div>
+                        </div> */}
                         <div className=" flex w-[28rem] flex-col mx-4 items-center ">
                             <h1 className=" font-bold tracking-tight text-gray-900 sm:text-lg leading-none">ID Pedido: {id}</h1>
                             <div className="flex justify-center items-center gap-1">
@@ -68,10 +68,10 @@ const UserOrderCard = ({ id, nombre, email, image, estado, fecha, direccion, pro
                                 <p className=" font-bold tracking-tight text-gray-900 sm:text-lg mt-1">Fecha Compra: </p>
                                 <p className=" font-bold tracking-tight text-indigo-600 sm:text-xl mt-1">{fecha}</p>
                             </div>
-                            <div className="flex justify-center items-center gap-1">
+                            {/* <div className="flex justify-center items-center gap-1">
                                 <p className=" font-bold tracking-tight text-gray-900 sm:text-lg mt-1">Direccion: </p>
                                 <p className=" font-bold tracking-tight text-indigo-600 sm:text-xl mt-1">{direccion}</p>
-                            </div>
+                            </div> */}
 
 
                         </div>

@@ -4,7 +4,7 @@ import DetailProductBuyCard from "./DetailProductBuyCard";
 const DetailProductBuy = ({ onClose, products, precioTotal }) => {
     const array = [1, 2, 3, 4, 5, 6, 7, 7, 87, 535, 434, 434]
     return (
-        <div className="z-20 bg-white max-w-full bg-contain min-h-[40rem] absolute top-0 bottom-0 right-0 left-0 rounded-2xl">
+        <div className="z-20 bg-white max-w-full bg-contain min-h-[60rem] absolute top-0 bottom-0 right-0 left-0 rounded-2xl">
             <div className="">
                 <div className="absolute left-0 top-4">
                     <button
@@ -24,7 +24,7 @@ const DetailProductBuy = ({ onClose, products, precioTotal }) => {
                         {products.length > 0 && products.map((el) => (
                             <DetailProductBuyCard
                                 title={el.title}
-                                image={el.pictures[0]}
+                                image={el.pictures ? el.pictures[0] : el.picture_ids[0]}
                                 brand={el.brand}
                                 category={el.category}
                                 colors={el.colors}
