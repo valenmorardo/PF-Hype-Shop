@@ -83,7 +83,7 @@ const AdminOrders = () => {
     return (
         <div>
 
-            {user && user.isAdmin === true ?
+            {user && user.isAdmin === false ?
                 <div className=" bg-slate-50 ">
                     <Link to="/" className="absolute left-0 top-4">
                         <button
