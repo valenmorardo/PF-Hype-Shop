@@ -24,7 +24,7 @@ import {
 export const getSneakers = () => {
   return async (dispatch) => {
     try {
-      const sneakers = await axios.get("http://localhost:3001/sneakers");
+      const sneakers = await axios.get("https://hype-shop.vercel.app/sneakers");
       /* console.log(response) */
 
       return dispatch({
@@ -41,7 +41,7 @@ export const getSearchTitle = (title) => {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `http://localhost:3001/sneakers?title=${title}`
+        `https://hype-shop.vercel.app/sneakers?title=${title}`
       );
       return dispatch({
         type: SEARCH_SNEAKER,
@@ -58,7 +58,7 @@ export const getSearchTitle = (title) => {
 export function CreateNewProduct(payload) {
   return async function () {
     const response = await axios.post(
-      "http://localhost:3001/sneakersCreate",
+      "https://hype-shop.vercel.app/sneakersCreate",
       payload
     );
     return response;
@@ -68,7 +68,7 @@ export function CreateNewProduct(payload) {
 export function getDetail(id) {
   return async function (dispatch) {
     try {
-      let json = await axios.get(`http://localhost:3001/sneakers/${id}`);
+      let json = await axios.get(`https://hype-shop.vercel.app/sneakers/${id}`);
       return dispatch({
         type: GET_DETAIL,
         payload: json.data,
@@ -82,7 +82,7 @@ export function getDetail(id) {
 export function getBrands() {
   return async function (dispatch) {
     try {
-      let json = await axios.get(`http://localhost:3001/filters/brand`);
+      let json = await axios.get(`https://hype-shop.vercel.app/filters/brand`);
       json.data.unshift("Todos");
       let marcas = json.data.filter((e) => e != null);
       return dispatch({
@@ -98,7 +98,7 @@ export function getBrands() {
 export function getCategories() {
   return async function (dispatch) {
     try {
-      let json = await axios.get(`http://localhost:3001/filters/category`);
+      let json = await axios.get(`https://hype-shop.vercel.app/filters/category`);
 
       json.data.unshift("Todos");
       let marcas = json.data.filter((e) => e != null);
@@ -116,7 +116,7 @@ export function getCategories() {
 export function getGenders() {
   return async function (dispatch) {
     try {
-      let json = await axios.get(`http://localhost:3001/filters/gender`);
+      let json = await axios.get(`https://hype-shop.vercel.app/filters/gender`);
       json.data.unshift("Todos");
 
       return dispatch({
@@ -162,7 +162,7 @@ export const detailZero = () => {
 export const getOrders = () => {
   return async (dispatch) => {
     try {
-      const orders = await axios.get("http://localhost:3001/orders");
+      const orders = await axios.get("https://hype-shop.vercel.app/orders");
 
       return dispatch({
         type: GET_ORDERS,
@@ -179,7 +179,7 @@ export const patchOrder = (id, payload) => {
   return async () => {
     try {
       const order = await axios.patch(
-        `http://localhost:3001/orders/?id=${id}`,
+        `https://hype-shop.vercel.app/orders/?id=${id}`,
         payload
       );
 
@@ -212,7 +212,7 @@ export const filterDate = (payload) => {
 export function UpdateProductPost(payload){
   return async function () {
     const response = await axios.put(
-      "http://localhost:3001/sneakersUpdate",
+      "https://hype-shop.vercel.app/sneakersUpdate",
       payload
     );
     return response;
@@ -222,7 +222,7 @@ export function UpdateProductPost(payload){
 export function DeleteProduct(payload) {
   return async function () {
     const response = await axios.put(
-      "http://localhost:3001/sneakersDelete",
+      "https://hype-shop.vercel.app/sneakersDelete",
       payload
     );
     return response;
@@ -232,7 +232,7 @@ export function DeleteProduct(payload) {
 export const getUsers = () => {
 return async (dispatch) => {
   try {
-    const users = await axios.get("http://localhost:3001/usuarios");
+    const users = await axios.get("https://hype-shop.vercel.app/usuarios");
     /* console.log(response) */
 
     return dispatch({
@@ -248,7 +248,7 @@ return async (dispatch) => {
 export function deshabilitarUser(payload) {
 return async function () {
   const response = await axios.put(
-    "http://localhost:3001/deshabilitarUser",
+    "https://hype-shop.vercel.app/deshabilitarUser",
     payload
   );
   return response;
@@ -258,7 +258,7 @@ return async function () {
 export function habilitarUser(payload) {
 return async function () {
   const response = await axios.put(
-    "http://localhost:3001/habilitarUser",
+    "https://hype-shop.vercel.app/habilitarUser",
     payload
   );
   return response;
@@ -268,7 +268,7 @@ return async function () {
 export function darAdmin(payload) {
 return async function () {
   const response = await axios.put(
-    "http://localhost:3001/admin",
+    "https://hype-shop.vercel.app/admin",
     payload
   );
   return response;
@@ -278,7 +278,7 @@ return async function () {
 export function sacarAdmin(payload) {
 return async function () {
   const response = await axios.put(
-    "http://localhost:3001/sacarAdmin",
+    "https://hype-shop.vercel.app/sacarAdmin",
     payload
   );
   return response;
@@ -288,7 +288,7 @@ return async function () {
 // POST REview
 export function CreateReview(payload) {
   return async function() {
-    const response = await axios.post("http://localhost:3001/createReview", payload)
+    const response = await axios.post("https://hype-shop.vercel.app/createReview", payload)
     return response
   };
 }
