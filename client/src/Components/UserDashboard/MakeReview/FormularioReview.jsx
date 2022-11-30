@@ -1,19 +1,18 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createReview } from "../../Redux/actions";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
-import { CreateReview } from "../../Redux/actions";
+import { CreateReview } from "../../../Redux/actions";
 
-const MakeReview = ({idProduct}) => {
+const FormularioReview = ({closeModal}) => {
 
   const dispatch = useDispatch();
 
   const [puntaje, setPuntaje] = useState(null);
   const [review, setReview] = useState({
-    productId: idProduct
+    productId: 'fa1c985e-6643-4d46-b2f9-558e8a4a88a2',
   })
 
  
@@ -34,6 +33,7 @@ const MakeReview = ({idProduct}) => {
     if(Object.values(review).length) {
       dispatch(CreateReview(review))
       setReview({});
+      closeModal()
     } else {
       alert('llene todos los campos porfavor')
     }
@@ -91,4 +91,4 @@ const MakeReview = ({idProduct}) => {
   );
 };
 
-export default MakeReview;
+export default FormularioReview;
