@@ -9,7 +9,7 @@ const {
 } = process.env;
 
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/sneakers`, {
+const sequelize = new Sequelize(`postgresql://${ DB_USER }:${ DB_PASSWORD }@${ DB_HOST }:${ DB_PORT }/${ DB_DATABASE }`, {
 
   dialectModule: pg,
 logging: false, // set to console.log to see the raw SQL queries
