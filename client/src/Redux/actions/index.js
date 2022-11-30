@@ -17,6 +17,8 @@ import {
   PATCH_ORDER,
   FILTER_DATE,
   FILTER_STATE,
+  GET_USERS,
+  
 } from "./actionTypes";
 
 export const getSneakers = () => {
@@ -204,6 +206,85 @@ export const filterDate = (payload) => {
    };
 };
 
+
+//Dashboard actions
+
+export function UpdateProductPost(payload){
+  return async function () {
+    const response = await axios.put(
+      "http://localhost:3001/sneakersUpdate",
+      payload
+    );
+    return response;
+  }
+}
+
+export function DeleteProduct(payload) {
+  return async function () {
+    const response = await axios.put(
+      "http://localhost:3001/sneakersDelete",
+      payload
+    );
+    return response;
+  }
+}
+
+export const getUsers = () => {
+return async (dispatch) => {
+  try {
+    const users = await axios.get("http://localhost:3001/usuarios");
+    /* console.log(response) */
+
+    return dispatch({
+      type: GET_USERS,
+      payload: users.data,
+    });
+  } catch (error) {
+    console.log("error trying to GET_Users", error);
+  }
+};
+};
+
+export function deshabilitarUser(payload) {
+return async function () {
+  const response = await axios.put(
+    "http://localhost:3001/deshabilitarUser",
+    payload
+  );
+  return response;
+}
+}
+
+export function habilitarUser(payload) {
+return async function () {
+  const response = await axios.put(
+    "http://localhost:3001/habilitarUser",
+    payload
+  );
+  return response;
+}
+}
+
+export function darAdmin(payload) {
+return async function () {
+  const response = await axios.put(
+    "http://localhost:3001/admin",
+    payload
+  );
+  return response;
+}
+}
+
+export function sacarAdmin(payload) {
+return async function () {
+  const response = await axios.put(
+    "http://localhost:3001/sacarAdmin",
+    payload
+  );
+  return response;
+}
+}
+
 // POST REview
 export function CreateReview(payload) {
   return async function() {
@@ -211,4 +292,5 @@ export function CreateReview(payload) {
     return response
   };
 }
+
 
