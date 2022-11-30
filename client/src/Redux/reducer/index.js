@@ -9,10 +9,12 @@ import {
    DETAIL_ZERO,
    SET_CURRENT_USER,
    //  ORDERS ADMIN
-   GET_ORDERS,
+  
    FILTER_DATE,
    FILTER_STATE,
    GET_USERS,
+   GET_ORDERS_ADMIN,
+   GET_ORDERS_USERS
 } from "../actions/actionTypes";
 const initialState = {
    sneakersReducer: [],
@@ -26,7 +28,8 @@ const initialState = {
    orden: {},
    search: [],
    currentUser: null,
-   orders: [],
+   ordersUsers: [],
+   ordersAdmins: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -106,10 +109,17 @@ const rootReducer = (state = initialState, action) => {
          };
 
       //  ORDER ADMIN
-      case GET_ORDERS:
+      case GET_ORDERS_ADMIN:
          return {
             ...state,
-            orders: action.payload,
+            ordersAdmins: action.payload,
+         };
+
+      //  ORDER USERS
+      case GET_ORDERS_USERS:
+         return {
+            ...state,
+            ordersUsers: action.payload,
          };
 
       // FILTROS ORDER ADMIN
