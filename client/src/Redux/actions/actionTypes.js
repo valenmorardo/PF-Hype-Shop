@@ -20,3 +20,4 @@ export const GET_ORDERS = "GET_ORDERS";
 export const PATCH_ORDER = "PACTH_ORDER";
 export const FILTER_DATE = "FILTER_DATE";
 export const FILTER_STATE = "FILTER_STATE";
+export const GET_USERS = "GET_USERS";

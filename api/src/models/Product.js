@@ -35,6 +35,11 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      visible:{
+     type: DataTypes.INTEGER,
+     defaultValue: 0,
+      allowNull: false,
+      }
     },
     { timestamps: false }
   );

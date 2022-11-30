@@ -2,6 +2,13 @@ import React, { useState } from "react";
 // import AdminOrdersModal from "./AdminOrdersModal";
 import DetailProductBuy from "../DetailProductBuy/DetailProductBuy";
 import ticket from "../../Img/ticket.svg"
+import bolsaCheck from "../images/bolsa-check.png";
+import entrega from "../images/camion.png";
+import entregaCheck from "../images/camion-check.png";
+import check from "../images/check.png";
+import checkCheck from "../images/check-check.png";
+
+
 
 const UserOrderCard = ({ id, nombre, email, image, estado, fecha, direccion, products, precioTotal }) => {
 
@@ -23,6 +30,10 @@ const UserOrderCard = ({ id, nombre, email, image, estado, fecha, direccion, pro
         setOpenDetail(false)
     }
 
+    // const estadoInterno = "Comprado";
+    // const estadoInterno = "Enviado";
+    const estadoInterno = "Entregado";
+
     return (
         <div>
             {
@@ -33,7 +44,7 @@ const UserOrderCard = ({ id, nombre, email, image, estado, fecha, direccion, pro
                     precioTotal={precioTotal}
                 />
             }
-            <div className="flex flex-col justify-around items-center bg-white py-7 px-4 w-[880px] h-64 mt-8 rounded-xl border border-solid border=[#e6e8eb] relative " >
+            <div className="flex flex-col justify-around items-center bg-white py-7 px-4 w-[880px] h-80 mt-8 rounded-xl border border-solid border=[#e6e8eb] relative " >
                 <section className="flex">
                     <div className="flex  justify-center ">
                         <div className="aspect-w-1 aspect-h-1  h-min w-[100px] overflow-hidden rounded-lg self-center">
@@ -77,10 +88,37 @@ const UserOrderCard = ({ id, nombre, email, image, estado, fecha, direccion, pro
                 </section>
                 <section className="w-full">
                     {/* <span><img className="text-lime-500" src={ticket} /></span> */}
-                    <p>Modal</p>
-                    <div className="w-full h-4 bg-slate-400 rounded-lg">
-                        <div className="w-[50%] h-4 bg-orange-600 rounded-lg"></div>
-                    </div>
+                    {estado === "Comprado" ?
+                        <div>
+                            <div className="flex justify-between">
+                                <img src={bolsaCheck} />
+                                <img src={entrega} />
+                                <img src={check} />
+                            </div>
+                            <div className="w-full h-4 bg-slate-400 rounded-lg">
+                                <div className="w-[5%] h-4 bg-[#1FD516] rounded-lg"></div>
+                            </div>
+                        </div> : estado === "Despachado" ?
+                            <div >
+                                <div className="flex justify-between">
+                                    <img src={bolsaCheck} />
+                                    <img src={entregaCheck} />
+                                    <img src={check} />
+                                </div>
+                                <div className="w-full h-4 bg-slate-400 rounded-lg">
+                                    <div className="w-[55%] h-4 bg-[#1FD516] rounded-lg"></div>
+                                </div>
+                            </div> : estado === "Entregado" ?
+                                <div >
+                                    <div className="flex justify-between">
+                                        <img src={bolsaCheck} />
+                                        <img src={entregaCheck} />
+                                        <img src={checkCheck} />
+                                    </div>
+                                    <div className="w-full h-4 bg-slate-400 rounded-lg">
+                                        <div className="w-[100%] h-4 bg-[#1FD516] rounded-lg"></div>
+                                    </div>
+                                </div> : <p></p>}
                 </section>
 
             </div >

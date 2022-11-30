@@ -15,7 +15,7 @@ const UserOrder = () => {
             email: "FernadoPrueba@gmail.com",
             direccion: "CalleFalsa 123",
             fecha_Compra: "11-nov-2022",
-            estado: "Comprado",
+            estado: "Despachado",
             precioTotal: 32000,
             Compra: [{
                 age_group: "Adultos",
@@ -60,7 +60,9 @@ const UserOrder = () => {
 
     return (
         <div>
-            <h1>Tus ordenes Aqui</h1>
+            <p className="mt-0 font-bold tracking-tight text-[#f15a24] sm:text-4xl ">
+                Estado De Tus Ordenes
+            </p>
             {console.log(user.isAdmin)}
             <div className="flex flex-col flex-wrap content-center">
                 {dataFalse &&

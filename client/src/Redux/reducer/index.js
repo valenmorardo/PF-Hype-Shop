@@ -12,10 +12,12 @@ import {
    GET_ORDERS,
    FILTER_DATE,
    FILTER_STATE,
+   GET_USERS,
 } from "../actions/actionTypes";
 const initialState = {
    sneakersReducer: [],
    allSneakers: [],
+   allUsers: [],
    detail: [],
    brands: [],
    categories: [],
@@ -118,6 +120,12 @@ const rootReducer = (state = initialState, action) => {
       case FILTER_DATE:
          // CREAR FILTROS ASCENDETE / DESCENDETE LOGICA
          return {};
+
+         case GET_USERS:
+            return{
+               ...state,
+               allUsers: action.payload
+            }
 
       default:
          return initialState;

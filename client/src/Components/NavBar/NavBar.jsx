@@ -93,6 +93,11 @@ const NavBar = () => {
                 </Link>
               </li>
               <li>
+              <Link to="/dashboard">
+                <span className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-600 md:p-0 ">Dashboard</span>
+                </Link>
+              </li>
+              <li>
               <Link to="/createProduct">
                 <span className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-600 md:p-0 ">Vender Producto</span>
                 </Link>

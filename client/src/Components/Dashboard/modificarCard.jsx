@@ -2,53 +2,42 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import { useDispatch, useSelector } from "react-redux";
-import { CreateNewProduct } from "../../Redux/actions";
-import style from "./CreateProduct.module.css";
-import { getBrands, getCategories, getGenders } from "../../Redux/actions";
+import { UpdateProductPost } from "../../Redux/actions";
+import style from "../CreateProduct/CreateProduct.module.css";
 // Previsualizar
-import ModalPrevisualizar from "./ModalPrevisualizar/ModalPrevisualizar";
-import PageNoAdmin from "../PageNoAdmin/PageNoAdmin";
+import ModalPrevisualizar from "../CreateProduct/ModalPrevisualizar/ModalPrevisualizar";
+import PageNoAdmin from "../PageNoAdmin/PageNoAdmin"
 
-const CreateProduct = () => {
+const UpdateProduct = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-
+  const sneakerDetail = useSelector((state) => state.detail);
   const user = useSelector((state) => state.currentUser)
-  const brand = (useSelector((state) => state.brands)).filter(e => e != 'Todos');
-  const category = (useSelector((state) => state.categories)).filter(e => e != 'Todos');
-  const gender = (useSelector((state) => state.genders)).filter(e => e != 'Todos');
-
-
-  useEffect(() => {
-    dispatch(getBrands());
-    dispatch(getCategories());
-    dispatch(getGenders());
-  }, [dispatch]);
-
+  console.log(sneakerDetail)
   // para validaciones:
   const [error, setError] = useState({});
   const initialState = {
-    thumbnail: "",
+    id: sneakerDetail.id,
+    thumbnail: sneakerDetail.pictures ? sneakerDetail.pictures[0] : "",
     localThumbnailInput: "",
-    title: "",
-    price: 0,
-    condition: "new",
+    title: sneakerDetail.title,
+    price: sneakerDetail.price,
+    condition: sneakerDetail.condition ? sneakerDetail.condition : "",
     picture: "",
-    pictures: [],
-    age_group: "",
-    brand: "",
+    pictures: sneakerDetail.pictures,
+    age_group: sneakerDetail.age_group,
+    brand: sneakerDetail.brand,
     color: "",
-    colors: [],
-    externalMaterial: "",
-    shoeStyle: "Zapatilla",
+    colors: sneakerDetail.colors ? sneakerDetail.colors : [],
+    externalMaterial: sneakerDetail.externalMaterial,
+    shoeStyle: sneakerDetail.shoeStyle ? sneakerDetail.shoeStyle : "Zapatilla",
     size: "",
-    sizes: [],
+    sizes: sneakerDetail.sizes ? sneakerDetail.sizes : [],
     imgInput: 0,
     laImg: 0,
     iLocalPictures: [],
-    genero: "",
-    category: "",
-    available_quantity: 6
+    genero: sneakerDetail.genero,
+    available_quantity: sneakerDetail.available_quantity
   };
 
   // ESTADO PRINCIPAL
@@ -143,14 +132,6 @@ const CreateProduct = () => {
     });
   };
 
-  // BRAND
-  const handleSelectBrand = (e) => {
-    setInput({
-      ...input,
-      brand: e.target.value,
-    });
-  };
-
   // AGE_GROUP
   const handleSelect = (e) => {
     setInput({
@@ -164,14 +145,6 @@ const CreateProduct = () => {
       condition: e.target.value,
     });
   };
-
-  const handleSelectCategory = (e) => {
-    setInput({
-      ...input,
-      category: e.target.value,
-    });
-  };
-
 
   const handleSelectGenero = (e) => {
     setInput({
@@ -248,12 +221,11 @@ const CreateProduct = () => {
       input.colors &&
       input.externalMaterial &&
       input.shoeStyle &&
-      input.sizes &&
-      input.genero &&
-      input.category
+      input.sizes
     ) {
       dispatch(
-        CreateNewProduct({
+        UpdateProductPost({
+          id: input.id,
           thumbnail: input.thumbnail,
           title: input.title,
           price: input.price,
@@ -265,8 +237,6 @@ const CreateProduct = () => {
           externalMaterial: input.externalMaterial,
           shoeStyle: input.shoeStyle,
           sizes: input.sizes,
-          category: input.category,
-          gender: input.genero,
           available_quantity: input.available_quantity
         })
       );
@@ -276,8 +246,8 @@ const CreateProduct = () => {
         button: "Ok",
       });
       setInput(initialState);
-      history.push("/");
-    } else alert(" missing data for the creation of a new product");
+      history.push(`/sneakerAdmin/${sneakerDetail.id}`);
+    } else alert(" missing data for the update of a new product");
   };
 
   const [images, setimages] = useState("");
@@ -578,7 +548,7 @@ const CreateProduct = () => {
         <div className={style.containerMain}>
           {console.log("Errores", error)}
           <form className={style.form}>
-            <h2 className={style.titulo}>Product Creation</h2>
+            <h2 className={style.titulo}>Product Update</h2>
             {/* Previsualizar */}
             <button className={style.btnPrev} onClick={(e) => handleOpenModal(e)}>Previsualizar</button>
             {
@@ -613,10 +583,10 @@ const CreateProduct = () => {
                 onChange={(e) => handleChange(e)}
               />
             </div>
-
             {/* PRICE */}
             <div>
               <p>Price: </p>
+
               <input
                 type="number"
                 min="0"
@@ -627,7 +597,6 @@ const CreateProduct = () => {
                 onChange={handleChange}
               />
             </div>
-
             {/* THUMBNAIL */}
             <div>
               <div>
@@ -637,31 +606,23 @@ const CreateProduct = () => {
                 {input.imgInput === true && <LocalRender />}
                 {input.imgInput === false && <URLRender />}
               </div>
-            </div>
+              {/* BRAND */}
+              <div>
+                <p>Brand:</p>
 
-            {/* BRAND */}
-            <div>
-              <div className={style.select}>
-                {input.brand.length === 0 && ( // si hay un error hara un <p> nuevo con el error
-                  <p className={style.error}>{"choose a brand"}</p>
-                )}
-                <p>Select brand:</p>
-                <select className={style.select} onChange={(e) => handleSelectBrand(e)}>
-                  <option selected disabled>
-                    Select brand
-                  </option>
-                  {
-                    brand.map((e) => (
-                      <option value={e}>{e}</option>
-                    ))
-                  }
-                </select>
+                <input
+                  type="text"
+                  value={input.brand}
+                  className={style.field}
+                  title="brand"
+                  onChange={(e) => handleChange(e)}
+                />
               </div>
             </div>
-
             {/* colors */}
             <div>
               <p>colors:</p>
+
               <input
                 type="text"
                 value={input.color}
@@ -671,7 +632,6 @@ const CreateProduct = () => {
               />
               <button className={style.btnImg} onClick={(e) => hundleColorsAdd(e)}> Añadir color</button>
             </div>
-
             {/* ARRAY COLORS  */}
             <div className={style.pictures}>
               {input.colors?.map(
@@ -716,7 +676,6 @@ const CreateProduct = () => {
               />
               <button className={style.btnImg} onClick={(e) => hundleSizesAdd(e)}> Añadir size</button>
             </div>
-
             {/* ARRAY SIZES  */}
             <div className={style.pictures}>
               {input.sizes?.map(
@@ -738,7 +697,8 @@ const CreateProduct = () => {
 
             {/* CONDITION */}
             <div className={style.select}>
-              {input.condition.length === 0 && ( // si hay un error hara un <p> nuevo con el error
+
+              {!input.condition && ( // si hay un error hara un <p> nuevo con el error
                 <p className={style.error}>{"choose a Condition"}</p>
               )}
               <p>Select Condition:</p>
@@ -751,27 +711,9 @@ const CreateProduct = () => {
               </select>
             </div>
 
-            {/* CATEGORIA */}
-            <div className={style.select}>
-              {input.category.length === 0 && ( // si hay un error hara un <p> nuevo con el error
-                <p className={style.error}>{"choose a Category"}</p>
-              )}
-              <p>Select Category:</p>
-              <select className={style.select} onChange={(e) => handleSelectCategory(e)}>
-                <option selected disabled>
-                  Select Category
-                </option>
-                {
-                  category.map((e) => (
-                    <option value={e}>{e}</option>
-                  ))
-                }
-              </select>
-            </div>
-
             {/* GENERO */}
             <div className={style.select}>
-              {input.genero.length === 0 && ( // si hay un error hara un <p> nuevo con el error
+              {!input.genero && ( // si hay un error hara un <p> nuevo con el error
                 <p className={style.error}>{"choose a genero"}</p>
               )}
               <p>Select genero:</p>
@@ -779,11 +721,8 @@ const CreateProduct = () => {
                 <option selected disabled>
                   Select genero
                 </option>
-                {
-                  gender.map((e) => (
-                    <option value={e}>{e}</option>
-                  ))
-                }
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
               </select>
             </div>
 
@@ -792,10 +731,10 @@ const CreateProduct = () => {
               {/* {input.age_group && ( // si hay un error hara un <p> nuevo con el error
             <p className={style.error}>{"choose a age_group"}</p>
           )} */}
-              <p>Select Age Group:</p>
+              <p>Select age_group Group:</p>
               <select className={style.select} onChange={(e) => handleSelect(e)}>
                 <option selected disabled>
-                  Select Age Group
+                  Select age_group Group
                 </option>
                 <option value="Adultos">Adultos</option>
                 <option value="Niños">Niños</option>
@@ -807,7 +746,7 @@ const CreateProduct = () => {
               <p>Imagenes Adicionales:</p>
               {/* {error.title && ( // si hay un error hara un <p> nuevo con el error
                         <p className={style.error}>{error.title}</p>
-                      )} */}
+                    )} */}
 
               {input.laImg === 0 && <RenderizadoBotonesPictures />}
               {input.laImg === true && <LocalRenderPictures />}
@@ -841,7 +780,7 @@ const CreateProduct = () => {
                 type="submit"
                 onClick={(e) => handleSubmit(e)}
               >
-                Create New Product
+                Update Product
               </button>
             }
           </form>
@@ -850,4 +789,4 @@ const CreateProduct = () => {
   );
 };
 
-export default CreateProduct;
+export default UpdateProduct;
