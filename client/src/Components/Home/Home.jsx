@@ -12,6 +12,11 @@ import Filtrado from "../NavBar/Filtrado/Filtrado";
 import Loading from "../Loading/Loading";
 import Button from "../Button/Button";
 import SearchBar from "../NavBar/SearchBar/SearchBar";
+//estilos 
+import LightSpeed from 'react-reveal/LightSpeed';
+import Zoom from 'react-reveal/Zoom';
+import Slide from 'react-reveal/Slide';
+
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -49,22 +54,29 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <div ssrFadeout>
       <div>
-        {/* <NavBar paginaUno={paginaUno} />
-        <nav className="bg-gray-50">
-      </nav> */}
-      <div className="py-3 px-4 mx-auto max-w-screen-xl md:px-6">
-        <SearchBar paginaUno={paginaUno} />
-      </div>
 
-        <Filtrado setIsLoading={setIsLoading} paginaUno={paginaUno} />
+        <div className="py-3 px-4 mx-auto max-w-screen-xl md:px-6">
+          <Slide top ssrFadeout>
+            <SearchBar paginaUno={paginaUno} />
+          </Slide>
+
+        </div>
+
+        <LightSpeed right delay={500} ssrFadeout>
+          <Filtrado setIsLoading={setIsLoading} paginaUno={paginaUno} />
+        </LightSpeed>
 
         {isLoading ? (
           <Loading setIsLoading={setIsLoading} isLoading={isLoading} />
         ) : sneakers.length ? (
           <div>
-            <Cards sneakers={currentSneaker} />
+
+            <Zoom ssrFadeout>
+              <Cards sneakers={currentSneaker} />
+            </Zoom>
+
             <Paginado
               nextPage={nextPage}
               prevPage={prevPage}
