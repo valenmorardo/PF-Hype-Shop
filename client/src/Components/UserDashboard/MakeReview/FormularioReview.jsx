@@ -32,6 +32,7 @@ const FormularioReview = ({closeModal}) => {
 
     if(Object.values(review).length) {
       dispatch(CreateReview(review))
+      setPuntaje(null);
       setReview({});
       closeModal()
     } else {
@@ -43,12 +44,13 @@ const FormularioReview = ({closeModal}) => {
   return (
 
     <div align="center">
-      <h1>REALIZE SU REVIEW</h1>
-
+      <h1 className="mt-0 font-bold tracking-tight text-[#f15a24] sm:text-4xl my-6">REALIZE SU REVIEW</h1>
+      
       <form>
         <div>
-          <label>Titulo: </label>
+          <label className="mt-0 font-bold tracking-tight text-[#000000] sm:text-2xl my-6">Titulo: </label>
           <input
+          className="bg-gray-50 border border-orange-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 mb-5"
             type="text"
             placeholder="EJ: excelente..."
             name="title"
@@ -57,8 +59,9 @@ const FormularioReview = ({closeModal}) => {
         </div>
 
         <div>
-          <label>Contenido: </label>
+          <label className="mt-0 font-bold tracking-tight text-[#000000] sm:text-2xl my-6">Contenido: </label>
           <textarea
+          className="bg-gray-50 border border-orange-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-5" 
             placeholder="EJ: muy buen producto, buena calidad..."
             name="content"
             onChange={(e) => handleChange(e)}
@@ -66,14 +69,13 @@ const FormularioReview = ({closeModal}) => {
         </div>
 
         <div>
-          <label>Puntaje: </label>
+          <label className="mt-0 font-bold tracking-tight text-[#000000] sm:text-2xl my-6">Puntaje: </label>
 
             <Box
               sx={{
                 "& > legend": { mt: 2 },
               }}
             >
-              <Typography component="legend">Controlled</Typography>
               <Rating
                 name="rate"
                 value={puntaje}
@@ -85,8 +87,8 @@ const FormularioReview = ({closeModal}) => {
             </Box>
         </div>
       </form>
+      <button className='text-orange-700 hover:text-white border border-orange-700 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 mt-6' onClick={(e) => handleSubmit(e)}>Enviar</button>
 
-      <button onClick={(e) => handleSubmit(e)}>Enviar</button>
     </div>
   );
 };
