@@ -6,7 +6,7 @@ const PayButton = ({ cartItems }) => {
   const user = useSelector((state) => state.currentUser);
   const handleCheckout = () => {
     axios
-      .post("http://localhost:3001/checkout", { cartItems })
+      .post("https://hype-shop.vercel.app/checkout", { cartItems })
       .then((response) => {
         if (response.data.url) {
           window.location.href = response.data.url;
