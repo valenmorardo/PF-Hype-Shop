@@ -42,8 +42,8 @@ router.post("/checkout", async (req, res) => {
       ],
       line_items,
       mode: "payment",
-      success_url: "https://hype-gamma.vercel.app/checkout-success",
-      cancel_url: "https://hype-gamma.vercel.app/",
+      success_url: "http://localhost:3000/checkout-success",
+      cancel_url: "http://localhost:3000/",
    });
 
    res.send({ url: session.url });
