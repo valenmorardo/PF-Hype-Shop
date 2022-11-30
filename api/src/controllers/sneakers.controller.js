@@ -306,11 +306,10 @@ const createReview = async (req, res) => {
 // CREACION DE ORDER
 
 const createOrder = async (req, res) => {
-   let { estado, carrito, precioTotal, usuarioId } = req.body;
+   let { carrito, precioTotal, usuarioId } = req.body;
 
    try {
       let createOrder = await Order.create({
-         estado,
          carrito,
          precioTotal,
       });
