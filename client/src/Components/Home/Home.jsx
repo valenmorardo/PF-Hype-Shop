@@ -83,6 +83,10 @@ const Home = () => {
           />
         )}
       </div>
+      <footer class="p-4 mt-3 bg-white rounded-lg shadow md:flex md:items-center justify-center md:p-6 ">
+    <span class="text-sm text-gray-600 text-center">© 2022 <a href="https://hype-kappa.vercel.app/" class="hover:underline">HYPESHOP™</a>. All Rights Reserved.
+    </span>
+</footer>
     </div>
   );
 };
