@@ -45,7 +45,7 @@ const AdminOrders = () => {
                 <Loading setIsLoading={setIsLoading} isLoading={isLoading} />
             ) :
 
-                user && user.isAdmin === false ?
+                user && user.isAdmin === true ?
                     <div className=" bg-slate-50 ">
                         {console.log(orders)}
                         {console.log(filterEstado)}
@@ -103,6 +103,7 @@ const AdminOrders = () => {
 
 
                                 <div className="flex flex-col flex-wrap content-center">
+                                   
                                     {orders.length > 0 ?
                                         orders.map((el) => (
                                             <AdminOrdersCard
