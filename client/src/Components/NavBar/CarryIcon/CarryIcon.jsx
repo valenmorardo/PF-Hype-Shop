@@ -20,12 +20,12 @@ const CarryIcon = () => {
         <>
             <img className='w-7 h-auto object-cover' src={iconCart} />
             {/* {console.log(totalItemsQuantity(item))} */}
-            <span className='relative bottom-3 right-3' >
+            {/* <span className='relative bottom-3 right-3' >
                 {cantidad !== 0 ?
                     < BubbleAlert value={cantidad} />
                     : null
                 }
-            </span>
+            </span> */}
         </>
     )
 }
