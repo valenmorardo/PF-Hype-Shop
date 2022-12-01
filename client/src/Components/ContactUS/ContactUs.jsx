@@ -5,14 +5,6 @@ import { Link } from "react-router-dom";
 export default function ContactUs() {
     return (
         <>
-            <Link to='/'>
-                <button
-                    type="submit"
-                    className="mt-6 ml-6 flex w-3 items-center justify-center rounded-md border border-transparent bg-[#f15a24]  py-2 px-9 text-base font-medium text-white hover:bg-orange-500 focus:outline-none  "
-                >
-                    Volver
-                </button>
-            </Link>
             <div className="">
                 <div className="md:grid md:grid-cols-3 md:gap-6 min-h-max">
                     <div className="md:col-span-1">
