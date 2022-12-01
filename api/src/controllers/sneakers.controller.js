@@ -159,11 +159,11 @@ const updateProduct = async (req, res) => {
          where : {id : req.body.id}
 
       });
-
+     })
       console.log(productUpdate);
 
       res.send(productUpdate);
-   } catch (error) {
+     } catch (error) {
       console.log(error);
       res.status(400).send(error);
    }
