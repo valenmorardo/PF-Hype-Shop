@@ -6,7 +6,7 @@ const {
 
 // const { Product, User} = require("../db");
 const transporter = require("../config/mailer");
-const { Product, Review, User, Order,  Attribute } = require("../db");
+const { Product, Review, User, Order,  Attribute, Variation,Color,Size } = require("../db");
 
 
 const allData = async (req, res) => {
@@ -50,8 +50,10 @@ const createProduct = async (req, res) => {
       category,
       gender,
       available_quantity,
+      variations
    } = req.body;
    console.log(req.body);
+   pictures.shift()
 
    const attributes = [
       age_group,
@@ -70,6 +72,12 @@ const createProduct = async (req, res) => {
       "Género",
    ];
 
+   const variationsArr = [
+      "color",
+      "pictures",
+      "size"
+   ]
+
    try {
       let productCreate = await Product.create({
          title,
@@ -78,13 +86,13 @@ const createProduct = async (req, res) => {
          pictures,
          age_group,
          sold_quantity: 0,
-         // shoeStyle,
-         // sizes,
-         // brand,
-         // colors,
-         // externalMaterial,
-         //  category,
-         // gender,
+          shoeStyle,
+          sizes,
+          brand,
+          colors,
+          externalMaterial,
+           category,
+          gender,
          available_quantity,
       });
 
@@ -97,7 +105,40 @@ const createProduct = async (req, res) => {
       });
       // console.log(productCreate);
 
+      variations.forEach(async (variation, index) => {
+         const  available_quantity = variation.available_quantity;
+         const  size = variation.size;
+         const  color = variation.color;
+         const img = variation.img
+         const price = variation.price
+         console.log(available_quantity)
+            console.log(size)
+            console.log(color)
+            const col = await Color.findOrCreate({
+where: { name:color},
+defaults:{name:color}
+            })
+console.log(col)
+
+const talle = await Size.findOrCreate({
+   where: { value:size},
+   defaults:{value:size}
+})
+
+         const vari = await Variation.create({
+            available_quantity,
+            sold_quantity:0,
+            price,
+            picture_ids:img
+
+         });
+        await vari.setColor(col[0])
+        await vari.setSize(talle[0])
+         return await productCreate.addVariations(vari);
+      });
+
       res.send(productCreate);
+      console.log(productCreate)
    } catch (error) {
       console.log(error);
       res.status(400).send(error);
