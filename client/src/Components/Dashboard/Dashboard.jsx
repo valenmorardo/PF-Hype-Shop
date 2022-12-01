@@ -11,6 +11,7 @@ import Error404 from '../error404/error404';
 
 
 
+
 const Dashboard = () => {
   const [funcionalidades, setFuncionalidades] = useState("Productos");
   
@@ -28,9 +29,11 @@ const Dashboard = () => {
       <li className="mb-8 font-bold">
         <button className ={styles.btn2} value = "Usuarios" onClick={() =>setFuncionalidades("Usuarios")}> Usuarios</button> 
       </li>
+      <Link to = "/adminOrders">
        <li className="mb-8 font-bold">
         <button className ={styles.btn3} value = "Ordenes" onClick={() =>setFuncionalidades("Ordenes")}> Ordenes</button> 
       </li>
+      </Link>
       <Link to = "/createProduct">
       <li className="mb-8 font-bold">
         <button className ={styles.btn4} > Vender Productos</button> 
