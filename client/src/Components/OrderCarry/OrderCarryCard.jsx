@@ -103,11 +103,6 @@ const OrderCarryCard = ({ id, title, brand, image, cantidad, size, externalMater
         <button type="button"  className="flex items-center px-2 py-1 space-x-1" onClick={() => handleOpenModal()}>
 		<span>Editar Cantidad</span>
 		</button>
-         {openModal &&
-  <div>
-      <p>Modalito</p>
-  </div>
-        }
         {openModal &&
      <ModalCantidad
          id={id}
