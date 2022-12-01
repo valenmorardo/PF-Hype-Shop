@@ -5,12 +5,6 @@ import styles from "../About/About.module.css";
 const About = () => {
   return (
     <>
-    <Link to='/'>
-      <button
-        type="submit"
-        className="mt-6 ml-6 flex w-3 items-center justify-center rounded-md border border-transparent bg-[#f15a24]  py-2 px-9 text-base font-medium text-white hover:bg-orange-500 focus:outline-none  "
-      >Volver</button>
-    </Link>
     <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
       <div className="text-center pb-12">
         <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl font-heading text-gray-900">

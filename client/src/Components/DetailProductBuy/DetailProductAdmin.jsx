@@ -1,11 +1,10 @@
-import { color } from "@mui/system";
 import React from "react";
-import DetailProductBuyCard from "./DetailProductBuyCard";
+import DetailProductAdminCard from "./DetailProductAdminCard";
 
-const DetailProductBuy = ({ onClose, products, precioTotal }) => {
+const DetailProductAdmin = ({ onClose, products, precioTotal }) => {
     const array = [1, 2, 3, 4, 5, 6, 7, 7, 87, 535, 434, 434]
     return (
-        <div className="z-20 bg-white max-w-full bg-contain min-h-[100rem] absolute top-0 bottom-0 right-0 left-0 rounded-2xl">
+        <div className="z-20 bg-white max-w-full bg-contain min-h-[60rem] absolute top-0 bottom-0 right-0 left-0 rounded-2xl">
             <div className="">
                 <div className="absolute left-0 top-4">
                     <button
@@ -23,7 +22,7 @@ const DetailProductBuy = ({ onClose, products, precioTotal }) => {
                     </div>
                     <div className="flex justify-center flex-wrap w-11/12 h-5/6 gap-4 ">
                         {products.length > 0 && products.map((el) => (
-                            <DetailProductBuyCard
+                            <DetailProductAdminCard
                                 title={el.title}
                                 image={el.pictures ? el.pictures[0] : el.picture_ids[0]}
                                 brand={el.attributes ? el.attributes[1].value : "nike"}
@@ -38,11 +37,11 @@ const DetailProductBuy = ({ onClose, products, precioTotal }) => {
                             />
                         ))}
                     </div>
-                    {console.log(products.length)}
+                    {console.log(products)}
                 </div>
             </div>
         </div >
     )
 }
 
-export default DetailProductBuy;
+export default DetailProductAdmin;

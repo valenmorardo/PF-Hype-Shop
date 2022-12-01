@@ -1,0 +1,85 @@
+.container{
+  position:relative;
+  border-radius: 0px;
+  border-bottom: #fff solid 7px;
+
+  height: 200px;
+  width: fit-content;
+}
+.name{
+  position:absolute;
+  left:2rem;
+  top:1rem;
+  font-size:30px;
+}
+
+
+.email{
+  position:absolute;
+  left:16rem;
+  top:1rem;
+  font-size:30px;
+  width: 25px;
+}
+
+.estado{
+  position:absolute;
+  left:46rem;
+  top:1rem;
+  font-size:2rem;
+}
+
+.tipo{
+  position:absolute;
+  left:67rem;
+  top:1rem;
+  font-size:2rem;
+}
+
+.btnEstado{
+  position:absolute;
+  top:6rem;
+  left:46rem;
+  background-color: transparent;
+  color: rgb(133 77 14);
+  font-size: 25px;
+  border-radius: 100px;
+  border: rgb(133 77 14) solid 3px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  text-align: justify;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+
+}
+.btnEstado:hover {
+  background-color: rgb(0, 0, 0);
+  color: #fff;
+
+}
+
+.btnTipo{
+  position:absolute;
+  top:6rem;
+  left:67rem;
+  background-color: transparent;
+  color: rgb(133 77 14);
+  font-size: 25px;
+  border-radius: 100px;
+  border: rgb(133 77 14) solid 3px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  /* text-align: justify; */
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+
+}
+.btnTipo:hover {
+  background-color: rgb(0, 0, 0);
+  color: #fff;
+
+}

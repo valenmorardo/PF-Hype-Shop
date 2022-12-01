@@ -58,8 +58,8 @@ const NavBar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to='/favorites'>
-                  <span className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Favoritos</span>
+                  <Link to='/dashboard'>
+                  <span className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Admin Dashboard</span>
                   </Link>
                 </li>
                 <li>
@@ -90,16 +90,6 @@ const NavBar = () => {
               <li>
               <Link to="/">
                 <span className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-600 md:p-0   " >Inicio</span>
-                </Link>
-              </li>
-              <li>
-              <Link to="/dashboard">
-                <span className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-600 md:p-0 ">Dashboard</span>
-                </Link>
-              </li>
-              <li>
-              <Link to="/createProduct">
-                <span className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-600 md:p-0 ">Vender Producto</span>
                 </Link>
               </li>
               <li>

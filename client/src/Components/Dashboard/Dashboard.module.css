@@ -9,18 +9,69 @@
   top: -50px;
 }
 
-.btn1{
-  background-color: red;
+.btn{
+  position: absolute;
+  left:14px;
+  border-radius: 100px;
+  text-align: justify;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  
+}
+
+.btn:focus{
+  background-color:rgba(255, 0, 0, 0.438);
 }
 
 .btn2{
-  background-color: blue;
+  position: absolute;
+  left:14px;
+  top:200px;
+  border-radius: 100px;
+  text-align: justify;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  
+}
+
+.btn2:focus{
+  background-color:rgba(255, 0, 0, 0.438);
 }
 
 .btn3{
-  background-color: orange;
+  position: absolute;
+  left:14px;
+  top:300px;
+  border-radius: 100px;
+  text-align: justify;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  
+}
+
+.btn3:focus{
+  background-color:rgba(255, 0, 0, 0.438);
 }
 
 .btn4{
-  background-color: green;
+  position: absolute;
+  left:14px;
+  top:400px;
+  border-radius: 100px;
+  text-align: justify;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  width: 15px;
+}
+
+.btn4:focus{
+  background-color:rgba(255, 0, 0, 0.438);
 }

@@ -9,10 +9,12 @@ import {
    DETAIL_ZERO,
    SET_CURRENT_USER,
    //  ORDERS ADMIN
-   GET_ORDERS,
    FILTER_DATE,
    FILTER_STATE,
    GET_USERS,
+   GET_ORDERS_ADMIN,
+   GET_ORDERS_USERS,
+   GET_REVIEWS,
 } from "../actions/actionTypes";
 const initialState = {
    sneakersReducer: [],
@@ -26,7 +28,10 @@ const initialState = {
    orden: {},
    search: [],
    currentUser: null,
-   orders: [],
+   ordersUsers: [],
+   ordersAdmins: [],
+   allOrdersAdmins: [],
+   reviews: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -106,26 +111,49 @@ const rootReducer = (state = initialState, action) => {
          };
 
       //  ORDER ADMIN
-      case GET_ORDERS:
+      case GET_ORDERS_ADMIN:
          return {
             ...state,
-            orders: action.payload,
+            ordersAdmins: action.payload,
+            allOrdersAdmins: action.payload,
+         };
+
+      //  ORDER USERS
+      case GET_ORDERS_USERS:
+         return {
+            ...state,
+            ordersUsers: action.payload,
          };
 
       // FILTROS ORDER ADMIN
       case FILTER_STATE:
+         const allOrders = state.allOrdersAdmins;
+         const filterStates =
+            action.payload === "All"
+               ? allOrders
+               : allOrders.filter((el) => el.estado === action.payload);
+         console.log("Reducerr", action.payload);
          // Crear Filtros/ AQUI HIRA LOGICA
-         return {};
+         return {
+            ...state,
+            ordersAdmins: filterStates,
+         };
 
       case FILTER_DATE:
          // CREAR FILTROS ASCENDETE / DESCENDETE LOGICA
          return {};
 
-         case GET_USERS:
-            return{
-               ...state,
-               allUsers: action.payload
-            }
+      case GET_USERS:
+         return {
+            ...state,
+            allUsers: action.payload,
+         };
+
+      case GET_REVIEWS:
+         return {
+            ...state,
+            reviews: action.payload,
+         };
 
       default:
          return initialState;
