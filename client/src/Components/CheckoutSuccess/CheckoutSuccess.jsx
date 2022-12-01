@@ -6,16 +6,15 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { CreateOrder } from "../../Redux/actions";
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 
 const CheckoutSuccess = () => {
-
-
   // -usuario toda la informacion
   // carrito
   // precio total del carrito
   const location = useLocation();
-  console.log(location)
+  const history = useHistory();
+  console.log(location);
   const dispatch = useDispatch();
 
   const [usuario, saveUser] = useLocalStorage("USUARIO", " ");
@@ -27,16 +26,24 @@ const CheckoutSuccess = () => {
     return Math.trunc(sumaTotal);
   };
 
-  let precio = totalPrice(item)
-
-  
+  let precio = totalPrice(item);
 
   useEffect(() => {
-    if(location.search === "?paid=true") {
-      dispatch(CreateOrder({carrito: item, precioTotal: precio, usuarioId: usuario.id}))
-      localStorage.clear()
+    const queryParams = new URLSearchParams(location.search);
+
+    if (queryParams.has("3lik4j23lk4j3lik4j23lk4j3lik4j23lk4j3lik4j23lk4j")) {
+      queryParams.delete("3lik4j23lk4j3lik4j23lk4j3lik4j23lk4j3lik4j23lk4j");
+      history.replace({ search: queryParams.toString() });
+      dispatch(
+        CreateOrder({
+          carrito: item,
+          precioTotal: precio,
+          usuarioId: usuario.id,
+        })
+      );
+      localStorage.clear();
     }
-  }, [])
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-screen-md min-h-[80vh] m-auto">
