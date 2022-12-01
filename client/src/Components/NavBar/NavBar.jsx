@@ -10,6 +10,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import LoginButton from "./Registrar/LoginButton";
 import LogoutButton from "./Registrar/LogoutButton";
 
+import { useSelector } from "react-redux";
+
 
 import { Link } from "react-router-dom";
 
@@ -19,6 +21,8 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
 
   const { user, isAuthenticated} = useAuth0();
+
+  const usuario = useSelector((state)=> state.currentUser)
 
   const handleMenu = () =>{
     const menu = document.querySelector('#mobile-menu-2')
@@ -52,16 +56,22 @@ const NavBar = () => {
                 <span className="block text-sm font-medium text-gray-500 truncate ">{user.email}</span>
               </div>
               <ul className="py-1" aria-labelledby="user-menu-button">
-                <li>
-                  <Link to='/orders'>
-                  <span  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Productos Comprados</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to='/dashboard'>
-                  <span className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Admin Dashboard</span>
-                  </Link>
-                </li>
+
+
+              { usuario && usuario.isAdmin?
+              <li>
+                <Link to='/dashboard'>
+                <span className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Admin Dashboard</span>
+                </Link>
+              </li>
+                :
+              <li>
+                <Link to='/orders'>
+                <span  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Productos Comprados</span>
+                </Link>
+              </li>
+              }
+
                 <li>
                  <LogoutButton/>
                 </li>

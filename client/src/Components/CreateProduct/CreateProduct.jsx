@@ -793,7 +793,7 @@ return(
   // COMPONENTE RENDER
   return (
     <div>
-      {user && user.isAdmin === false ? 
+      {user && user.isAdmin === true ? 
         <div className={style.containerMain}>
           {console.log("Errores", error)}
           <form className={style.form}>
@@ -987,9 +987,9 @@ return(
         }
       </form>
 </div>
- :
+  :
     <Error404/>
-     }
+    }
 </div>
   );
 };
