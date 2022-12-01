@@ -3,9 +3,11 @@ const {
    getSingleDbProduct,
 } = require("../services/getProducts");
 
+
 // const { Product, User} = require("../db");
 const transporter = require("../config/mailer");
-const { Product, Review, User, Order } = require("../db");
+const { Product, Review, User, Order,  Attribute } = require("../db");
+
 
 const allData = async (req, res) => {
    const { title } = req.query;
@@ -103,72 +105,59 @@ const createProduct = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
-   try {
-      let {
-         title,
-         price,
-         condition,
-         pictures,
-         age_group,
-         available_quantity,
-         id,
-         thumbnail,
-         shoeStyle,
-         sizes,
-         brand,
-         colors,
-         externalMaterial,
-         category,
-         gender,
-      } = req.body;
 
-      console.log(id);
+  try{
+     let {
+      title,
+      price,
+      condition,
+      pictures,
+       age_group,
+       available_quantity,
+        id,
+        thumbnail,
+        shoeStyle,
+        sizes,
+        brand,
+        colors,
+        externalMaterial,
+        category,
+        gender,
+     } = req.body;
+  
+     console.log(id)
+  
+     let productUpdate = await Product.update({
+  
+        title: title,
+        price: price,
+        condition: condition,
+        thumbnail:thumbnail,
+        pictures:pictures,
+        available_quantity:available_quantity,
+      //   age_group:age_group,
+      //   shoeStyle:shoeStyle,
+      //   sizes:sizes,
+      //   brand:brand,
+      //   colors:colors,
+      //   externalMaterial:externalMaterial,
+      //   category:category,
+      //   gender:gender,
 
-      let productUpdate = await Product.update(
-         {
-            title: title,
-            price: price,
-            condition: condition,
-            thumbnail: thumbnail,
-            pictures: pictures,
-            available_quantity: available_quantity,
-            //   age_group:age_group,
-            //   shoeStyle:shoeStyle,
-            //   sizes:sizes,
-            //   brand:brand,
-            //   colors:colors,
-            //   externalMaterial:externalMaterial,
-            //   category:category,
-            //   gender:gender,
-         },
-         {
-            where: { id: req.body.id },
-         }
-      );
+     },{
+        where : {id : req.body.id}
+     })
 
-      const attributes = [
-         age_group,
-         shoeStyle,
-         brand,
-         externalMaterial,
-         category,
-         gender,
-      ];
-      const attributesObj = [
-         "Edad",
-         "shoeStyle",
-         "Marca",
-         "Materiales del exterior",
-         "Estilo",
-         "Género",
-      ];
+     const attributes = [ age_group, shoeStyle, brand, externalMaterial, category, gender]
+     const attributesObj =["Edad", "shoeStyle", "Marca", "Materiales del exterior", "Estilo", "Género",]
 
-      attributes.forEach(async (attr, index) => {
-         const attribute = await Attribute.update({
-            name: attributesObj[index],
-            value: attr,
-         });
-         return await productUpdate.addAttributes(attribute);
+     attributes.forEach(async (attr, index) => {
+      const attribute = await Attribute.update({
+        name: attributesObj[index],
+        value:  attr,
+      },{
+         where : {id : req.body.id}
+
       });
 
       console.log(productUpdate);
