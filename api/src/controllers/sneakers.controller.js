@@ -124,7 +124,6 @@ const updateProduct = async (req, res) => {
       category,
       gender,
 
-      available_quantity,
       variations
    } = req.body;
    console.log(req.body);
