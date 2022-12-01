@@ -175,14 +175,6 @@ const CardDetail = (props) => {
       {variationChoosen.id ? (
         <div className="bg-white">
           <div className="pt-6">
-            <Link to="/">
-              <button
-                type="submit"
-                className="mt-0 ml-6 flex w-3 items-center justify-center rounded-md border border-transparent bg-[#f15a24]  py-2 px-9 text-base font-medium text-white hover:bg-orange-500 focus:outline-none  "
-              >
-                Volver
-              </button>
-            </Link>
             {/* Image gallery */}
             <Carousel infinite={true} responsive={responsive}>
               {sneakerDetail.pictures?.map((e) => (
