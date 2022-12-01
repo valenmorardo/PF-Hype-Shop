@@ -8,6 +8,7 @@ import { getBrands, getCategories, getGenders } from "../../Redux/actions";
 // Previsualizar
 import ModalPrevisualizar from "./ModalPrevisualizar/ModalPrevisualizar";
 import PageNoAdmin from "../PageNoAdmin/PageNoAdmin";
+import Error404 from "../error404/error404";
 
 const CreateProduct = () => {
   const history = useHistory();
@@ -946,8 +947,9 @@ return(
           </button>
         }
       </form>
-
-    </div>
+</div>
+:<Error404/>}
+</div>
   );
 };
 

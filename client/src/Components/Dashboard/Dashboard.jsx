@@ -7,15 +7,18 @@ import styles from "./Dashboard.module.css";
 import UsuariosDashboard from './usuarios/usuariosDashboard';
 import { useSelector } from 'react-redux';
 import PageNoAdmin from '../PageNoAdmin/PageNoAdmin';
+import Error404 from '../error404/error404';
+
 
 
 const Dashboard = () => {
   const [funcionalidades, setFuncionalidades] = useState("Productos");
-
+  
+  const user = useSelector((state) => state.currentUser)
   return(
-    
+    <div>
+    {user && user.isAdmin === true ?
     <div className="flex justify-around" >
-
 
   <div className ="mt-10 flex items-left  text-3xl   border-white-200  border-r-4 w-1/12"  >
     <ul>
@@ -41,11 +44,9 @@ const Dashboard = () => {
   {funcionalidades === "Usuarios" && <div className =""><UsuariosDashboard/></div>}
 
   </div>
-
-  
-
-    </div>
-
+  </div>
+  :<Error404/>}
+  </div>
   )
 }
 
