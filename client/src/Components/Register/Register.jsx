@@ -42,7 +42,7 @@ export default function Register() {
 
     const register = async () => {
         return await axios
-            .post("https://hype-shop.vercel.app/register", {
+            .post("https://hype-shop-cyan.vercel.app/register", {
                 name,
                 email,
                 password,

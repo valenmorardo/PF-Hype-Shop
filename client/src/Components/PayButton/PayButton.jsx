@@ -12,7 +12,7 @@ const PayButton = ({ cartItems }) => {
     saveUser(user)
 
     axios
-      .post("https://hype-shop.vercel.app/checkout", { cartItems })
+      .post("https://hype-shop-cyan.vercel.app/checkout", { cartItems })
       .then((response) => {
         if (response.data.url) {
           window.location.href = response.data.url;

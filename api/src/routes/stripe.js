@@ -43,8 +43,8 @@ router.post("/checkout", async (req, res) => {
     line_items,
     mode: "payment",
     success_url:
-      "https://hype-gamma.vercel.app/checkout-success?3lik4j23lk4j3lik4j23lk4j3lik4j23lk4j3lik4j23lk4j=true",
-    cancel_url: "https://hype-gamma.vercel.app/",
+      "https://hype-kappa.vercel.app/checkout-success?3lik4j23lk4j3lik4j23lk4j3lik4j23lk4j3lik4j23lk4j=true",
+    cancel_url: "https://hype-kappa.vercel.app/",
   });
 
   res.send({ url: session.url });

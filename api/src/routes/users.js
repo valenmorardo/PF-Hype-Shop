@@ -1381,7 +1381,7 @@ router.post("/register", async (req, res) => {
                                                                      ><a
                                                                         target="_blank"
                                                                         class="unsubscribe"
-                                                                        href="https://hype-gamma.vercel.app/"
+                                                                        href="https://hype-kappa.vercel.app/"
                                                                         style="
                                                                            -webkit-text-size-adjust: none;
                                                                            -ms-text-size-adjust: none;
@@ -1573,7 +1573,7 @@ router.post("/register", async (req, res) => {
                                                             >
                                                                <a
                                                                   target="_blank"
-                                                                  href="https://hype-gamma.vercel.app/"
+                                                                  href="https://hype-kappa.vercel.app/"
                                                                   style="
                                                                      -webkit-text-size-adjust: none;
                                                                      -ms-text-size-adjust: none;
