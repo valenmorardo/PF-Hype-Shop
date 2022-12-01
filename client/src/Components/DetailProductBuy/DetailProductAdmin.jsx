@@ -25,13 +25,15 @@ const DetailProductAdmin = ({ onClose, products, precioTotal }) => {
                             <DetailProductAdminCard
                                 title={el.title}
                                 image={el.pictures ? el.pictures[0] : el.picture_ids[0]}
-                                brand={el.brand}
-                                category={el.category}
-                                colors={el.colors}
-                                gender={el.gender}
+                                brand={el.attributes ? el.attributes[1].value : "nike"}
+                                category={el.attributes ? el.attributes[6].value : "Urbano"}
+                                colors={el.color ? el.color.name : el.attributes[2].value}
+                                gender={el.attributes ? el.attributes[4].value : "Sin genero"}
                                 cantidad={el.cantidad}
                                 price={el.price}
-                                externalMaterial={el.externalMaterial}
+                                // externalMaterial={el.externalMaterial}
+                                productId={el.id.length === 36 ? el.id : el.productId}
+                                cerrarModal={onClose}
                             />
                         ))}
                     </div>
