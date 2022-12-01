@@ -7,6 +7,8 @@ import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import { CreateReview } from "../../../Redux/actions";
 
+import swal from "sweetalert";
+
 import validacion from "./validaciones";
 
 const FormularioReview = ({ closeModal, productId, cerrarModal }) => {
@@ -44,12 +46,17 @@ const FormularioReview = ({ closeModal, productId, cerrarModal }) => {
 
     if (Object.values(review).length && Object.values(errores).length === 0) {
       dispatch(CreateReview(review));
+      swal("SU REVIEW FUE ENVIADA!", "Gracias.", "success");
       setPuntaje(null);
       setReview({});
       closeModal();
       cerrarModal();
     } else {
-      alert("Alguno de los campos es incorrecto!");
+      swal(
+        "Hay campos sin llenar o incorrectos!",
+        "Por favor, completar correctamente",
+        "error"
+      );
     }
   }
 
@@ -109,9 +116,11 @@ const FormularioReview = ({ closeModal, productId, cerrarModal }) => {
           <span className="font-bold text-red-600">{errores.rate}</span>
         </div>
       </form>
+
       <button
-        className="text-orange-700 hover:text-white border border-orange-700 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 mt-6"
+        className="text-orange-700  border-orange-700  focus:ring-4 focus:outline-none focus:ring-blue-300 text-lg font-medium rounded-lg  px-5 py-2.5 text-center mr-2 mb-2 mt-6"
         onClick={(e) => handleSubmit(e)}
+        disabled={!review.title || !review.content || !review.rate}
       >
         Enviar
       </button>

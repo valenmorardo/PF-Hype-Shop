@@ -84,7 +84,7 @@ export default function ContactUs() {
                                         name="_next"
                                         // ESto se debe cambiar al momento del DEPLOY
 
-                                        value="http://localhost:3000/"
+                                        value="https://hype-gamma.vercel.app/"
 
                                     />
                                 </div>

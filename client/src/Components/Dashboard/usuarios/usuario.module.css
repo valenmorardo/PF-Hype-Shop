@@ -16,9 +16,10 @@
 
 .email{
   position:absolute;
-  left:20rem;
+  left:16rem;
   top:1rem;
   font-size:30px;
+  width: 25px;
 }
 
 .estado{
@@ -40,10 +41,10 @@
   top:6rem;
   left:46rem;
   background-color: transparent;
-  color: #fff;
+  color: rgb(133 77 14);
   font-size: 25px;
   border-radius: 100px;
-  border: #fff solid 3px;
+  border: rgb(133 77 14) solid 3px;
   cursor: pointer;
   transition-duration: 0.4s;
   text-align: justify;
@@ -64,10 +65,10 @@
   top:6rem;
   left:67rem;
   background-color: transparent;
-  color: #fff;
+  color: rgb(133 77 14);
   font-size: 25px;
   border-radius: 100px;
-  border: #fff solid 3px;
+  border: rgb(133 77 14) solid 3px;
   cursor: pointer;
   transition-duration: 0.4s;
   /* text-align: justify; */

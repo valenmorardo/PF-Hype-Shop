@@ -53,14 +53,25 @@ router.post("/sneakersCreate", createProduct);
 router.post("/authentication", async (req, res, next) => {
    try {
       const { email, name } = req.body;
-      const user = await User.findOrCreate({
-         where: { email: email },
-         defaults: {
-            name,
-            email,
-         },
-      });
-      res.status(200).json(user);
+      if (email === "hypeshopcompany@gmail.com") {
+         const user = await User.findOrCreate({
+            where: { email: email, isAdmin: true },
+            defaults: {
+               name,
+               email,
+            },
+         });
+         res.status(200).json(user);
+      } else {
+         const user = await User.findOrCreate({
+            where: { email: email },
+            defaults: {
+               name,
+               email,
+            },
+         });
+         res.status(200).json(user);
+      }
    } catch (error) {
       next(error);
    }

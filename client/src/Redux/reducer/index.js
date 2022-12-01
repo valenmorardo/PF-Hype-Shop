@@ -9,13 +9,12 @@ import {
    DETAIL_ZERO,
    SET_CURRENT_USER,
    //  ORDERS ADMIN
-  
    FILTER_DATE,
    FILTER_STATE,
    GET_USERS,
    GET_ORDERS_ADMIN,
    GET_ORDERS_USERS,
-   GET_REVIEWS
+   GET_REVIEWS,
 } from "../actions/actionTypes";
 const initialState = {
    sneakersReducer: [],
@@ -31,6 +30,7 @@ const initialState = {
    currentUser: null,
    ordersUsers: [],
    ordersAdmins: [],
+   allOrdersAdmins: [],
    reviews: [],
 };
 
@@ -115,6 +115,7 @@ const rootReducer = (state = initialState, action) => {
          return {
             ...state,
             ordersAdmins: action.payload,
+            allOrdersAdmins: action.payload,
          };
 
       //  ORDER USERS
@@ -126,27 +127,33 @@ const rootReducer = (state = initialState, action) => {
 
       // FILTROS ORDER ADMIN
       case FILTER_STATE:
+         const allOrders = state.allOrdersAdmins;
+         const filterStates =
+            action.payload === "All"
+               ? allOrders
+               : allOrders.filter((el) => el.estado === action.payload);
+         console.log("Reducerr", action.payload);
          // Crear Filtros/ AQUI HIRA LOGICA
-         return {};
+         return {
+            ...state,
+            ordersAdmins: filterStates,
+         };
 
       case FILTER_DATE:
          // CREAR FILTROS ASCENDETE / DESCENDETE LOGICA
          return {};
 
       case GET_USERS:
-         return{
+         return {
             ...state,
-            allUsers: action.payload
-         }
+            allUsers: action.payload,
+         };
 
       case GET_REVIEWS:
          return {
             ...state,
-            reviews: action.payload
-         }
-
-
-
+            reviews: action.payload,
+         };
 
       default:
          return initialState;
