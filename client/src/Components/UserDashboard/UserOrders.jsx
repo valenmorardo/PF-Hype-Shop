@@ -19,7 +19,7 @@ const UserOrder = () => {
         if (usuario) {
             dispatch(getOrdersUsers(usuario.id));
         }
-    }, []);
+    }, [usuario]);
 
     return (
         <div>
