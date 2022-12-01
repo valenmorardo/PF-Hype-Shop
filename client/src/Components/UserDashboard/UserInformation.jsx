@@ -4,10 +4,10 @@ import Error404 from "../error404/error404";
 
 const UserInformation = () => {
     const { user, isAuthenticated, logout } = useAuth0();
-    console.log(user)
+    console.log(isAuthenticated)
     return (
         <div>
-            {isAuthenticated ?
+            {user && isAuthenticated ?
                 <div>
                     <div className="flex flex-col items-center text-left">
                         <img className='rounded-t-full rounded-b-full w-28 my-10' src={user.picture} alt={user.name} />
