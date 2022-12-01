@@ -67,11 +67,7 @@ const UserOrder = () => {
                                 </p>
                             </div>}
 
-                        <div>
-                            <MakeReview />
-                        </div>
                     </div> : <Error404 />}
-
         </div>
     )
 }
