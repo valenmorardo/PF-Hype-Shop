@@ -16,7 +16,6 @@ import Register from "./Components/Register/Register";
 //USER DASHBOARD
 import UserInformation from "./Components/UserDashboard/UserInformation";
 import UserOrder from "./Components/UserDashboard/UserOrders";
-import Favorites from "./Components/UserDashboard/UserFavorites";
 import NavBar from "./Components/NavBar/NavBar";
 // AdminOrder
 import AdminOrders from "./Components/AdminOrders/AdminOrders";
@@ -48,7 +47,6 @@ function App() {
                <Route path="/account" component={UserInformation} />
                <Route path="/orders" component={UserOrder} />
                <Route path="/pageNoFound" component={PageNoAdmin} />
-               <Route path="/favorites" component={Favorites} />
                <Route exact path="/createProduct" component={CreateProduct} />
                <Route path="/updateProduct" component={UpdateProduct} />
                <Route exact path="/dashboard" component={Dashboard} />
