@@ -49,9 +49,10 @@ const CreateProduct = () => {
     iLocalPictures: [],
     genero: "",
     category: "",
-    available_quantity: 6,
+    stock:"",
     variations:[],
     variacionesRender:0,
+     available_quantity:6
   };
 
   // ESTADO PRINCIPAL
@@ -71,10 +72,12 @@ const CreateProduct = () => {
       imgInput: true,
     });
   };
-  const LocalRender = () => {
+  const LocalRender = (e) => {
+
     return (
       <div>
         <button className={style.btnImg} onClick={(e) => handleRenderChangeURL(e)}>Subir con URL</button>
+        
 
         {EditSesionUrl()}
       </div>
@@ -241,20 +244,19 @@ const CreateProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (
-      input.thumbnail &&
       input.title &&
       input.price &&
       input.condition &&
       input.pictures &&
       input.age_group &&
       input.brand &&
-      input.colors &&
       input.externalMaterial &&
       input.shoeStyle &&
-      input.sizes &&
-      input.genero &&
-      input.category
+      input.genero 
+     
     ) {
+
+      input.variations ?      
       dispatch(
         CreateNewProduct({
           thumbnail: input.thumbnail,
@@ -264,13 +266,30 @@ const CreateProduct = () => {
           pictures: [input.thumbnail, ...input.pictures],
           age_group: input.age_group,
           brand: input.brand,
-          colors: input.colors,
           externalMaterial: input.externalMaterial,
           shoeStyle: input.shoeStyle,
-          sizes: input.sizes,
           category: input.category,
           gender: input.genero,
+          variations:input.variations,
           available_quantity: input.available_quantity
+        })
+      ) :
+      dispatch(
+        CreateNewProduct({
+          thumbnail: input.thumbnail,
+          title: input.title,
+          price: input.price,
+          condition: input.condition,
+          pictures: [input.thumbnail, ...input.pictures],
+          age_group: input.age_group,
+          brand: input.brand,
+          colors: input.color,
+          externalMaterial: input.externalMaterial,
+          shoeStyle: input.shoeStyle,
+          sizes: input.size,
+          category: input.category,
+          gender: input.genero,
+          available_quantity: input.stock
         })
       );
       swal({
@@ -284,23 +303,19 @@ const CreateProduct = () => {
   };
 
   const [images, setimages] = useState("");
+  
 
-  useEffect(() => {
-    setInput({
-      ...input,
-      thumbnail: images
-    })
 
-  }, [images]);
 
   const EditSesionUrl = () => {
     const changeInput = async (e) => {
-
+e.preventDefault()
       let newImgsToState = readmultifiles(e);
       console.log(newImgsToState)
       let thumbnail = await uploadImgLocal(newImgsToState)
       console.log(thumbnail)
-      setimages(thumbnail[0]);
+      setimages(thumbnail);
+
     };
 
     function readmultifiles(e, indexInicial) {
@@ -391,12 +406,10 @@ const CreateProduct = () => {
       let newImgsToState = readmultifiles(e, indexImg);
       let pictures2 = await uploadImgLocal(newImgsToState)
       console.log(pictures2[0])
-
-      if (input.thumbnail && pictures2[0]) {
-        if (pictures[0] !== input.thumbnail) {
-          pictures2.unshift(input.thumbnail);
-        }
-      }
+if(!pictures){
+  setPictures(pictures2);
+}
+ if(pictures){}
       let newImgsState2 = pictures.concat(pictures2)
 
       setPictures(newImgsState2);
@@ -592,8 +605,8 @@ const CreateProduct = () => {
     return(
       <div>
     <p>¿Su producto tendrá variaciones?</p>
-    <button onClick={(e) => VariacionesSi(e)}>Si</button>
-    <button onClick={(e) => VariacionesNo(e)}>No</button>
+    <button className = {style.btnVariaciones}onClick={(e) => VariacionesSi(e)}>Si</button>
+    <button className = {style.variationsCancel}onClick={(e) => VariacionesNo(e)}>No</button>
     </div>
     )
   }
@@ -650,9 +663,11 @@ onChange={(e) => handleChange(e)}
     const variationsObj = {
       size:"",
       color:"",
-      stock:0,
-      img:"",
+      available_quantity:0,
+      img:[],
+      price:0,
     }
+
     const [inputVariations, setInputvariations] = useState(variationsObj);
 const handleChangeVariaciones = (e)=>{
     e.preventDefault();
@@ -660,12 +675,21 @@ const handleChangeVariaciones = (e)=>{
       ...inputVariations,
       [e.target.title]: e.target.value,
     });
-
   }
+
+  useEffect(() => {
+    setInputvariations({
+...inputVariations,
+img: images
+
+
+    })
+  },[images])
   const addVariations = (e)=>{
     e.preventDefault();
 let arr=[];
 arr.push(inputVariations)
+const subirVariationsImg = images
     const subirVariations = input.variations.concat(arr)
     setInputvariations({
       ...inputVariations,
@@ -677,6 +701,7 @@ arr.push(inputVariations)
       variations: subirVariations
       
     })
+    console.log(subirVariationsImg)
     console.log(inputVariations)
     console.log(input.variations)
   }
@@ -684,8 +709,24 @@ arr.push(inputVariations)
 return(
 <div>
 <div>
+<p className="text-4xl">Variaciones:</p>
 
-  <button className = {style.variationsCancel} onClick={(e) => VariacionesNo(e)} >Cancelar variaciones</button>
+<button className = {style.variationsCancel} onClick={(e) => VariacionesNo(e)} >Cancelar variaciones</button>
+
+{input.imgInput === 0 && <RenderizadoBotones />}
+{input.imgInput === true && <LocalRender />}
+{input.imgInput === false && <URLRender />}
+
+  
+<p>price: </p>
+    <input
+      type="text"
+      value={inputVariations.price}
+      className={style.field}
+      title="price"
+      onChange={ handleChangeVariaciones}
+    />
+
     <p>sizes: </p>
     <input
       type="text"
@@ -704,8 +745,8 @@ return(
   min="0"
   step="25"
   className={style.field}
-  value={inputVariations.stock}
-  title="stock"
+  value={inputVariations.available_quantity}
+  title="available_quantity"
   onChange={(e) => handleChangeVariaciones(e)}
 />
 </div>
@@ -723,9 +764,7 @@ return(
 />
 </div>
 
-{input.imgInput === 0 && <RenderizadoBotones />}
-{input.imgInput === true && <LocalRender />}
-{input.imgInput === false && <URLRender />}
+
 
 
 <button className={style.btnImg} onClick={(e) => addVariations(e)} >Añadir variación</button>
@@ -754,7 +793,7 @@ return(
   // COMPONENTE RENDER
   return (
     <div>
-      {user && user.isAdmin === true ?
+      {/* {user && user.isAdmin === false ? */}
         <div className={style.containerMain}>
           {console.log("Errores", error)}
           <form className={style.form}>
@@ -948,7 +987,7 @@ return(
         }
       </form>
 </div>
-:<Error404/>}
+{/* :<Error404/>} */}
 </div>
   );
 };

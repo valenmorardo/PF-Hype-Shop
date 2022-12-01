@@ -18,7 +18,7 @@ const Dashboard = () => {
   const user = useSelector((state) => state.currentUser)
   return(
     <div>
-    {user && user.isAdmin === true ?
+    {/* {user && user.isAdmin === false ? */}
     <div className="flex justify-around" >
 
   <div className ="mt-10 flex items-left  text-3xl   border-white-200  border-r-4 w-1/12"  >
@@ -48,7 +48,7 @@ const Dashboard = () => {
 
   </div>
   </div>
-  :<Error404/>}
+  {/* :<Error404/>} */}
   </div>
   )
 }

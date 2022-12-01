@@ -5,7 +5,10 @@ const {
 
 // const { Product, User} = require("../db");
 const transporter = require("../config/mailer");
-const { Product, Review, User, Order, Attribute, Variation } = require("../db");
+
+const { Product, Review, User, Order,  Attribute, Variation,Color,Size } = require("../db");
+
+
 
 const allData = async (req, res) => {
   const { title } = req.query;
@@ -120,9 +123,17 @@ const updateProduct = async (req, res) => {
       externalMaterial,
       category,
       gender,
+
+      available_quantity,
+      variations
+   } = req.body;
+   console.log(req.body);
+   pictures.shift()
+
     } = req.body;
 
     console.log(id);
+
 
     let productUpdate = await Product.update(
       {
@@ -161,6 +172,146 @@ const updateProduct = async (req, res) => {
       "Materiales del exterior",
       "Estilo",
       "Género",
+
+   ];
+
+   const variationsArr = [
+      "color",
+      "pictures",
+      "size"
+   ]
+
+   try {
+      let productCreate = await Product.create({
+         title,
+         price,
+         condition,
+         pictures,
+         age_group,
+         sold_quantity: 0,
+          shoeStyle,
+          sizes,
+          brand,
+          colors,
+          externalMaterial,
+           category,
+          gender,
+         available_quantity,
+      });
+
+      attributes.forEach(async (attr, index) => {
+         const attribute = await Attribute.create({
+            name: attributesObj[index],
+            value: attr,
+         });
+         return await productCreate.addAttributes(attribute);
+      });
+      // console.log(productCreate);
+
+      variations.forEach(async (variation, index) => {
+         const  available_quantity = variation.available_quantity;
+         const  size = variation.size;
+         const  color = variation.color;
+         const img = variation.img
+         const price = variation.price
+         console.log(available_quantity)
+            console.log(size)
+            console.log(color)
+            const col = await Color.findOrCreate({
+where: { name:color},
+defaults:{name:color}
+            })
+console.log(col)
+
+const talle = await Size.findOrCreate({
+   where: { value:size},
+   defaults:{value:size}
+})
+
+         const vari = await Variation.create({
+            available_quantity,
+            sold_quantity:0,
+            price,
+            picture_ids:img
+
+         });
+        await vari.setColor(col[0])
+        await vari.setSize(talle[0])
+         return await productCreate.addVariations(vari);
+      });
+
+      res.send(productCreate);
+      console.log(productCreate)
+   } catch (error) {
+      console.log(error);
+      res.status(400).send(error);
+   }
+};
+
+const updateProduct = async (req, res) => {
+
+  try{
+     let {
+      title,
+      price,
+      condition,
+      pictures,
+       age_group,
+       available_quantity,
+        id,
+        thumbnail,
+        shoeStyle,
+        sizes,
+        brand,
+        colors,
+        externalMaterial,
+        category,
+        gender,
+     } = req.body;
+  
+     console.log(id)
+  
+     let productUpdate = await Product.update({
+  
+        title: title,
+        price: price,
+        condition: condition,
+        thumbnail:thumbnail,
+        pictures:pictures,
+        available_quantity:available_quantity,
+      //   age_group:age_group,
+      //   shoeStyle:shoeStyle,
+      //   sizes:sizes,
+      //   brand:brand,
+      //   colors:colors,
+      //   externalMaterial:externalMaterial,
+      //   category:category,
+      //   gender:gender,
+
+     },{
+        where : {id : req.body.id}
+     })
+
+     const attributes = [ age_group, shoeStyle, brand, externalMaterial, category, gender]
+     const attributesObj =["Edad", "shoeStyle", "Marca", "Materiales del exterior", "Estilo", "Género",]
+
+     attributes.forEach(async (attr, index) => {
+      const attribute = await Attribute.update({
+        name: attributesObj[index],
+        value:  attr,
+      },{
+         where : {id : req.body.id}
+
+      });
+     })
+      console.log(productUpdate);
+
+      res.send(productUpdate);
+     } catch (error) {
+      console.log(error);
+      res.status(400).send(error);
+   }
+
     ];
 
     attributes.forEach(async (attr, index) => {
@@ -181,6 +332,7 @@ const updateProduct = async (req, res) => {
     console.log(error);
     res.status(400).send(error);
   }
+
 };
 
 const deleteProduct = async (req, res) => {
