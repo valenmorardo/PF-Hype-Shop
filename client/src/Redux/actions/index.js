@@ -19,6 +19,7 @@ import {
   FILTER_DATE,
   FILTER_STATE,
   GET_USERS,
+  GET_REVIEWS,
 
 } from "./actionTypes";
 
@@ -273,8 +274,10 @@ return async function () {
 }
 }
 
-// POST REview
+// POST Review
 export function CreateReview(payload) {
+  
+  console.log(payload)
   return async function() {
     const response = await axios.post("http://localhost:3001/createReview", payload)
     return response
@@ -321,3 +324,23 @@ export const getOrdersAdmin = () => {
     }
   };
 };
+
+
+
+//GET ALL REVIEWS
+export const getAllReviews = () => {
+  return async (dispatch) => {
+    try {
+      const orders = await axios.get(`http://localhost:3001/allReviews`);
+
+      return dispatch({
+        type: GET_REVIEWS,
+        payload: orders.data,
+      });
+    } catch (error) {
+      console.log("error trying to GET_ORDERS", error);
+    }
+  };
+};
+
+

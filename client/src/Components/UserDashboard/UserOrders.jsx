@@ -11,7 +11,7 @@ const UserOrder = () => {
 
     const usuario = useSelector((state) => state.currentUser);
     const orders = useSelector((state) => state.ordersUsers);
-    console.log(orders)
+   
 
 
     useEffect(() => {
@@ -96,9 +96,7 @@ const UserOrder = () => {
                     ))}
             </div>
 
-            <div>
-                <MakeReview />
-            </div>
+
         </div>
     )
 }

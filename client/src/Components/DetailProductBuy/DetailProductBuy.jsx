@@ -21,7 +21,7 @@ const DetailProductBuy = ({ onClose, products, precioTotal }) => {
                         <p className="text-2xl"> ${precioTotal}</p>
                     </div>
                     <div className="flex justify-center flex-wrap w-11/12 h-5/6 gap-4 ">
-                        {products.length > 0 && products.map((el) => (
+                        {products.length > 0 && products.map((el) => (               
                             <DetailProductBuyCard
                                 title={el.title}
                                 image={el.pictures ? el.pictures[0] : el.picture_ids[0]}
@@ -32,6 +32,8 @@ const DetailProductBuy = ({ onClose, products, precioTotal }) => {
                                 cantidad={el.cantidad}
                                 price={el.price}
                                 externalMaterial={el.externalMaterial}
+                                productId={el.id.length === 36? el.id : el.productId}
+                                cerrarModal={onClose}
                             />
                         ))}
                     </div>
