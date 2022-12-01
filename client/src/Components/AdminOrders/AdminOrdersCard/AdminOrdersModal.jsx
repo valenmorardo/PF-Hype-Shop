@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import swal from "sweetalert"
-import { patchOrder } from "../../../Redux/actions";
+import { updateOrderAdmin } from "../../../Redux/actions";
 
 
 const AdminOrdersModal = ({ setOpenModal, id, estado, products }) => {
@@ -17,6 +18,7 @@ const AdminOrdersModal = ({ setOpenModal, id, estado, products }) => {
     }
 
     const handleChange = (e) => {
+
         setEstadoOrder(e.target.value)
     }
 
@@ -31,12 +33,17 @@ const AdminOrdersModal = ({ setOpenModal, id, estado, products }) => {
             .then((willDelete) => {
                 if (willDelete) {
                     // AQUI SE DEBE MANDAR AL BACK CON UN PUT:
-                    // dispatch(patchOrder(id, { estado: estadoOrder }))
+                    dispatch(updateOrderAdmin({
+                        estado: estadoOrder,
+                        idOrder: id
+                    }))
                     console.log("Confirmacion")
                     swal("Cambio Realizado", `El Nuevo Estado Es: ${estado} `, {
                         icon: "success",
                     });
                     setOpenModal(false)
+                    window.location.reload()
+
                 } else {
                     swal("Cambio no Realizado!");
                 }
