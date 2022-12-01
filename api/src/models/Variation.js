@@ -23,12 +23,6 @@ module.exports = (sequelize) => {
       picture_ids: {
         type: DataTypes.ARRAY(DataTypes.STRING),
       },
-      available_quantity: {
-        type: DataTypes.INTEGER,
-      },
-      picture_ids: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-      },
     },
     { timestamps: false }
   ),
