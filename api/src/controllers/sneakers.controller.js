@@ -280,7 +280,7 @@ const sacarAdmin = async (req, res) => {
 };
 
 const createReview = async (req, res) => {
-   let { title, content, rate, productId, userId } = req.body;
+   let { title, content, rate, productId, userId, opinado } = req.body;
 
    try {
       let seacrhProduct = await Product.findByPk(productId);
@@ -289,6 +289,7 @@ const createReview = async (req, res) => {
          title,
          content,
          rate,
+         opinado,
       });
       console.log("antes", searchUser);
       seacrhProduct.addReview(reviewCreate);
@@ -392,6 +393,15 @@ const getOrdersUser = async (req, res) => {
    }
 };
 
+const getAllReviews = async (req, res) => {
+   try {
+      let allReviews = await Review.findAll();
+      res.send(allReviews);
+   } catch (error) {
+      res.send(error);
+   }
+};
+
 module.exports = {
    allData,
    getProductById,
@@ -410,4 +420,5 @@ module.exports = {
    getOrdersAdmin,
    getOrdersUser,
    orderState,
+   getAllReviews,
 };

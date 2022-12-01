@@ -13,8 +13,10 @@ const UserOrder = () => {
 
     const usuario = useSelector((state) => state.currentUser);
     const orders = useSelector((state) => state.ordersUsers);
+
     const [isLoading, setIsLoading] = useState(true);
     console.log(orders)
+
 
 
     useEffect(() => {
@@ -53,6 +55,7 @@ const UserOrder = () => {
                                             products={el.carrito}
                                             precioTotal={el.precioTotal}
 
+
                                         />
                                     ))}
                             </div> : <div>
@@ -68,6 +71,7 @@ const UserOrder = () => {
                             <MakeReview />
                         </div>
                     </div> : <Error404 />}
+
         </div>
     )
 }

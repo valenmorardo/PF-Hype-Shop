@@ -3,22 +3,25 @@ import filter from "../../utils/filter";
 import orden from "../../utils/orden";
 
 import {
-   GET_SNEAKERS,
-   SEARCH_SNEAKER,
-   GET_DETAIL,
-   GET_BRANDS,
-   GET_CATEGORIES,
-   GET_GENDERS,
-   FILTER,
-   DETAIL_ZERO,
-   SET_CURRENT_USER,
-   // ORDER ADMIN
-   GET_ORDERS_USERS,
-   GET_ORDERS_ADMIN,
-   PATCH_ORDER,
-   FILTER_DATE,
-   FILTER_STATE,
-   GET_USERS,
+
+  GET_SNEAKERS,
+  SEARCH_SNEAKER,
+  GET_DETAIL,
+  GET_BRANDS,
+  GET_CATEGORIES,
+  GET_GENDERS,
+  FILTER,
+  DETAIL_ZERO,
+  SET_CURRENT_USER,
+  // ORDER ADMIN
+  GET_ORDERS_USERS,
+  GET_ORDERS_ADMIN,
+  PATCH_ORDER,
+  FILTER_DATE,
+  FILTER_STATE,
+  GET_USERS,
+  GET_REVIEWS,
+
 } from "./actionTypes";
 
 export const getSneakers = () => {
@@ -264,7 +267,7 @@ export function sacarAdmin(payload) {
    };
 }
 
-// POST REview
+// POST Review
 export function CreateReview(payload) {
    return async function () {
       const response = await axios.post(
@@ -306,16 +309,35 @@ export const getOrdersUsers = (id) => {
 
 //AGARRAR ORDENES ADMINS
 export const getOrdersAdmin = () => {
-   return async (dispatch) => {
-      try {
-         const orders = await axios.get(`http://localhost:3001/adminOrders`);
 
-         return dispatch({
-            type: GET_ORDERS_ADMIN,
-            payload: orders.data,
-         });
-      } catch (error) {
-         console.log("error trying to GET_ORDERS", error);
-      }
-   };
+  return async (dispatch) => {
+    try {
+      const orders = await axios.get(`http://localhost:3001/adminOrders`);
+
+      return dispatch({
+        type: GET_ORDERS_ADMIN,
+        payload: orders.data,
+      });
+    } catch (error) {
+      console.log("error trying to GET_ORDERS", error);
+    }
+  };
 };
+
+//GET ALL REVIEWS
+export const getAllReviews = () => {
+  return async (dispatch) => {
+    try {
+      const orders = await axios.get(`http://localhost:3001/allReviews`);
+
+      return dispatch({
+        type: GET_REVIEWS,
+        payload: orders.data,
+      });
+    } catch (error) {
+      console.log("error trying to GET_ORDERS", error);
+    }
+  };
+};
+
+

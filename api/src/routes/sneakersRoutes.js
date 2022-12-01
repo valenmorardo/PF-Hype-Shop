@@ -17,6 +17,7 @@ const {
    getOrdersUser,
    orderState,
    createReview,
+   getAllReviews,
 } = require("../controllers/sneakers.controller");
 const { objectFormatter } = require("../utils/objectFormatter");
 
@@ -88,6 +89,7 @@ router.get("/adminOrders", getOrdersAdmin);
 router.put("/adminOrders", orderState);
 router.get("/userOrders/:id", getOrdersUser);
 
+router.get("/allReviews", getAllReviews);
 //   res.status(200).json({created, pokemon})
 //   }
 //   catch (error) {

@@ -1,20 +1,29 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import { CreateReview } from "../../../Redux/actions";
 
-const FormularioReview = ({closeModal}) => {
+
+const FormularioReview = ({closeModal, productId, cerrarModal}) => {
 
   const dispatch = useDispatch();
 
+  const user = useSelector((state) => state.currentUser)
+  
+
   const [puntaje, setPuntaje] = useState(null);
   const [review, setReview] = useState({
-    productId: 'fa1c985e-6643-4d46-b2f9-558e8a4a88a2',
+    productId: productId,
+    userId: user.id, 
+    opinado: true,
+    
   })
-
+  
+  
  
 
   function handleChange(e) { 
@@ -34,7 +43,8 @@ const FormularioReview = ({closeModal}) => {
       dispatch(CreateReview(review))
       setPuntaje(null);
       setReview({});
-      closeModal()
+      closeModal();
+      cerrarModal();
     } else {
       alert('llene todos los campos porfavor')
     }
