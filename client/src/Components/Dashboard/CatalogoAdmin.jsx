@@ -45,7 +45,7 @@ const CatalogoAdmin = () => {
   }
 
 return(
-  <div className="  right-10 w-7/12 ">
+  <div className="w-full">
 
 <div className="py-3 px-4 mx-auto max-w-screen-xl md:px-6">
 <Filtrado setIsLoading={setIsLoading} paginaUno={paginaUno} />

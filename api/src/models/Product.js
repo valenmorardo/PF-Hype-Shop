@@ -23,10 +23,6 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      condition: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       pictures: {
         type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,

@@ -3,7 +3,7 @@ const {
    getSingleDbProduct,
 } = require("../services/getProducts");
 
-const { Product, User} = require("../db");
+const { Product, User, Attribute} = require("../db");
 
 const allData = async (req, res) => {
    const { title } = req.query;
@@ -127,7 +127,7 @@ const updateProduct = async (req, res) => {
       //   externalMaterial:externalMaterial,
       //   category:category,
       //   gender:gender,
-        
+
      },{
         where : {id : req.body.id}
      })
@@ -139,6 +139,8 @@ const updateProduct = async (req, res) => {
       const attribute = await Attribute.update({
         name: attributesObj[index],
         value:  attr,
+      },{
+         where : {id : req.body.id}
       });
       return await productUpdate.addAttributes(attribute);
    });
