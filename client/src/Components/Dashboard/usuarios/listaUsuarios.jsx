@@ -30,16 +30,14 @@ const UsuariosCardsAdmin = ({ users}) => {
         </ul>
 
 
-
+         <ul>
             <div className="">
-
               {users?.map((e) => (
                 <li>
                   <UsuariosCardAdmin {...e} />
                   </li>     
                 ))}
             </div>
-
             </ul>
       </div>
   </div>
