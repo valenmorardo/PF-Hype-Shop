@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 import CatalogoAdmin from "./CatalogoAdmin"
 import styles from "./Dashboard.module.css";
 import UsuariosDashboard from './usuarios/usuariosDashboard';
-
+import { useSelector } from 'react-redux';
+import PageNoAdmin from '../PageNoAdmin/PageNoAdmin';
 
 
 const Dashboard = () => {
   const [funcionalidades, setFuncionalidades] = useState("Productos");
+
   return(
     
     <div className="flex justify-around" >
@@ -43,13 +45,9 @@ const Dashboard = () => {
   
 
     </div>
+
   )
 }
-
-
-
-
-
 
 
 export default Dashboard;

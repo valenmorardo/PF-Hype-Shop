@@ -1,29 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { getAllReviews } from "../../Redux/actions";
 
-import MakeReview from "../UserDashboard/MakeReview/MakeReview";
-
-
-const DetailProductBuyCard = ({ title, image, brand, category, colors, gender, cantidad, price, externalMaterial, productId, cerrarModal}) => {
-    
-    const dispatch = useDispatch();
-
-    const reviews = useSelector((state) => state.reviews)
-    const usuarioActual = useSelector((state) => state.currentUser)
-   
-    useEffect(() => {
-        dispatch(getAllReviews());
-      }, []);
-
-    const validacion = (el) => el.productId === productId && el.userId === usuarioActual.id;
-
-
-
+const DetailProductAdminCard = ({ title, image, brand, category, colors, gender, cantidad, price, externalMaterial }) => {
     return (
-        <>
         <div className="flex flex-col gap-3 w-[32rem] h-72 justify-center rounded-xl border border-solid border-gray-300 m-6">
             <p className="font-bold tracking-tight text-gray-900 text-xl leading-none">{title}</p>
             <section className="flex">
@@ -56,23 +34,9 @@ const DetailProductBuyCard = ({ title, image, brand, category, colors, gender, c
                 <p className="font-bold text-2xl">Cantidad: <b className=" text-[#f15a24] ">{cantidad}</b></p>
                 <p className="font-semibold text-2xl">Precio Total: <b className="font-bold text-3xl text-indigo-600"> ${price * cantidad}</b></p>
             </section>
-        
+            {console.log("DESDE UN LUGAR", image)}
         </div>
-
-        {usuarioActual && !reviews.some(validacion)? 
-        <section className="mt-6">
-            <MakeReview productId={productId} cerrarModal={cerrarModal}/>
-        </section>
-        :
-
-        <></>
-
-        }
-        
-    
-        </>
-
     )
 }
 
-export default DetailProductBuyCard;
+export default DetailProductAdminCard;

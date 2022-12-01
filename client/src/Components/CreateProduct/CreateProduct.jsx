@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
-import { useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CreateNewProduct } from "../../Redux/actions";
 import style from "./CreateProduct.module.css";
 import { getBrands, getCategories, getGenders } from "../../Redux/actions";
 // Previsualizar
 import ModalPrevisualizar from "./ModalPrevisualizar/ModalPrevisualizar";
+import PageNoAdmin from "../PageNoAdmin/PageNoAdmin";
 
 const CreateProduct = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const user = useSelector((state) => state.currentUser)
   const brand = (useSelector((state) => state.brands)).filter(e => e != 'Todos');
   const category = (useSelector((state) => state.categories)).filter(e => e != 'Todos');
   const gender = (useSelector((state) => state.genders)).filter(e => e != 'Todos');
@@ -22,7 +24,7 @@ const CreateProduct = () => {
     dispatch(getCategories());
     dispatch(getGenders());
   }, [dispatch]);
-  
+
   // para validaciones:
   const [error, setError] = useState({});
   const initialState = {
@@ -250,7 +252,7 @@ const CreateProduct = () => {
       input.shoeStyle &&
       input.sizes &&
       input.genero &&
-      input.category 
+      input.category
     ) {
       dispatch(
         CreateNewProduct({
@@ -750,58 +752,61 @@ return(
   // --------------------------------------------------------------------------------------------
   // COMPONENTE RENDER
   return (
-    <div className={style.containerMain}>
-      {console.log("Errores", error)}
-      <form className={style.form}>
-        <h2 className={style.titulo}>Product Creation</h2>
-        {/* Previsualizar */}
-        <button className={style.btnPrev} onClick={(e) => handleOpenModal(e)}>Previsualizar</button>
-        {
-          ModalPrev &&
-          <ModalPrevisualizar
-            title={input.title}
-            picture={input.thumbnail}
-            price={input.price}
-            setModalPrev={setModalPrev}
-            brand={input.brand}
-            gender={input.genero}
-            condition={input.condition}
-            externalMaterial={input.externalMaterial}
-            age_group={input.age_group}
-            // Carrousel
-            pictures={input.pictures}
-            colors={input.colors}
-            sizes={input.sizes}
+    <div>
+      {user && user.isAdmin === true ?
+        <div className={style.containerMain}>
+          {console.log("Errores", error)}
+          <form className={style.form}>
+            <h2 className={style.titulo}>Product Creation</h2>
+            {/* Previsualizar */}
+            <button className={style.btnPrev} onClick={(e) => handleOpenModal(e)}>Previsualizar</button>
+            {
+              ModalPrev &&
+              <ModalPrevisualizar
+                title={input.title}
+                picture={input.thumbnail}
+                price={input.price}
+                setModalPrev={setModalPrev}
+                brand={input.brand}
+                gender={input.genero}
+                condition={input.condition}
+                externalMaterial={input.externalMaterial}
+                age_group={input.age_group}
+                // Carrousel
+                pictures={input.pictures}
+                colors={input.colors}
+                sizes={input.sizes}
 
-          />
-        }
+              />
+            }
 
-        {/* TITLE */}
-        <div>
-          <p>Title:</p>
+            {/* TITLE */}
+            <div>
+              <p>Title:</p>
 
-          <input
-            type="text"
-            value={input.title}
-            className={style.field}
-            title="title"
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
+              <input
+                type="text"
+                value={input.title}
+                className={style.field}
+                title="title"
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
 
-        {/* PRICE */}
-        <div>
-          <p>Price: </p>
-          <input
-            type="number"
-            min="0"
-            step="25"
-            className={style.field}
-            value={input.price}
-            title="price"
-            onChange={handleChange}
-          />
-        </div>
+            {/* PRICE */}
+            <div>
+              <p>Price: </p>
+              <input
+                type="number"
+                min="0"
+                step="25"
+                className={style.field}
+                value={input.price}
+                title="price"
+                onChange={handleChange}
+              />
+            </div>
+
 
           {/* BRAND */}
       <div>
@@ -854,38 +859,40 @@ return(
           </select>
         </div>
 
-        {/* GENERO */}
-        <div className={style.select}>
-            {input.genero.length === 0 && ( // si hay un error hara un <p> nuevo con el error
-              <p className={style.error}>{"choose a genero"}</p>
-            )}
-            <p>Select genero:</p>
-            <select className={style.select} onChange={(e) => handleSelectGenero(e)}>
-              <option selected disabled>
-                Select genero
-              </option>
-              {
-                gender.map((e) => (
-                  <option value={e}>{e}</option>
-                ))
-              }
-            </select>
-        </div>
 
-        {/* AGE_GROUP */}
-        <div className={style.select}>
-          {/* {input.age_group && ( // si hay un error hara un <p> nuevo con el error
+            {/* GENERO */}
+            <div className={style.select}>
+              {input.genero.length === 0 && ( // si hay un error hara un <p> nuevo con el error
+                <p className={style.error}>{"choose a genero"}</p>
+              )}
+              <p>Select genero:</p>
+              <select className={style.select} onChange={(e) => handleSelectGenero(e)}>
+                <option selected disabled>
+                  Select genero
+                </option>
+                {
+                  gender.map((e) => (
+                    <option value={e}>{e}</option>
+                  ))
+                }
+              </select>
+            </div>
+
+            {/* AGE_GROUP */}
+            <div className={style.select}>
+              {/* {input.age_group && ( // si hay un error hara un <p> nuevo con el error
             <p className={style.error}>{"choose a age_group"}</p>
           )} */}
-          <p>Select Age Group:</p>
-          <select className={style.select} onChange={(e) => handleSelect(e)}>
-            <option selected disabled>
-              Select Age Group
-            </option>
-            <option value="Adultos">Adultos</option>
-            <option value="Niños">Niños</option>
-          </select>
-        </div>
+              <p>Select Age Group:</p>
+              <select className={style.select} onChange={(e) => handleSelect(e)}>
+                <option selected disabled>
+                  Select Age Group
+                </option>
+                <option value="Adultos">Adultos</option>
+                <option value="Niños">Niños</option>
+              </select>
+            </div>
+
 
         {/* PICTURES */}
         <div>
@@ -939,6 +946,7 @@ return(
           </button>
         }
       </form>
+
     </div>
   );
 };

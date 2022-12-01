@@ -1,7 +1,7 @@
 import React from "react";
-import DetailProductBuyCard from "./DetailProductBuyCard";
+import DetailProductAdminCard from "./DetailProductAdminCard";
 
-const DetailProductBuy = ({ onClose, products, precioTotal }) => {
+const DetailProductAdmin = ({ onClose, products, precioTotal }) => {
     const array = [1, 2, 3, 4, 5, 6, 7, 7, 87, 535, 434, 434]
     return (
         <div className="z-20 bg-white max-w-full bg-contain min-h-[60rem] absolute top-0 bottom-0 right-0 left-0 rounded-2xl">
@@ -21,8 +21,8 @@ const DetailProductBuy = ({ onClose, products, precioTotal }) => {
                         <p className="text-2xl"> ${precioTotal}</p>
                     </div>
                     <div className="flex justify-center flex-wrap w-11/12 h-5/6 gap-4 ">
-                        {products.length > 0 && products.map((el) => (               
-                            <DetailProductBuyCard
+                        {products.length > 0 && products.map((el) => (
+                            <DetailProductAdminCard
                                 title={el.title}
                                 image={el.pictures ? el.pictures[0] : el.picture_ids[0]}
                                 brand={el.brand}
@@ -32,8 +32,6 @@ const DetailProductBuy = ({ onClose, products, precioTotal }) => {
                                 cantidad={el.cantidad}
                                 price={el.price}
                                 externalMaterial={el.externalMaterial}
-                                productId={el.id.length === 36? el.id : el.productId}
-                                cerrarModal={onClose}
                             />
                         ))}
                     </div>
@@ -44,4 +42,4 @@ const DetailProductBuy = ({ onClose, products, precioTotal }) => {
     )
 }
 
-export default DetailProductBuy;
+export default DetailProductAdmin;

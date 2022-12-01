@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AdminOrdersModal from "./AdminOrdersModal";
-import DetailProductBuy from "../../DetailProductBuy/DetailProductBuy";
+import DetailProductAdmin from "../../DetailProductBuy/DetailProductAdmin";
 
 const AdminOrdersCard = ({ id, nombre, email, image, estado, fecha, direccion, products, precioTotal }) => {
 
@@ -26,22 +26,22 @@ const AdminOrdersCard = ({ id, nombre, email, image, estado, fecha, direccion, p
         <div>
             {
                 openDetail &&
-                <DetailProductBuy
+                <DetailProductAdmin
                     onClose={handleCloseDetail}
                     products={products}
                     precioTotal={precioTotal}
                 />
             }
-            <div className="flex justify-between bg-white py-7 px-4 w-[890px] h-56 mt-8 rounded-xl border border-solid border=[#e6e8eb] relative " >
-                <div className="flex ">
-                    <div className="aspect-w-1 aspect-h-1  h-min w-[140px] overflow-hidden rounded-lg">
+            <div className="flex justify-around items-center bg-white py-7 px-4 w-[750px] h-56 mt-8 rounded-xl border border-solid border=[#e6e8eb] relative " >
+                <div className="flex  justify-center ">
+                    {/* <div className="aspect-w-1 aspect-h-1  h-min w-[100px] overflow-hidden rounded-lg self-center">
                         <img
                             src={image}
                             alt="imagem Producto"
                         // className="h-auto w-auto object-cover object-center group-hover:opacity-75"
                         />
-                    </div>
-                    <div className=" flex w-[28rem] flex-col mx-8 items-center ">
+                    </div> */}
+                    <div className=" flex w-[28rem] flex-col mx-10 items-center ">
                         <h1 className=" font-bold tracking-tight text-gray-900 sm:text-lg leading-none">ID Pedido: {id}</h1>
                         <div className="flex justify-center items-center gap-1">
                             <p className=" font-bold tracking-tight text-gray-900 sm:text-lg mt-1">Nombre: </p>
@@ -55,10 +55,10 @@ const AdminOrdersCard = ({ id, nombre, email, image, estado, fecha, direccion, p
                             <p className=" font-bold tracking-tight text-gray-900 sm:text-lg mt-1">Fecha Compra: </p>
                             <p className=" font-bold tracking-tight text-indigo-600 sm:text-xl mt-1">{fecha}</p>
                         </div>
-                        <div className="flex justify-center items-center gap-1">
+                        {/* <div className="flex justify-center items-center gap-1">
                             <p className=" font-bold tracking-tight text-gray-900 sm:text-lg mt-1">Direccion: </p>
                             <p className=" font-bold tracking-tight text-indigo-600 sm:text-xl mt-1">{direccion}</p>
-                        </div>
+                        </div> */}
                         <button onClick={() => handleOpenDetail()} className=" font-bold tracking-tight text-[#f15a24]  sm:text-xl leading-none">Detalle Compra</button>
                         {/* <p className=" font-bold tracking-tight text-gray-900 sm:text-2xl mt-3">${price}</p> */}
                     </div>
