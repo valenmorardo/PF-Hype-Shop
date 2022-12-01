@@ -7,6 +7,8 @@ import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import { CreateReview } from "../../../Redux/actions";
 
+import swal from "sweetalert";
+
 import validacion from "./validaciones";
 
 const FormularioReview = ({ closeModal, productId, cerrarModal }) => {
@@ -44,6 +46,11 @@ const FormularioReview = ({ closeModal, productId, cerrarModal }) => {
 
     if (Object.values(review).length && Object.values(errores).length === 0) {
       dispatch(CreateReview(review));
+      swal(
+        "SU REVIEW FUE ENVIADA!",
+        "Gracias.",
+        "success"
+      )
       setPuntaje(null);
       setReview({});
       closeModal();
