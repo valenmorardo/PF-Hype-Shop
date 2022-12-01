@@ -17,7 +17,7 @@ const DetailProductAdminCard = ({ title, image, brand, category, colors, gender,
                         <p className="font-medium text-lg tracking-tight text-gray-900 ">Marca: <b>{brand}</b></p>
                         <p className="font-medium text-lg tracking-tight text-gray-900">Categoria: <b>{category}</b></p>
                         <p className="font-medium text-lg tracking-tight text-gray-900">Genero: <b>{gender}</b></p>
-                        <p className="font-medium text-lg tracking-tight text-gray-900">Material Externo: <b>{externalMaterial}</b></p>
+                        {/* <p className="font-medium text-lg tracking-tight text-gray-900">Material Externo: <b>{externalMaterial}</b></p> */}
                     </section>
                     <section className="flex flex-col items-start mx-2">
 
