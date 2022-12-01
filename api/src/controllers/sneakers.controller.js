@@ -307,10 +307,11 @@ const createReview = async (req, res) => {
 // CREACION DE ORDER
 
 const createOrder = async (req, res) => {
-   let { carrito, precioTotal, usuarioId } = req.body;
+   let { estado, carrito, precioTotal, usuarioId } = req.body;
 
    try {
       let createOrder = await Order.create({
+         estado,
          carrito,
          precioTotal,
       });
@@ -349,12 +350,12 @@ const getOrdersAdmin = async (req, res) => {
 // PUT ORDER
 
 const orderState = async (req, res) => {
-   let { estado, idOder } = req.body;
+   let { estado, idOrder } = req.body;
 
    try {
       // Mandar Email
       let email = await Order.findAll({
-         where: { id: idOder },
+         where: { id: idOrder },
          include: [
             {
                model: User,
@@ -367,7 +368,7 @@ const orderState = async (req, res) => {
             estado: estado,
          },
          {
-            where: { id: idOder },
+            where: { id: idOrder },
          }
       );
       res.send(cambioOrder);
