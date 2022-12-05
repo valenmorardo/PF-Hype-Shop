@@ -8,8 +8,11 @@ Esta aplicacion esta preparada para lo siguiente:
     - Filtrarlos.
     - Buscar algun producto en especifico.
     - Ver los detalles de algun producto en particular.
+    - Visualizar reviews de cada producto.
     - Utilizar sistema de cuentas para para realizar pedidos.
     - Adquirir productos de la manera que se desee.
+    - Realizar review del producto adquirido.
+    
 
 - Vista de Administrador:
     - Idem a la vista de usuario
